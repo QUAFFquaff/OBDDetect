@@ -38,7 +38,7 @@ class Event(object):
     def getType(self):
         return self.type
 
-lock = threading.Lock()
+#lock = threading.Lock()
 eventQueue = queue.Queue()
 
 
@@ -91,7 +91,6 @@ class myThread(threading.Thread):  # threading.Thread
                 smaX = calculateSMA(x)
                 smaY = calculateSMAY(y)
 
-                print(smaX)
                 if isCatch:
                     brakeResult = brakeDetector(smaX, newrecord)
                     if brakeResult:  # when detect a brake event, start a new thread to process
@@ -99,7 +98,11 @@ class myThread(threading.Thread):  # threading.Thread
 
                     speedupResult = speedupDetector(smaX, newrecord)
                     if speedupResult:  # when detect a speed up event
-                        eventQueue.put(brakeResult)  # put this event in queue
+                        eventQueue.put(speedupResult)  # put this event in queue
+
+                    swerveResult = swerveDetector(smaY, newrecord)
+                    if swerveResult:  # when detect a swerve or change lane
+                        eventQueue.put(swerveResult)  # put this event in queue to process
 
             finally:
                 connection.close()
@@ -107,14 +110,9 @@ class myThread(threading.Thread):  # threading.Thread
     def stop(self):
         self.__running.clear()
 
-# detect brake
-bthresholdnum = 0
-oneMore = 2
-brakeStart = 0
 
-sthresholdnum = 0
-negativeMax = 2
-speedupStart = 0
+
+
 def calculateSMA(acc):
     sum = 0
     for i in range(size(acc)):
@@ -129,7 +127,10 @@ def calculateSMAY(acc):
     sma = round(sum / 3, 10) * (acc[0] / abs(acc[0]))
     return sma
 
-
+# detect brake
+bthresholdnum = 0
+oneMore = 2
+brakeStart = 0
 def brakeDetector(sma, time):
     global bthresholdnum
     global oneMore
@@ -152,9 +153,11 @@ def brakeDetector(sma, time):
         bthresholdnum = 0
         oneMore = 2
         brakeStart = 0
-    return Event(1542318353140, 1542318354500, 'brake')
+    return False
 
-
+sthresholdnum = 0
+negativeMax = 2
+speedupStart = 0
 def speedupDetector(sma, time):
     global sthresholdnum
     global negativeMax
@@ -181,8 +184,23 @@ def speedupDetector(sma, time):
         speedupStart = 0
     return False
 
-
-
+tthresholdnum = 0 #threshold for turn or change line
+swerveStart = 0
+def swerveDetector(sma, time):
+    global tthresholdnum
+    global swerveStart
+    if sma > 0.05 or sma < -0.05:
+        tthresholdnum = tthresholdnum + 1
+        if swerveStart == 0:
+            swerveStart = time
+    elif sma < 0.05 and sma > -0.05 and tthresholdnum > 0:
+        if tthresholdnum > 3:
+            tthresholdnum = 0
+            swerveEvent = Event(swerveStart, time, 'swerve')
+            return swerveEvent
+        tthresholdnum = 0
+        swerveStart = 0
+    return False
 
 def main():
     def drawBackground():
@@ -193,7 +211,7 @@ def main():
 
         # === set the background color ===
         Ground = Rectangle(Point(0, 0), Point(40, 20))
-        Ground.setFill("light Green")
+        #Ground.setFill("light Green")
         Ground.draw(win)
 
         return win
@@ -289,7 +307,8 @@ def main():
     pntMsg = Point(20, 13)
 
     while True:
-        tip = Text(pntMsg, "Event detector, when the system detect an event, it will ask you if it is a normal one")
+        tip = Text(pntMsg, "TIP: Event detector, when the system detect an event, it will ask you if it is a normal one")
+        tip.setSize(18)
 
         tip.draw(win)
 
