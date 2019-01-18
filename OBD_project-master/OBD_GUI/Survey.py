@@ -41,6 +41,9 @@ class Event(object):
 lock = threading.Lock()
 eventQueue = queue.Queue()
 
+
+
+
 # thread class to write
 class myThread(threading.Thread):  # threading.Thread
     def __init__(self):
@@ -263,8 +266,11 @@ def main():
                 # 获取一个游标
                 connection = connectDB()
                 with connection.cursor() as cursor:
-                    sql = 'INSERT INTO eventlogger (startTime, endTime, type, normal) VALUES (' + starttime + ',' + int(endtime) + ',"' + type + '", "no")'
+                    sql = 'INSERT INTO eventlogger (startTime, endTime, type, normal) VALUES (' + str(starttime) + ',' + str(endtime) + ',"' + type + '", "no")'
                     cout = cursor.execute(sql)
+                    connection.commit()
+            except Exception:
+                    connection.rollback()
             finally:
                 connection.close()
 
@@ -275,26 +281,30 @@ def main():
         cancelBtn.undraw()
         cancelText.undraw()
 
+    thread1 = myThread()
+    thread1.start()
 
     # initial
     win = drawBackground()
-
     pntMsg = Point(20, 13)
-    tip = Text(pntMsg, "Event detector, when the system detect an event, it will ask you if it is a normal one")
-
-    thread1 = myThread()
-    thread1.start()
-    tip.draw(win)
 
     while True:
-        time.sleep(1)
+        tip = Text(pntMsg, "Event detector, when the system detect an event, it will ask you if it is a normal one")
+
+        tip.draw(win)
+
+        time.sleep(0.5)
+
         if not eventQueue.empty():
-            print("queue")
+            tip.undraw()
             event = eventQueue.get()
             catchEvent(event)
-            print(event)
+            tip.draw(win)
         else:
             print("empty")
+
+
+        tip.undraw()
 
 
 main()
