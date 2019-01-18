@@ -9,6 +9,7 @@ def connectDB():
     connection=pymysql.connect(host='localhost',
                                 user='root',
                                 password='970608',
+                                password='password',
                                 db='DRIVINGDB',
                                 port=3306,
                                 charset='utf8')
@@ -144,6 +145,7 @@ def Calibration():
         finally:
             connection.close()
 
+    time.sleep(6)
 
     A_x = []  # accelerate
     A_y = []
@@ -153,6 +155,7 @@ def Calibration():
         connection = connectDB()
         with connection.cursor() as cursor:
             sql = 'select * from test ORDER BY time DESC LIMIT 25'
+            sql = 'select * from test ORDER BY time DESC LIMIT 30'
             cout = cursor.execute(sql)
 
             for row in cursor.fetchall():
@@ -251,6 +254,8 @@ def Calibration():
     txtMsg.draw(win)
 
     time.sleep(6)  # get a 6 seconds delay to catch data from database
+    time.sleep(6)
+
 
     B_x = []  # back forward
     B_y = []
