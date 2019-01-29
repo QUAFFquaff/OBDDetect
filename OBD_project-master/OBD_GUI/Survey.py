@@ -6,11 +6,11 @@ from numpy import *
 import threading
 import queue
 
-matrix = array([(-0.146736425, -0.046935409, 0.98806148),
-                (0.986075641, -0.085959069, 0.142358237),
-                (0.078251203, 0.995192497, 0.05889519)])
-#matrix = loadtxt('orientation.txt')
-#drivingData = []
+#matrix = array([(-0.146736425, -0.046935409, 0.98806148),
+                #(0.986075641, -0.085959069, 0.142358237),
+                #(0.078251203, 0.995192497, 0.05889519)])
+matrix = loadtxt('orientation.txt')
+drivingData = []
 
 
 
@@ -63,7 +63,7 @@ class myThread(threading.Thread):  # threading.Thread
                 # 获取一个游标
                 connection = connectDB()
                 with connection.cursor() as cursor:
-                    sql = 'select * from test ORDER BY time DESC LIMIT 10'
+                    sql = 'select * from STATUS ORDER BY time DESC LIMIT 10'
                     cout = cursor.execute(sql)
 
                     i = 0
@@ -135,15 +135,15 @@ def brakeDetector(sma, time):
     global bthresholdnum
     global oneMore
     global brakeStart
-    if sma < -0.2:
+    if sma < -0.1:
         bthresholdnum = bthresholdnum + 1
         oneMore = 2
         if brakeStart == 0:
             brakeStart = time
-    elif sma > -0.2 and oneMore > 0 and bthresholdnum>0:
+    elif sma > -0.1 and oneMore > 0 and bthresholdnum>0:
         bthresholdnum = bthresholdnum + 1
         oneMore = oneMore - 1
-    elif sma > -0.2 and oneMore==0 and bthresholdnum > 0:
+    elif sma > -0.1 and oneMore==0 and bthresholdnum > 0:
         if bthresholdnum > 3:
             brakeEvent  = Event(brakeStart, time, 'brake')
             bthresholdnum = 0
@@ -170,13 +170,12 @@ def speedupDetector(sma, time):
     elif sma < 0 and negativeMax > 0 and sthresholdnum>0:
         sthresholdnum = sthresholdnum + 1
         negativeMax = negativeMax -1
-    elif negativeMax == 0:
-        sthresholdnum = 0
     elif sma > 0.005 and sthresholdnum > 0:
         sthresholdnum = sthresholdnum + 1
     elif sma < 0.005 and sthresholdnum > 0:
         if sthresholdnum > 5:
             sthresholdnum = 0
+            negativeMax = 2
             speedupEvent = Event(speedupStart, time, 'speedup')
             return speedupEvent
         sthresholdnum = 0
@@ -235,7 +234,7 @@ def main():
         time_local = time.localtime(float(event.getEndtime() / 1000))
         end = time.strftime("%H:%M:%S", time_local)
 
-        timeText = Text(Point(20, 9), "This event is from "+str(start)+' to '+str(end))
+        timeText = Text(Point(20, 9), "This ["+ str(event.getType()) +"] event is from "+str(start)+' to '+str(end))
 
         # confirm text
         confirmText = Text(Point(15, 6), "yes")
