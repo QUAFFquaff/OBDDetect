@@ -407,7 +407,7 @@ def Calibration():
     unitAccy = Accy/Acclength
     unitAccz = Accz/Acclength
     OBDx = array([float(unitAccx), float(unitAccy), float(unitAccz)])
-    OBDz = Gforce
+    OBDz = unitG
     unitSwervex = OBDz[1]*OBDx[2]-OBDx[1]*OBDz[2]
     unitSwervey = OBDx[0]*OBDz[2]-OBDx[2]*OBDz[0]
     unitSwervez = OBDz[0]*OBDx[1]-OBDx[0]*OBDz[1]
