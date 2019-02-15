@@ -144,6 +144,7 @@ def show(money):
                         z.append(round(acc[2], 9))
 
                     i = i+1
+
                 drivingData.append(DrivingStatus(time[0], speed[0], x[0], y[0], z[0]))
                 #calculate sma
                 print(drivingData[0].getTime())
@@ -151,12 +152,22 @@ def show(money):
                 smaY = calculateSMAY(y)
                 #print(smaX)
 
+
+                if isCatch:
+                    # detect hard brake number
+                    detectHardBrake(smaX)
+                    # detetc hard sped up number
+                    detectHardSpeed(smaX, x)
+                    # detect hard change line
+                    detectHardSwerve(smaY, y)
+
                 #detect hard brake number
                 detectHardBrake(smaX)
                 #detetc hard sped up number
                 detectHardSpeed(smaX, x)
                 #detect hard change line
                 detectHardSwerve(smaY, y)
+
 
 
             # === display acc ===
@@ -340,6 +351,9 @@ def detectHardBrake(sma):
         if bthresholdnum > 5 :
             bcount = bcount + 1
             bthresholdnum = 0
+            return True
+        bthresholdnum = 0
+    return False
 
 
 
@@ -350,6 +364,12 @@ def detectHardSpeed(sma,x):
     global scounter
     global sthresholdnum
     global negativeMax
+
+    if sma < 0 and x[1] > 0 and sthresholdnum > 0:  # if sma <0 check if the previous is positive
+        negativeMax = 2
+    if sma > 0.045:
+        sthresholdnum = sthresholdnum + 1
+
     if sma > 0.045:
         sthresholdnum = sthresholdnum + 1
     elif sma < 0 and x[1] > 0 and sthresholdnum > 0:  # if sma <0 check if the previous is positive
@@ -357,6 +377,17 @@ def detectHardSpeed(sma,x):
     elif sma < 0 and negativeMax > 0 and sthresholdnum > 0:  # if just 2 negative, still count in speed up
         sthresholdnum = sthresholdnum + 1
         negativeMax = negativeMax - 1
+    elif sma > 0.04 and sthresholdnum > 0:
+        sthresholdnum = sthresholdnum + 1
+    elif sma < 0.04 and sthresholdnum > 0:
+        if sthresholdnum > 10:
+            scounter = scounter + 1
+            sthresholdnum = 0
+            negativeMax = 2
+            return True
+        sthresholdnum = 0
+        negativeMax = 2
+    return False 
     elif negativeMax == 0:
         sthresholdnum = 0
         negativeMax = 2
@@ -381,6 +412,9 @@ def detectHardSwerve(sma,y):
         if tthresholdnum > 5:
             tcounter = tcounter + 1
             tthresholdnum = 0
+            return True
+        tthresholdnum = 0
+    return False
 
 
 
