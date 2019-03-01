@@ -20,7 +20,7 @@ import xlrd
 
 from xlwt import *
 
-file = 'STATUS.xlsx'
+# file = 'STATUS.xlsx'
 breakV = []
 speedV = []
 
@@ -54,7 +54,7 @@ def calcSwerve(data):
 
 def init():
     swerveV = []
-    rawData = read_excel()
+    rawData = read_excel('STATUS.xlsx')
     rawData = rawData.astype(np.double)
 
     length = len(rawData)
@@ -92,12 +92,12 @@ def init():
     # data = np.array(swerveV)
     # print(data[0][0])
     # write_excel(swerveV,breakV,speedV)
-    write_excel(normalization(swerveV), normalization(breakV), normalization(speedV))
+    # write_excel(normalization(swerveV), normalization(breakV), normalization(speedV))
     return
 
 
 # load raw data into workspace
-def read_excel():
+def read_excel(file):
     data = xlrd.open_workbook(file)
     table = data.sheets()[0]
     # print(table)
