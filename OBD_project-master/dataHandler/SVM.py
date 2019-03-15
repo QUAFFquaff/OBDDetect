@@ -41,7 +41,8 @@ def svm_test(data):
     # gamma: parameter for 'rbf’,'poly' and 'sigmoid'
     # degree: parameter for 'poly'
     # coef0 is a constant for poly
-    model = svm.SVC(kernel='poly', C=1, gamma=3,degree = 3,coef0=1)
+    # model = svm.SVC(kernel='poly', C=1, gamma=3,degree = 3,coef0=1)
+    model = svm.SVC(kernel='linear', C=15, gamma=5,degree = 4,coef0=50)
     model.fit(x_train, y_train.ravel())
     print('train set accuracy:  ', model.score(x_train, y_train.ravel()))
     print('test set accuracy:  ', model.score(x_test, y_test.ravel()))
@@ -87,7 +88,7 @@ def read_excel(file):
     table = data.sheets()[0]
 
     start = 0  # 开始的行
-    end = 9767  # 结束的行
+    end = 1477  # 结束的行
     # end = 6847  # 结束的行
     rows = end - start
 
@@ -112,7 +113,6 @@ def init(datamatrix):
     datamatrix = np.array(datamatrix)
     temp = 1.0
     vect = []  # break labeled 1
-    speedV = []  # speed up labeled 2
     flag = 0
     for i in range(len(datamatrix)):
         if datamatrix[i, 0] == temp:
@@ -169,7 +169,7 @@ def plot(x, y, x_test):
 
 
 def main():
-    datamatrix = read_excel('svmdata.xls')
+    datamatrix = read_excel('label_data.xls')
     vect = np.array(init(datamatrix))
     write_excel(vect, 'vect.xls')
     # x = vect[:,0:-2]
