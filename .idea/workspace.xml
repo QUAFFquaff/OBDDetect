@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="772fc987-062a-4324-98f6-5efd9cfcd885" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OBD_project-master/dataHandler/LDAForEvent.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/OBD_project-master/dataHandler/LDAmodel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_project-master/dataHandler/vect.xls" afterPath="$PROJECT_DIR$/OBD_project-master/dataHandler/vect.xls" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_project-master/dataHandler/LDATest.py" afterPath="$PROJECT_DIR$/OBD_project-master/dataHandler/LDATest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_project-master/dataHandler/SVM.py" afterPath="$PROJECT_DIR$/OBD_project-master/dataHandler/SVM.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_project-master/dataHandler/LDAForEvent.py" afterPath="$PROJECT_DIR$/OBD_project-master/dataHandler/LDAForEvent.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +21,7 @@
     <SUITE FILE_PATH="coverage/OBDdetect$CarAnalogyEngine.coverage" NAME="CarAnalogyEngine Coverage Results" MODIFIED="1547853052275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/test" />
     <SUITE FILE_PATH="coverage/OBDdetect$LDATest.coverage" NAME="LDATest Coverage Results" MODIFIED="1552645810398" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/dataHandler" />
     <SUITE FILE_PATH="coverage/OBDdetect$LDAmodel.coverage" NAME="LDAmodel Coverage Results" MODIFIED="1552642400248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/dataHandler" />
-    <SUITE FILE_PATH="coverage/OBDdetect$LDAForEvent.coverage" NAME="LDAForEvent Coverage Results" MODIFIED="1552645943475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/dataHandler" />
+    <SUITE FILE_PATH="coverage/OBDdetect$LDAForEvent.coverage" NAME="LDAForEvent Coverage Results" MODIFIED="1552684852924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/dataHandler" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -111,8 +106,8 @@
       <file leaf-file-name="LDAForEvent.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OBD_project-master/dataHandler/LDAForEvent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1251">
-              <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+            <state relative-caret-position="101">
+              <caret line="145" column="128" lean-forward="true" selection-start-line="145" selection-start-column="4" selection-end-line="145" selection-end-column="128" />
               <folding>
                 <element signature="e#181#192#0" expanded="true" />
                 <element signature="e#1338#1922#0" expanded="false" />
@@ -609,15 +604,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1490" height="880" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2858156" sideWeight="0.49483013" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21347518" sideWeight="0.49483013" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3387978" sideWeight="0.50668895" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42632332" sideWeight="0.49331105" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42918456" sideWeight="0.49331105" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1761427" sideWeight="0.50516987" order="2" side_tool="true" content_ui="tabs" />
@@ -1008,8 +1003,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OBD_project-master/dataHandler/LDAForEvent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1251">
-          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+        <state relative-caret-position="101">
+          <caret line="145" column="128" lean-forward="true" selection-start-line="145" selection-start-column="4" selection-end-line="145" selection-end-column="128" />
           <folding>
             <element signature="e#181#192#0" expanded="true" />
             <element signature="e#1338#1922#0" expanded="false" />

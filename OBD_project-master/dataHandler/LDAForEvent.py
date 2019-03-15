@@ -118,10 +118,10 @@ def LDAtraining(doc_set, test_set):
     Lda = gensim.models.ldamodel.LdaModel
 
     # generate LDA model
-    ldamodel = Lda(corpus, num_topics=4, eval_every=10,id2word=dictionary, passes=40,iterations=5000)
+    ldamodel = Lda(corpus, num_topics=4, eval_every=10,id2word=dictionary, passes=20,iterations=5000)
 
     # print most related words of each topic
-    print(ldamodel.print_topics(num_topics=4, num_words=3))
+    print(ldamodel.print_topics(num_topics=4, num_words=9))
 
     # print(ldamodel.print_topics(num_topics=2, num_words=20))
 
@@ -142,6 +142,7 @@ def main():
     ldamodel,dictionary = LDAtraining(datamatrix,[])
     ldamodel = LdaModel.load(datapath('model'))
     dictionary = Dictionary.load(datapath('dictionary'))
+    print(len(dictionary))
     test = ['04000', '42044', '24024', '02022', '02000', '24022', '02206', '02200', '00624', '00624', '04442', '42004', '44024']
     testEvent(test,ldamodel,dictionary)
 
