@@ -481,13 +481,15 @@ def Calibration():
     unitAccy = Accy / Acclength
     unitAccz = Accz / Acclength
 
-    Swervex = unitAccy*unitG[2] - unitAccz*unitG[1]
-    Swervey = unitAccz*unitG[0] - unitAccx*unitG[2]
-    Swervez = unitAccx*unitG[1] - unitAccy*unitG[0]
-    Swelength = lengthOfForce(Swervex, Swervey, Swervez)
+    # Swervex = unitAccy*unitG[2] - unitAccz*unitG[1]
+    # Swervey = unitAccz*unitG[0] - unitAccx*unitG[2]
+    # Swervez = unitAccx*unitG[1] - unitAccy*unitG[0]
+    # Swelength = lengthOfForce(Swervex, Swervey, Swervez)
 
-    cosRoll = dot(y, array([float(Swervex), float(Swervey), float(Swervez)])) / (Swelength*1)
-    sinRoll = math.sin(math.acos(cosRoll))
+    # cosRoll = dot(y, array([float(Swervex), float(Swervey), float(Swervez)])) / (Swelength*1)
+    # sinRoll = math.sin(math.acos(cosRoll))
+    sinRoll = Gforce[0] / glen
+    cosRoll = math.cos(math.asin(sinRoll))
 
     Rx = array([(1, 0 , 0),
                 (0, cosPitch, -sinPitch),
