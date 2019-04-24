@@ -11,10 +11,9 @@ from scipy import signal
 from graphics import *
 import time
 
-
 matrix = np.array([[0.0649579822346719, 0, -0.997888],
-               [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
-               [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
+                   [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
+                   [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
 
 
 # def connectDB():
@@ -27,25 +26,26 @@ matrix = np.array([[0.0649579822346719, 0, -0.997888],
 #     return connection
 
 def connectDB():
-    connection=pymysql.connect(host='35.197.95.95',
-                                user='root',
-                                password='obd12345',
-                                db='DRIVINGDB',
-                                port=3306,
-                                charset='utf8')
+    connection = pymysql.connect(host='35.197.95.95',
+                                 user='root',
+                                 password='obd12345',
+                                 db='DRIVINGDB',
+                                 port=3306,
+                                 charset='utf8')
     return connection
 
+
 class Event(object):
-    def __init__(self,starttime,type):
+    def __init__(self, starttime, type):
         self.start = starttime
-        self.type =type
+        self.type = type
         self.vect = []
 
-    def setEndtime(self,endtime):
+    def setEndtime(self, endtime):
         self.end = endtime
 
     def getDuration(self):
-        duration = (self.end-self.start)/5
+        duration = (self.end - self.start) / 5
         return duration
 
     def getStart(self):
@@ -54,11 +54,11 @@ class Event(object):
     def getEnd(self):
         return self.end
 
-    def addValue(self,data):
+    def addValue(self, data):
         temp = []
         temp = self.vect
         temp.append(data)
-        self.vect=temp
+        self.vect = temp
 
         return self.vect
 
@@ -76,15 +76,16 @@ def write_data(dataTemp, table, row):
         table.write(row, j, data[j])
 
 
-xstdQueue =queue.Queue(maxsize=19)
+xstdQueue = queue.Queue(maxsize=19)
 ystdQueue = queue.Queue(maxsize=19)
 
 thresholdnum = 0
 bthresholdnum = 0
-sevent=Event(0, -1)
+sevent = Event(0, -1)
 bevent = Event(0, -1)
 sfault = 3
 bfault = 3
+
 
 #  detect event from acceleration x
 def detectEvent(data):
@@ -93,12 +94,12 @@ def detectEvent(data):
     global sevent
     global bevent
     global sfault
-    global  bfault
+    global bfault
     sflag = False
     bflag = False
     xarray = []
     # x = []
-    stdXArray = [] # use to get the smallest std, which will be the beginning of an event
+    stdXArray = []  # use to get the smallest std, which will be the beginning of an event
     xstdQueue.put(data)
 
     if xstdQueue.full():
@@ -107,7 +108,7 @@ def detectEvent(data):
             temp = xstdQueue.get()
             t.append(temp[3])
             if i > 8:
-                stdXArray.append(np.std(t[i-9:i]), ddof=1)
+                stdXArray.append(np.std(t[i - 9:i]), ddof=1)
                 xarray.append(temp)
                 # x.append(temp[3])
             xstdQueue.put(temp)
@@ -116,8 +117,7 @@ def detectEvent(data):
 
         startIndex = stdXArray.index(min(stdXArray))
 
-
-        accx =data[3]
+        accx = data[3]
         timestamp = data[0]
 
         if accx > 0.1 and stdX > 0.02 and thresholdnum == 0:
@@ -131,8 +131,8 @@ def detectEvent(data):
             sfault = 3
             sflag = True
         elif accx < 0.05 and sfault > 0 and thresholdnum > 0:
-            sfault = sfault-1
-            thresholdnum = thresholdnum+1
+            sfault = sfault - 1
+            thresholdnum = thresholdnum + 1
             sflag = True
         elif (accx < 0.05 or stdX < 0.02) and thresholdnum > 0:
             if thresholdnum > 10:
@@ -173,7 +173,7 @@ def detectEvent(data):
 
 
 tthresholdnum = 0
-tevent = Event(0,-1)
+tevent = Event(0, -1)
 tfault = 3
 swerveFlag = False
 positive = True
@@ -200,7 +200,7 @@ def detectYEvent(data):
             temp = ystdQueue.get()
             t.append(temp[2])
             if i > 8:
-                stdYArray.append(np.std(t[i-9:i]), ddof=1)
+                stdYArray.append(np.std(t[i - 9:i]), ddof=1)
                 yarray.append(temp)
             # y.append(temp[2])
             ystdQueue.put(temp)
@@ -214,7 +214,7 @@ def detectYEvent(data):
 
         if positive:
             if accy > 0.1 and stdY > 0.03 and tthresholdnum == 0:
-                tthresholdnum = tthresholdnum+1
+                tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 4)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
                     tevent.addValue(yarray[i])
@@ -236,7 +236,7 @@ def detectYEvent(data):
                     negative = True
                     return tevent
                 elif stdY > 0.1:
-                    tthresholdnum = tthresholdnum+1
+                    tthresholdnum = tthresholdnum + 1
                     tflag = True
                 elif tthresholdnum > 15:
                     tevent.setEndtime(timestamp)
@@ -251,7 +251,7 @@ def detectYEvent(data):
 
         if negative:
             if accy < -0.1 and stdY > 0.03 and tthresholdnum == 0:
-                tthresholdnum = tthresholdnum+1
+                tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 4)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
                     tevent.addValue(yarray[i])
@@ -273,7 +273,7 @@ def detectYEvent(data):
                     positive = True
                     return tevent
                 elif stdY > 0.1:
-                    tthresholdnum = tthresholdnum+1
+                    tthresholdnum = tthresholdnum + 1
                     tflag = True
                 elif tthresholdnum > 15:
                     tevent.setEndtime(timestamp)
@@ -307,7 +307,7 @@ def calcData(data):
     meanOY = np.mean(data[:, 5])
     maxOX = max(data[:, 6])
     maxOY = max(data[:, 5])
-    t = (data[-1, 0] - data[0, 0])/1000
+    t = (data[-1, 0] - data[0, 0]) / 1000
     meanSP = np.mean(data[:, 1])
     varSP = np.std(data[:, 1])
     return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOX,
@@ -315,17 +315,19 @@ def calcData(data):
 
 
 def nomalization(vect):
-    max = [0.619,0.944,0.208,0.281,6.075,17.258,0.286,0.349,3.901,26.569,10.171,60.271,0.097,106.5,29.291,24.982]
-    min = [0.034,0.021,0.009,0.004,0.325,0.845,-0.312,-0.281,-3.816,-20.210,-0.061,-1.291,-0.818,4.979,0.408,1.581]
+    max = [0.619, 0.944, 0.208, 0.281, 6.075, 17.258, 0.286, 0.349, 3.901, 26.569, 10.171, 60.271, 0.097, 106.5, 29.291,
+           24.982]
+    min = [0.034, 0.021, 0.009, 0.004, 0.325, 0.845, -0.312, -0.281, -3.816, -20.210, -0.061, -1.291, -0.818, 4.979,
+           0.408, 1.581]
     for i in range(len(vect)):
         vect[i] = (vect[i] - min[i]) / (max[i] - min[i])
     return vect
 
 
 def transformTimestamp(timestamp):
-    timestamp = float(int(timestamp)/1000)
+    timestamp = float(int(timestamp) / 1000)
     time_local = time.localtime(timestamp)
-    dt = time.strftime(" %H:%M:%S",time_local)
+    dt = time.strftime(" %H:%M:%S", time_local)
     return dt
 
 
@@ -342,19 +344,18 @@ def drawBackground():
 
     return win
 
-def saveResult(start, end , result):
+
+def saveResult(start, end, result):
     oldwd = open_workbook('ForLDA.xls', formatting_info=True)
     sheet = oldwd.sheet_by_index(0)
     rowNum = sheet.nrows
     newwb = copy(oldwd)
     newWs = newwb.get_sheet(0)
-    write_data(np.array([start,end,result]), newWs, rowNum)
+    write_data(np.array([start, end, result]), newWs, rowNum)
     newwb.save('ForLDA.xls')
 
 
 def main():
-
-
     svm = joblib.load('svm.pkl')
     resultMatrix = []
     newrecord = 0
@@ -369,23 +370,23 @@ def main():
     txtMsg.setSize(15)
     txtMsg.draw(win)
 
-    gpsTxt = Text(Point(12,12),"GPS")
+    gpsTxt = Text(Point(12, 12), "GPS")
     gpsTxt.setTextColor("blue")
     gpsTxt.setSize(15)
     gpsTxt.draw(win)
 
-    timestamp=[]
-    speed=[]
-    accx=[]
-    accy=[]
-    accz=[]
-    gyox=[]
-    gyoy=[]
-    gyoz=[]
+    timestamp = []
+    speed = []
+    accx = []
+    accy = []
+    accz = []
+    gyox = []
+    gyoy = []
+    gyoz = []
     gpsLa = []
     gpsLo = []
 
-    while(True):
+    while (True):
         isCatch = False
         lowpass = []
         try:
@@ -422,24 +423,26 @@ def main():
         finally:
             connection.close()
         if isCatch:
-            gpsTxt.setText('GPS:('+gpsLa[-2]+','+gpsLo[-1]+')')
+            gpsTxt.setText('GPS:(' + gpsLa[-2] + ',' + gpsLo[-1] + ')')
             # low pass filter
             lowpass = np.array(lowpass)
             b, a = signal.butter(3, 0.4, 'low')
-            accxsf = signal.filtfilt(b, a, lowpass[:,1])
-            accysf = signal.filtfilt(b, a, lowpass[:,0])
-            acczsf = signal.filtfilt(b, a, lowpass[:,2])
-            #print(accxsf, accysf,acczsf)
+            accxsf = signal.filtfilt(b, a, lowpass[:, 1])
+            accysf = signal.filtfilt(b, a, lowpass[:, 0])
+            acczsf = signal.filtfilt(b, a, lowpass[:, 2])
+            # print(accxsf, accysf,acczsf)
             # if(x>=30):
-                # lowpassed.append([accysf[-2],accxsf[-2],acczsf[-2]])
+            # lowpassed.append([accysf[-2],accxsf[-2],acczsf[-2]])
 
-            #detect event
-            event = detectEvent([timestamp[-2],speed[-2],accysf[-2],accxsf[-2],acczsf[-2],gyox[-2],gyoy[-2],gyoz[-2]])
-            yevent = detectYEvent([timestamp[-2],speed[-2],accysf[-2],accxsf[-2],acczsf[-2],gyox[-2],gyoy[-2],gyoz[-2]])
+            # detect event
+            event = detectEvent(
+                [timestamp[-2], speed[-2], accysf[-2], accxsf[-2], acczsf[-2], gyox[-2], gyoy[-2], gyoz[-2]])
+            yevent = detectYEvent(
+                [timestamp[-2], speed[-2], accysf[-2], accxsf[-2], acczsf[-2], gyox[-2], gyoy[-2], gyoz[-2]])
 
             #  define type and intensity
             if not event is None:
-                print(event.getType(),' event: ',event.getStart(),'-',event.getEnd())
+                print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
 
                 vect = np.array(event.getValue())
                 # print(vect)
@@ -450,22 +453,26 @@ def main():
 
                 result = svm.predict([vect])
                 print(result)
-                if result<4:
+                if result < 4:
                     eventNum = eventNum + 1
-                    resultMatrix.append([event.getStart(),event.getEnd(),result[0]])
+                    resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
 
                     txtMsg.undraw()
                     if result == 0:
-                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd())  +' speed up')
+                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+                            event.getEnd()) + ' speed up')
                     elif result == 1:
-                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + 'hard speed up')
-                    elif result ==2:
-                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + ' brake')
-                    elif result ==3:
-                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + ' hrad brake')
+                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+                            event.getEnd()) + 'hard speed up')
+                    elif result == 2:
+                        txtMsg.setText(
+                            transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + ' brake')
+                    elif result == 3:
+                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+                            event.getEnd()) + ' hrad brake')
                     txtMsg.draw(win)
 
-                    saveResult(event.getStart(),event.getEnd(),result[0])
+                    saveResult(event.getStart(), event.getEnd(), result[0])
 
             if not yevent is None:
                 print(yevent.getType(), ' event: ', yevent.getStart(), '-', yevent.getEnd())
@@ -478,19 +485,23 @@ def main():
 
                 result = svm.predict([vect])
                 print(result)
-                if result>3:
-                    eventNum = eventNum +1
+                if result > 3:
+                    eventNum = eventNum + 1
                     resultMatrix.append([yevent.getStart(), yevent.getEnd(), result[0]])
 
                     txtMsg.undraw()
                     if result == 4:
-                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(yevent.getEnd()) + ' turn')
+                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(
+                            yevent.getEnd()) + ' turn')
                     elif result == 5:
-                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(yevent.getEnd()) + 'hard turn')
+                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(
+                            yevent.getEnd()) + 'hard turn')
                     elif result == 6:
-                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(yevent.getEnd()) + ' swerve')
+                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(
+                            yevent.getEnd()) + ' swerve')
                     elif result == 7:
-                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(yevent.getEnd()) + ' hrad swerve')
+                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(
+                            yevent.getEnd()) + ' hrad swerve')
                     txtMsg.draw(win)
                     saveResult(yevent.getStart(), yevent.getEnd(), result[0])
 
