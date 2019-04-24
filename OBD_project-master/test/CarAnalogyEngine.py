@@ -76,4 +76,6 @@ def testCarAnalogyEngine():
         fclock.tick(fps)
 
 if __name__ == '__main__':
-    testCarAnalogyEngine()
+    # testCarAnalogyEngine()
+    l = [1,2,3,4,5,6]
+    print(l[::-1])
