@@ -31,11 +31,11 @@ p_stemmer = PorterStemmer()
 #         "Of course, as a hipster, you know you can’t just ask, " \
 #         "so what do you do?"
 
-# doc_a = "Brocolli is good to eat. My brother likes to eat good brocolli, but not my mother."
-# doc_b = "My mother spends a lot of time driving my brother around to baseball practice."
-# doc_c = "Some health experts suggest that driving may cause increased tension and blood pressure."
-# doc_d = "I often feel pressure to perform well at school, but my mother never seems to drive my brother to do better."
-# doc_e = "Health professionals say that brocolli is good for your health."
+doc_a = "Brocolli is good to eat. My brother likes to eat good brocolli, but not my mother."
+doc_b = "My mother spends a lot of time driving my brother around to baseball practice."
+doc_c = "Some health experts suggest that driving may cause increased tension and blood pressure."
+doc_d = "I often feel pressure to perform well at school, but my mother never seems to drive my brother to do better."
+doc_e = "Health professionals say that brocolli is good for your health."
 #
 # doc_a = "1 2 1 3 1 4 1 1 0 0 0 0 0 5 1 2 0 0" \
 #         "0 1 2 0 0 0 0 0 0 1 0 0 2 3 1 0 0 0 7 6 1" \
@@ -48,12 +48,12 @@ p_stemmer = PorterStemmer()
 #         "0001 0506 0500 1234 0131  " \
 #         "0001 1121 2300 0054 3005 6666  " \
 #         "0000 1112 3334 5677 1234 "
-doc_a = '04000 42044 24024 02022 02000 24022 02206 02200 00624 04442 42004 44024 13412 22132 02460 62006 13130 20220 ' \
-        '22020 20131 32122 04204 20220 44422 20417 34402 04222 00002 00002 00200 20255 30420 '
+# doc_a = '04000 42044 24024 02022 02000 24022 02206 02200 00624 04442 42004 44024 13412 22132 02460 62006 13130 20220 ' \
+#        '22020 20131 32122 04204 20220 44422 20417 34402 04222 00002 00002 00200 20255 30420 '
 
 
 # compile sample documents into a list
-doc_set = [doc_a]
+doc_set = [doc_a,doc_b,doc_c,doc_d]
 
 # list for tokenized documents in loop
 texts = []
