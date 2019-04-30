@@ -9,12 +9,26 @@ from sklearn import svm
 from sklearn.externals import joblib
 from scipy import signal
 from graphics import *
+import threading
 import time
 
 matrix = np.array([[0.0649579822346719, 0, -0.997888],
                    [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
                    [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
 
+timestamp = []
+speed = []
+gyox = []
+gyoy = []
+gyoz = []
+gpsLa = []
+gpsLo = []
+accelerationx = 0
+accelerationy = 0
+accelerationz = 0
+
+#lock = threading.Lock()
+eventQueue = queue.Queue()
 
 # def connectDB():
 #     connection=pymysql.connect(host='localhost',
@@ -68,6 +82,98 @@ class Event(object):
     def getType(self):
         return self.type
 
+
+# thread class to write
+class myThread(threading.Thread):  # threading.Thread
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.__running = threading.Event()
+        self.__running.set()
+
+    def run(self):
+        newrecord = 0
+
+        global timestamp
+        global speed
+        accx = []
+        accy = []
+        accz = []
+        global gyox
+        global gyoy
+        global gyoz
+        global gpsLa
+        global gpsLo
+        global accelerationx
+        global accelerationy
+        global accelerationz
+        global eventQueue
+
+        while (True):
+            isCatch = False
+            lowpass = []
+            try:
+                # 获取一个游标
+                connection = connectDB()
+                with connection.cursor() as cursor:
+                    sql = 'select * from STATUS ORDER BY time DESC LIMIT 30'
+                    count = cursor.execute(sql)
+
+                    i = 0
+                    for row in cursor.fetchall():
+                        if i == 0:
+                            if row[2] != newrecord:  # detect if catch the same data
+                                isCatch = True
+                                newrecord = row[2]
+                        if isCatch:
+                            timestamp.append(row[2])
+                            speed.append(row[3])
+                            accx.append(row[4])
+                            accy.append(row[5])
+                            accz.append(row[6])
+                            gpsLa.append(row[7])
+                            gpsLo.append(row[8])
+                            gyox.append(row[9])
+                            gyoy.append(row[10])
+                            gyoz.append(row[11])
+                            acc = np.array([accx, accy, accz])
+                            acc = acc.astype(np.float64)
+
+                            # calibration
+                            acc = np.dot(matrix, acc)
+                            accelerationx = acc[1]
+                            accelerationy = acc[0]
+                            accelerationz = acc[2]
+                            # put data into lowpass list which is used to filtered
+                            lowpass.append(acc)
+                        i = i + 1
+            finally:
+                connection.close()
+            if isCatch:
+                # gpsTxt.setText('GPS:(' + gpsLa[-2] + ',' + gpsLo[-1] + ')')
+                # low pass filter
+                lowpass = np.array(lowpass)
+                b, a = signal.butter(3, 0.4, 'low')
+                accxsf = signal.filtfilt(b, a, lowpass[:, 1])
+                accysf = signal.filtfilt(b, a, lowpass[:, 0])
+                acczsf = signal.filtfilt(b, a, lowpass[:, 2])
+                # print(accxsf, accysf,acczsf)
+                # if(x>=30):
+                # lowpassed.append([accysf[-2],accxsf[-2],acczsf[-2]])
+
+                # detect event
+                event = detectEvent(
+                    [timestamp[-2], speed[-2], accysf[-2], accxsf[-2], acczsf[-2], gyox[-2], gyoy[-2], gyoz[-2]])
+                yevent = detectYEvent(
+                    [timestamp[-2], speed[-2], accysf[-2], accxsf[-2], acczsf[-2], gyox[-2], gyoy[-2], gyoz[-2]])
+
+                # put the event into Queue
+                if not event is None:
+                    eventQueue.put(event)
+                if not yevent is None:
+                    eventQueue.put(yevent)
+
+    def stop(self):
+        self.__running.clear()
 
 def write_data(dataTemp, table, row):
     data = np.array(dataTemp)
@@ -358,10 +464,13 @@ def saveResult(start, end, result):
 def main():
     svm = joblib.load('svm.pkl')
     resultMatrix = []
-    newrecord = 0
-
     eventNum = 0
 
+    # start the data collection and event detection thread
+    thread1 = myThread()
+    thread1.start()
+
+    # draw the background
     win = drawBackground()
     pntMsg = Point(12, 6)
     txtMsg = Text(pntMsg, "Event")
@@ -375,138 +484,50 @@ def main():
     gpsTxt.setSize(15)
     gpsTxt.draw(win)
 
-    timestamp = []
-    speed = []
-    accx = []
-    accy = []
-    accz = []
-    gyox = []
-    gyoy = []
-    gyoz = []
-    gpsLa = []
-    gpsLo = []
+    while True:
+        #  define type and intensity
+        if not eventQueue.empty():
+            event = eventQueue.get()
 
-    while (True):
-        isCatch = False
-        lowpass = []
-        try:
-            # 获取一个游标
-            connection = connectDB()
-            with connection.cursor() as cursor:
-                sql = 'select * from STATUS ORDER BY time DESC LIMIT 30'
-                count = cursor.execute(sql)
+            print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
 
-                i = 0
-                for row in cursor.fetchall():
-                    if i == 0:
-                        if row[2] != newrecord:  # detect if catch the same data
-                            isCatch = True
-                            newrecord = row[2]
-                    if isCatch:
-                        timestamp.append(row[2])
-                        speed.append(row[3])
-                        accx.append(row[4])
-                        accy.append(row[5])
-                        accz.append(row[6])
-                        gpsLa.append(row[7])
-                        gpsLo.append(row[8])
-                        gyox.append(row[9])
-                        gyoy.append(row[10])
-                        gyoz.append(row[11])
-                        acc = np.array([accx, accy, accz])
-                        acc = acc.astype(np.float64)
+            vect = np.array(event.getValue())
+            # print(vect)
+            vect = vect.astype(np.float64)
 
-                        # calibration
-                        acc = np.dot(matrix, acc)
-                        lowpass.append(acc)
-                    i = i + 1
-        finally:
-            connection.close()
-        if isCatch:
-            gpsTxt.setText('GPS:(' + gpsLa[-2] + ',' + gpsLo[-1] + ')')
-            # low pass filter
-            lowpass = np.array(lowpass)
-            b, a = signal.butter(3, 0.4, 'low')
-            accxsf = signal.filtfilt(b, a, lowpass[:, 1])
-            accysf = signal.filtfilt(b, a, lowpass[:, 0])
-            acczsf = signal.filtfilt(b, a, lowpass[:, 2])
-            # print(accxsf, accysf,acczsf)
-            # if(x>=30):
-            # lowpassed.append([accysf[-2],accxsf[-2],acczsf[-2]])
+            # calculate the features
+            vect = calcData(vect)
+            # normalize the features
+            vect = nomalization(vect)
 
-            # detect event
-            event = detectEvent(
-                [timestamp[-2], speed[-2], accysf[-2], accxsf[-2], acczsf[-2], gyox[-2], gyoy[-2], gyoz[-2]])
-            yevent = detectYEvent(
-                [timestamp[-2], speed[-2], accysf[-2], accxsf[-2], acczsf[-2], gyox[-2], gyoy[-2], gyoz[-2]])
+            # predict the result
+            result = svm.predict([vect])
+            print(result)
+            if result < 4:
+                eventNum = eventNum + 1
+                resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
 
-            #  define type and intensity
-            if not event is None:
-                print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
+                txtMsg.undraw()
+                if result == 0:
+                    txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+                        event.getEnd()) + ' speed up')
+                elif result == 1:
+                    txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+                        event.getEnd()) + 'hard speed up')
+                elif result == 2:
+                    txtMsg.setText(
+                        transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + ' brake')
+                elif result == 3:
+                    txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+                        event.getEnd()) + ' hrad brake')
+                txtMsg.draw(win)
 
-                vect = np.array(event.getValue())
-                # print(vect)
-                vect = vect.astype(np.float64)
+                saveResult(event.getStart(), event.getEnd(), result[0])
 
-                vect = calcData(vect)
-                vect = nomalization(vect)
 
-                result = svm.predict([vect])
-                print(result)
-                if result < 4:
-                    eventNum = eventNum + 1
-                    resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
 
-                    txtMsg.undraw()
-                    if result == 0:
-                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-                            event.getEnd()) + ' speed up')
-                    elif result == 1:
-                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-                            event.getEnd()) + 'hard speed up')
-                    elif result == 2:
-                        txtMsg.setText(
-                            transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + ' brake')
-                    elif result == 3:
-                        txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-                            event.getEnd()) + ' hrad brake')
-                    txtMsg.draw(win)
-
-                    saveResult(event.getStart(), event.getEnd(), result[0])
-
-            if not yevent is None:
-                print(yevent.getType(), ' event: ', yevent.getStart(), '-', yevent.getEnd())
-
-                vect = np.array(yevent.getValue())
-                vect = vect.astype(np.float64)
-
-                vect = calcData(vect)
-                vect = nomalization(vect)
-
-                result = svm.predict([vect])
-                print(result)
-                if result > 3:
-                    eventNum = eventNum + 1
-                    resultMatrix.append([yevent.getStart(), yevent.getEnd(), result[0]])
-
-                    txtMsg.undraw()
-                    if result == 4:
-                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(
-                            yevent.getEnd()) + ' turn')
-                    elif result == 5:
-                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(
-                            yevent.getEnd()) + 'hard turn')
-                    elif result == 6:
-                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(
-                            yevent.getEnd()) + ' swerve')
-                    elif result == 7:
-                        txtMsg.setText(transformTimestamp(yevent.getStart()) + '--' + transformTimestamp(
-                            yevent.getEnd()) + ' hrad swerve')
-                    txtMsg.draw(win)
-                    saveResult(yevent.getStart(), yevent.getEnd(), result[0])
-
-    # print('total ',eventNum,'turns')
-    # print(resultMatrix)
+# print('total ',eventNum,'turns')
+# print(resultMatrix)
     # file_w = Workbook()
     # table = file_w.add_sheet(u'Data', cell_overwrite_ok=True)  # 创建sheet
     # write_data(np.array(resultMatrix), table)
