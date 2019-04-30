@@ -17,8 +17,10 @@ matrix = np.array([[0.0649579822346719, 0, -0.997888],
                    [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
                    [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
 
-time_window = 40
-svm_label_buffer = ""
+time_window = 40 # time window for a word in LDA
+svm_label_buffer = "" # the word in a time window
+LDA_flag = True # if False, there are a event holding a time window, we should waiting for the end of event
+
 timestamp = []
 speed = []
 gyox = []
@@ -178,15 +180,12 @@ class thread_for_lda(threading.Thread):  # threading.Thread
         self.score_queue = []
 
     def run(self):
-        newrecord = 0
         global svm_label_buffer
         ldaforevent = LDAForEvent
         start_time = time.time()
         #  monitor time-window
         while True:
-            #
-
-            if time.time()-start_time > time_window:
+            if time.time()-start_time > time_window and LDA_flag:
                 start_time = time.time()
                 temp_word = svm_label_buffer
                 svm_label_buffer = ""
@@ -200,7 +199,8 @@ class thread_for_lda(threading.Thread):  # threading.Thread
     def calc_score(self,type):
         if 1 == type:
             return np.average(self.score_queue)
-
+        if 2 == type:
+            return 1
         return 0
 
 

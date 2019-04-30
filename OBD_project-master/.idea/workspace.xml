@@ -23,22 +23,22 @@
       <file leaf-file-name="EventDetection.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="196" column="46" lean-forward="true" selection-start-line="196" selection-start-column="46" selection-end-line="196" selection-end-column="46" />
+            <state relative-caret-position="274">
+              <caret line="195" column="46" lean-forward="true" selection-start-line="195" selection-start-column="46" selection-end-line="195" selection-end-column="46" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#1121#1749#0" expanded="false" />
-                <element signature="e#1831#5228#0" expanded="false" />
-                <element signature="e#6559#6691#0" expanded="false" />
-                <element signature="e#6933#9680#0" expanded="false" />
-                <element signature="e#9850#13807#0" expanded="false" />
-                <element signature="e#13834#14556#0" expanded="false" />
-                <element signature="e#14587#14968#0" expanded="false" />
-                <element signature="e#15010#15155#0" expanded="false" />
-                <element signature="e#15184#15506#0" expanded="false" />
-                <element signature="e#15548#15812#0" expanded="false" />
-                <element signature="e#15830#18206#0" expanded="false" />
-                <marker date="1556621515645" expanded="true" signature="2559:2607" ph="select * fro... STATUS" />
+                <element signature="e#1290#1918#0" expanded="false" />
+                <element signature="e#2000#5397#0" expanded="false" />
+                <element signature="e#6746#6878#0" expanded="false" />
+                <element signature="e#7120#9867#0" expanded="false" />
+                <element signature="e#10037#13994#0" expanded="false" />
+                <element signature="e#14021#14743#0" expanded="false" />
+                <element signature="e#14774#15155#0" expanded="false" />
+                <element signature="e#15197#15342#0" expanded="false" />
+                <element signature="e#15371#15693#0" expanded="false" />
+                <element signature="e#15735#15999#0" expanded="false" />
+                <element signature="e#16017#18393#0" expanded="false" />
+                <marker date="1556622835689" expanded="true" signature="2728:2776" ph="select * fro... STATUS" />
               </folding>
             </state>
           </provider>
@@ -518,18 +518,18 @@
           <caret line="516" column="15" lean-forward="false" selection-start-line="516" selection-start-column="4" selection-end-line="516" selection-end-column="15" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1121#1749#0" expanded="false" />
-            <element signature="e#1831#5228#0" expanded="false" />
-            <element signature="e#6559#6691#0" expanded="false" />
-            <element signature="e#6933#9680#0" expanded="false" />
-            <element signature="e#9850#13807#0" expanded="false" />
-            <element signature="e#13834#14556#0" expanded="false" />
-            <element signature="e#14587#14968#0" expanded="false" />
-            <element signature="e#15010#15155#0" expanded="false" />
-            <element signature="e#15184#15506#0" expanded="false" />
-            <element signature="e#15548#15812#0" expanded="false" />
-            <element signature="e#15830#18206#0" expanded="false" />
-            <marker date="1556621515645" expanded="true" signature="2559:2607" ph="select * fro... STATUS" />
+            <element signature="e#1290#1918#0" expanded="false" />
+            <element signature="e#2000#5397#0" expanded="false" />
+            <element signature="e#6746#6878#0" expanded="false" />
+            <element signature="e#7120#9867#0" expanded="false" />
+            <element signature="e#10037#13994#0" expanded="false" />
+            <element signature="e#14021#14743#0" expanded="false" />
+            <element signature="e#14774#15155#0" expanded="false" />
+            <element signature="e#15197#15342#0" expanded="false" />
+            <element signature="e#15371#15693#0" expanded="false" />
+            <element signature="e#15735#15999#0" expanded="false" />
+            <element signature="e#16017#18393#0" expanded="false" />
+            <marker date="1556622835689" expanded="true" signature="2728:2776" ph="select * fro... STATUS" />
           </folding>
         </state>
       </provider>
@@ -562,18 +562,18 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1121#1749#0" expanded="false" />
-            <element signature="e#1831#5228#0" expanded="false" />
-            <element signature="e#6559#6691#0" expanded="false" />
-            <element signature="e#6933#9680#0" expanded="false" />
-            <element signature="e#9850#13807#0" expanded="false" />
-            <element signature="e#13834#14556#0" expanded="false" />
-            <element signature="e#14587#14968#0" expanded="false" />
-            <element signature="e#15010#15155#0" expanded="false" />
-            <element signature="e#15184#15506#0" expanded="false" />
-            <element signature="e#15548#15812#0" expanded="false" />
-            <element signature="e#15830#18206#0" expanded="false" />
-            <marker date="1556621515645" expanded="true" signature="2559:2607" ph="select * fro... STATUS" />
+            <element signature="e#1290#1918#0" expanded="false" />
+            <element signature="e#2000#5397#0" expanded="false" />
+            <element signature="e#6746#6878#0" expanded="false" />
+            <element signature="e#7120#9867#0" expanded="false" />
+            <element signature="e#10037#13994#0" expanded="false" />
+            <element signature="e#14021#14743#0" expanded="false" />
+            <element signature="e#14774#15155#0" expanded="false" />
+            <element signature="e#15197#15342#0" expanded="false" />
+            <element signature="e#15371#15693#0" expanded="false" />
+            <element signature="e#15735#15999#0" expanded="false" />
+            <element signature="e#16017#18393#0" expanded="false" />
+            <marker date="1556622835689" expanded="true" signature="2728:2776" ph="select * fro... STATUS" />
           </folding>
         </state>
       </provider>
@@ -620,22 +620,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="196" column="46" lean-forward="true" selection-start-line="196" selection-start-column="46" selection-end-line="196" selection-end-column="46" />
+        <state relative-caret-position="274">
+          <caret line="195" column="46" lean-forward="true" selection-start-line="195" selection-start-column="46" selection-end-line="195" selection-end-column="46" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1121#1749#0" expanded="false" />
-            <element signature="e#1831#5228#0" expanded="false" />
-            <element signature="e#6559#6691#0" expanded="false" />
-            <element signature="e#6933#9680#0" expanded="false" />
-            <element signature="e#9850#13807#0" expanded="false" />
-            <element signature="e#13834#14556#0" expanded="false" />
-            <element signature="e#14587#14968#0" expanded="false" />
-            <element signature="e#15010#15155#0" expanded="false" />
-            <element signature="e#15184#15506#0" expanded="false" />
-            <element signature="e#15548#15812#0" expanded="false" />
-            <element signature="e#15830#18206#0" expanded="false" />
-            <marker date="1556621515645" expanded="true" signature="2559:2607" ph="select * fro... STATUS" />
+            <element signature="e#1290#1918#0" expanded="false" />
+            <element signature="e#2000#5397#0" expanded="false" />
+            <element signature="e#6746#6878#0" expanded="false" />
+            <element signature="e#7120#9867#0" expanded="false" />
+            <element signature="e#10037#13994#0" expanded="false" />
+            <element signature="e#14021#14743#0" expanded="false" />
+            <element signature="e#14774#15155#0" expanded="false" />
+            <element signature="e#15197#15342#0" expanded="false" />
+            <element signature="e#15371#15693#0" expanded="false" />
+            <element signature="e#15735#15999#0" expanded="false" />
+            <element signature="e#16017#18393#0" expanded="false" />
+            <marker date="1556622835689" expanded="true" signature="2728:2776" ph="select * fro... STATUS" />
           </folding>
         </state>
       </provider>
