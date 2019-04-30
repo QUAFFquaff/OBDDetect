@@ -155,7 +155,8 @@ class LDAForEvent:
                 if f_max == grade:
                     testV[index][1] += 1 / flag
         # print(testV)
-        print(self.ldamodel[testV])
+        # print(self.ldamodel[testV])
+        return self.ldamodel[testV]
 
     def LDAtraining(self, doc_set):
         texts = []
@@ -249,14 +250,16 @@ class LDAForEvent:
 
     def LDATest(self, test):
         dictionary = Dictionary.load("lda_dictionary.model")
-        self.testEvent(self, test,dictionary)
+        result = self.testEvent(self, test,dictionary)
+        return result
 
 
 def main():
     ldamodel = LDAForEvent
     ldamodel.LDAPreProcessing(ldamodel)
     test = ['01']
-    ldamodel.LDATest(ldamodel,test)
+    result = ldamodel.LDATest(ldamodel,test)
+    print(result[0])
     # test = ['04000', '42044', '24024', '02022', '02000', '24022', '02206', '02200', '00624', '00624', '04442', '42004',
     #         '44024']
     # test = ['21222','01212','12121', '21012', '01010', '12121', '02120', '12010', '13312',

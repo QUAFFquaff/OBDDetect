@@ -10,11 +10,11 @@ from sklearn.externals import joblib
 from scipy import signal
 from graphics import *
 import time
+from dataHandler.LDAForEvent import *
 
 matrix = np.array([[0.0649579822346719, 0, -0.997888],
                    [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
                    [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
-
 
 # def connectDB():
 #     connection=pymysql.connect(host='localhost',
@@ -511,6 +511,10 @@ def main():
     # table = file_w.add_sheet(u'Data', cell_overwrite_ok=True)  # 创建sheet
     # write_data(np.array(resultMatrix), table)
     # file_w.save('ForLDA.xls')
+
+def LDATest():
+    ldaforevent = LDAForEvent
+    ldaforevent.LDATest(ldaforevent,[""])
 
 
 if __name__ == "__main__":
