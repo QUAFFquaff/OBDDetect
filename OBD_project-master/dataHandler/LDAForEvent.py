@@ -117,9 +117,9 @@ class LDAForEvent:
                 match_matrix[i][j] = self.calcDis(self,self.match_str_to_num(self, s1[i]),
                                                   self.match_str_to_num(self, s2[j]))
         for i in range(len(s1)):
-            match_matrix[i][0] += self.add_weight * i
+            match_matrix[i][0] = self.add_weight * i + match_matrix[0][0]
         for j in range(len(s2)):
-            match_matrix[0][j] += self.delete_weight * j
+            match_matrix[0][j] = self.delete_weight * j + match_matrix[0][0]
         for i in range(1, len(s1)):
             for j in range(1, len(s2)):
                 match_matrix[i][j] = min(
@@ -259,7 +259,8 @@ def main():
     ldamodel.LDAPreProcessing(ldamodel)
     test = ['01']
     result = ldamodel.LDATest(ldamodel,test)
-    print(result[0])
+    for node in result:
+        print(node[1])
     # test = ['04000', '42044', '24024', '02022', '02000', '24022', '02206', '02200', '00624', '00624', '04442', '42004',
     #         '44024']
     # test = ['21222','01212','12121', '21012', '01010', '12121', '02120', '12010', '13312',

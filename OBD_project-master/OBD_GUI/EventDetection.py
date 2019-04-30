@@ -17,7 +17,8 @@ matrix = np.array([[0.0649579822346719, 0, -0.997888],
                    [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
                    [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
 
-
+time_window = 40
+svm_label_buffer = ""
 timestamp = []
 speed = []
 gyox = []
@@ -165,6 +166,49 @@ class myThread(threading.Thread):  # threading.Thread
                     eventQueue.put(event)
                 if not yevent is None:
                     eventQueue.put(yevent)
+
+    def stop(self):
+        self.__running.clear()
+# this thread for time-window monitor and LDA detection
+class thread_for_lda(threading.Thread):  # threading.Thread
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.__running = threading.Event()
+        self.__running.set()
+        self.score_queue = []
+
+    def run(self):
+        newrecord = 0
+        global svm_label_buffer
+        ldaforevent = LDAForEvent
+        start_time = time.time()
+        #  monitor time-window
+        while True:
+            #
+
+            if time.time()-start_time > time_window:
+                start_time = time.time()
+                temp_word = svm_label_buffer
+                svm_label_buffer = ""
+                if svm_label_buffer != "":
+                    result = ldaforevent.LDATest(ldaforevent, [temp_word])
+                    self.score_queue.append(self.result_to_score(self,result))
+                    if len(self.score_queue) > 5:
+                        self.score_queue.pop()
+
+
+    def calc_score(self,type):
+        if 1 == type:
+            return np.average(self.score_queue)
+
+        return 0
+
+
+    def result_to_score(self,result):
+        score = 0
+        for node in result:
+            score += (node[0]+1) * 25 * node[1]
+        return score
 
     def stop(self):
         self.__running.clear()
@@ -444,7 +488,6 @@ def drawBackground():
 
     return win
 
-
 def saveResult(start, end, result):
     oldwd = open_workbook('ForLDA.xls', formatting_info=True)
     sheet = oldwd.sheet_by_index(0)
@@ -453,7 +496,6 @@ def saveResult(start, end, result):
     newWs = newwb.get_sheet(0)
     write_data(np.array([start, end, result]), newWs, rowNum)
     newwb.save('ForLDA.xls')
-
 
 def main():
     svm = joblib.load('svm.pkl')
