@@ -17,8 +17,7 @@ matrix = np.array([[0.0649579822346719, 0, -0.997888],
                    [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
                    [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
 
-<<<<<<< HEAD
-=======
+
 timestamp = []
 speed = []
 gyox = []
@@ -33,15 +32,6 @@ accelerationz = 0
 #lock = threading.Lock()
 eventQueue = queue.Queue()
 
->>>>>>> d647aacae7aa58b99bb4f7fe8cfead6e03277c5f
-# def connectDB():
-#     connection=pymysql.connect(host='localhost',
-#                                 user='root',
-#                                 password='970608',
-#                                 db='DRIVINGDB',
-#                                 port=3306,
-#                                 charset='utf8')
-#     return connection
 
 def connectDB():
     connection = pymysql.connect(host='35.197.95.95',
