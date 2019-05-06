@@ -16,6 +16,8 @@
 
 '''
 import pygame, sys
+import time
+import numpy as np
 
 
 def testCarAnalogyEngine():
@@ -77,5 +79,11 @@ def testCarAnalogyEngine():
 
 if __name__ == '__main__':
     # testCarAnalogyEngine()
-    l = [1,2,3,4,5,6]
-    print(l[::-1])
+    score_queue = []
+    score_queue.append(1)
+    score_queue.append(1)
+    score_queue.append(0)
+    score_queue.append(3)
+    score_queue.pop()
+    print(score_queue)
+    print(np.average(score_queue))
