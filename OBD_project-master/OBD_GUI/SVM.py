@@ -34,7 +34,7 @@ def read_excel1(number):
     table = data.sheets()[0]
 
     start = 0  # 开始的行
-    end = 191 # 结束的行
+    end = 287 # 结束的行
     # end = 6847  # 结束的行
     rows = end - start
 
@@ -44,7 +44,7 @@ def read_excel1(number):
         row = table.row_values(x)
         # all data from excel
         if(x==number-1):
-            for i in range(26):
+            for i in range(24):
                 # print(value)
                 values.append(row[i])
             list_values.append(values)
@@ -72,9 +72,9 @@ def svm_test(data):
     # gamma: parameter for 'rbf’,'poly' and 'sigmoid'
     # degree: parameter for 'poly'
     # coef0 is a constant for poly
-    #model = svm.SVC(kernel='poly', C=2, gamma=3,degree = 3,coef0=1)
+    model = svm.SVC(kernel='poly', C=1, gamma=3,degree = 2,coef0=1, probability=True, class_weight='balanced')
     #model = svm.SVC(kernel='rbf', C=2, gamma=2, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, decision_function_shape='ovr')
-    model = svm.SVC(kernel='rbf', C=2, gamma=2, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, class_weight='balanced')
+    #model = svm.SVC(kernel='rbf', C=4, gamma=5, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, class_weight='balanced')
     model.fit(x_train, y_train.ravel())
 
     print('train set accuracy:  ', model.score(x_train, y_train.ravel()))
@@ -88,11 +88,12 @@ def svm_test(data):
 
     # get accuracy of the model
     # print(clf.score(x_train, y_train))  # 精度
-    for i in range(1,191):
+
+    for i in range(1,287):
         predict = read_excel1(i)
-        y_hat = model.predict(predict[:,:25])
-        y_pro = model.predict_proba(predict[:,:25])
-        y_score = model.decision_function(predict[:,:25])
+        y_hat = model.predict(predict[:,:23])
+        y_pro = model.predict_proba(predict[:,:23])
+        y_score = model.decision_function(predict[:,:23])
         if(y_hat!=predict[:,-1]):
             print("prob", y_pro)
             print("score", y_score)
@@ -100,12 +101,12 @@ def svm_test(data):
             print("but graound truth is ",predict[:,-1])
             print(predict[:,-2])
             print('*****************')
+
     # # show_accuracy(y_hat, y_train, 'train data')
     # print(clf.score(x_test, y_test))
 
 
 def calcData(data):
-    half = int(len(data)/2)
     maxAX = max(data[:, 4])
     maxAY = max(data[:, 3])
     minAX = min(data[:, 4])
@@ -122,17 +123,14 @@ def calcData(data):
     meanAY = np.mean(data[:, 3])
     meanOX = np.mean(data[:, 7])
     meanOY = np.mean(data[:, 6])
-    meanAYhalf1 = np.mean(data[0:half, 3])
-    meanAYhalf2 = np.mean(data[half+1:-1, 3])
     maxOX = max(abs(data[:, 7]))
     maxOY = max(abs(data[:, 6]))
     t = (data[-1, 1] - data[0, 1])/1000
     maxSP = max(data[:, 2])
     meanSP = np.mean(data[:, 2])
     varSP = np.std(data[:, 2])
-    # accSP= (data[-1,2]-data[0,2])/t
     differenceSP = data[-1, 2]-data[0, 2]
-    return [rangeAX, rangeAY, startAY, endAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY,meanAYhalf1, meanAYhalf2, maxOX,
+    return [rangeAX, rangeAY, startAY, endAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOX,
             maxOY, maxAX, maxAY, minAX, minAY, differenceSP, maxSP, meanSP, varSP, t, data[0, -1]]
 
 
@@ -142,7 +140,7 @@ def read_excel(file):
     table = data.sheets()[0]
 
     start = 0  # 开始的行
-    end = 20687 # 结束的行
+    end = 11994 # 结束的行
     # end = 6847  # 结束的行
     rows = end - start
 
