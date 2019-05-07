@@ -8,7 +8,7 @@ from xlutils.copy import copy
 from sklearn import svm
 from sklearn.externals import joblib
 from scipy import signal
-from graphics import *
+from OBD_GUI.graphics import *
 import threading
 import time
 from dataHandler.LDAForEvent import *
@@ -83,8 +83,6 @@ class Event(object):
 
 
 
-# thread class written by Haoyu, used to deliver score
-class myThread(threading.Thread):  # threading.Thread
 
 # thread class to write
 class detectThread(threading.Thread):  # threading.Thread
@@ -271,7 +269,7 @@ class thread_for_lda(threading.Thread):  # threading.Thread
         elif 3 == self.type:
             weight = [0.06684435423,0.09224520883,0.1265973246,0.1724409706,0.2325203058,0.309351836]
         elif 4 == self.type:
-            weight = [0.02485508984,0.04823130184.0.09134744503,0.1651632657,0.2743477661,0.3960551315]
+            weight = [0.02485508984,0.04823130184,0.09134744503,0.1651632657,0.2743477661,0.3960551315]
         for i in range(len(weight)):
             temp_sum += weight[i]*self.score_queue[i]
         return temp_sum
