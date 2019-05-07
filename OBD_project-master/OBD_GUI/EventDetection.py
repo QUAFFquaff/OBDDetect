@@ -81,9 +81,6 @@ class Event(object):
 
 
 
-# thread class written by Haoyu, used to deliver score
-class myThread(threading.Thread):  # threading.Thread
-
 # thread class to write
 class detectThread(threading.Thread):  # threading.Thread
 
