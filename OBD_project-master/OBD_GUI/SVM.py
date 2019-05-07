@@ -34,7 +34,7 @@ def read_excel1(number):
     table = data.sheets()[0]
 
     start = 0  # 开始的行
-    end = 287 # 结束的行
+    end = 328 # 结束的行
     # end = 6847  # 结束的行
     rows = end - start
 
@@ -72,9 +72,9 @@ def svm_test(data):
     # gamma: parameter for 'rbf’,'poly' and 'sigmoid'
     # degree: parameter for 'poly'
     # coef0 is a constant for poly
-    model = svm.SVC(kernel='poly', C=1, gamma=3,degree = 2,coef0=1, probability=True, class_weight='balanced')
+    #model = svm.SVC(kernel='poly', C=3, gamma=4,degree = 2,coef0=1, probability=True, class_weight='balanced')
     #model = svm.SVC(kernel='rbf', C=2, gamma=2, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, decision_function_shape='ovr')
-    #model = svm.SVC(kernel='rbf', C=4, gamma=5, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, class_weight='balanced')
+    model = svm.SVC(kernel='rbf', C=5, gamma=5, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, class_weight='balanced')
     model.fit(x_train, y_train.ravel())
 
     print('train set accuracy:  ', model.score(x_train, y_train.ravel()))
@@ -89,7 +89,7 @@ def svm_test(data):
     # get accuracy of the model
     # print(clf.score(x_train, y_train))  # 精度
 
-    for i in range(1,287):
+    for i in range(1,328):
         predict = read_excel1(i)
         y_hat = model.predict(predict[:,:23])
         y_pro = model.predict_proba(predict[:,:23])
@@ -140,7 +140,7 @@ def read_excel(file):
     table = data.sheets()[0]
 
     start = 0  # 开始的行
-    end = 11994 # 结束的行
+    end = 13419 # 结束的行
     # end = 6847  # 结束的行
     rows = end - start
 

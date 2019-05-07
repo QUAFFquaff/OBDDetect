@@ -171,6 +171,49 @@ class detectThread(threading.Thread):  # threading.Thread
 
     def stop(self):
         self.__running.clear()
+
+# this thread for SVM classification
+class SVMthread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.__running = threading.Event()
+        self.__running.set()
+        self.score_queue = []
+
+    def run(self):
+        resultMatrix = []
+        eventNum = 0
+        svm = joblib.load('svm.pkl')
+
+        while True:
+            #  define type and intensity
+            if not eventQueue.empty():
+                event = eventQueue.get()
+
+                print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
+
+                vect = np.array(event.getValue())
+                # print(vect)
+                vect = vect.astype(np.float64)
+
+                # calculate the features
+                vect = calcData(vect)
+                # normalize the features
+                vect = nomalization(vect)
+
+                # predict the result
+                result = svm.predict([vect])
+                print(result)
+                if result < 4:
+                    eventNum = eventNum + 1
+                    resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
+
+                    saveResult(event.getStart(), event.getEnd(), result[0])
+
+    def stop(self):
+            self.__running.clear()
+
+
 # this thread for time-window monitor and LDA detection
 class thread_for_lda(threading.Thread):  # threading.Thread
     def __init__(self):
@@ -502,9 +545,8 @@ def saveResult(start, end, result):
     newwb.save('ForLDA.xls')
 
 def main():
-    svm = joblib.load('svm.pkl')
-    resultMatrix = []
-    eventNum = 0
+
+
 
     # start the data collection and event detection thread
     thread1 = detectThread()
@@ -524,45 +566,24 @@ def main():
     gpsTxt.setSize(15)
     gpsTxt.draw(win)
 
-    while True:
-        #  define type and intensity
-        if not eventQueue.empty():
-            event = eventQueue.get()
-
-            print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
-
-            vect = np.array(event.getValue())
-            # print(vect)
-            vect = vect.astype(np.float64)
-
-            # calculate the features
-            vect = calcData(vect)
-            # normalize the features
-            vect = nomalization(vect)
-
-            # predict the result
-            result = svm.predict([vect])
-            print(result)
-            if result < 4:
-                eventNum = eventNum + 1
-                resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
-
-                txtMsg.undraw()
-                if result == 0:
-                    txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-                        event.getEnd()) + ' speed up')
-                elif result == 1:
-                    txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-                        event.getEnd()) + 'hard speed up')
-                elif result == 2:
-                    txtMsg.setText(
-                        transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + ' brake')
-                elif result == 3:
-                    txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-                        event.getEnd()) + ' hrad brake')
-                txtMsg.draw(win)
-
-                saveResult(event.getStart(), event.getEnd(), result[0])
+    # if result < 4:
+    #     eventNum = eventNum + 1
+    #     resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
+    #
+    #     txtMsg.undraw()
+    #     if result == 0:
+    #         txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+    #             event.getEnd()) + ' speed up')
+    #     elif result == 1:
+    #         txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+    #             event.getEnd()) + 'hard speed up')
+    #     elif result == 2:
+    #         txtMsg.setText(
+    #             transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + ' brake')
+    #     elif result == 3:
+    #         txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
+    #             event.getEnd()) + ' hrad brake')
+    #     txtMsg.draw(win)
 
 
 
