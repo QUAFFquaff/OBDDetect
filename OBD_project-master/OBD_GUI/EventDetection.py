@@ -80,7 +80,7 @@ class Event(object):
         return self.type
 
 
-# thread class to write
+# thread class written by Haoyu, used to deliver score
 class myThread(threading.Thread):  # threading.Thread
     def __init__(self):
         threading.Thread.__init__(self)
@@ -178,30 +178,49 @@ class thread_for_lda(threading.Thread):  # threading.Thread
         self.__running = threading.Event()
         self.__running.set()
         self.score_queue = []
+        self.type = 0
+
+    def setType(self,type):
+        self.type = type
 
     def run(self):
         global svm_label_buffer
         ldaforevent = LDAForEvent
         start_time = time.time()
         #  monitor time-window
+        time.sleep(time_window)
         while True:
             if time.time()-start_time > time_window and LDA_flag:
                 start_time = time.time()
                 temp_word = svm_label_buffer
                 svm_label_buffer = ""
-                if svm_label_buffer != "":
+                if temp_word != "":
                     result = ldaforevent.LDATest(ldaforevent, [temp_word])
                     self.score_queue.append(self.result_to_score(self,result))
-                    if len(self.score_queue) > 5:
-                        self.score_queue.pop()
+                elif temp_word == "":
+                    self.score_queue.append(100)
+
+                if len(self.score_queue) > 6:
+                    self.score_queue.pop()
+                    self.trigger_feedback()
 
 
-    def calc_score(self,type):
-        if 1 == type:
+    def trigger_feedback(self):
+        weight = []
+        temp_sum = 0
+        if 0 == self.type:
             return np.average(self.score_queue)
-        if 2 == type:
-            return 1
-        return 0
+        if 1 == self.type:
+            weight = [0.1568819267,0.1608039749,0.1647235717,0.1686358209,0.1725358535,0.1764188523]
+        elif 2 == self.type:
+            weight = [0.1041067243,0.1238870019,0.147190147,0.1745471447,0.2065300858,0.2437388963]
+        elif 3 == self.type:
+            weight = [0.06684435423,0.09224520883,0.1265973246,0.1724409706,0.2325203058,0.309351836]
+        elif 4 == self.type:
+            weight = [0.02485508984,0.04823130184.0.09134744503,0.1651632657,0.2743477661,0.3960551315]
+        for i in range(len(weight)):
+            temp_sum += weight[i]*self.score_queue[i]
+        return temp_sum
 
 
     def result_to_score(self,result):
@@ -212,6 +231,7 @@ class thread_for_lda(threading.Thread):  # threading.Thread
 
     def stop(self):
         self.__running.clear()
+
 
 def write_data(dataTemp, table, row):
     data = np.array(dataTemp)
