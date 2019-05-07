@@ -98,10 +98,32 @@ class LDAForEvent:
         else:
             return int(str)
 
+    # # used to calculate the distance between two character
+    # def calcDis(self, num_1, num_2):
+    #     partA = self.height_weight * abs(num_1 / 4 - num_2 / 4)
+    #     partB = abs(num_1 % 4 - num_2 % 4)
+    #     return partA + partB
+
     # used to calculate the distance between two character
-    def calcDis(self, num_1, num_2):
-        partA = self.height_weight * abs(num_1 / 4 - num_2 / 4)
-        partB = abs(num_1 % 4 - num_2 % 4)
+    # second vision
+    # using characters a-z A-Z
+    def calcDis(self, char_1, char_2):
+        height1 = width1 = 0
+        height2 = width2 = 0
+        if ord(char_1)>140:
+            height1 = (ord(char_1) - ord('a'))%7
+            width1 = (ord(char_1) - ord('a') )/7
+        else:
+            height1 = (ord(char_1) - ord('C'))%7
+            width1 = (ord(char_1) - ord('C') )/7
+        if ord(char_2)>140:
+            height2 = (ord(char_2) - ord('a'))%7
+            width2 = (ord(char_2) - ord('a') )/7
+        else:
+            height2 = (ord(char_2) - ord('C'))%7
+            width2 = (ord(char_2) - ord('C') )/7
+        partA = self.height_weight * abs(height1 - height2)
+        partB = abs(width1 - width2)
         return partA + partB
 
     #   fuzzyEvent2
