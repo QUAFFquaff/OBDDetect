@@ -102,29 +102,36 @@ def detectEvent(data):
     global sevent
     global bevent
     global sfault
-    global  bfault
+    global bfault
     sflag = False
     bflag = False
     xarray = []
-    x = []
+    # x = []
+    stdXArray = []  # use to get the smallest std, which will be the beginning of an event
     xstdQueue.put(data)
 
     if xstdQueue.full():
+        t = []  # transform the queue to array
         for i in range(xstdQueue.qsize()):
             temp = xstdQueue.get()
-            xarray.append(temp)
-            x.append(temp[3])
+            t.append(temp[3])
+            if i > 8:
+                stdXArray.append(np.std(t[i - 9:i]), ddof=1)
+                xarray.append(temp)
+                # x.append(temp[3])
             xstdQueue.put(temp)
         xstdQueue.get()
-        stdX = np.std(x,ddof=1)
+        stdX = np.std(xarray[:, 3], ddof=1)
 
-        accx =data[3]
+        startIndex = stdXArray.index(min(stdXArray))
+
+        accx = data[3]
         timestamp = data[0]
 
-        if accx>0.1 and stdX>0.025 and thresholdnum == 0:
+        if accx > 0.1 and stdX > 0.02 and thresholdnum == 0:
             thresholdnum = thresholdnum + 1
-            sevent = Event(xarray[-5][0],0)
-            for i in range(-5,-1):
+            sevent = Event(xarray[startIndex][0], 0)
+            for i in range(startIndex, len(xarray)):  # add the previous data to event
                 sevent.addValue(xarray[i])
             sflag = True
         elif accx > 0.05 and thresholdnum > 0:
@@ -132,10 +139,10 @@ def detectEvent(data):
             sfault = 3
             sflag = True
         elif accx < 0.05 and sfault > 0 and thresholdnum > 0:
-            sfault = sfault-1
-            thresholdnum = thresholdnum+1
+            sfault = sfault - 1
+            thresholdnum = thresholdnum + 1
             sflag = True
-        elif (accx < 0.05 or stdX < 0.025) and thresholdnum > 0:
+        elif (accx < 0.05 or stdX < 0.02) and thresholdnum > 0:
             if thresholdnum > 10:
                 sevent.setEndtime(timestamp)
                 sfault = 3
@@ -144,9 +151,11 @@ def detectEvent(data):
             thresholdnum = 0
             sfault = 3
 
-        if accx<-0.10 and stdX>0.02 and bthresholdnum ==0:
+        if accx < -0.10 and stdX > 0.02 and bthresholdnum == 0:
             bthresholdnum = bthresholdnum + 1
-            bevent = Event(xarray[-5][0],2)
+            bevent = Event(xarray[startIndex][0], 2)
+            for i in range(startIndex, len(xarray)):  # add the previous data to event
+                bevent.addValue(xarray[i])
             bflag = True
         elif accx < -0.05 and bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
@@ -170,7 +179,6 @@ def detectEvent(data):
     if bflag:
         bevent.addValue(data)
 
-
 tthresholdnum = 0
 tevent = Event(0,-1)
 tfault = 3
@@ -185,102 +193,102 @@ def detectYEvent(data):
     global positive
     global negative
     yarray = []
-    y = []
+    stdYArray = []  # use to get the smallest std, which will be the beginning of an event
+    # y = []
     tflag = False
     ystdQueue.put(data)
 
     if ystdQueue.full():
+        t = []  # transform the queue to array
         for i in range(ystdQueue.qsize()):
             temp = ystdQueue.get()
-            yarray.append(temp)
-            y.append(temp[2])
+            t.append(temp[2])
+            if i > 8:
+                stdYArray.append(np.std(t[i - 9:i]), ddof=1)
+                yarray.append(temp)
+            # y.append(temp[2])
             ystdQueue.put(temp)
         ystdQueue.get()
-        stdY = np.std(y,ddof=1)
+        stdY = np.std(yarray[:, 2], ddof=1)
+
+        startIndex = stdYArray.index(min(stdYArray))
 
         accy = data[2]
         timestamp = data[0]
 
-
         if positive:
-            if accy > 0.1 and stdY > 0.02 and tthresholdnum == 0:
-                tthresholdnum = tthresholdnum+1
-                tevent = Event(yarray[-5][0],4)
-                for i in range(-5,-1):
+            if accy > 0.1 and stdY > 0.03 and tthresholdnum == 0:
+                tthresholdnum = tthresholdnum + 1
+                tevent = Event(yarray[startIndex][0], 4)
+                for i in range(startIndex, len(stdYArray)):  # add the previous data to event
                     tevent.addValue(yarray[i])
                 tflag = True
                 negative = False
-            elif accy >0.05 and tthresholdnum>0:
+            elif accy > 0.05 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = 3
                 tflag = True
-            elif (accy < 0.05 or stdY<0.02) and tfault>0 and tthresholdnum>0:
+            elif (accy < 0.05 or stdY < 0.03) and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy < 0.05 or stdY<0.02) and tthresholdnum>0:
-                if tthresholdnum>15 and not swerveFlag:
+            elif (accy < 0.05 or stdY < 0.03) and tthresholdnum > 0:
+                if tthresholdnum > 15 and not swerveFlag:
                     tevent.setEndtime(timestamp)
                     tfault = 3
                     tthresholdnum = 0
                     negative = True
                     return tevent
-                elif stdY>0.1:
-                    swerveFlag = True
-                    tthresholdnum = tthresholdnum+1
+                elif stdY > 0.1:
+                    tthresholdnum = tthresholdnum + 1
                     tflag = True
                 elif tthresholdnum > 15:
                     tevent.setEndtime(timestamp)
                     tfault = 3
                     tthresholdnum = 0
                     negative = True
-                    swerveFlag = False
                     return tevent
                 else:
                     tflag = 3
                     tthresholdnum = 0
-                    swerveFlag = False
                     negative = True
 
         if negative:
-            if accy < -0.1 and stdY > 0.02 and tthresholdnum == 0:
-                tthresholdnum = tthresholdnum+1
-                tevent = Event(yarray[-5][0],4)
-                for i in range(-5,-1):
+            if accy < -0.1 and stdY > 0.03 and tthresholdnum == 0:
+                tthresholdnum = tthresholdnum + 1
+                tevent = Event(yarray[startIndex][0], 4)
+                for i in range(startIndex, len(stdYArray)):  # add the previous data to event
                     tevent.addValue(yarray[i])
                 tflag = True
                 positive = False
-            elif accy < -0.05 and tthresholdnum>0:
+            elif accy < -0.05 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = 3
                 tflag = True
-            elif (accy > -0.05 or stdY<0.02) and tfault>0 and tthresholdnum>0:
+            elif (accy > -0.05 or stdY < 0.03) and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy > -0.05 or stdY<0.02) and tthresholdnum>0:
-                if tthresholdnum>15 and not swerveFlag:
+            elif (accy > -0.05 or stdY < 0.03) and tthresholdnum > 0:
+                if tthresholdnum > 15 and not swerveFlag:
                     tevent.setEndtime(timestamp)
                     tfault = 3
                     tthresholdnum = 0
                     positive = True
                     return tevent
-                elif stdY>0.1:
-                    swerveFlag = True
-                    tthresholdnum = tthresholdnum+1
+                elif stdY > 0.1:
+                    tthresholdnum = tthresholdnum + 1
                     tflag = True
                 elif tthresholdnum > 15:
                     tevent.setEndtime(timestamp)
                     tfault = 3
                     tthresholdnum = 0
                     positive = True
-                    swerveFlag = False
                     return tevent
                 else:
                     tflag = 3
                     tthresholdnum = 0
-                    swerveFlag = False
-                    positive = True
+                    negative = True
 
     if tflag:
         tevent.addValue(data)
