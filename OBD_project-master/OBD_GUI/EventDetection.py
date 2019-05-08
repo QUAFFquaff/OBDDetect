@@ -55,7 +55,7 @@ class Event(object):
         self.end = endtime
 
     def getDuration(self):
-        duration = (self.end - self.start) / 1000
+        duration = (self.end - self.start)
         return duration
 
     def getStart(self):
@@ -80,8 +80,6 @@ class Event(object):
 
     def setType(self, type):
         self.type = type
-
-
 
 
 # thread class to write
@@ -176,6 +174,8 @@ class detectThread(threading.Thread):  # threading.Thread
                     max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
                     if max_gyo < 15:
                         yevent.setType(yevent.getType()+2)
+                    if SVM_flag > 0:
+                        overlapNum = overlapNum + 1
                     eventQueue.put(yevent)
 
     def stop(self):
@@ -191,15 +191,25 @@ class SVMthread(threading.Thread):
 
     def run(self):
         resultMatrix = []
-        eventNum = 0
         svm = joblib.load('svm.pkl')
+        global overlapNum
+        global eventQueue
 
         while True:
             #  define type and intensity
-            if not eventQueue.empty():
-                event = eventQueue.get()
+            if (not eventQueue.empty()) and SVM_flag == 0:
+                eventNum = overlapNum
+                overlapNum = 0
+                eventList = []
+                for i in range(0, eventNum):
+                    eventList.append(eventQueue.get())
+                eventList = self.makeDecision(eventList)
 
-                print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
+                for i in range(0, eventNum):
+                    if eventList[i]:
+
+
+                # print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
 
                 vect = np.array(event.getValue())
                 # print(vect)
@@ -214,10 +224,21 @@ class SVMthread(threading.Thread):
                 result = svm.predict([vect])
                 print(result)
                 if result < 4:
-                    eventNum = eventNum + 1
                     resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
 
                     saveResult(event.getStart(), event.getEnd(), result[0])
+
+    def makeDecision(self, eventList):
+        for i in range(0, len(eventList)-2):
+            if eventList[i]:
+                factor1 = (eventList[i].getEnd() - eventList[i+1].getStart())/ eventList[i].getDuration()
+                factor2 = (eventList[i+1].getEnd() - eventList[i].getEnd()) / eventList[i+1].getDuration()
+                if factor1>0.5 and factor2<0.5:
+                    if eventList[i].getType() >= eventList[i+1].getType():
+                        eventList[i+1] = None
+                    else:
+                        eventList[i] = None
+        return eventList
 
     def stop(self):
             self.__running.clear()

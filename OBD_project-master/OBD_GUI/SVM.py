@@ -72,7 +72,7 @@ def svm_test(data):
     # gamma: parameter for 'rbf’,'poly' and 'sigmoid'
     # degree: parameter for 'poly'
     # coef0 is a constant for poly
-    #model = svm.SVC(kernel='poly', C=3, gamma=4,degree = 2,coef0=1, probability=True, class_weight='balanced')
+    #model = svm.SVC(kernel='poly', C=1, gamma=3,degree = 2,coef0=1, probability=True, class_weight='balanced')
     #model = svm.SVC(kernel='rbf', C=2, gamma=2, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, decision_function_shape='ovr')
     model = svm.SVC(kernel='rbf', C=5, gamma=5, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, class_weight='balanced')
     model.fit(x_train, y_train.ravel())
