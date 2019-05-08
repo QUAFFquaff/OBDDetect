@@ -82,7 +82,7 @@ class Event(object):
         self.type = type
 
 
-# thread class to write
+
 class detectThread(threading.Thread):  # threading.Thread
 
     def __init__(self):

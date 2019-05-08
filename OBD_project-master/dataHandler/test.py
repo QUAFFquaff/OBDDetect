@@ -15,6 +15,8 @@
 @desc:
 
 '''
+a = 'a'
+b = 'h'
 
 
-print(min(2,4,9,1))
+print((ord('A')-ord('C')) % 7)
