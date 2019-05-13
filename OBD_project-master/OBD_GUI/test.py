@@ -10,5 +10,5 @@ matrix1 = array([(1,1,3),
                  (5,4,3)])
 matrix2 = array([2,4,1])
 
-print(dot(matrix1,matrix2))
-print(matrix1)
+eventList = 2
+print(eventList)

@@ -206,27 +206,37 @@ class SVMthread(threading.Thread):
                 eventList = self.makeDecision(eventList)
 
                 for i in range(0, eventNum):
-                    if eventList[i]:
+                    if eventList[i]!=None:
+                        vect = np.array(eventList[i].getValue())
+                        vect = vect.astype(np.float64)
 
+                        # calculate the 23 features
+                        vect = calcData(vect)
+                        # nomaliz the 23 features
+                        vect = nomalization(vect)
 
-                # print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
+                        # predict the result
+                        result = svm.predict([vect])  # result of SVM
+                        score = svm.decision_function([vect])  # score of SVM for each tyeps
+                        score = np.array(score[0])
+                        print(result)
 
-                vect = np.array(event.getValue())
-                # print(vect)
-                vect = vect.astype(np.float64)
+                        if eventList[i].getType() >= 2:
+                            index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
+                            if index == 0:
+                                result = [2]
+                            elif index == 1:
+                                result = [3]
+                            elif index == 2:
+                                result = [6]
+                            elif index == 3:
+                                result = [7]
+                            elif index == 4:
+                                result = [10]
+                            else:
+                                result = [11]
 
-                # calculate the features
-                vect = calcData(vect)
-                # normalize the features
-                vect = nomalization(vect)
-
-                # predict the result
-                result = svm.predict([vect])
-                print(result)
-                if result < 4:
-                    resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
-
-                    saveResult(event.getStart(), event.getEnd(), result[0])
+                        saveResult(eventList[i].getStart(),eventList[i].getEnd(), result[0])
 
     def makeDecision(self, eventList):
         for i in range(0, len(eventList)-2):
@@ -365,7 +375,7 @@ def detectEvent(data):
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 sevent.addValue(xarray[i])
             sflag = True
-            SVM_flag = SVM_flag + 1
+            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
         elif accx > 0.05 and thresholdnum > 0:
             thresholdnum = thresholdnum + 1
             sfault = faultNum
@@ -394,7 +404,7 @@ def detectEvent(data):
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 bevent.addValue(xarray[i])
             bflag = True
-            SVM_flag = SVM_flag + 1
+            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
         elif accx < -0.05 and bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
             bfault = faultNum
@@ -474,7 +484,7 @@ def detectYEvent(data):
                     tevent.addValue(yarray[i])
                 tflag = True
                 negative = False
-                SVM_flag = SVM_flag + 1
+                SVM_flag = SVM_flag + 1 # set the flag to denote the event starts
             elif accy > 0.05 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
@@ -507,7 +517,7 @@ def detectYEvent(data):
                     tevent.addValue(yarray[i])
                 tflag = True
                 positive = False
-                SVM_flag = SVM_flag + 1
+                SVM_flag = SVM_flag + 1 # set the flag to denote the event starts
             elif accy < -0.05 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
