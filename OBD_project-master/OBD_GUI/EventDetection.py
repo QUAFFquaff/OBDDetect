@@ -207,9 +207,8 @@ class SVMthread(threading.Thread):
 
                 for i in range(0, eventNum):
                     if eventList[i]:
-
-
-                # print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
+                        pass
+                #print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
 
                 vect = np.array(event.getValue())
                 # print(vect)
