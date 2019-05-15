@@ -12,6 +12,7 @@ from OBD_GUI.graphics import *
 import threading
 import time
 from dataHandler.LDAForEvent import *
+from OBD_GUI import GUI
 
 matrix = np.array([[0.0649579822346719, 0, -0.997888],
                    [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
@@ -31,6 +32,7 @@ gpsLo = None
 
 #lock = threading.Lock()
 eventQueue = queue.Queue()
+SVMResultQueue = queue.Queue()
 SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
 overlapNum = 0  # the number of overlapped events
 
@@ -44,12 +46,28 @@ def connectDB():
                                  charset='utf8')
     return connection
 
+# to get the result label from SVM
+class SVMResult(object):
+    def __init__(self, start, end, label):
+        self.start = start
+        self.end = end
+        self.label = label
 
+    def getStart(self):
+        return self.start
+
+    def getEnd(self):
+        return self.getEnd()
+    def getLabel(self):
+        return self.label
+
+#record the events detected
 class Event(object):
     def __init__(self, starttime, type):
         self.start = starttime
         self.type = type
         self.vect = []
+
 
     def setEndtime(self, endtime):
         self.end = endtime
@@ -131,8 +149,8 @@ class detectThread(threading.Thread):  # threading.Thread
                             accy.append(row[4])
                             accx.append(row[5])
                             accz.append(row[6])
-                            gpsLa.append(row[7])
-                            gpsLo.append(row[8])
+                            gpsLa = row[7]
+                            gpsLo = row[8]
                             gyox.append(row[9])
                             gyoy.append(row[10])
                             gyoz.append(row[11])
@@ -150,7 +168,8 @@ class detectThread(threading.Thread):  # threading.Thread
             finally:
                 connection.close()
             if isCatch:
-                cutoff = 2*(1/int(samplingRate))  # cutoff frequency of low pass filter
+                cutoff = 2*(1/samplingRate)  # cutoff frequency of low pass filter
+
                 # low pass filter
                 lowpass = np.array(lowpass)
                 b, a = signal.butter(3, cutoff, 'low')
@@ -194,6 +213,7 @@ class SVMthread(threading.Thread):
         svm = joblib.load('svm.pkl')
         global overlapNum
         global eventQueue
+        global SVMResultQueue
 
         while True:
             #  define type and intensity
@@ -206,6 +226,7 @@ class SVMthread(threading.Thread):
                 eventList = self.makeDecision(eventList)
 
                 for i in range(0, eventNum):
+<<<<<<< HEAD
                     if eventList[i]:
                         pass
                 #print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
@@ -226,6 +247,39 @@ class SVMthread(threading.Thread):
                     resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
 
                     saveResult(event.getStart(), event.getEnd(), result[0])
+=======
+                    if eventList[i]!=None:
+                        vect = np.array(eventList[i].getValue())
+                        vect = vect.astype(np.float64)
+
+                        # calculate the 23 features
+                        vect = calcData(vect)
+                        # nomaliz the 23 features
+                        vect = nomalization(vect)
+
+                        # predict the result
+                        result = svm.predict([vect])  # result of SVM
+                        score = svm.decision_function([vect])  # score of SVM for each tyeps
+                        score = np.array(score[0])
+                        print(result)
+
+                        if eventList[i].getType() >= 2:
+                            index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
+                            if index == 0:
+                                result = [2]
+                            elif index == 1:
+                                result = [3]
+                            elif index == 2:
+                                result = [6]
+                            elif index == 3:
+                                result = [7]
+                            elif index == 4:
+                                result = [10]
+                            else:
+                                result = [11]
+                        SVMResultQueue.put(SVMResult(eventList[i].getStart(),eventList[i].getEnd(),result[0]))
+                        saveResult(eventList[i].getStart(),eventList[i].getEnd(), result[0])
+>>>>>>> 7713d6fdb01fd71c4e9fcc0798b78fa40be0367c
 
     def makeDecision(self, eventList):
         for i in range(0, len(eventList)-2):
@@ -233,9 +287,9 @@ class SVMthread(threading.Thread):
                 factor1 = (eventList[i].getEnd() - eventList[i+1].getStart())/ eventList[i].getDuration()
                 factor2 = (eventList[i+1].getEnd() - eventList[i].getEnd()) / eventList[i+1].getDuration()
                 if factor1>0.5 and factor2<0.5:
-                    if eventList[i].getType() >= eventList[i+1].getType():
+                    if eventList[i].getType() > 2 >= eventList[i+1].getType():
                         eventList[i+1] = None
-                    else:
+                    elif eventList[i].getType() <= 2 < eventList[i+1].getType():
                         eventList[i] = None
         return eventList
 
@@ -364,7 +418,7 @@ def detectEvent(data):
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 sevent.addValue(xarray[i])
             sflag = True
-            SVM_flag = SVM_flag + 1
+            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
         elif accx > 0.05 and thresholdnum > 0:
             thresholdnum = thresholdnum + 1
             sfault = faultNum
@@ -393,7 +447,7 @@ def detectEvent(data):
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 bevent.addValue(xarray[i])
             bflag = True
-            SVM_flag = SVM_flag + 1
+            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
         elif accx < -0.05 and bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
             bfault = faultNum
@@ -473,7 +527,7 @@ def detectYEvent(data):
                     tevent.addValue(yarray[i])
                 tflag = True
                 negative = False
-                SVM_flag = SVM_flag + 1
+                SVM_flag = SVM_flag + 1 # set the flag to denote the event starts
             elif accy > 0.05 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
@@ -506,7 +560,7 @@ def detectYEvent(data):
                     tevent.addValue(yarray[i])
                 tflag = True
                 positive = False
-                SVM_flag = SVM_flag + 1
+                SVM_flag = SVM_flag + 1 # set the flag to denote the event starts
             elif accy < -0.05 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
@@ -580,18 +634,6 @@ def transformTimestamp(timestamp):
     return dt
 
 
-def drawBackground():
-    backgroudcolor = color_rgb(33, 33, 33)
-    # === creating the graphic window ===
-    win = GraphWin("event detection", 500, 300)
-    win.setCoords(0, 0, 25, 15)
-
-    # === set the background color ===
-    Ground = Rectangle(Point(0, 0), Point(25, 15))
-    Ground.setFill("light Green")
-    Ground.draw(win)
-
-    return win
 
 def saveResult(start, end, result):
     oldwd = open_workbook('ForLDA.xls', formatting_info=True)
@@ -611,6 +653,7 @@ def main():
     global bfault
     global tfault
     global std_window
+    global SVMResultQueue
 
     try:
         # 获取一个游标
@@ -622,14 +665,16 @@ def main():
             for row in cursor.fetchall():
                 timestamp.append(row[2])
             # calculate the sampling rate of the car
-            samplingRate = 4 / ((timestamp[-1] - timestamp[0]) / 1000)
-            std_window = 2*samplingRate
-            xstdQueue = queue.Queue(maxsize=(4*samplingRate-1))
-            ystdQueue = queue.Queue(maxsize=(4*samplingRate-1))
+            samplingRate = 4 / ((timestamp[0] - timestamp[-1]) / 1000)
+            std_window = int(2*samplingRate+0.5)
+            xstdQueue = queue.Queue(maxsize=(4*std_window-1))
+            ystdQueue = queue.Queue(maxsize=(4*std_window-1))
     finally:
         connection.close()
-    sfault = bfault = int(2*samplingRate/5)
-    tfault = int(8*samplingRate/15)
+    sfault = bfault = int(2*int(samplingRate+0.5)/5)
+    tfault = int(8*int(samplingRate+0.5)/15)
+
+    print(samplingRate)
 
     # start the data collection and event detection thread
     thread1 = detectThread()
@@ -639,38 +684,16 @@ def main():
     thread2 = SVMthread()
     thread2.start()
 
-    # draw the background
-    win = drawBackground()
-    pntMsg = Point(12, 6)
-    txtMsg = Text(pntMsg, "Event")
-    txtMsg.setStyle("bold")
-    txtMsg.setTextColor("blue")
-    txtMsg.setSize(15)
-    txtMsg.draw(win)
+    Panel = GUI.Panel()
+    Panel.drawPanel()
 
-    gpsTxt = Text(Point(12, 12), "GPS")
-    gpsTxt.setTextColor("blue")
-    gpsTxt.setSize(15)
-    gpsTxt.draw(win)
+    while True:
+        Panel.refresh()
+        if not SVMResultQueue.empty():
+            result = SVMResultQueue.get()
 
-    # if result < 4:
-    #     eventNum = eventNum + 1
-    #     resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
-    #
-    #     txtMsg.undraw()
-    #     if result == 0:
-    #         txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-    #             event.getEnd()) + ' speed up')
-    #     elif result == 1:
-    #         txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-    #             event.getEnd()) + 'hard speed up')
-    #     elif result == 2:
-    #         txtMsg.setText(
-    #             transformTimestamp(event.getStart()) + '--' + transformTimestamp(event.getEnd()) + ' brake')
-    #     elif result == 3:
-    #         txtMsg.setText(transformTimestamp(event.getStart()) + '--' + transformTimestamp(
-    #             event.getEnd()) + ' hrad brake')
-    #     txtMsg.draw(win)
+
+
 
 
 

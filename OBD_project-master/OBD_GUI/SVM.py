@@ -97,6 +97,8 @@ def svm_test(data):
         if(y_hat!=predict[:,-1]):
             print("prob", y_pro)
             print("score", y_score)
+            y_score = np.array(y_score[0])
+            print(np.argmax([y_score[2],y_score[3],y_score[6],y_score[7],y_score[10],y_score[11]]))
             print("predict as",y_hat)
             print("but graound truth is ",predict[:,-1])
             print(predict[:,-2])
