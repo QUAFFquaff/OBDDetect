@@ -45,29 +45,22 @@ class LDAForEvent:
 
         start = 0  # 开始的行
         # end = 164  # 结束的行
-        end = 189  # 结束的行
+        end = len(table.col_values(0))  # from the first line to last line
         rows = end - start
         list_values = ""
         flag = 0
         values = ''
-        start_time = table.row_values(0)[0]
+        start_time = float(table.row_values(0)[0])
         end_time = start_time + time_window
         x = start
-        while x < end:
+        for x in range(end):
             # for x in range(start, end):
             row = table.row_values(x)
 
             flag += 1
-            temp_s_time = row[0]
-            temp_e_time = row[1]
+            temp_s_time = float(row[0])
+            temp_e_time = float(row[1])
             temp_char = row[2]
-            # handle character
-            if temp_char == 10:
-                temp_char = 'a'
-            elif temp_char == 11:
-                temp_char = 'b'
-            else:
-                temp_char = str(temp_char)[0]
             # handle time
             if temp_e_time < end_time:  # the event is in the current time window
                 values += temp_char
@@ -75,28 +68,17 @@ class LDAForEvent:
                 start_time = end_time + 1
                 end_time = start_time + time_window
                 list_values += values + ' '
-                values = ''
-                x -= 1
+                values = temp_char
             elif temp_s_time < end_time < temp_e_time:
                 start_time = temp_e_time + 1
                 end_time = start_time + time_window
-                list_values += values + ' '
+                list_values += values + temp_char+' '
                 values = ''
-            x += 1
 
         print([list_values])
         # datamatrix = np.array(list_values)
         # print(datamatrix)
-        return [
-            list_values]
-
-    def match_str_to_num(self, str):
-        if str == 'a':
-            return 10
-        elif str == 'b':
-            return 11
-        else:
-            return int(str)
+        return list_values
 
     # # used to calculate the distance between two character
     # def calcDis(self, num_1, num_2):
@@ -136,8 +118,7 @@ class LDAForEvent:
                         range(len(s1))]  # length of s1 is numbers of rows; s2 are columns
         for i in range(len(s1)):
             for j in range(len(s2)):
-                match_matrix[i][j] = self.calcDis(self,self.match_str_to_num(self, s1[i]),
-                                                  self.match_str_to_num(self, s2[j]))
+                match_matrix[i][j] = self.calcDis(self, s1[i], s2[j])
         for i in range(len(s1)):
             match_matrix[i][0] = self.add_weight * i + match_matrix[0][0]
         for j in range(len(s2)):
@@ -145,8 +126,7 @@ class LDAForEvent:
         for i in range(1, len(s1)):
             for j in range(1, len(s2)):
                 match_matrix[i][j] = min(
-                    match_matrix[i - 1][j - 1] + self.calcDis(self,self.match_str_to_num(self, s1[i]),
-                                                              self.match_str_to_num(self, s2[j])),
+                    match_matrix[i - 1][j - 1] + self.calcDis(self, s1[i],s2[j]),
                     match_matrix[i - 1][j] + self.add_weight, match_matrix[i][j - 1] + self.delete_weight)
 
         sum_distance = match_matrix[len(s1) - 1][len(s2) - 1]
@@ -242,23 +222,19 @@ class LDAForEvent:
         return self.ldamodel, dictionary
 
     def LDAPreProcessing(self):
-        datamatrix = self.read_excel('ForLDA0415.xls')
-        print(datamatrix[0][127:150])
+        datamatrix1 = self.read_excel('ForLDA1alph.xls')
+        datamatrix2 = self.read_excel('ForLDA2alph.xls')
+        datamatrix3 = self.read_excel('ForLDA3alph.xls')
+        datamatrix4 = self.read_excel('ForLDA4alph.xls')
+        # print(datamatrix)
         # datamatrix = read_excel('ForLDA.xls')
         # print(datamatrix[0][102:180])
         # doc_set = [datamatrix[0], datamatrix[0][0:5] + datamatrix[0][8:17], datamatrix[0][18:31], datamatrix[0][85:105],
         #            datamatrix[0][127:150], "a8 8b1 ba1228b9"]
-        doc_set = ["2122 201 1212 1212 101 2 1 0   1 2 21",
-                   "0212 120 1 0   33 2 1011 101 02 12122 2",
-                   "'22 21 0201 03 12 2122 121",
-                   "245 92aa 8101 81187 a  3 5   20 2",
-                   "20 641 88 3 8b1 4 41814 a89ba 228b9",
-                   "54216 61 02 31  024 01",
-                   " 0 0 5 0 90 10 8 52 4389 81 53  0 ",
-                   "201 1212 101 2 1 0 1 2 21 1 0 33 2 101 02 2 21 03 12 3 2 20 0",
-                   "a89ba 228b9 92aa 88 81 8b1",
-                   "54216 12122 52 5 41814"
-                   ]
+        doc_set = [
+            datamatrix1,datamatrix2,datamatrix3,
+                   datamatrix4]
+
         # print(doc_set)
         # doc_set = [datamatrix[0]]
         ldamodel2, dictionary = self.LDAtraining(self,doc_set)
@@ -279,10 +255,14 @@ class LDAForEvent:
 def main():
     ldamodel = LDAForEvent
     ldamodel.LDAPreProcessing(ldamodel)
-    test = ['01']
+    test = ['ah',"a","h"]
     result = ldamodel.LDATest(ldamodel,test)
+    print(result)
+    score =0
     for node in result:
+        score+=(4-node[0])*25*node[1]
         print(node[1])
+    print(score)
     # test = ['04000', '42044', '24024', '02022', '02000', '24022', '02206', '02200', '00624', '00624', '04442', '42004',
     #         '44024']
     # test = ['21222','01212','12121', '21012', '01010', '12121', '02120', '12010', '13312',
