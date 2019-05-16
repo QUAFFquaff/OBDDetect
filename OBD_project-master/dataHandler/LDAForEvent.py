@@ -226,6 +226,7 @@ class LDAForEvent:
         datamatrix2 = self.read_excel('ForLDA2alph.xls')
         datamatrix3 = self.read_excel('ForLDA3alph.xls')
         datamatrix4 = self.read_excel('ForLDA4alph.xls')
+        datamatrix5 = self.read_excel('ForLDA0415alph.xls')
         # print(datamatrix)
         # datamatrix = read_excel('ForLDA.xls')
         # print(datamatrix[0][102:180])
@@ -233,7 +234,7 @@ class LDAForEvent:
         #            datamatrix[0][127:150], "a8 8b1 ba1228b9"]
         doc_set = [
             datamatrix1,datamatrix2,datamatrix3,
-                   datamatrix4]
+                   datamatrix4+datamatrix5]
 
         # print(doc_set)
         # doc_set = [datamatrix[0]]

@@ -55,9 +55,9 @@ class Panel(object):
         self.dBar.setFill(color_rgb(209, 0, 0))
         # self.dBar.draw(win)
 
-    def drawPanel(this):
+    def drawPanel(self):
         # draw the background
-        win = this.win
+        win = self.win
 
 
         # gpsTxt = Text(Point(12, 22), "GPS")
@@ -66,36 +66,33 @@ class Panel(object):
         # gpsTxt.draw(win)
 
         # === draw the reward box ===
-        rewardB = Rectangle(Point(36, 21), Point(47, 28))
-        rewardB.setWidth(4)
-        rewardB.setFill("light gray")
-        rewardB.draw(win)
+        rewardB1 = Rectangle(Point(36,15), Point(47, 28))
+        rewardB1.setWidth(4)
+        rewardB1.setFill("light gray")
+        rewardB1.draw(win)
 
         # === draw the alert box ===
-        rewardB = Rectangle(Point(36, 11), Point(47, 19.5))
-        rewardB.setWidth(4)
-        rewardB.setFill("light gray")
-        rewardB.draw(win)
+        rewardB2 = Rectangle(Point(36, 1.5), Point(47, 13))
+        rewardB2.setWidth(4)
+        rewardB2.setFill("light gray")
+        rewardB2.draw(win)
 
-        # === draw the recommend box ===
-        rewardB = Rectangle(Point(36, 1.5), Point(47, 9.5))
-        rewardB.setWidth(4)
-        rewardB.setFill("light gray")
-        rewardB.draw(win)
-
-        pntMsg = Point(41.5, 26)
-        txtMsg = Text(pntMsg, "Reward")
+        # === draw the text on the box ===
+        pntMsg = Point(41.5, 25)
+        txtMsg = Text(pntMsg, "Time Window\nScore")
         txtMsg.setStyle("bold")
-        txtMsg.setTextColor("blue")
-        txtMsg.setSize(15)
+        txtMsg.setTextColor("purple")
+        txtMsg.setSize(13)
         txtMsg.draw(win)
 
-        moneyMsg = Point(41.5, 23)
-        moneyMsg = Text(moneyMsg, "$ " + str(3))
-        moneyMsg.setStyle("bold")
-        moneyMsg.setTextColor("dark green")
-        moneyMsg.setSize(15)
-        moneyMsg.draw(win)
+        # === draw the text on the box ===
+        pntMsg = Point(41.5, 10)
+        txtMsg = Text(pntMsg, "Trip\nScore")
+        txtMsg.setStyle("bold")
+        txtMsg.setTextColor("purple")
+        txtMsg.setSize(13)
+        txtMsg.draw(win)
+
 
         # show leftdown icon
         image1 = Image(Point(7.5, 4), "pic1.gif")
@@ -110,11 +107,31 @@ class Panel(object):
         image4 = Image(Point(28.5, 4), "pic4.gif")
         image4.draw(win)
 
-        image5 = Image(Point(41.5, 15.5), "pic5.gif")
-        image5.draw(win)
+        # image5 = Image(Point(41.5, 15.5), "pic5.gif")
+        # image5.draw(win)
+        #
+        # image6 = Image(Point(41.5, 5.5), "pic6.gif")
+        # image6.draw(win)
 
-        image6 = Image(Point(41.5, 5.5), "pic6.gif")
-        image6.draw(win)
+    def change_score(self,time_window_score,trip_score):
+
+        win = self.win
+
+        # === write time window score on the box ===
+        moneyMsg = Point(41.5, 20)
+        moneyMsg = Text(moneyMsg,  str(time_window_score))
+        moneyMsg.setStyle("bold")
+        moneyMsg.setTextColor("dark green")
+        moneyMsg.setSize(15)
+        moneyMsg.draw(win)
+
+        # === write trip score on the box ===
+        moneyMsg = Point(41.5, 5)
+        moneyMsg = Text(moneyMsg, str(trip_score))
+        moneyMsg.setStyle("bold")
+        moneyMsg.setTextColor("dark green")
+        moneyMsg.setSize(15)
+        moneyMsg.draw(win)
 
     def refresh(self):
         tip = Text(Point(0,0),"")
