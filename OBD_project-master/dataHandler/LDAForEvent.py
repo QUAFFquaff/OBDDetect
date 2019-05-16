@@ -49,11 +49,11 @@ class LDAForEvent:
         rows = end - start
         list_values = ""
         flag = 0
-        values = ''
+        word_brffer = ''
         start_time = float(table.row_values(0)[0])
         end_time = start_time + time_window
         x = start
-        for x in range(end):
+        while x <end:
             # for x in range(start, end):
             row = table.row_values(x)
 
@@ -63,17 +63,19 @@ class LDAForEvent:
             temp_char = row[2]
             # handle time
             if temp_e_time < end_time:  # the event is in the current time window
-                values += temp_char
+                word_brffer += temp_char
             elif temp_s_time > end_time:  # the event is out of the window
-                start_time = end_time + 1
+                start_time = end_time
                 end_time = start_time + time_window
-                list_values += values + ' '
-                values = temp_char
+                list_values += word_brffer + ' '
+                word_brffer = ""
+                x-=1
             elif temp_s_time < end_time < temp_e_time:
                 start_time = temp_e_time + 1
                 end_time = start_time + time_window
-                list_values += values + temp_char+' '
-                values = ''
+                list_values += word_brffer + temp_char+' '
+                word_brffer = ''
+            x+=1
 
         print([list_values])
         # datamatrix = np.array(list_values)
@@ -227,7 +229,7 @@ class LDAForEvent:
         datamatrix3 = self.read_excel('ForLDA3alph.xls')
         datamatrix4 = self.read_excel('ForLDA4alph.xls')
         datamatrix5 = self.read_excel('ForLDA0415alph.xls')
-        # print(datamatrix)
+        print(datamatrix5[0:126])
         # datamatrix = read_excel('ForLDA.xls')
         # print(datamatrix[0][102:180])
         # doc_set = [datamatrix[0], datamatrix[0][0:5] + datamatrix[0][8:17], datamatrix[0][18:31], datamatrix[0][85:105],
