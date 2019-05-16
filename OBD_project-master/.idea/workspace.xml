@@ -151,9 +151,14 @@
       <file leaf-file-name="change_numbers_to_alphabet.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dataHandler/change_numbers_to_alphabet.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="538">
+              <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+=======
             <state relative-caret-position="1591">
               <caret line="72" column="21" lean-forward="false" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
 >>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
+>>>>>>> 7d2b0abf73455a61ca687d19ac32e63cd94d1ec7
               <folding>
                 <element signature="e#167#178#0" expanded="true" />
               </folding>
@@ -317,7 +322,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBD_project-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBD_project-master" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBD_GUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+=======
 >>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
+>>>>>>> 7d2b0abf73455a61ca687d19ac32e63cd94d1ec7
         </subPane>
       </pane>
     </panes>
@@ -677,6 +699,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="0547c4ae-ab38-441b-8213-fbc7e410c1d2" name="Default" comment="" />
@@ -733,9 +758,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="2339" height="1368" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15950377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15950377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1081,9 +1106,14 @@
 =======
     <entry file="file://$PROJECT_DIR$/dataHandler/change_numbers_to_alphabet.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="538">
+          <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+=======
         <state relative-caret-position="1591">
           <caret line="72" column="21" lean-forward="false" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
 >>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
+>>>>>>> 7d2b0abf73455a61ca687d19ac32e63cd94d1ec7
           <folding>
             <element signature="e#167#178#0" expanded="true" />
           </folding>
