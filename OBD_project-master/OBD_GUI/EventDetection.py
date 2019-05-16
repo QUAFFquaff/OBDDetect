@@ -706,7 +706,9 @@ def main():
     while True:
         Panel.refresh()
         Panel.showEvent("22", "33", 0)
-        Panel.change_score(time_window_score, 0)
+        Panel.change_score(time_window_score, trip_score)
+        if time_window_score<80:Panel.sadSound()
+        if time_window_score>90:Panel.happySound()
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
             time_local = time.localtime(float(result.getStart() / 1000))
