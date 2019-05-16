@@ -21,8 +21,8 @@ from xlwt import Workbook
 
 
 def change_number_label_to_alphabet():
-    datamatrix = read_excel('ForLDA4.xlsx')
-    write_excel(np.array(datamatrix), 'ForLDA4Alph.xls')
+    datamatrix = read_excel('ForLDA3.xlsx')
+    write_excel(np.array(datamatrix), 'ForLDA3Alph.xls')
 
 
 def read_excel(file):
