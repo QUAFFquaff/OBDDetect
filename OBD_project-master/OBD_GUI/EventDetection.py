@@ -399,8 +399,10 @@ def detectEvent(data):
     minLength = int(samplingRate * 1.5)  # the minimum length that the event should be
     faultNum = int(2 * samplingRate / 5)
     xstdQueue.put(data)
+    print(data)
 
     if xstdQueue.full():
+        print(xstdQueue.qsize())
         t = []  # transform the queue to array
         for i in range(xstdQueue.qsize()):
             temp = xstdQueue.get()
@@ -685,12 +687,13 @@ def main():
             # calculate the sampling rate of the car
             samplingRate = 4 / ((timestamp[0] - timestamp[-1]) / 1000)
             std_window = int(2 * samplingRate + 0.5)
-            xstdQueue = queue.Queue(maxsize=(4 * std_window - 1))
-            ystdQueue = queue.Queue(maxsize=(4 * std_window - 1))
+            xstdQueue = queue.Queue(maxsize=(2 * std_window - 1))
+            ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
     finally:
         connection.close()
     sfault = bfault = int(2 * int(samplingRate + 0.5) / 5)
     tfault = int(8 * int(samplingRate + 0.5) / 15)
+    print(2 * std_window - 1)
 
     # start the data collection and event detection thread
     thread1 = detectThread()
@@ -708,9 +711,8 @@ def main():
     Panel.drawPanel()
     while True:
         Panel.refresh()
-        Panel.showEvent("22", "33", 0)
         Panel.change_score(time_window_score, trip_score)
-        if time_window_score<80:Panel.sadSound()
+        if time_window_score<40:Panel.sadSound()
         if time_window_score>90:Panel.happySound()
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
