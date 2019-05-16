@@ -12,11 +12,12 @@ from OBD_GUI.graphics import *
 import threading
 import time
 from dataHandler.LDAForEvent import *
+from dataHandler.change_numbers_to_alphabet import *
 from OBD_GUI import GUI
 
-matrix = np.array([[0.0649579822346719, 0, -0.997888],
-                   [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
-                   [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
+matrix = np.array([[9.99E-01, 0.00E+00, -3.46E-02],
+                    [-2.67E-02, 6.36E-01, -7.71E-01],
+                    [2.20E-02, 7.72E-01, 6.35E-01]])
 
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
@@ -218,6 +219,7 @@ class SVMthread(threading.Thread):
         global eventQueue
         global SVMResultQueue
         global LDA_flag
+        global svm_label_buffer
 
         while True:
             #  define type and intensity
@@ -262,6 +264,7 @@ class SVMthread(threading.Thread):
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(),eventList[i].getEnd(),result[0]))
 
                         saveResult(eventList[i].getStart(),eventList[i].getEnd(), result[0])
+                        svm_label_buffer = svm_label_buffer+ change_n_to_a(result[0])
                         LDA_flag = True
 
     def makeDecision(self, eventList):
