@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
+    <list default="true" id="44de97c5-061b-49ff-b1d1-67eeacc70fb9" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/EventDetection.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/EventDetection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/GUI.py" afterDir="false" />
+    </list>
+=======
     <list default="true" id="0547c4ae-ab38-441b-8213-fbc7e410c1d2" name="Default" comment="" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +32,13 @@
       <file leaf-file-name="EventDetection.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="314">
+              <caret line="264" column="38" selection-start-line="264" selection-start-column="38" selection-end-line="264" selection-end-column="38" />
+=======
             <state relative-caret-position="594">
               <caret line="239" column="40" lean-forward="false" selection-start-line="239" selection-start-column="40" selection-end-line="239" selection-end-column="40" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <marker date="1557902279709" expanded="true" signature="23603:23840" ph="..." />
@@ -38,13 +51,41 @@
       <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/test.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="332">
+              <caret line="256" selection-start-line="256" selection-end-line="256" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
+=======
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OBD_GUI/pic3.gif">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OBD_GUI/pic4.gif">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OBD_GUI/Survey.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="232" column="59" lean-forward="true" selection-start-line="231" selection-start-column="8" selection-end-line="232" selection-end-column="59" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+=======
       <file leaf-file-name="SVM.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/SVM.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -96,15 +137,28 @@
             <state relative-caret-position="215">
               <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
               <folding />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OBD_GUI/Survey2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+=======
       <file leaf-file-name="change_numbers_to_alphabet.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dataHandler/change_numbers_to_alphabet.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="538">
               <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+=======
+            <state relative-caret-position="1591">
+              <caret line="72" column="21" lean-forward="false" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
+>>>>>>> 7d2b0abf73455a61ca687d19ac32e63cd94d1ec7
               <folding>
                 <element signature="e#167#178#0" expanded="true" />
               </folding>
@@ -115,8 +169,12 @@
       <file leaf-file-name="LDATest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dataHandler/LDATest.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state>
+=======
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -124,6 +182,36 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OBD_GUI/graphics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="427">
+              <caret line="763" column="8" selection-start-line="763" selection-start-column="8" selection-end-line="763" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dataHandler/LabelRawData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="190">
+              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dataHandler/LDAForEvent.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="494">
+              <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+=======
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -151,6 +239,13 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1931" />
+    <option name="y" value="91" />
+    <option name="width" value="1939" />
+    <option name="height" value="1099" />
+=======
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
@@ -162,6 +257,7 @@
     <option name="y" value="-9" />
     <option name="width" value="2339" />
     <option name="height" value="1368" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -183,6 +279,25 @@
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
+<<<<<<< HEAD
+          <expand>
+            <path>
+              <item name="OBD_project-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OBD_project-master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OBD_project-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OBD_project-master" type="462c0819:PsiDirectoryNode" />
+              <item name="dataHandler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OBD_project-master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OBD_project-master" type="462c0819:PsiDirectoryNode" />
+              <item name="OBD_GUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+=======
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="OBD_project-master" />
@@ -207,6 +322,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="OBD_project-master" />
@@ -221,6 +337,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+=======
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
+>>>>>>> 7d2b0abf73455a61ca687d19ac32e63cd94d1ec7
         </subPane>
       </pane>
     </panes>
@@ -232,8 +351,31 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/OBD_GUI" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+<<<<<<< HEAD
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Shield\Documents\PythonWorkspace\OBD\OBDDetect\OBD_project-master\OBD_GUI" />
+      <recent name="C:\Users\wdb\OneDrive\Irvine\OBD project\Daben\OBDDetect-master\OBDDetect-master\OBD_project-master\OBD_GUI" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.EventDetection">
+    <configuration default="true" type="tests" factoryName="Attests">
+=======
   <component name="RunManager" selected="Python.change_numbers_to_alphabet">
     <configuration default="false" name="LDAForEvent" type="PythonConfigurationType" factoryName="Python" temporary="true">
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -570,6 +712,47 @@
       <workItem from="1557217850868" duration="3869000" />
       <workItem from="1557260541302" duration="6126000" />
       <workItem from="1557288101127" duration="963000" />
+<<<<<<< HEAD
+      <workItem from="1557687470767" duration="21008000" />
+      <workItem from="1557856165510" duration="1930000" />
+      <workItem from="1557950021221" duration="17654000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Nosetests_in_graphics_py - 2019.05.13 at 23h 32m 54s.xml">
+      <configuration name="Nosetests in graphics.py" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="51550000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1929" y="73" width="1551" height="879" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17012726" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3293348" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30655956" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32917705" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="4" weight="0.4487609" />
+=======
     </task>
     <servers />
   </component>
@@ -595,11 +778,21 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
   </component>
+<<<<<<< HEAD
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/OBD_project_master$SVM__1_.coverage" NAME="SVM (1) Coverage Results" MODIFIED="1557735705747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$EventDetection.coverage" NAME="EventDetection Coverage Results" MODIFIED="1557969244912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$test.coverage" NAME="test Coverage Results" MODIFIED="1557734548824" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$Kmeans.coverage" NAME="Kmeans Coverage Results" MODIFIED="1557270797922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$SVM.coverage" NAME="SVM Coverage Results" MODIFIED="1557262666939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataHandler" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$Nosetests_in_graphics_py.coverage" NAME="Nosetests in graphics.py Coverage Results" MODIFIED="1557815574281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+=======
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -608,6 +801,7 @@
       <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection.py">
@@ -654,6 +848,9 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py">
+=======
     <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -674,6 +871,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/CarAnalogyEngine.py">
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1634">
           <caret line="88" column="32" lean-forward="false" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
@@ -687,6 +885,12 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/pic6.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection2.py">
+=======
     <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
@@ -700,6 +904,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OBD_GUI/test.py">
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -707,10 +912,26 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/dataHandler/LDATest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/panel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5852">
+          <caret line="313" column="32" selection-start-line="312" selection-start-column="16" selection-end-line="313" selection-end-column="32" />
+=======
     <entry file="file://$PROJECT_DIR$/OBD_GUI/SVM.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="553">
           <caret line="200" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
           <folding>
             <element signature="e#172#195#0" expanded="true" />
             <marker date="1557902279401" expanded="true" signature="1158:3707" ph="..." />
@@ -738,16 +959,83 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataHandler/LDAmodel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+=======
     <entry file="file://$PROJECT_DIR$/dataHandler/LDATest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/dataHandler/LabelRawData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataHandler/LDAForEvent.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="26" column="34" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/Calibration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1767">
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/Calibration2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-741">
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/Survey2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/graphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="763" column="8" selection-start-line="763" selection-start-column="8" selection-end-line="763" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/Survey.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="232" column="59" lean-forward="true" selection-start-line="231" selection-start-column="8" selection-end-line="232" selection-end-column="59" />
+=======
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/xlrd/sheet.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -784,16 +1072,48 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="727">
           <caret line="260" column="12" lean-forward="true" selection-start-line="260" selection-start-column="12" selection-end-line="260" selection-end-column="12" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
           <folding>
             <element signature="e#150#161#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/pic1.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/pic4.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/pic3.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/GUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="256" selection-start-line="256" selection-end-line="256" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="264" column="38" selection-start-line="264" selection-start-column="38" selection-end-line="264" selection-end-column="38" />
+=======
     <entry file="file://$PROJECT_DIR$/dataHandler/change_numbers_to_alphabet.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="538">
           <caret line="33" column="18" lean-forward="true" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+=======
+        <state relative-caret-position="1591">
+          <caret line="72" column="21" lean-forward="false" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
+>>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
+>>>>>>> 7d2b0abf73455a61ca687d19ac32e63cd94d1ec7
           <folding>
             <element signature="e#167#178#0" expanded="true" />
           </folding>

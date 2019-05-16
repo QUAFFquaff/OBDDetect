@@ -12,11 +12,12 @@ from OBD_GUI.graphics import *
 import threading
 import time
 from dataHandler.LDAForEvent import *
+from dataHandler.change_numbers_to_alphabet import change_n_to_a
 from OBD_GUI import GUI
 
-matrix = np.array([[0.0649579822346719, 0, -0.997888],
-                   [-0.140818558599268, 0.989992982850364, -0.00916664939131784],
-                   [0.987902117670584, 0.141116596851819, 0.0643079465924438]])
+matrix = np.array([[9.99E-01, 0.00E+00, -3.46E-02],
+                    [-2.67E-02, 6.36E-01, -7.71E-01],
+                    [2.20E-02, 7.72E-01, 6.35E-01]])
 
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
@@ -185,9 +186,11 @@ class detectThread(threading.Thread):  # threading.Thread
 
                 # put the event into Queue
                 if not event is None:
+
                     if SVM_flag > 0:
                         overlapNum = overlapNum + 1
                     eventQueue.put(event)
+                    SVM_flag = SVM_flag - 1
                 if not yevent is None:
                     data = yevent.getValue()
                     max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
@@ -196,6 +199,7 @@ class detectThread(threading.Thread):  # threading.Thread
                     if SVM_flag > 0:
                         overlapNum = overlapNum + 1
                     eventQueue.put(yevent)
+                    SVM_flag = SVM_flag - 1
 
     def stop(self):
         self.__running.clear()
@@ -214,6 +218,8 @@ class SVMthread(threading.Thread):
         global overlapNum
         global eventQueue
         global SVMResultQueue
+        global LDA_flag
+        global svm_label_buffer
 
         while True:
             #  define type and intensity
@@ -226,28 +232,6 @@ class SVMthread(threading.Thread):
                 eventList = self.makeDecision(eventList)
 
                 for i in range(0, eventNum):
-<<<<<<< HEAD
-                    if eventList[i]:
-                        pass
-                #print(event.getType(), ' event: ', event.getStart(), '-', event.getEnd())
-
-                vect = np.array(event.getValue())
-                # print(vect)
-                vect = vect.astype(np.float64)
-
-                # calculate the features
-                vect = calcData(vect)
-                # normalize the features
-                vect = nomalization(vect)
-
-                # predict the result
-                result = svm.predict([vect])
-                print(result)
-                if result < 4:
-                    resultMatrix.append([event.getStart(), event.getEnd(), result[0]])
-
-                    saveResult(event.getStart(), event.getEnd(), result[0])
-=======
                     if eventList[i]!=None:
                         vect = np.array(eventList[i].getValue())
                         vect = vect.astype(np.float64)
@@ -278,8 +262,10 @@ class SVMthread(threading.Thread):
                             else:
                                 result = [11]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(),eventList[i].getEnd(),result[0]))
+
                         saveResult(eventList[i].getStart(),eventList[i].getEnd(), result[0])
->>>>>>> 7713d6fdb01fd71c4e9fcc0798b78fa40be0367c
+                        svm_label_buffer = svm_label_buffer+ change_n_to_a(result[0])
+                        LDA_flag = True
 
     def makeDecision(self, eventList):
         for i in range(0, len(eventList)-2):
@@ -385,6 +371,7 @@ def detectEvent(data):
     global sfault
     global bfault
     global SVM_flag
+    global LDA_flag
     sflag = False
     bflag = False
     xarray = []
@@ -419,6 +406,7 @@ def detectEvent(data):
                 sevent.addValue(xarray[i])
             sflag = True
             SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
+            LDA_flag = False
         elif accx > 0.05 and thresholdnum > 0:
             thresholdnum = thresholdnum + 1
             sfault = faultNum
@@ -428,7 +416,6 @@ def detectEvent(data):
             thresholdnum = thresholdnum + 1
             sflag = True
         elif (accx < 0.05 or stdX < 0.02) and thresholdnum > 0:
-            SVM_flag = SVM_flag - 1
             if thresholdnum > minLength:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
@@ -436,6 +423,8 @@ def detectEvent(data):
                 return sevent
             thresholdnum = 0
             sfault = faultNum
+            SVM_flag = SVM_flag - 1
+            LDA_flag = True
         else:
             thresholdnum = thresholdnum + 1
             sflag = True
@@ -448,6 +437,7 @@ def detectEvent(data):
                 bevent.addValue(xarray[i])
             bflag = True
             SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
+            LDA_flag = False
         elif accx < -0.05 and bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
             bfault = faultNum
@@ -457,7 +447,6 @@ def detectEvent(data):
             bthresholdnum = bthresholdnum + 1
             bflag = True
         elif (accx > -0.05 or stdX < 0.02) and bthresholdnum > 0:
-            SVM_flag = SVM_flag - 1
             if bthresholdnum > minLength:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
@@ -465,6 +454,8 @@ def detectEvent(data):
                 return bevent
             bfault = faultNum
             bthresholdnum = 0
+            SVM_flag = SVM_flag - 1
+            LDA_flag = True
         else:
             bthresholdnum = bthresholdnum + 1
             bflag = True
@@ -492,6 +483,7 @@ def detectYEvent(data):
     global positive
     global negative
     global SVM_flag
+    global LDA_flag
     yarray = []
     stdYArray = []  # use to get the smallest std, which will be the beginning of an event
     # y = []
@@ -537,7 +529,6 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
             elif (accy < 0.05 or stdY < 0.03) and tthresholdnum > 0:
-                SVM_flag = SVM_flag - 1
                 if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
@@ -548,9 +539,13 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     negative = True
+                    SVM_flag = SVM_flag - 1
+                    LDA_flag = True
             else:
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
+                SVM_flag = SVM_flag - 1
+                LDA_flag = True
 
         if negative:
             if accy < -0.1 and stdY > 0.03 and tthresholdnum == 0:
@@ -570,7 +565,6 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
             elif (accy > -0.05 or stdY < 0.03) and tthresholdnum > 0:
-                SVM_flag = SVM_flag - 1
                 if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
@@ -581,9 +575,13 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     negative = True
+                    SVM_flag = SVM_flag - 1
+                    LDA_flag = True
             else:
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
+                SVM_flag = SVM_flag - 1
+                LDA_flag = True
 
     if tflag:
         tevent.addValue(data)
@@ -674,7 +672,6 @@ def main():
     sfault = bfault = int(2*int(samplingRate+0.5)/5)
     tfault = int(8*int(samplingRate+0.5)/15)
 
-    print(samplingRate)
 
     # start the data collection and event detection thread
     thread1 = detectThread()
@@ -689,8 +686,15 @@ def main():
 
     while True:
         Panel.refresh()
+        Panel.showEvent("22", "33", 0)
+        Panel.coinSound()
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
+            time_local = time.localtime(float(result.getStart() / 1000))
+            start = time.strftime("%H:%M:%S", time_local)
+            time_local = time.localtime(float(result.getEnd / 1000))
+            end = time.strftime("%H:%M:%S", time_local)
+            Panel.showEvent(start, end, result.getType()[0])
 
 
 
