@@ -257,6 +257,7 @@ def main():
     ldamodel.LDAPreProcessing(ldamodel)
     test = ['ah',"a","h"]
     result = ldamodel.LDATest(ldamodel,test)
+    print(result)
     score =0
     for node in result:
         score+=(4-node[0])*25*node[1]

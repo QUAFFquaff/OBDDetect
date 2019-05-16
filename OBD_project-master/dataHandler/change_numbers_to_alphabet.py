@@ -21,8 +21,8 @@ from xlwt import Workbook
 
 
 def change_number_label_to_alphabet():
-    datamatrix = read_excel('ForLDA3.xlsx')
-    write_excel(np.array(datamatrix), 'ForLDA3Alph.xls')
+    datamatrix = read_excel('ForLDA0415.xls')
+    write_excel(np.array(datamatrix), 'ForLDA0415Alph.xls')
 
 
 def read_excel(file):
@@ -31,8 +31,6 @@ def read_excel(file):
     table = data.sheets()[0]
 
     start = 0  # 开始的行
-    # end = 164  # 结束的行
-    end = 66  # 结束的行
     list_values = []
     end = len(table.col_values(0))  # from the first line to last line
     for x in range(start, end):
