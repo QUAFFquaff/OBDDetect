@@ -23,8 +23,8 @@ time_window = 40  # time window for a word in LDA
 svm_label_buffer = ""  # the word in a time window
 trip_svm_buffer = ""    # save the whole trip's SVm label
 LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
-time_window_score = 0
-trip_score = 0
+time_window_score = 50
+trip_score = 50
 
 timestamp = []
 speed = []
@@ -328,8 +328,9 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
 
     # change trip score
     def renew_trip_score(self,ldaforevent):
+        global trip_score
         result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
-        trip_score= self.result_to_score(self,result_trip)
+        trip_score = self.result_to_score(self,result_trip)
 
     # calculate window score using LDA
     def calc_window_socre(self):
