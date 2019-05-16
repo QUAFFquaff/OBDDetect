@@ -3,6 +3,7 @@ from pydub import AudioSegment
 from threading import Timer
 import time
 import datetime
+import pygame
 
 
 class Panel(object):
@@ -253,6 +254,29 @@ class Panel(object):
 
 
     def happySound(self):
-        song = AudioSegment.from_ogg("POP Brust 16 copy.ogg")
+        file = 'sound/POP Brust 16 copy.mp3'
+        pygame.mixer.init()
+        track = pygame.mixer.music.load(file)
+        pygame.mixer.music.play()
+        time.sleep(0.05)
+        pygame.mixer.music.stop()
+
+    def sadSound(self):
+        file = 'sound/NEGATIVE Failure Beeps Oh No 05 copy.mp3'
+        pygame.mixer.init()
+        track = pygame.mixer.music.load(file)
+        pygame.mixer.music.play()
+        time.sleep(0.1)
+        pygame.mixer.music.stop()
+
+    def coinSound(self):
+        file = 'sound/COINS Collect Chime 01 copy.mp3'
+        pygame.mixer.init()
+        track = pygame.mixer.music.load(file)
+        pygame.mixer.music.play()
+        time.sleep(0.1)
+        pygame.mixer.music.stop()
+
+
 
 

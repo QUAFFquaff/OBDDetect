@@ -12,7 +12,7 @@ from OBD_GUI.graphics import *
 import threading
 import time
 from dataHandler.LDAForEvent import *
-from dataHandler.change_numbers_to_alphabet import *
+from dataHandler.change_numbers_to_alphabet import change_n_to_a
 from OBD_GUI import GUI
 
 matrix = np.array([[9.99E-01, 0.00E+00, -3.46E-02],
@@ -687,14 +687,14 @@ def main():
     while True:
         Panel.refresh()
         Panel.showEvent("22", "33", 0)
+        Panel.coinSound()
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
             time_local = time.localtime(float(result.getStart() / 1000))
             start = time.strftime("%H:%M:%S", time_local)
             time_local = time.localtime(float(result.getEnd / 1000))
             end = time.strftime("%H:%M:%S", time_local)
-            # Panel.showEvent(start, end, result.getType()[0])
-            Panel.showEvent("ssdfsf", "sdafs", "3")
+            Panel.showEvent(start, end, result.getType()[0])
 
 
 
