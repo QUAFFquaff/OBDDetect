@@ -1,6 +1,4 @@
 from OBD_GUI.graphics import *
-from pydub import AudioSegment
-from threading import Timer
 import time
 import datetime
 import pygame

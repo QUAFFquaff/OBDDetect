@@ -686,8 +686,8 @@ def main():
 
     while True:
         Panel.refresh()
-        Panel.showEvent("22", "33", 0)
-        Panel.coinSound()
+        # Panel.showEvent("22", "33", 0)
+        # Panel.coinSound()
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
             time_local = time.localtime(float(result.getStart() / 1000))
