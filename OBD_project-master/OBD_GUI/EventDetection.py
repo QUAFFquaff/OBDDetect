@@ -403,7 +403,7 @@ def detectEvent(data):
     xarray = []
     # x = []
     stdXArray = []  # use to get the smallest std, which will be the beginning of an event
-    minLength = int(samplingRate * 1.5)  # the minimum length that the event should be
+    minLength = int(samplingRate * 1.2)  # the minimum length that the event should be
     faultNum = int(2 * samplingRate / 5)
     xstdQueue.put(data)
 
@@ -425,7 +425,7 @@ def detectEvent(data):
         accx = data[3]
         timestamp = data[0]
 
-        if accx > 0.1 and stdX > 0.01 and thresholdnum == 0:
+        if accx > 0.09 and stdX > 0.01 and thresholdnum == 0:
             thresholdnum = thresholdnum + 1
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -433,15 +433,15 @@ def detectEvent(data):
             sflag = True
             SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
             LDA_flag = False
-        elif accx > 0.05 and thresholdnum > 0:
+        elif accx > 0.04 and thresholdnum > 0:
             thresholdnum = thresholdnum + 1
             sfault = faultNum
             sflag = True
-        elif accx < 0.05 and sfault > 0 and thresholdnum > 0:
+        elif accx < 0.04 and sfault > 0 and thresholdnum > 0:
             sfault = sfault - 1
             thresholdnum = thresholdnum + 1
             sflag = True
-        elif (accx < 0.05 or stdX < 0.01) and thresholdnum > 0:
+        elif (accx < 0.04 or stdX < 0.01) and thresholdnum > 0:
             if thresholdnum > minLength:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
@@ -456,7 +456,7 @@ def detectEvent(data):
             sflag = True
 
 
-        if accx < -0.10 and stdX > 0.02 and bthresholdnum == 0:
+        if accx < -0.10 and stdX > 0.01 and bthresholdnum == 0:
             bthresholdnum = bthresholdnum + 1
             bevent = Event(xarray[startIndex][0], 1)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -472,7 +472,7 @@ def detectEvent(data):
             bfault = bfault - 1
             bthresholdnum = bthresholdnum + 1
             bflag = True
-        elif (accx > -0.05 or stdX < 0.02) and bthresholdnum > 0:
+        elif (accx > -0.05 or stdX < 0.01) and bthresholdnum > 0:
             if bthresholdnum > minLength:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
