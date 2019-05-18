@@ -25,6 +25,7 @@ trip_svm_buffer = ""    # save the whole trip's SVm label
 LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
 time_window_score = 50
 trip_score = 50
+GUI_flag = False
 
 timestamp = []
 speed = []
@@ -308,6 +309,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         global trip_svm_buffer
         global time_window_score
         global trip_score
+        global GUI_flag
         ldaforevent = LDAForEvent
         ldaforevent.LDALoad(ldaforevent)
         start_time = time.time()
@@ -320,6 +322,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 trip_svm_buffer += temp_word
                 svm_label_buffer = ""
                 if temp_word != "":
+                    GUI_flag = True
                     result = ldaforevent.LDATest(ldaforevent, [temp_word])
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
                     print(result_trip)
@@ -714,7 +717,9 @@ def main():
     Panel.drawPanel()
     while True:
         Panel.refresh()
-        Panel.change_score(time_window_score, trip_score)
+        if GUI_flag:
+            GUI_flag = False
+            Panel.change_score(time_window_score, trip_score)
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
             time_local = time.localtime(float(result.getStart() / 1000))
