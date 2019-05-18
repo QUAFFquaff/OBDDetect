@@ -123,14 +123,14 @@ class Panel(object):
         self.tripscoreMsg.undraw()
 
         # === write time window score on the box ===
-        self.moneyMsg = Text(Point(41.5, 20),  str(time_window_score))
+        self.moneyMsg = Text(Point(41.5, 20),  str(time_window_score)[:3])
         self.moneyMsg.setStyle("bold")
         self.moneyMsg.setTextColor("dark green")
         self.moneyMsg.setSize(15)
         self.moneyMsg.draw(win)
 
         # === write trip score on the box ===
-        self.tripscoreMsg = Text(Point(41.5, 5), str(trip_score))
+        self.tripscoreMsg = Text(Point(41.5, 5), str(trip_score)[0:3])
         self.tripscoreMsg.setStyle("bold")
         self.tripscoreMsg.setTextColor("dark green")
         self.tripscoreMsg.setSize(15)
