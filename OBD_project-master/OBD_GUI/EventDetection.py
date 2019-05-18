@@ -12,14 +12,14 @@ from dataHandler.LDAForEvent import *
 from dataHandler.change_numbers_to_alphabet import change_n_to_a
 from OBD_GUI import GUI
 
-matrix = np.array([[9.99E-01, 0.00E+00, -3.46E-02],
-                   [-2.67E-02, 6.36E-01, -7.71E-01],
-                   [2.20E-02, 7.72E-01, 6.35E-01]])
+matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
+                   [-0.026682913, 0.63608, -0.770697297],
+                   [0.021995888, 0.77162, 0.635319376]])
 
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 40  # time window for a word in LDA
+time_window = 20  # time window for a word in LDA
 svm_label_buffer = ""  # the word in a time window
 trip_svm_buffer = ""    # save the whole trip's SVm label
 LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
@@ -59,7 +59,7 @@ class SVMResult(object):
         return self.start
 
     def getEnd(self):
-        return self.getEnd()
+        return self.end
 
     def getLabel(self):
         return self.label
@@ -120,23 +120,26 @@ class detectThread(threading.Thread):  # threading.Thread
         global samplingRate
         global eventQueue
         global overlapNum
+        global SVM_flag
 
-        while (True):
-            isCatch = False
-            lowpass = []
-            timestamp = []
-            speed = []
-            accx = []
-            accy = []
-            accz = []
-            gyox = []
-            gyoy = []
-            gyoz = []
-            try:
-                # 获取一个游标
-                connection = connectDB()
+        try:
+            # 获取一个游标
+            connection = connectDB()
+            connection.autocommit(True)
+            while (True):
+                isCatch = False
+                lowpass = []
+                timestamp = []
+                speed = []
+                accx = []
+                accy = []
+                accz = []
+                gyox = []
+                gyoy = []
+                gyoz = []
+
                 with connection.cursor() as cursor:
-                    sql = 'select * from STATUS ORDER BY time DESC LIMIT 30'
+                    sql = 'select * from STATUS ORDER BY time DESC LIMIT 20'
                     count = cursor.execute(sql)
 
                     i = 0
@@ -145,6 +148,7 @@ class detectThread(threading.Thread):  # threading.Thread
                             if row[2] != newrecord:  # detect if catch the same data
                                 isCatch = True
                                 newrecord = row[2]
+                        isCatch = True
                         if isCatch:
                             timestamp.append(row[2])
                             speed.append(row[3])
@@ -167,40 +171,41 @@ class detectThread(threading.Thread):  # threading.Thread
                             # put data into lowpass list which is used to filtered
                             lowpass.append(acc)
                         i = i + 1
-            finally:
-                connection.close()
-            if isCatch:
-                cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
 
-                # low pass filter
-                lowpass = np.array(lowpass)
-                b, a = signal.butter(3, cutoff, 'low')
-                accxsf = signal.filtfilt(b, a, lowpass[:, 1])
-                accysf = signal.filtfilt(b, a, lowpass[:, 0])
-                acczsf = signal.filtfilt(b, a, lowpass[:, 2])
+                if isCatch:
+                    cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
+                    # low pass filter
+                    lowpass = np.array(lowpass)
+                    b, a = signal.butter(3, cutoff, 'low')
+                    accxsf = signal.filtfilt(b, a, lowpass[:, 1])
+                    accysf = signal.filtfilt(b, a, lowpass[:, 0])
+                    acczsf = signal.filtfilt(b, a, lowpass[:, 2])
 
-                # detect event
-                event = detectEvent(
-                    [timestamp[-2], speed[-2], accysf[-2], accxsf[-2], acczsf[-2], gyox[-2], gyoy[-2], gyoz[-2]])
-                yevent = detectYEvent(
-                    [timestamp[-2], speed[-2], accysf[-2], accxsf[-2], acczsf[-2], gyox[-2], gyoy[-2], gyoz[-2]])
 
-                # put the event into Queue
-                if not event is None:
+                    # detect event
+                    event = detectEvent(
+                        [timestamp[1], speed[1], accysf[1], accxsf[1], acczsf[1], gyox[1], gyoy[1], gyoz[1]])
+                    yevent = detectYEvent(
+                        [timestamp[1], speed[1], accysf[1], accxsf[1], acczsf[1], gyox[1], gyoy[1], gyoz[1]])
 
-                    if SVM_flag > 0:
-                        overlapNum = overlapNum + 1
-                    eventQueue.put(event)
-                    SVM_flag = SVM_flag - 1
-                if not yevent is None:
-                    data = yevent.getValue()
-                    max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
-                    if max_gyo < 15:
-                        yevent.setType(yevent.getType() + 2)
-                    if SVM_flag > 0:
-                        overlapNum = overlapNum + 1
-                    eventQueue.put(yevent)
-                    SVM_flag = SVM_flag - 1
+                    # put the event into Queue
+                    if not event is None:
+
+                        if SVM_flag > 0:
+                            overlapNum = overlapNum + 1
+                        eventQueue.put(event)
+                        SVM_flag = SVM_flag - 1
+                    if not yevent is None:
+                        data = yevent.getValue()
+                        # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
+                        # if max_gyo < 15:
+                        #     yevent.setType(yevent.getType() + 2)
+                        if SVM_flag > 0:
+                            overlapNum = overlapNum + 1
+                        eventQueue.put(yevent)
+                        SVM_flag = SVM_flag - 1
+        finally:
+            connection.close()
 
     def stop(self):
         self.__running.clear()
@@ -247,7 +252,6 @@ class SVMthread(threading.Thread):
                         result = svm.predict([vect])  # result of SVM
                         score = svm.decision_function([vect])  # score of SVM for each tyeps
                         score = np.array(score[0])
-                        print(result)
 
                         if eventList[i].getType() >= 2:
                             index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
@@ -305,6 +309,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         global time_window_score
         global trip_score
         ldaforevent = LDAForEvent
+        ldaforevent.LDALoad(ldaforevent)
         start_time = time.time()
         #  monitor time-window
         time.sleep(time_window)
@@ -317,9 +322,10 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 if temp_word != "":
                     result = ldaforevent.LDATest(ldaforevent, [temp_word])
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
-                    trip_score = self.result_to_score(self,result_trip)
+                    print(result_trip)
+                    trip_score = self.result_to_score(result_trip)
                     # self.renew_trip_score(self,ldaforevent)
-                    self.score_queue.append(self.result_to_score(self, result))
+                    self.score_queue.append(self.result_to_score( result))
                 elif temp_word == "":
                     print("____________________________________________")
                     self.score_queue.append(100)
@@ -365,10 +371,10 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
 
 
 def write_data(dataTemp, table, row):
-    data = np.array(dataTemp)
-    l = len(data)  # l is the number of column
+    # data = np.array(dataTemp)
+    l = len(dataTemp)  # l is the number of column
     for j in range(l):
-        table.write(row, j, data[j])
+        table.write(row, j, dataTemp[j])
 
 
 xstdQueue = queue.Queue(maxsize=19)
@@ -400,28 +406,26 @@ def detectEvent(data):
     minLength = int(samplingRate * 1.5)  # the minimum length that the event should be
     faultNum = int(2 * samplingRate / 5)
     xstdQueue.put(data)
-    print(data)
 
     if xstdQueue.full():
-        print(xstdQueue.qsize())
         t = []  # transform the queue to array
         for i in range(xstdQueue.qsize()):
             temp = xstdQueue.get()
             t.append(temp[3])
-            if i > 8:
-                stdXArray.append(np.std(t[i - 9:i]), ddof=1)
+            if i > std_window - 2:
+                stdXArray.append(np.std(t[i - std_window + 1:i], ddof=1))
                 xarray.append(temp)
                 # x.append(temp[3])
             xstdQueue.put(temp)
         xstdQueue.get()
-        stdX = np.std(xarray[:, 3], ddof=1)
+        stdX = stdXArray[-1]
 
         startIndex = stdXArray.index(min(stdXArray))
 
         accx = data[3]
         timestamp = data[0]
 
-        if accx > 0.1 and stdX > 0.02 and thresholdnum == 0:
+        if accx > 0.1 and stdX > 0.01 and thresholdnum == 0:
             thresholdnum = thresholdnum + 1
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -437,7 +441,7 @@ def detectEvent(data):
             sfault = sfault - 1
             thresholdnum = thresholdnum + 1
             sflag = True
-        elif (accx < 0.05 or stdX < 0.02) and thresholdnum > 0:
+        elif (accx < 0.05 or stdX < 0.01) and thresholdnum > 0:
             if thresholdnum > minLength:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
@@ -447,9 +451,10 @@ def detectEvent(data):
             sfault = faultNum
             SVM_flag = SVM_flag - 1
             LDA_flag = True
-        else:
+        elif thresholdnum>0:
             thresholdnum = thresholdnum + 1
             sflag = True
+
 
         if accx < -0.10 and stdX > 0.02 and bthresholdnum == 0:
             bthresholdnum = bthresholdnum + 1
@@ -477,7 +482,7 @@ def detectEvent(data):
             bthresholdnum = 0
             SVM_flag = SVM_flag - 1
             LDA_flag = True
-        else:
+        elif bthresholdnum>0:
             bthresholdnum = bthresholdnum + 1
             bflag = True
 
@@ -520,12 +525,12 @@ def detectYEvent(data):
             temp = ystdQueue.get()
             t.append(temp[2])
             if i > std_window - 2:  # calculate the standard deviation from list
-                stdYArray.append(np.std(t[i - std_window + 1:i]), ddof=1)
+                stdYArray.append(np.std(t[i - std_window + 1:i], ddof=1))
                 yarray.append(temp)
             # y.append(temp[2])
             ystdQueue.put(temp)
         ystdQueue.get()
-        stdY = np.std(yarray[:, 2], ddof=1)
+        stdY = stdYArray[-1]
 
         startIndex = stdYArray.index(min(stdYArray))
 
@@ -533,7 +538,7 @@ def detectYEvent(data):
         timestamp = data[0]
 
         if positive:
-            if accy > 0.1 and stdY > 0.03 and tthresholdnum == 0:
+            if accy > 0.1 and stdY > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 2)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
@@ -545,11 +550,11 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
                 tflag = True
-            elif (accy < 0.05 or stdY < 0.03) and tfault > 0 and tthresholdnum > 0:
+            elif (accy < 0.05 or stdY < 0.015) and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy < 0.05 or stdY < 0.03) and tthresholdnum > 0:
+            elif (accy < 0.05 or stdY < 0.015) and tthresholdnum > 0:
                 if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
@@ -562,14 +567,12 @@ def detectYEvent(data):
                     negative = True
                     SVM_flag = SVM_flag - 1
                     LDA_flag = True
-            else:
+            elif tthresholdnum>0:
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-                SVM_flag = SVM_flag - 1
-                LDA_flag = True
 
         if negative:
-            if accy < -0.1 and stdY > 0.03 and tthresholdnum == 0:
+            if accy < -0.1 and stdY > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 3)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
@@ -581,7 +584,7 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
                 tflag = True
-            elif (accy > -0.05 or stdY < 0.03) and tfault > 0 and tthresholdnum > 0:
+            elif (accy > -0.05 or stdY < 0.015) and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
@@ -595,14 +598,12 @@ def detectYEvent(data):
                 else:
                     tfault = faultNum
                     tthresholdnum = 0
-                    negative = True
+                    positive = True
                     SVM_flag = SVM_flag - 1
                     LDA_flag = True
-            else:
+            elif tthresholdnum>0:
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-                SVM_flag = SVM_flag - 1
-                LDA_flag = True
 
     if tflag:
         tevent.addValue(data)
@@ -661,7 +662,7 @@ def saveResult(start, end, result):
     rowNum = sheet.nrows
     newwb = copy(oldwd)
     newWs = newwb.get_sheet(0)
-    write_data(np.array([start, end, result]), newWs, rowNum)
+    write_data([start, end, result], newWs, rowNum)
     newwb.save('ForLDA.xls')
 
 
@@ -679,22 +680,23 @@ def main():
     try:
         # 获取一个游标
         connection = connectDB()
+        connection.autocommit(True)
         with connection.cursor() as cursor:
-            sql = 'select * from STATUS ORDER BY time DESC LIMIT 5'
+            sql = 'select * from STATUS ORDER BY time DESC LIMIT 15'
             count = cursor.execute(sql)
             timestamp = []
             for row in cursor.fetchall():
                 timestamp.append(row[2])
             # calculate the sampling rate of the car
-            samplingRate = 4 / ((timestamp[0] - timestamp[-1]) / 1000)
-            std_window = int(2 * samplingRate + 0.5)
-            xstdQueue = queue.Queue(maxsize=(2 * std_window - 1))
-            ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
+            samplingRate = 14 / ((timestamp[0] - timestamp[-1]) / 1000)
+            std_window = int(samplingRate + 0.5)
+            xstdQueue = queue.Queue(maxsize=(2*std_window - 1))
+            ystdQueue = queue.Queue(maxsize=(2*std_window - 1))
     finally:
         connection.close()
     sfault = bfault = int(2 * int(samplingRate + 0.5) / 5)
     tfault = int(8 * int(samplingRate + 0.5) / 15)
-    print(2 * std_window - 1)
+    print('samplingrate--'+str(samplingRate))
 
     # start the data collection and event detection thread
     thread1 = detectThread()
@@ -719,9 +721,9 @@ def main():
             result = SVMResultQueue.get()
             time_local = time.localtime(float(result.getStart() / 1000))
             start = time.strftime("%H:%M:%S", time_local)
-            time_local = time.localtime(float(result.getEnd / 1000))
+            time_local = time.localtime(float(result.getEnd() / 1000))
             end = time.strftime("%H:%M:%S", time_local)
-            Panel.showEvent(start, end, result.getType()[0])
+            Panel.showEvent(start, end, result.getLabel())
 
 
 
