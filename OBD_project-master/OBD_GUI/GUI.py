@@ -17,7 +17,7 @@ class Panel(object):
 
         self.win = win
 
-        self.eventMsg = Text(Point(20, 28), "Event")
+        self.eventMsg = Text(Point(18, 28), "Event")
         self.eventMsg.setStyle("bold")
         self.eventMsg.setTextColor("blue")
         self.eventMsg.setSize(15)

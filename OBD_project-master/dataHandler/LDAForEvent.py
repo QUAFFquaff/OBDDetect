@@ -257,7 +257,8 @@ class LDAForEvent:
 
 def main():
     ldamodel = LDAForEvent
-    ldamodel.LDAPreProcessing(ldamodel)
+    # ldamodel.LDAPreProcessing(ldamodel)
+    ldamodel.LDALoad(ldamodel)
     test = ['ah',"a","h"]
     result = ldamodel.LDATest(ldamodel,test)
     print(result)
