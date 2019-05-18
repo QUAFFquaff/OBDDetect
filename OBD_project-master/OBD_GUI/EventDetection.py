@@ -317,12 +317,12 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         time.sleep(time_window)
         while True:
             if time.time() - start_time > time_window and LDA_flag:
+                GUI_flag = True
                 start_time = time.time()
                 temp_word = svm_label_buffer
                 trip_svm_buffer += temp_word
                 svm_label_buffer = ""
                 if temp_word != "":
-                    GUI_flag = True
                     result = ldaforevent.LDATest(ldaforevent, [temp_word])
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
                     print(result_trip)
@@ -337,6 +337,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                     self.score_queue.pop()
                     window_score = self.calc_window_socre()
                     time_window_score = window_score
+                # time.sleep(time_window)
 
     # change trip score
     def renew_trip_score(self,ldaforevent):
@@ -465,10 +466,10 @@ def detectEvent(data):
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 bevent.addValue(xarray[i])
             bflag = True
-            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
+            SVM_flag += 1  # set the flag to denote the event starts
             LDA_flag = False
         elif accx < -0.04 and bthresholdnum > 0:
-            bthresholdnum = bthresholdnum + 1
+            bthresholdnum += 1
             bfault = faultNum
             bflag = True
         elif accx > -0.04 and bfault > 0 and bthresholdnum > 0:
@@ -572,7 +573,7 @@ def detectYEvent(data):
                     LDA_flag = True
             elif tthresholdnum>0:
                 tthresholdnum = tthresholdnum + 1
-                tflag = True
+                tflag = True1
 
         if negative:
             if accy < -0.1 and stdY > 0.015 and tthresholdnum == 0:
@@ -679,6 +680,7 @@ def main():
     global tfault
     global std_window
     global SVMResultQueue
+    global GUI_flag
 
     try:
         # 获取一个游标
