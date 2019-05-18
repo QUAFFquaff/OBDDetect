@@ -114,30 +114,44 @@ class Panel(object):
         # image5.draw(win)
         #
         # image6 = Image(Point(41.5, 5.5), "pic6.gif")
-        # image6.draw(win)
+        # image6.draw(win
+
+        # === write time window score on the box ===
+        moneyMsg = Text(Point(41.5, 20),  str(50.00)[:3])
+        moneyMsg.setStyle("bold")
+        moneyMsg.setTextColor("dark green")
+        moneyMsg.setSize(15)
+        moneyMsg.draw(win)
+
+        # === write trip score on the box ===
+        tripscoreMsg = Text(Point(41.5, 5), str(50.00)[0:3])
+        tripscoreMsg.setStyle("bold")
+        tripscoreMsg.setTextColor("dark green")
+        tripscoreMsg.setSize(15)
+        tripscoreMsg.draw(win)
 
     def change_score(self,time_window_score,trip_score):
 
         win = self.win
-        self.moneyMsg.undraw()
-        self.tripscoreMsg.undraw()
+        # self.moneyMsg.undraw()
+        # self.tripscoreMsg.undraw()
 
         # === write time window score on the box ===
         self.moneyMsg = Text(Point(41.5, 20),  str(time_window_score)[:3])
-        self.moneyMsg.setStyle("bold")
-        self.moneyMsg.setTextColor("dark green")
-        self.moneyMsg.setSize(15)
-        self.moneyMsg.draw(win)
+        # self.moneyMsg.setStyle("bold")
+        # self.moneyMsg.setTextColor("dark green")
+        # self.moneyMsg.setSize(15)
+        # self.moneyMsg.draw(win)
 
         # === write trip score on the box ===
         self.tripscoreMsg = Text(Point(41.5, 5), str(trip_score)[0:3])
-        self.tripscoreMsg.setStyle("bold")
-        self.tripscoreMsg.setTextColor("dark green")
-        self.tripscoreMsg.setSize(15)
-        self.tripscoreMsg.draw(win)
+        # self.tripscoreMsg.setStyle("bold")
+        # self.tripscoreMsg.setTextColor("dark green")
+        # self.tripscoreMsg.setSize(15)
+        # self.tripscoreMsg.draw(win)
 
-        if time_window_score < 40: self.sadSound()
-        if time_window_score > 90: self.happySound()
+        # if time_window_score < 40: self.sadSound()
+        # if time_window_score > 90: self.happySound()
 
     def refresh(self):
         tip = Text(Point(0,0),"")
