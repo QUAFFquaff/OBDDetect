@@ -279,9 +279,9 @@ class SVMthread(threading.Thread):
                 factor1 = (eventList[i].getEnd() - eventList[i + 1].getStart()) / eventList[i].getDuration()
                 factor2 = (eventList[i + 1].getEnd() - eventList[i].getEnd()) / eventList[i + 1].getDuration()
                 if factor1 > 0.5 and factor2 < 0.5:
-                    if eventList[i].getType() > 2 >= eventList[i + 1].getType():
+                    if eventList[i].getType() >= 2 > eventList[i + 1].getType():
                         eventList[i + 1] = None
-                    elif eventList[i].getType() <= 2 < eventList[i + 1].getType():
+                    elif eventList[i].getType() < 2 <= eventList[i + 1].getType():
                         eventList[i] = None
         return eventList
 
@@ -464,15 +464,15 @@ def detectEvent(data):
             bflag = True
             SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
             LDA_flag = False
-        elif accx < -0.05 and bthresholdnum > 0:
+        elif accx < -0.04 and bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
             bfault = faultNum
             bflag = True
-        elif accx > -0.05 and bfault > 0 and bthresholdnum > 0:
+        elif accx > -0.04 and bfault > 0 and bthresholdnum > 0:
             bfault = bfault - 1
             bthresholdnum = bthresholdnum + 1
             bflag = True
-        elif (accx > -0.05 or stdX < 0.01) and bthresholdnum > 0:
+        elif (accx > -0.04 or stdX < 0.01) and bthresholdnum > 0:
             if bthresholdnum > minLength:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
