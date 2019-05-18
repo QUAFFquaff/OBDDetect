@@ -327,6 +327,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                     # self.renew_trip_score(self,ldaforevent)
                     self.score_queue.append(self.result_to_score( result))
                 elif temp_word == "":
+                    print("____________________________________________")
                     self.score_queue.append(100)
 
                 if len(self.score_queue) > 6:
