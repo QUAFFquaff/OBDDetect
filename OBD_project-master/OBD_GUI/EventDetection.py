@@ -322,9 +322,10 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 if temp_word != "":
                     result = ldaforevent.LDATest(ldaforevent, [temp_word])
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
-                    trip_score = self.result_to_score(self,result_trip)
+                    print(result_trip)
+                    trip_score = self.result_to_score(result_trip)
                     # self.renew_trip_score(self,ldaforevent)
-                    self.score_queue.append(self.result_to_score(self, result))
+                    self.score_queue.append(self.result_to_score( result))
                 elif temp_word == "":
                     self.score_queue.append(100)
 
