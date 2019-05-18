@@ -53,6 +53,11 @@ class Panel(object):
         self.dBar.setFill(color_rgb(209, 0, 0))
         # self.dBar.draw(win)
 
+        self.moneyMsg = Text(Point(41.5, 20), "")
+        self.moneyMsg.draw(win)
+        self.tripscoreMsg = Text(Point(41.5, 5),"")
+        self.tripscoreMsg.draw(win)
+
     def drawPanel(self):
         # draw the background
         win = self.win
@@ -114,22 +119,25 @@ class Panel(object):
     def change_score(self,time_window_score,trip_score):
 
         win = self.win
+        self.moneyMsg.undraw()
+        self.tripscoreMsg.undraw()
 
         # === write time window score on the box ===
-        moneyMsg = Point(41.5, 20)
-        moneyMsg = Text(moneyMsg,  str(time_window_score))
-        moneyMsg.setStyle("bold")
-        moneyMsg.setTextColor("dark green")
-        moneyMsg.setSize(15)
-        moneyMsg.draw(win)
+        self.moneyMsg = Text(Point(41.5, 20),  str(time_window_score))
+        self.moneyMsg.setStyle("bold")
+        self.moneyMsg.setTextColor("dark green")
+        self.moneyMsg.setSize(15)
+        self.moneyMsg.draw(win)
 
         # === write trip score on the box ===
-        moneyMsg = Point(41.5, 5)
-        moneyMsg = Text(moneyMsg, str(trip_score))
-        moneyMsg.setStyle("bold")
-        moneyMsg.setTextColor("dark green")
-        moneyMsg.setSize(15)
-        moneyMsg.draw(win)
+        self.tripscoreMsg = Text(Point(41.5, 5), str(trip_score))
+        self.tripscoreMsg.setStyle("bold")
+        self.tripscoreMsg.setTextColor("dark green")
+        self.tripscoreMsg.setSize(15)
+        self.tripscoreMsg.draw(win)
+
+        if time_window_score < 40: self.sadSound()
+        if time_window_score > 90: self.happySound()
 
     def refresh(self):
         tip = Text(Point(0,0),"")
