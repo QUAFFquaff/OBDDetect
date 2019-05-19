@@ -55,11 +55,14 @@ plt.ylabel('SSE')
 plt.plot(X,SSE,'o-')
 plt.show()
 # labels = km_cluster.labels_
-# center = km_cluster.cluster_centers_
+center = km_cluster.cluster_centers_
 # predict = km_cluster.predict(data)
 # print(labels)
 # print(center)
 # print(predict)
+
+draw = plt.subplot(111,projection='3d')
+draw.scatter(X[:1])
 
 
 # this is the Average silhouette method
@@ -73,3 +76,5 @@ plt.xlabel('k')
 plt.ylabel('average silhouette width ')
 plt.plot(X,Scores,'o-')
 plt.show()
+
+plt.scatter()
