@@ -8,9 +8,11 @@ from sklearn.externals import joblib
 from scipy import signal
 import threading
 import time
-from dataHandler.LDAForEvent import *
-from dataHandler.change_numbers_to_alphabet import change_n_to_a
-from OBD_GUI import GUI
+import sys
+sys.path.append('../dataHandler/')
+from LDAForEvent import *
+from change_numbers_to_alphabet import change_n_to_a
+import GUI
 
 matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
                    [-0.026682913, 0.63608, -0.770697297],
@@ -140,7 +142,7 @@ class detectThread(threading.Thread):  # threading.Thread
                 gyoz = []
 
                 with connection.cursor() as cursor:
-                    sql = 'select * from STATUS ORDER BY time DESC LIMIT 20'
+                    sql = 'select * from STATUS ORDER BY time DESC LIMIT 30'
                     count = cursor.execute(sql)
 
                     i = 0
@@ -583,7 +585,7 @@ def detectYEvent(data):
                     print("dismiss the turn")
             elif tthresholdnum>0:
                 tthresholdnum = tthresholdnum + 1
-                tflag = True1
+                tflag = True
 
         if negative:
             if accy < -0.12 and stdY > 0.015 and tthresholdnum == 0:
