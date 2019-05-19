@@ -24,16 +24,18 @@ class Panel(object):
         self.eventMsg.draw(win)
 
         a2 = 8
-        a1 = a2-2
-        a3 = a2+2
-        self.aBar = Polygon(Point(a1,10-2),Point(a1,11-1),Point(a2,11),Point(a3,11-1),Point(a3,10-2),Point(a2,10-1))
-        self.aBar.setFill(color_rgb(209,0,0))
+        a1 = a2 - 2
+        a3 = a2 + 2
+        self.aBar = Polygon(Point(a1, 10 - 2), Point(a1, 11 - 1), Point(a2, 11), Point(a3, 11 - 1), Point(a3, 10 - 2),
+                            Point(a2, 10 - 1))
+        self.aBar.setFill(color_rgb(209, 0, 0))
         # self.aBar.draw(win)
 
         b2 = 15
         b1 = b2 - 2
         b3 = b2 + 2
-        self.bBar = Polygon(Point(b1, 10 - 2), Point(b1, 11 - 1), Point(b2, 11), Point(b3, 11 - 1), Point(b3, 10 - 2),Point(b2, 10 - 1))
+        self.bBar = Polygon(Point(b1, 10 - 2), Point(b1, 11 - 1), Point(b2, 11), Point(b3, 11 - 1), Point(b3, 10 - 2),
+                            Point(b2, 10 - 1))
         self.bBar.setFill(color_rgb(209, 0, 0))
         # self.bBar.draw(win)
 
@@ -55,13 +57,12 @@ class Panel(object):
 
         self.moneyMsg = Text(Point(41.5, 20), "")
         self.moneyMsg.draw(win)
-        self.tripscoreMsg = Text(Point(41.5, 5),"")
+        self.tripscoreMsg = Text(Point(41.5, 5), "")
         self.tripscoreMsg.draw(win)
 
     def drawPanel(self):
         # draw the background
         win = self.win
-
 
         # gpsTxt = Text(Point(12, 22), "GPS")
         # gpsTxt.setTextColor("blue")
@@ -69,7 +70,7 @@ class Panel(object):
         # gpsTxt.draw(win)
 
         # === draw the reward box ===
-        rewardB1 = Rectangle(Point(36,15), Point(47, 28))
+        rewardB1 = Rectangle(Point(36, 15), Point(47, 28))
         rewardB1.setWidth(4)
         rewardB1.setFill("light gray")
         rewardB1.draw(win)
@@ -96,7 +97,6 @@ class Panel(object):
         txtMsg.setSize(13)
         txtMsg.draw(win)
 
-
         # show leftdown icon
         image1 = Image(Point(7.5, 4), "pic1.gif")
         image1.draw(win)
@@ -116,82 +116,67 @@ class Panel(object):
         # image6 = Image(Point(41.5, 5.5), "pic6.gif")
         # image6.draw(win
 
-        # === write time window score on the box ===
-        moneyMsg = Text(Point(41.5, 20),  str(50.00)[:3])
-        moneyMsg.setStyle("bold")
-        moneyMsg.setTextColor("dark green")
-        moneyMsg.setSize(15)
-        moneyMsg.draw(win)
-
-        # === write trip score on the box ===
-        tripscoreMsg = Text(Point(41.5, 5), str(50.00)[0:3])
-        tripscoreMsg.setStyle("bold")
-        tripscoreMsg.setTextColor("dark green")
-        tripscoreMsg.setSize(15)
-        tripscoreMsg.draw(win)
-
-    def change_score(self,time_window_score,trip_score):
+    def change_score(self, time_window_score, trip_score):
 
         win = self.win
-        # self.moneyMsg.undraw()
-        # self.tripscoreMsg.undraw()
+        self.moneyMsg.undraw()
+        self.tripscoreMsg.undraw()
 
         # === write time window score on the box ===
-        self.moneyMsg = Text(Point(41.5, 20),  str(time_window_score)[:3])
-        # self.moneyMsg.setStyle("bold")
-        # self.moneyMsg.setTextColor("dark green")
-        # self.moneyMsg.setSize(15)
-        # self.moneyMsg.draw(win)
+        self.moneyMsg = Text(Point(41.5, 20), str(time_window_score)[:4])
+        self.moneyMsg.setStyle("bold")
+        self.moneyMsg.setTextColor("dark green")
+        self.moneyMsg.setSize(15)
+        self.moneyMsg.draw(win)
 
         # === write trip score on the box ===
-        self.tripscoreMsg = Text(Point(41.5, 5), str(trip_score)[0:3])
-        # self.tripscoreMsg.setStyle("bold")
-        # self.tripscoreMsg.setTextColor("dark green")
-        # self.tripscoreMsg.setSize(15)
-        # self.tripscoreMsg.draw(win)
+        self.tripscoreMsg = Text(Point(41.5, 5), str(trip_score)[0:4])
+        self.tripscoreMsg.setStyle("bold")
+        self.tripscoreMsg.setTextColor("dark green")
+        self.tripscoreMsg.setSize(15)
+        self.tripscoreMsg.draw(win)
 
-        # if time_window_score < 40: self.sadSound()
-        # if time_window_score > 90: self.happySound()
+        if time_window_score < 40: self.sadSound()
+        if time_window_score > 90: self.happySound()
 
     def refresh(self):
-        tip = Text(Point(0,0),"")
+        tip = Text(Point(0, 0), "")
         tip.draw(self.win)
         tip.undraw()
 
-    def showEvent(self,start, end, event_type):
+    def showEvent(self, start, end, event_type):
         self.eventMsg.undraw()
-        self.eventMsg.setText(start+"--"+end+"["+self.transfer(event_type)+"]")
+        self.eventMsg.setText(start + "--" + end + "[" + self.transfer(event_type) + "]")
         self.eventMsg.draw(self.win)
 
         self.drawBar(event_type)
 
     #     eraseTimer = Timer(2,)
-    def transfer(self,Eventtype):
-        if Eventtype==0:
+    def transfer(self, Eventtype):
+        if Eventtype == 0:
             return "normal speedup"
-        if Eventtype==1:
+        if Eventtype == 1:
             return "normal brake"
-        if Eventtype==2:
+        if Eventtype == 2:
             return "normal turn"
-        if Eventtype==3:
+        if Eventtype == 3:
             return "normal swerve"
-        if Eventtype==4:
+        if Eventtype == 4:
             return "medium speedup"
-        if Eventtype==5:
+        if Eventtype == 5:
             return "medium brake"
-        if Eventtype==6:
+        if Eventtype == 6:
             return "medium turn"
-        if Eventtype==7:
+        if Eventtype == 7:
             return "medium swerve"
-        if Eventtype==8:
+        if Eventtype == 8:
             return "high speedup"
-        if Eventtype==9:
+        if Eventtype == 9:
             return "high brake"
-        if Eventtype==10:
+        if Eventtype == 10:
             return "high turn"
-        if Eventtype==11:
+        if Eventtype == 11:
             return "high swerve"
-
 
     def drawBar(self, Eventtype):
         a2 = 8
@@ -207,54 +192,62 @@ class Panel(object):
         d1 = d2 - 2
         d3 = d2 + 2
         y = 11
-        if Eventtype<4:
-            if Eventtype==0:
-                self.bBar = Polygon(Point(b1, y - 3), Point(b1, y - 1), Point(b2, y), Point(b3, y - 1), Point(b3, y - 3),Point(b2, y - 2))
+        if Eventtype < 4:
+            if Eventtype == 0:
+                self.bBar = Polygon(Point(b1, y - 3), Point(b1, y - 1), Point(b2, y), Point(b3, y - 1),
+                                    Point(b3, y - 3), Point(b2, y - 2))
                 self.bBar.setFill(color_rgb(39, 244, 106))
                 self.bBar.draw(self.win)
-            if Eventtype==1:
-                self.aBar = Polygon(Point(a1, y - 3), Point(a1, y - 1), Point(a2, y), Point(a3, y - 1), Point(a3, y - 3), Point(a2, y - 2))
+            if Eventtype == 1:
+                self.aBar = Polygon(Point(a1, y - 3), Point(a1, y - 1), Point(a2, y), Point(a3, y - 1),
+                                    Point(a3, y - 3), Point(a2, y - 2))
                 self.aBar.setFill(color_rgb(39, 244, 106))
                 self.aBar.draw(self.win)
-            if Eventtype==2:
-                self.cBar = Polygon(Point(c1, y - 3), Point(c1, y - 1), Point(c2, y), Point(c3, y - 1),Point(c3, y - 3), Point(c2, y - 2))
+            if Eventtype == 2:
+                self.cBar = Polygon(Point(c1, y - 3), Point(c1, y - 1), Point(c2, y), Point(c3, y - 1),
+                                    Point(c3, y - 3), Point(c2, y - 2))
                 self.cBar.setFill(color_rgb(39, 244, 106))
                 self.cBar.draw(self.win)
-            if Eventtype==3:
-                self.dBar = Polygon(Point(d1, y - 3), Point(d1, y - 1), Point(d2, y), Point(d3, y - 1),Point(d3, y - 3), Point(d2, y - 2))
+            if Eventtype == 3:
+                self.dBar = Polygon(Point(d1, y - 3), Point(d1, y - 1), Point(d2, y), Point(d3, y - 1),
+                                    Point(d3, y - 3), Point(d2, y - 2))
                 self.dBar.setFill(color_rgb(39, 244, 106))
                 self.dBar.draw(self.win)
-        elif 3<Eventtype<8:
+        elif 3 < Eventtype < 8:
             blocknum = 3
-            if Eventtype==4:
-                while blocknum>0:
-                    self.bBar = Polygon(Point(b1, y - 3), Point(b1, y - 1), Point(b2, y), Point(b3, y - 1),Point(b3, y - 3), Point(b2, y - 2))
+            if Eventtype == 4:
+                while blocknum > 0:
+                    self.bBar = Polygon(Point(b1, y - 3), Point(b1, y - 1), Point(b2, y), Point(b3, y - 1),
+                                        Point(b3, y - 3), Point(b2, y - 2))
                     self.bBar.setFill(color_rgb(208, 173, 44))
                     self.bBar.draw(self.win)
-                    blocknum = blocknum-1
-                    y=y+3
-            if Eventtype==5:
-                while blocknum>0:
-                    self.aBar = Polygon(Point(a1, y - 3), Point(a1, y - 1), Point(a2, y), Point(a3, y - 1), Point(a3, y - 3), Point(a2, y - 2))
+                    blocknum = blocknum - 1
+                    y = y + 3
+            if Eventtype == 5:
+                while blocknum > 0:
+                    self.aBar = Polygon(Point(a1, y - 3), Point(a1, y - 1), Point(a2, y), Point(a3, y - 1),
+                                        Point(a3, y - 3), Point(a2, y - 2))
                     self.aBar.setFill(color_rgb(208, 173, 44))
                     self.aBar.draw(self.win)
-                    blocknum = blocknum-1
-                    y=y+3
-            if Eventtype==6:
-                while blocknum>0:
-                    self.cBar = Polygon(Point(c1, y - 3), Point(c1, y - 1), Point(c2, y), Point(c3, y - 1),Point(c3, y - 3), Point(c2, y - 2))
+                    blocknum = blocknum - 1
+                    y = y + 3
+            if Eventtype == 6:
+                while blocknum > 0:
+                    self.cBar = Polygon(Point(c1, y - 3), Point(c1, y - 1), Point(c2, y), Point(c3, y - 1),
+                                        Point(c3, y - 3), Point(c2, y - 2))
                     self.cBar.setFill(color_rgb(208, 173, 44))
                     self.cBar.draw(self.win)
-                    blocknum = blocknum-1
-                    y=y+3
-            if Eventtype==7:
-                while blocknum>0:
-                    self.dBar = Polygon(Point(d1, y - 3), Point(d1, y - 1), Point(d2, y), Point(d3, y - 1),Point(d3, y - 3), Point(d2, y - 2))
+                    blocknum = blocknum - 1
+                    y = y + 3
+            if Eventtype == 7:
+                while blocknum > 0:
+                    self.dBar = Polygon(Point(d1, y - 3), Point(d1, y - 1), Point(d2, y), Point(d3, y - 1),
+                                        Point(d3, y - 3), Point(d2, y - 2))
                     self.dBar.setFill(color_rgb(208, 173, 44))
                     self.dBar.draw(self.win)
-                    blocknum = blocknum-1
-                    y=y+3
-        elif 7<Eventtype<12:
+                    blocknum = blocknum - 1
+                    y = y + 3
+        elif 7 < Eventtype < 12:
             blocknum = 6
             if Eventtype == 8:
                 while blocknum > 0:
@@ -289,7 +282,6 @@ class Panel(object):
                     blocknum = blocknum - 1
                     y = y + 3
 
-
     def happySound(self):
         file = 'sound/POP Brust 16 copy.mp3'
         pygame.mixer.init()
@@ -313,7 +305,3 @@ class Panel(object):
         pygame.mixer.music.play()
         time.sleep(0.1)
         pygame.mixer.music.stop()
-
-
-
-

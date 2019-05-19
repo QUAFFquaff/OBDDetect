@@ -19,12 +19,13 @@ matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 20  # time window for a word in LDA
+time_window = 5  # time window for a word in LDA
 svm_label_buffer = ""  # the word in a time window
 trip_svm_buffer = ""    # save the whole trip's SVm label
 LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
 time_window_score = 50
 trip_score = 50
+GUI_flag = False
 
 timestamp = []
 speed = []
@@ -308,6 +309,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         global trip_svm_buffer
         global time_window_score
         global trip_score
+        global GUI_flag
         ldaforevent = LDAForEvent
         ldaforevent.LDALoad(ldaforevent)
         start_time = time.time()
@@ -315,6 +317,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         time.sleep(time_window)
         while True:
             if time.time() - start_time > time_window and LDA_flag:
+                GUI_flag = True
                 start_time = time.time()
                 temp_word = svm_label_buffer
                 trip_svm_buffer += temp_word
@@ -334,6 +337,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                     self.score_queue.pop()
                     window_score = self.calc_window_socre()
                     time_window_score = window_score
+                # time.sleep(time_window)
 
     # change trip score
     def renew_trip_score(self,ldaforevent):
@@ -467,7 +471,7 @@ def detectEvent(data):
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 bevent.addValue(xarray[i])
             bflag = True
-            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
+            SVM_flag += 1  # set the flag to denote the event starts
             LDA_flag = False
             print("catch a break")
         elif accx < -0.05 and bthresholdnum > 0:
@@ -579,7 +583,7 @@ def detectYEvent(data):
                     print("dismiss the turn")
             elif tthresholdnum>0:
                 tthresholdnum = tthresholdnum + 1
-                tflag = True
+                tflag = True1
 
         if negative:
             if accy < -0.12 and stdY > 0.015 and tthresholdnum == 0:
@@ -688,6 +692,7 @@ def main():
     global tfault
     global std_window
     global SVMResultQueue
+    global GUI_flag
 
     try:
         # 获取一个游标
@@ -726,7 +731,9 @@ def main():
     Panel.drawPanel()
     while True:
         Panel.refresh()
-        Panel.change_score(time_window_score, trip_score)
+        if GUI_flag:
+            GUI_flag = False
+            Panel.change_score(time_window_score, trip_score)
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
             time_local = time.localtime(float(result.getStart() / 1000))
