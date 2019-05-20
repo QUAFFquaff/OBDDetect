@@ -431,7 +431,6 @@ def detectEvent(data):
         accx = data[3]
         timestamp = data[0]
 
-        print(accx)
 
         if accx > 0.1 and stdX > 0.01 and thresholdnum == 0:
             thresholdnum = thresholdnum + 1
