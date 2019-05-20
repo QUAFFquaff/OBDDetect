@@ -1,7 +1,10 @@
 import serial
 
-ser = serial.Serial('/dev/rfcomm0',57600)
-
-while True:
-    result = ser.read()
-    print (result)
+ser = serial.Serial(port='/dev/rfcomm0',baudrate=57600,timeout = 0.5)
+print(ser)
+data = ''
+data = data.encode('utf-8')
+n = ser.inWaiting()
+data = data+ser.readline()
+print('get data:',data)
+print(type(data))
