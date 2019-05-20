@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6f3943f5-1002-43e1-b3a9-180fe4d3da2c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetection.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/KMeansData.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/KMeansData.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/Kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/Kmeans.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/LowPass.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/LowPass.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,14 +13,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/Kmeans.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="67" column="70" lean-forward="true" selection-start-line="67" selection-start-column="70" selection-end-line="67" selection-end-column="70" />
+            <state relative-caret-position="428">
+              <caret line="565" column="28" selection-start-line="565" selection-start-column="28" selection-end-line="565" selection-end-column="28" />
               <folding>
-                <element signature="e#113#132#0" expanded="true" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -36,14 +43,16 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/OBD_project-master/OBD_GUI/Kmeans.py" />
+        <option value="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetection.py" />
+        <option value="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="135" />
-    <option name="y" value="90" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2202" />
+    <option name="y" value="173" />
     <option name="width" value="1440" />
-    <option name="height" value="785" />
+    <option name="height" value="774" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -131,19 +140,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1558309731408</updated>
-      <workItem from="1558309732614" duration="6537000" />
+      <workItem from="1558309732614" duration="8792000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6537000" />
+    <option name="totallyTimeSpent" value="8792000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="2139" y="561" width="1152" height="619" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18967828" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25868374" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -153,12 +162,12 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1713881" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24845996" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="SciView" visible="true" weight="0.2191689" />
+      <window_info anchor="right" id="SciView" weight="0.2191689" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -184,11 +193,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/Kmeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="67" column="70" lean-forward="true" selection-start-line="67" selection-start-column="70" selection-end-line="67" selection-end-column="70" />
+        <state relative-caret-position="234">
+          <caret line="69" lean-forward="true" selection-start-line="69" selection-end-line="69" />
           <folding>
             <element signature="e#113#132#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="565" column="28" selection-start-line="565" selection-start-column="28" selection-end-line="565" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
         </state>
       </provider>
     </entry>

@@ -432,7 +432,7 @@ def detectEvent(data):
         timestamp = data[0]
 
 
-        if accx > 0.1 and stdX > 0.01 and thresholdnum == 0:
+        if accx > 0.12 and stdX > 0.01 and thresholdnum == 0:
             thresholdnum = thresholdnum + 1
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -466,7 +466,7 @@ def detectEvent(data):
             sflag = True
 
 
-        if accx < -0.10 and stdX > 0.012 and bthresholdnum == 0:
+        if accx < -0.12 and stdX > 0.012 and bthresholdnum == 0:
             bthresholdnum = bthresholdnum + 1
             bevent = Event(xarray[startIndex][0], 1)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -551,7 +551,7 @@ def detectYEvent(data):
         timestamp = data[0]
 
         if positive:
-            if accy > 0.12 and stdY > 0.015 and tthresholdnum == 0:
+            if accy > 0.15 and stdY > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 2)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
@@ -587,7 +587,7 @@ def detectYEvent(data):
                 tflag = True
 
         if negative:
-            if accy < -0.12 and stdY > 0.015 and tthresholdnum == 0:
+            if accy < -0.15 and stdY > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 3)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
