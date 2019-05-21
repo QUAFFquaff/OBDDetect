@@ -1,18 +1,10 @@
+import serial
+import time
 import numpy as np
 import queue
-import pymysql
-import pymysql.cursors
-from xlrd import *
-from xlutils.copy import copy
-from sklearn.externals import joblib
-from scipy import signal
-import threading
-import time
-import sys
-sys.path.append('../dataHandler/')
-from LDAForEvent import *
-from change_numbers_to_alphabet import change_n_to_a
 import GUI
+import threading
+from scipy import signal
 
 matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
                    [-0.026682913, 0.63608, -0.770697297],
@@ -29,8 +21,8 @@ time_window_score = 50
 trip_score = 50
 GUI_flag = False
 
-timestamp = []
-speed = []
+timestamp = 0
+speed = 0
 gpsLa = None
 gpsLo = None
 
@@ -40,33 +32,14 @@ SVMResultQueue = queue.Queue()
 SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
 overlapNum = 0  # the number of overlapped events
 
+xstdQueue = queue.Queue(maxsize=19)
+ystdQueue = queue.Queue(maxsize=19)
 
-def connectDB():
-    connection = pymysql.connect(host='35.197.95.95',
-                                 user='root',
-                                 password='obd12345',
-                                 db='DRIVINGDB',
-                                 port=3306,
-                                 charset='utf8')
-    return connection
-
-
-# to get the result label from SVM
-class SVMResult(object):
-    def __init__(self, start, end, label):
-        self.start = start
-        self.end = end
-        self.label = label
-
-    def getStart(self):
-        return self.start
-
-    def getEnd(self):
-        return self.end
-
-    def getLabel(self):
-        return self.label
-
+def getSerial():
+    ser = serial.Serial(port='/dev/rfcomm0', baudrate=57600, timeout=0.5)
+    if not ser.is_open:
+        ser.open()
+    return  ser
 
 # record the events detected
 class Event(object):
@@ -93,7 +66,6 @@ class Event(object):
         temp = self.vect
         temp.append(data)
         self.vect = temp
-
         return self.vect
 
     def getValue(self):
@@ -104,6 +76,28 @@ class Event(object):
 
     def setType(self, type):
         self.type = type
+
+# to get the result label from SVM
+class SVMResult(object):
+    def __init__(self, start, end, label):
+        self.start = start
+        self.end = end
+        self.label = label
+
+    def getStart(self):
+        return self.start
+
+    def getEnd(self):
+        return self.end
+
+    def getLabel(self):
+        return self.label
+
+class SaveInDatabase(threading.Thread):
+    def __init__(self):
+        threading.Thred.__init__(self)
+        self.__running = threading.Event()
+        self.__running.set()
 
 
 class detectThread(threading.Thread):  # threading.Thread
@@ -118,71 +112,45 @@ class detectThread(threading.Thread):  # threading.Thread
 
         global timestamp
         global speed
-        global gpsLa
-        global gpsLo
+        # global gpsLa
+        # global gpsLo
         global samplingRate
         global eventQueue
         global overlapNum
         global SVM_flag
 
-        try:
-            # 获取一个游标
-            connection = connectDB()
-            connection.autocommit(True)
-            while (True):
-                isCatch = False
-                lowpass = []
-                timestamp = []
-                speed = []
-                accx = []
-                accy = []
-                accz = []
-                gyox = []
-                gyoy = []
-                gyoz = []
+        lowpass = queue.Queue()
+        obddata = ''
+        obddata = obddata.encode('utf-8')
 
-                with connection.cursor() as cursor:
-                    sql = 'select * from STATUS ORDER BY time DESC LIMIT 30'
-                    count = cursor.execute(sql)
+        lowpassCount = 0
 
-                    i = 0
-                    for row in cursor.fetchall():
-                        if i == 0:
-                            if row[2] != newrecord:  # detect if catch the same data
-                                isCatch = True
-                                newrecord = row[2]
-                        isCatch = True
-                        if isCatch:
-                            timestamp.append(row[2])
-                            speed.append(row[3])
-                            accy.append(row[4])
-                            accx.append(row[5])
-                            accz.append(row[6])
-                            gpsLa = row[7]
-                            gpsLo = row[8]
-                            gyox.append(row[9])
-                            gyoy.append(row[10])
-                            gyoz.append(row[11])
-                            acc = np.array([row[4], row[5], row[6]])
-                            acc = acc.astype(np.float64)
+        while True:
+            row = obddata + serial.readline()
+            if obddata != b'':
+                row = splitByte(row)
+                speed = row[3]
+                accy = row[4]
+                accx = row[5]
+                accz = row[6]
+                gyox = row[9]
+                gyoy = row[10]
+                gyoz = row[11]
+                acc = np.array([accy,accx,accz])
+                acc = acc.astype(np.float64)
 
-                            # calibration
-                            acc = np.dot(matrix, acc)
-                            accelerationx = acc[1]
-                            accelerationy = acc[0]
-                            accelerationz = acc[2]
-                            # put data into lowpass list which is used to filtered
-                            lowpass.append(acc)
-                        i = i + 1
+                #calibration
+                acc = np.dot(matrix, acc)
+                lowpass.put(acc)
+                if(lowpassCount>=29):
+                    timestamp = int(round(time.time()*1000))
 
-                if isCatch:
                     cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
                     # low pass filter
-                    lowpass = np.array(lowpass)
                     b, a = signal.butter(3, cutoff, 'low')
-                    accxsf = signal.filtfilt(b, a, lowpass[:, 1])
-                    accysf = signal.filtfilt(b, a, lowpass[:, 0])
-                    acczsf = signal.filtfilt(b, a, lowpass[:, 2])
+                    accxsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'x'))
+                    accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
+                    acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
 
                     # detect event
@@ -207,184 +175,31 @@ class detectThread(threading.Thread):  # threading.Thread
                             overlapNum = overlapNum + 1
                         eventQueue.put(yevent)
                         SVM_flag = SVM_flag - 1
-        finally:
-            connection.close()
+
+    def getLowPass(self,lowpass, opt):
+        acc = []
+        if opt == 'x':
+            for i in range(lowpass.qsize()):
+                temp = lowpass.get()
+                lowpass.put(temp)
+                acc.append(temp[1])
+        if opt == 'y':
+            for i in range(lowpass.qsize()):
+                temp = lowpass.get()
+                lowpass.put(temp)
+                acc.append(temp[0])
+        if opt == 'z':
+            for i in range(lowpass.qsize()):
+                temp = lowpass.get()
+                lowpass.put(temp)
+                acc.append(temp[2])
+
+        return acc
+
 
     def stop(self):
         self.__running.clear()
 
-
-# this thread for SVM classification
-class SVMthread(threading.Thread):
-    def __init__(self):
-        threading.Thread.__init__(self)
-        self.__running = threading.Event()
-        self.__running.set()
-        self.score_queue = []
-
-    def run(self):
-        resultMatrix = []
-        svm = joblib.load('svm.pkl')
-        global overlapNum
-        global eventQueue
-        global SVMResultQueue
-        global LDA_flag
-        global svm_label_buffer
-
-        while True:
-            #  define type and intensity
-            if (not eventQueue.empty()) and SVM_flag == 0:
-                eventNum = overlapNum
-                overlapNum = 0
-                eventList = []
-                for i in range(0, eventNum):
-                    eventList.append(eventQueue.get())
-                eventList = self.makeDecision(eventList)
-
-                for i in range(0, eventNum):
-                    if eventList[i] != None:
-                        vect = np.array(eventList[i].getValue())
-                        vect = vect.astype(np.float64)
-
-                        # calculate the 23 features
-                        vect = calcData(vect)
-                        # nomaliz the 23 features
-                        vect = nomalization(vect)
-
-                        # predict the result
-                        result = svm.predict([vect])  # result of SVM
-                        score = svm.decision_function([vect])  # score of SVM for each tyeps
-                        score = np.array(score[0])
-
-                        if eventList[i].getType() >= 2:
-                            index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
-                            if index == 0:
-                                result = [2]
-                            elif index == 1:
-                                result = [3]
-                            elif index == 2:
-                                result = [6]
-                            elif index == 3:
-                                result = [7]
-                            elif index == 4:
-                                result = [10]
-                            else:
-                                result = [11]
-                        SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
-
-                        saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
-                        svm_label_buffer = svm_label_buffer + change_n_to_a(result[0])
-                        LDA_flag = True
-
-    def makeDecision(self, eventList):
-        for i in range(0, len(eventList) - 2):
-            if eventList[i]:
-                factor1 = (eventList[i].getEnd() - eventList[i + 1].getStart()) / eventList[i].getDuration()
-                factor2 = (eventList[i + 1].getEnd() - eventList[i].getEnd()) / eventList[i + 1].getDuration()
-                if factor1 > 0.5 and factor2 < 0.5:
-                    if eventList[i].getType() >= 2 > eventList[i + 1].getType():
-                        eventList[i + 1] = None
-                    elif eventList[i].getType() < 2 <= eventList[i + 1].getType():
-                        eventList[i] = None
-        return eventList
-
-    def stop(self):
-        self.__running.clear()
-
-
-# this thread for time-window monitor and LDA detection
-class Thread_for_lda(threading.Thread):  # threading.Thread
-    def __init__(self):
-        threading.Thread.__init__(self)
-        self.__running = threading.Event()
-        self.__running.set()
-        self.score_queue = []
-        self.type = 0
-
-    # set driver type
-    def setType(self, type = 0):
-        self.type = type
-
-    # main function in the thread
-    def run(self):
-        global svm_label_buffer
-        global trip_svm_buffer
-        global time_window_score
-        global trip_score
-        global GUI_flag
-        ldaforevent = LDAForEvent
-        ldaforevent.LDALoad(ldaforevent)
-        start_time = time.time()
-        #  monitor time-window
-        time.sleep(time_window)
-        while True:
-            if time.time() - start_time > time_window and LDA_flag:
-                GUI_flag = True
-                start_time = time.time()
-                temp_word = svm_label_buffer
-                trip_svm_buffer += temp_word
-                svm_label_buffer = ""
-                if temp_word != "":
-                    result = ldaforevent.LDATest(ldaforevent, [temp_word])
-                    result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
-                    print(result_trip)
-                    trip_score = self.result_to_score(result_trip)
-                    # self.renew_trip_score(self,ldaforevent)
-                    self.score_queue.append(self.result_to_score( result))
-                elif temp_word == "":
-                    print("____________________________________________")
-                    self.score_queue.append(100)
-
-                if len(self.score_queue) > 6:
-                    self.score_queue.pop()
-                    window_score = self.calc_window_socre()
-                    time_window_score = window_score
-                # time.sleep(time_window)
-
-    # change trip score
-    def renew_trip_score(self,ldaforevent):
-        global trip_score
-        result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
-        trip_score = self.result_to_score(self,result_trip)
-
-    # calculate window score using LDA
-    def calc_window_socre(self):
-        weight = []
-        temp_sum = 0
-        if 0 == self.type:
-            return np.average(self.score_queue)
-        if 1 == self.type:
-            weight = [0.1568819267, 0.1608039749, 0.1647235717, 0.1686358209, 0.1725358535, 0.1764188523]
-        elif 2 == self.type:
-            weight = [0.1041067243, 0.1238870019, 0.147190147, 0.1745471447, 0.2065300858, 0.2437388963]
-        elif 3 == self.type:
-            weight = [0.06684435423, 0.09224520883, 0.1265973246, 0.1724409706, 0.2325203058, 0.309351836]
-        elif 4 == self.type:
-            weight = [0.02485508984, 0.04823130184, 0.09134744503, 0.1651632657, 0.2743477661, 0.3960551315]
-        for i in range(len(weight)):
-            temp_sum += weight[i] * self.score_queue[i]
-        return temp_sum
-
-    # get a score by LDA topics
-    def result_to_score(self, result):
-        score = 0
-        for node in result:
-            score += (node[0] + 1) * 25 * node[1]
-        return score
-
-    def stop(self):
-        self.__running.clear()
-
-
-def write_data(dataTemp, table, row):
-    # data = np.array(dataTemp)
-    l = len(dataTemp)  # l is the number of column
-    for j in range(l):
-        table.write(row, j, dataTemp[j])
-
-
-xstdQueue = queue.Queue(maxsize=19)
-ystdQueue = queue.Queue(maxsize=19)
 
 thresholdnum = 0
 bthresholdnum = 0
@@ -624,62 +439,10 @@ def detectYEvent(data):
         tevent.addValue(data)
 
 
-def calcData(data):
-    maxAX = max(data[:, 3])
-    maxAY = max(data[:, 2])
-    minAX = min(data[:, 3])
-    minAY = min(data[:, 2])
-    rangeAX = maxAX - minAX
-    rangeAY = maxAY - minAY
-    startAY = data[0, 3]
-    endAY = data[-1, 3]
-    varAX = np.std(data[:, 3])
-    varAY = np.std(data[:, 2])
-    varOX = np.std(data[:, 6])
-    varOY = np.std(data[:, 5])
-    meanAX = np.mean(data[:, 3])
-    meanAY = np.mean(data[:, 2])
-    meanOX = np.mean(data[:, 6])
-    meanOY = np.mean(data[:, 5])
-    maxOX = max(data[:, 6])
-    maxOY = max(data[:, 5])
-    t = (data[-1, 0] - data[0, 0]) / 1000
-    meanSP = np.mean(data[:, 1])
-    varSP = np.std(data[:, 1])
-    differenceSP = data[-1, 2] - data[0, 2]
-    maxSP = max(data[:, 2])
-    return [rangeAX, rangeAY, startAY, endAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOX,
-            maxOY, maxAX, maxAY, minAX, minAY, differenceSP, maxSP, meanSP, varSP, t]
-
-
-def nomalization(vect):
-    max = [0.619, 0.944, 0.546, 0.418, 0.208, 0.281, 6.075, 17.258, 0.286, 0.349, 3.901, 26.569, 22.12, 60.271, 0.594,
-           0.932, 0.097, 0.191, 90, 136,
-           122.637, 29.291, 24.982]
-    min = [0.034, 0.021, -0.302, -0.249, 0.009, 0.004, 0.325, 0.575, -0.312, -0.281, -3.816, -20.210, -0.061, -1.291,
-           -0.063, -0.067, -0.539, -0.818, -76, 5,
-           4.979, 0.408, 1.581]
-    for i in range(len(vect)):
-        vect[i] = (vect[i] - min[i]) / (max[i] - min[i])
-    return vect
-
-
-def transformTimestamp(timestamp):
-    timestamp = float(int(timestamp) / 1000)
-    time_local = time.localtime(timestamp)
-    dt = time.strftime(" %H:%M:%S", time_local)
-    return dt
-
-
-def saveResult(start, end, result):
-    oldwd = open_workbook('ForLDA.xls', formatting_info=True)
-    sheet = oldwd.sheet_by_index(0)
-    rowNum = sheet.nrows
-    newwb = copy(oldwd)
-    newWs = newwb.get_sheet(0)
-    write_data([start, end, result], newWs, rowNum)
-    newwb.save('ForLDA.xls')
-
+def splitByte(obdData):
+    row = obdData.split(" ")[0]
+    row = row.split(",")
+    return row
 
 def main():
     # initialize the sampling rate of the data reading
@@ -693,23 +456,25 @@ def main():
     global SVMResultQueue
     global GUI_flag
 
-    try:
-        # 获取一个游标
-        connection = connectDB()
-        connection.autocommit(True)
-        with connection.cursor() as cursor:
-            sql = 'select * from STATUS ORDER BY time DESC LIMIT 15'
-            count = cursor.execute(sql)
-            timestamp = []
-            for row in cursor.fetchall():
-                timestamp.append(row[2])
+
+
+    serial = getSerial()
+    countDown = 15
+    obddata = ''
+    obddata = obddata.encode('utf-8')
+    timestamp = []
+    while countDown > 0:
+        row = obddata + serial.readline()
+        if obddata != b'':
+            row = splitByte(row)
+            timestamp.append(row[2])
             # calculate the sampling rate of the car
             samplingRate = 14 / ((timestamp[0] - timestamp[-1]) / 1000)
             std_window = int(samplingRate + 0.5)
             xstdQueue = queue.Queue(maxsize=(2*std_window - 1))
             ystdQueue = queue.Queue(maxsize=(2*std_window - 1))
-    finally:
-        connection.close()
+            countDown = countDown - 1
+
     sfault = bfault = int(2 * int(samplingRate + 0.5) / 5)
     tfault = int(8 * int(samplingRate + 0.5) / 15)
     print('samplingrate--'+str(samplingRate))
