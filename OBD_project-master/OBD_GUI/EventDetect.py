@@ -145,7 +145,7 @@ class detectThread(threading.Thread):  # threading.Thread
 
         while True:
             row = obddata + serial.readline()
-            if obddata != b'':
+            if row != b'':
                 row = splitByte(row)
                 speed = row[1]
                 accy = row[2]
@@ -723,7 +723,7 @@ def main():
     timestamp = []
     while countDown > 0:
         row = obddata + serial.readline()
-        if obddata != b'':
+        if row != b'':
             row = splitByte(row)
             print(row)
             timestamp.append(row[2])
