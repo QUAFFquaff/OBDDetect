@@ -77,7 +77,7 @@ class LDAForEvent:
                 word_brffer = ''
             x+=1
 
-        print([list_values])
+        # print([list_values])
         # datamatrix = np.array(list_values)
         # print(datamatrix)
         return list_values
@@ -173,20 +173,27 @@ class LDAForEvent:
         p_stemmer = PorterStemmer()
 
         # loop through document list
+        temp_context = []
         for i in doc_set:
-            # clean and tokenize document string
-            raw = i.lower()
-            tokens = tokenizer.tokenize(raw)
-
-            # remove stop words from tokens
-            stopped_tokens = [i for i in tokens if not i in en_stop]
-
-            # stem tokens
-            stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
+            for j in i.split(" "):
+                if j != "":
+                    temp_context.append(j)
+            # # clean and tokenize document string
+            # raw = i.lower()
+            # tokens = tokenizer.tokenize(raw)
+            #
+            # # remove stop words from tokens
+            # stopped_tokens = [i for i in tokens if not i in en_stop]
+            # print(stopped_tokens)
+            #
+            # # stem tokens
+            # stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
+            # print(stemmed_tokens)
 
             # add tokens to list
-            texts.append(stemmed_tokens)
-
+            texts.append(temp_context)
+            temp_context = []
+        print(texts)
         # turn our tokenized documents into a id <-> term dictionary
         dictionary = corpora.Dictionary(texts)
 
@@ -229,16 +236,16 @@ class LDAForEvent:
         datamatrix3 = self.read_excel('ForLDA3alph.xls')
         datamatrix4 = self.read_excel('ForLDA4alph.xls')
         datamatrix5 = self.read_excel('ForLDA0415alph.xls')
-        print(datamatrix5[0:126])
+        # print(datamatrix5[0:126])
         # datamatrix = read_excel('ForLDA.xls')
         # print(datamatrix[0][102:180])
         # doc_set = [datamatrix[0], datamatrix[0][0:5] + datamatrix[0][8:17], datamatrix[0][18:31], datamatrix[0][85:105],
         #            datamatrix[0][127:150], "a8 8b1 ba1228b9"]
         doc_set = [
             datamatrix1,datamatrix2,datamatrix3,
-                   datamatrix4+datamatrix5]
+                   datamatrix4,datamatrix5]
 
-        # print(doc_set)
+        print(doc_set)
         # doc_set = [datamatrix[0]]
         ldamodel2, dictionary = self.LDAtraining(self,doc_set)
         # ldamodel = LdaModel.load(datapath('model'))
@@ -257,7 +264,7 @@ class LDAForEvent:
 
 def main():
     ldamodel = LDAForEvent
-    # ldamodel.LDAPreProcessing(ldamodel)
+    ldamodel.LDAPreProcessing(ldamodel)
     ldamodel.LDALoad(ldamodel)
     test = ['ah',"a","h"]
     result = ldamodel.LDATest(ldamodel,test)
