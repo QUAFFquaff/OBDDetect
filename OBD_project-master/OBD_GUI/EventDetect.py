@@ -524,7 +524,7 @@ def detectEvent(data):
             thresholdnum = thresholdnum + 1
             sflag = True
         elif (accx < 0.05 or stdX < 0.01) and thresholdnum > 0:
-            if thresholdnum > minLength:
+            if thresholdnum > 15:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
                 thresholdnum = 0
@@ -534,7 +534,7 @@ def detectEvent(data):
                 sfault = faultNum
                 SVM_flag = SVM_flag - 1
                 LDA_flag = True
-                print("dismis the event")
+                print("dismis the speedup")
         elif thresholdnum>0:
             thresholdnum = thresholdnum + 1
             sflag = True
@@ -558,7 +558,7 @@ def detectEvent(data):
             bthresholdnum = bthresholdnum + 1
             bflag = True
         elif (accx > -0.05 or stdX < 0.012) and bthresholdnum > 0:
-            if bthresholdnum > minLength:
+            if bthresholdnum > 15:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
                 bthresholdnum = 0
@@ -642,7 +642,7 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
             elif (accy < 0.05 or stdY < 0.015) and tthresholdnum > 0:
-                if minLength < tthresholdnum < maxLength:
+                if 15 < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
                     tthresholdnum = 0
@@ -678,7 +678,7 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
             elif (accy > -0.05 or stdY < 0.03) and tthresholdnum > 0:
-                if minLength < tthresholdnum < maxLength:
+                if 15 < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
                     tthresholdnum = 0
@@ -725,6 +725,7 @@ def main():
         row = obddata + serial.readline()
         if obddata != b'':
             row = splitByte(row)
+            print(row)
             timestamp.append(row[2])
             # calculate the sampling rate of the car
             samplingRate = 14 / ((timestamp[0] - timestamp[-1]) / 1000)
