@@ -700,8 +700,8 @@ def detectYEvent(data):
 
 
 def splitByte(obdData):
-    row = obdData.split(" ")[0]
-    row = row.split(",")
+    row = obdData.split(b" ")[0]
+    row = row.split(b",")
     return row
 
 def main():
