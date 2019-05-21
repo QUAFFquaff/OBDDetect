@@ -4,7 +4,17 @@ import numpy as np
 import queue
 import GUI
 import threading
+import _thread
 from scipy import signal
+import pymysql
+import pymysql.cursors
+from sklearn.externals import joblib
+import sys
+sys.path.append('../dataHandler/')
+from LDAForEvent import *
+from change_numbers_to_alphabet import change_n_to_a
+from xlrd import *
+from xlutils.copy import copy
 
 matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
                    [-0.026682913, 0.63608, -0.770697297],
@@ -29,6 +39,7 @@ gpsLo = None
 # lock = threading.Lock()
 eventQueue = queue.Queue()
 SVMResultQueue = queue.Queue()
+dataQueue = queue.Queue() # put data into dataQueue for databse
 SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
 overlapNum = 0  # the number of overlapped events
 
@@ -40,6 +51,15 @@ def getSerial():
     if not ser.is_open:
         ser.open()
     return  ser
+
+def connectDB():
+    connection = pymysql.connect(host='35.197.95.95',
+                                 user='root',
+                                 password='obd12345',
+                                 db='DRIVINGDB',
+                                 port=3306,
+                                 charset='utf8')
+    return connection
 
 # record the events detected
 class Event(object):
@@ -93,11 +113,8 @@ class SVMResult(object):
     def getLabel(self):
         return self.label
 
-class SaveInDatabase(threading.Thread):
-    def __init__(self):
-        threading.Thred.__init__(self)
-        self.__running = threading.Event()
-        self.__running.set()
+
+
 
 
 class detectThread(threading.Thread):  # threading.Thread
@@ -118,6 +135,7 @@ class detectThread(threading.Thread):  # threading.Thread
         global eventQueue
         global overlapNum
         global SVM_flag
+        global dataQueue
 
         lowpass = queue.Queue()
         obddata = ''
@@ -129,13 +147,13 @@ class detectThread(threading.Thread):  # threading.Thread
             row = obddata + serial.readline()
             if obddata != b'':
                 row = splitByte(row)
-                speed = row[3]
-                accy = row[4]
-                accx = row[5]
-                accz = row[6]
-                gyox = row[9]
-                gyoy = row[10]
-                gyoz = row[11]
+                speed = row[1]
+                accy = row[2]
+                accx = row[3]
+                accz = row[4]
+                gyox = row[5]
+                gyoy = row[6]
+                gyoz = row[7]
                 acc = np.array([accy,accx,accz])
                 acc = acc.astype(np.float64)
 
@@ -155,9 +173,16 @@ class detectThread(threading.Thread):  # threading.Thread
 
                     # detect event
                     event = detectEvent(
-                        [timestamp[1], speed[1], accysf[1], accxsf[1], acczsf[1], gyox[1], gyoy[1], gyoz[1]])
+                        [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
                     yevent = detectYEvent(
-                        [timestamp[1], speed[1], accysf[1], accxsf[1], acczsf[1], gyox[1], gyoy[1], gyoz[1]])
+                        [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
+
+                    #start a thread to store data into databse
+                    dataQueue.put([row,timestamp])
+                    try:
+                        _thread.start_new_thread(SaveInDatabase)
+                    except:
+                        print("Error: unable to start thread")
 
                     # put the event into Queue
                     if not event is None:
@@ -199,6 +224,241 @@ class detectThread(threading.Thread):  # threading.Thread
 
     def stop(self):
         self.__running.clear()
+
+
+def SaveInDatabase():
+    global dataQueue
+    temp = dataQueue.get()
+    row = temp[0]
+    timestamp = temp[1]
+    try:
+        # 获取一个游标
+        connection = connectDB()
+        connection.autocommit(True)
+        mycursor = connection.cursor()
+        sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        val = (row[0],"deviceid",timestamp,row[1],row[2],row[3],row[4],"","",row[5],row[6],row[7])
+        mycursor.execute(sql,val)
+    finally:
+        connection.close()
+
+
+# this thread for SVM classification
+class SVMthread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.__running = threading.Event()
+        self.__running.set()
+        self.score_queue = []
+
+    def run(self):
+        resultMatrix = []
+        svm = joblib.load('svm.pkl')
+        global overlapNum
+        global eventQueue
+        global SVMResultQueue
+        global LDA_flag
+        global svm_label_buffer
+
+        while True:
+            #  define type and intensity
+            if (not eventQueue.empty()) and SVM_flag == 0:
+                eventNum = overlapNum
+                overlapNum = 0
+                eventList = []
+                for i in range(0, eventNum):
+                    eventList.append(eventQueue.get())
+                eventList = self.makeDecision(eventList)
+
+                for i in range(0, eventNum):
+                    if eventList[i] != None:
+                        vect = np.array(eventList[i].getValue())
+                        vect = vect.astype(np.float64)
+
+                        # calculate the 23 features
+                        vect = self.calcData(vect)
+                        # nomaliz the 23 features
+                        vect = self.nomalization(vect)
+
+                        # predict the result
+                        result = svm.predict([vect])  # result of SVM
+                        score = svm.decision_function([vect])  # score of SVM for each tyeps
+                        score = np.array(score[0])
+
+                        if eventList[i].getType() >= 2:
+                            index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
+                            if index == 0:
+                                result = [2]
+                            elif index == 1:
+                                result = [3]
+                            elif index == 2:
+                                result = [6]
+                            elif index == 3:
+                                result = [7]
+                            elif index == 4:
+                                result = [10]
+                            else:
+                                result = [11]
+                        SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
+
+                        self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
+                        svm_label_buffer = svm_label_buffer + change_n_to_a(result[0])
+                        LDA_flag = True
+
+    def makeDecision(self, eventList):
+        for i in range(0, len(eventList) - 2):
+            if eventList[i]:
+                factor1 = (eventList[i].getEnd() - eventList[i + 1].getStart()) / eventList[i].getDuration()
+                factor2 = (eventList[i + 1].getEnd() - eventList[i].getEnd()) / eventList[i + 1].getDuration()
+                if factor1 > 0.5 and factor2 < 0.5:
+                    if eventList[i].getType() >= 2 > eventList[i + 1].getType():
+                        eventList[i + 1] = None
+                    elif eventList[i].getType() < 2 <= eventList[i + 1].getType():
+                        eventList[i] = None
+        return eventList
+
+    def nomalization(self,vect):
+        max = [0.619, 0.944, 0.546, 0.418, 0.208, 0.281, 6.075, 17.258, 0.286, 0.349, 3.901, 26.569, 22.12, 60.271,
+               0.594,
+               0.932, 0.097, 0.191, 90, 136,
+               122.637, 29.291, 24.982]
+        min = [0.034, 0.021, -0.302, -0.249, 0.009, 0.004, 0.325, 0.575, -0.312, -0.281, -3.816, -20.210, -0.061,
+               -1.291,
+               -0.063, -0.067, -0.539, -0.818, -76, 5,
+               4.979, 0.408, 1.581]
+        for i in range(len(vect)):
+            vect[i] = (vect[i] - min[i]) / (max[i] - min[i])
+        return vect
+
+    def calcData(self,data):
+        maxAX = max(data[:, 3])
+        maxAY = max(data[:, 2])
+        minAX = min(data[:, 3])
+        minAY = min(data[:, 2])
+        rangeAX = maxAX - minAX
+        rangeAY = maxAY - minAY
+        startAY = data[0, 3]
+        endAY = data[-1, 3]
+        varAX = np.std(data[:, 3])
+        varAY = np.std(data[:, 2])
+        varOX = np.std(data[:, 6])
+        varOY = np.std(data[:, 5])
+        meanAX = np.mean(data[:, 3])
+        meanAY = np.mean(data[:, 2])
+        meanOX = np.mean(data[:, 6])
+        meanOY = np.mean(data[:, 5])
+        maxOX = max(data[:, 6])
+        maxOY = max(data[:, 5])
+        t = (data[-1, 0] - data[0, 0]) / 1000
+        meanSP = np.mean(data[:, 1])
+        varSP = np.std(data[:, 1])
+        differenceSP = data[-1, 2] - data[0, 2]
+        maxSP = max(data[:, 2])
+        return [rangeAX, rangeAY, startAY, endAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOX,
+                maxOY, maxAX, maxAY, minAX, minAY, differenceSP, maxSP, meanSP, varSP, t]
+
+    def saveResult(self,start, end, result):
+        oldwd = open_workbook('ForLDA.xls', formatting_info=True)
+        sheet = oldwd.sheet_by_index(0)
+        rowNum = sheet.nrows
+        newwb = copy(oldwd)
+        newWs = newwb.get_sheet(0)
+        self.write_data([start, end, result], newWs, rowNum)
+        newwb.save('ForLDA.xls')
+
+    def write_data(dataTemp, table, row):
+        # data = np.array(dataTemp)
+        l = len(dataTemp)  # l is the number of column
+        for j in range(l):
+            table.write(row, j, dataTemp[j])
+
+    def stop(self):
+        self.__running.clear()
+
+
+# this thread for time-window monitor and LDA detection
+class Thread_for_lda(threading.Thread):  # threading.Thread
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.__running = threading.Event()
+        self.__running.set()
+        self.score_queue = []
+        self.type = 0
+
+    # set driver type
+    def setType(self, type = 0):
+        self.type = type
+
+    # main function in the thread
+    def run(self):
+        global svm_label_buffer
+        global trip_svm_buffer
+        global time_window_score
+        global trip_score
+        global GUI_flag
+        ldaforevent = LDAForEvent
+        ldaforevent.LDALoad(ldaforevent)
+        start_time = time.time()
+        #  monitor time-window
+        time.sleep(time_window)
+        while True:
+            if time.time() - start_time > time_window and LDA_flag:
+                GUI_flag = True
+                start_time = time.time()
+                temp_word = svm_label_buffer
+                trip_svm_buffer += temp_word
+                svm_label_buffer = ""
+                if temp_word != "":
+                    result = ldaforevent.LDATest(ldaforevent, [temp_word])
+                    result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
+                    print(result_trip)
+                    trip_score = self.result_to_score(result_trip)
+                    # self.renew_trip_score(self,ldaforevent)
+                    self.score_queue.append(self.result_to_score( result))
+                elif temp_word == "":
+                    print("____________________________________________")
+                    self.score_queue.append(100)
+
+                if len(self.score_queue) > 6:
+                    self.score_queue.pop()
+                    window_score = self.calc_window_socre()
+                    time_window_score = window_score
+                # time.sleep(time_window)
+
+    # change trip score
+    def renew_trip_score(self,ldaforevent):
+        global trip_score
+        result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
+        trip_score = self.result_to_score(self,result_trip)
+
+    # calculate window score using LDA
+    def calc_window_socre(self):
+        weight = []
+        temp_sum = 0
+        if 0 == self.type:
+            return np.average(self.score_queue)
+        if 1 == self.type:
+            weight = [0.1568819267, 0.1608039749, 0.1647235717, 0.1686358209, 0.1725358535, 0.1764188523]
+        elif 2 == self.type:
+            weight = [0.1041067243, 0.1238870019, 0.147190147, 0.1745471447, 0.2065300858, 0.2437388963]
+        elif 3 == self.type:
+            weight = [0.06684435423, 0.09224520883, 0.1265973246, 0.1724409706, 0.2325203058, 0.309351836]
+        elif 4 == self.type:
+            weight = [0.02485508984, 0.04823130184, 0.09134744503, 0.1651632657, 0.2743477661, 0.3960551315]
+        for i in range(len(weight)):
+            temp_sum += weight[i] * self.score_queue[i]
+        return temp_sum
+
+    # get a score by LDA topics
+    def result_to_score(self, result):
+        score = 0
+        for node in result:
+            score += (node[0] + 1) * 25 * node[1]
+        return score
+
+    def stop(self):
+        self.__running.clear()
+
 
 
 thresholdnum = 0
@@ -455,8 +715,6 @@ def main():
     global std_window
     global SVMResultQueue
     global GUI_flag
-
-
 
     serial = getSerial()
     countDown = 15
