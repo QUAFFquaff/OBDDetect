@@ -838,10 +838,5 @@ def main():
             # file_w.save('ForLDA.xls')
 
 
-def LDATest():
-    ldaforevent = LDAForEvent
-    ldaforevent.LDATest(ldaforevent, [""])
-
-
 if __name__ == "__main__":
     main()
