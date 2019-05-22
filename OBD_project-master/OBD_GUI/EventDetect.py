@@ -139,6 +139,7 @@ class detectThread(threading.Thread):  # threading.Thread
         global eventQueue
         global overlapNum
         global SVM_flag
+        global LDA_flag
         global dataQueue
 
         lowpass = queue.Queue()
@@ -196,6 +197,7 @@ class detectThread(threading.Thread):  # threading.Thread
                             overlapNum = overlapNum + 1
                         eventQueue.put(event)
                         SVM_flag = SVM_flag - 1
+                        LDA_flag = False
                     if not yevent is None:
                         data = yevent.getValue()
                         # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
@@ -205,6 +207,7 @@ class detectThread(threading.Thread):  # threading.Thread
                             overlapNum = overlapNum + 1
                         eventQueue.put(yevent)
                         SVM_flag = SVM_flag - 1
+                        LDA_flag = False
 
     def getLowPass(self,lowpass, opt):
         acc = []
@@ -724,9 +727,6 @@ def main():
     global samplingRate
     global xstdQueue
     global ystdQueue
-    global sfault
-    global bfault
-    global tfault
     global std_window
     global SVMResultQueue
     global GUI_flag
@@ -750,9 +750,8 @@ def main():
     xstdQueue = queue.Queue(maxsize=(2 * std_window - 1))
     ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
 
-    sfault = bfault = int(2 * int(samplingRate + 0.5) / 5)
-    tfault = int(8 * int(samplingRate + 0.5) / 15)
     print('samplingrate--'+str(samplingRate))
+    print('std_window:',str(std_window))
 
     # start the data collection and event detection thread
     thread1 = detectThread()
