@@ -176,7 +176,7 @@ class detectThread(threading.Thread):  # threading.Thread
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
-
+                    print([accysf[-2], accxsf[-2], acczsf[-2]])
                     # detect event
                     event = detectEvent(
                         [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
@@ -740,7 +740,6 @@ def main():
         row = obddata + BTserial.readline()
         if row != b'':
             row = splitByte(row)
-            print(row)
             timestamp.append(int(round(time.time()*1000)))
 
             countDown = countDown - 1
