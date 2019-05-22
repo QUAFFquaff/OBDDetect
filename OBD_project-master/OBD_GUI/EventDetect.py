@@ -151,6 +151,7 @@ class detectThread(threading.Thread):  # threading.Thread
 
         while True:
             row = obddata + BTserial.readline()
+            print(row)
             if row != b'':
                 row = splitByte(row)
                 speed = row[1]
