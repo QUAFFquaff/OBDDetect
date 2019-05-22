@@ -150,8 +150,8 @@ class detectThread(threading.Thread):  # threading.Thread
 
         while True:
             row = obddata + BTserial.readline()
-            if row != b'':
-                row = splitByte(row)
+            row = splitByte(row)
+            if row != "":
                 speed = row[1]
                 accy = row[2]
                 accx = row[3]
@@ -197,6 +197,7 @@ class detectThread(threading.Thread):  # threading.Thread
                             overlapNum = overlapNum + 1
                         eventQueue.put(event)
                         SVM_flag = SVM_flag - 1
+                        print("put acceleration or brake into svm")
                         LDA_flag = False
                     if not yevent is None:
                         data = yevent.getValue()
@@ -207,10 +208,13 @@ class detectThread(threading.Thread):  # threading.Thread
                             overlapNum = overlapNum + 1
                         eventQueue.put(yevent)
                         SVM_flag = SVM_flag - 1
+                        print("put turn into svm")
                         LDA_flag = False
 
                     lowpass.get()
                     lowpassCount = lowpassCount - 1
+            else:
+                print("something wrong with bluetooth")
 
     def getLowPass(self,lowpass, opt):
         acc = []
@@ -310,6 +314,14 @@ class SVMthread(threading.Thread):
                                 result = [10]
                             else:
                                 result = [11]
+                        elif eventList[i].getType() == 0:
+                            index = np.argmax([score[0], score[4], score[8]])
+                            if index == 0:
+                                result = [0]
+                            elif index == 1:
+                                result = [4]
+                            elif index == 2:
+                                result = [8]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
@@ -511,7 +523,7 @@ def detectEvent(data):
         xstdQueue.get()
 
         stdX = stdXArray[-1]
-        startIndex = stdXArray.index(min(stdXArray))
+        startIndex = stdXArray.index(max(stdXArray))
 
         accx = data[3]
         timestamp = data[0]
@@ -627,7 +639,7 @@ def detectYEvent(data):
         ystdQueue.get()
         stdY = stdYArray[-1]
 
-        startIndex = stdYArray.index(min(stdYArray))
+        startIndex = stdYArray.index(max(stdYArray))
 
         accy = data[2]
         timestamp = data[0]
@@ -714,17 +726,20 @@ def splitByte(obdData):
     row = obdData.split(b"\r")[0]
     row = row.split(b",")
     newrow = []
-    if str(row[1]==b"0"):
-        newrow.append(str(row[0], encoding="utf-8"))
-        newrow.append(int(str(row[1], encoding="utf-8")))
-        newrow.append(float(str(row[2], encoding="utf-8")))
-        newrow.append(float(str(row[3], encoding="utf-8")))
-        newrow.append(float(str(row[4], encoding="utf-8")))
-        newrow.append(float(str(row[5], encoding="utf-8")))
-        newrow.append(float(str(row[6], encoding="utf-8")))
-        newrow.append(float(str(row[7], encoding="utf-8")))
+    if row!=b"":
+        if len(row)>7:
+            newrow.append(str(row[0], encoding="utf-8"))
+            newrow.append(int(str(row[1], encoding="utf-8")))
+            newrow.append(float(str(row[2], encoding="utf-8")))
+            newrow.append(float(str(row[3], encoding="utf-8")))
+            newrow.append(float(str(row[4], encoding="utf-8")))
+            newrow.append(float(str(row[5], encoding="utf-8")))
+            newrow.append(float(str(row[6], encoding="utf-8")))
+            newrow.append(float(str(row[7], encoding="utf-8")))
+        else:
+            newrow = ""
     else:
-        newrow.append(0)
+        newrow = ""
 
     return newrow
 
@@ -744,8 +759,8 @@ def main():
     timestamp = []
     while countDown > 0:
         row = obddata + BTserial.readline()
-        if row != b'':
-            row = splitByte(row)
+        row = splitByte(row)
+        if row != "":
             timestamp.append(int(round(time.time()*1000)))
 
             countDown = countDown - 1
