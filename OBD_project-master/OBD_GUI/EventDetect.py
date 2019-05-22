@@ -745,7 +745,7 @@ def main():
 
             countDown = countDown - 1
     # calculate the sampling rate of the car
-    samplingRate = 14 / ((timestamp[0] - timestamp[-1]) / 1000)
+    samplingRate = 14 / ((timestamp[-1] - timestamp[0]) / 1000)
     std_window = int(samplingRate + 0.5)
     xstdQueue = queue.Queue(maxsize=(2 * std_window - 1))
     ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
