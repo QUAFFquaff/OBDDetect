@@ -142,6 +142,7 @@ class detectThread(threading.Thread):  # threading.Thread
         global dataQueue
 
         lowpass = queue.Queue()
+        serial = getSerial()
         obddata = ''
         obddata = obddata.encode('utf-8')
 
