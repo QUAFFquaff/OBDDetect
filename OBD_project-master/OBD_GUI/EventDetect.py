@@ -16,9 +16,13 @@ from change_numbers_to_alphabet import change_n_to_a
 from xlrd import *
 from xlutils.copy import copy
 
-matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
-                   [-0.026682913, 0.63608, -0.770697297],
-                   [0.021995888, 0.77162, 0.635319376]])
+# matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
+#                    [-0.026682913, 0.63608, -0.770697297],
+#                    [0.021995888, 0.77162, 0.635319376]])
+
+matrix = np.array([[0.989992983, 0.00E+00, -0.141116597],
+                   [-0.140675553,0.079, -0.9869],
+                   [0.0111482, 0.99687, 0.07821]])
 
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
@@ -505,7 +509,7 @@ def detectEvent(data):
         accx = data[3]
         timestamp = data[0]
 
-        if accx > 0.12 and stdX > 0.01 and thresholdnum == 0:
+        if accx > 0.1 and max(stdXArray) > 0.02 and thresholdnum == 0:
             thresholdnum = thresholdnum + 1
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -539,7 +543,7 @@ def detectEvent(data):
             sflag = True
 
 
-        if accx < -0.12 and stdX > 0.012 and bthresholdnum == 0:
+        if accx < -0.12 and max(stdXArray) > 0.02 and bthresholdnum == 0:
             bthresholdnum = bthresholdnum + 1
             bevent = Event(xarray[startIndex][0], 1)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -556,7 +560,7 @@ def detectEvent(data):
             bfault = bfault - 1
             bthresholdnum = bthresholdnum + 1
             bflag = True
-        elif (accx > -0.05 or stdX < 0.012) and bthresholdnum > 0:
+        elif (accx > -0.05 or stdX < 0.01) and bthresholdnum > 0:
             if bthresholdnum > 15:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
@@ -623,7 +627,7 @@ def detectYEvent(data):
         timestamp = data[0]
 
         if positive:
-            if accy > 0.15 and stdY > 0.015 and tthresholdnum == 0:
+            if accy > 0.12 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 2)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
@@ -659,7 +663,7 @@ def detectYEvent(data):
                 tflag = True
 
         if negative:
-            if accy < -0.15 and stdY > 0.015 and tthresholdnum == 0:
+            if accy < -0.12 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 3)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
