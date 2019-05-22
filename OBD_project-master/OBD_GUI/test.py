@@ -16,6 +16,11 @@
 #         millis = int(round(time.time()*1000))
 #         print(millis)
 
-a1 = [1,2,3,4]
-time = 3
-print([a1,time])
+obdData = b"sds,0,3.4\r\n"
+row = obdData.split(b"\r")[0]
+row = row.split(b",")
+newrow = []
+newrow.append(str(row[0],encoding="utf-8"))
+newrow.append(int(str(row[1],encoding="utf-8")))
+newrow.append(float(str(row[2],encoding="utf-8")))
+print(newrow)

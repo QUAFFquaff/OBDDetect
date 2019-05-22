@@ -416,7 +416,6 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                     # self.renew_trip_score(self,ldaforevent)
                     self.score_queue.append(self.result_to_score( result))
                 elif temp_word == "":
-                    print("____________________________________________")
                     self.score_queue.append(100)
 
                 if len(self.score_queue) > 6:
@@ -601,7 +600,7 @@ def detectYEvent(data):
     stdYArray = []  # use to get the smallest std, which will be the beginning of an event
     tflag = False
     minLength = int(samplingRate * 1.2)
-    maxLength = int(samplingRate * 9.6)
+    maxLength = int(samplingRate * 14)
     faultNum = int(8 * samplingRate / 15)
     ystdQueue.put(data)
 
@@ -700,9 +699,19 @@ def detectYEvent(data):
 
 
 def splitByte(obdData):
-    row = obdData.split(b" ")[0]
+    row = obdData.split(b"\r")[0]
     row = row.split(b",")
-    return row
+    newrow = []
+    newrow.append(str(row[0], encoding="utf-8"))
+    newrow.append(int(str(row[1], encoding="utf-8")))
+    newrow.append(float(str(row[2], encoding="utf-8")))
+    newrow.append(float(str(row[3], encoding="utf-8")))
+    newrow.append(float(str(row[4], encoding="utf-8")))
+    newrow.append(float(str(row[5], encoding="utf-8")))
+    newrow.append(float(str(row[6], encoding="utf-8")))
+    newrow.append(float(str(row[7], encoding="utf-8")))
+
+    return newrow
 
 def main():
     # initialize the sampling rate of the data reading
@@ -764,9 +773,6 @@ def main():
             time_local = time.localtime(float(result.getEnd() / 1000))
             end = time.strftime("%H:%M:%S", time_local)
             Panel.showEvent(start, end, result.getLabel())
-
-
-
 
 
 
