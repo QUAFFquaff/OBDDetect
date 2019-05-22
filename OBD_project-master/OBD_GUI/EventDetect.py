@@ -136,7 +136,6 @@ class detectThread(threading.Thread):  # threading.Thread
         global speed
         # global gpsLa
         # global gpsLo
-        global samplingRate
         global eventQueue
         global overlapNum
         global SVM_flag
@@ -149,6 +148,9 @@ class detectThread(threading.Thread):  # threading.Thread
         obddata = obddata.encode('utf-8')
 
         lowpassCount = 0
+        cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
+        # low pass filter
+        b, a = signal.butter(3, cutoff, 'low')
 
         while True:
             row = obddata + BTserial.readline()
@@ -175,21 +177,16 @@ class detectThread(threading.Thread):  # threading.Thread
                 if (lowpassCount > 29):
                     timestamp = int(round(time.time() * 1000))
 
-                    cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
-                    # low pass filter
-                    b, a = signal.butter(3, cutoff, 'low')
-                    # accxsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'x'))
-                    # accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
-                    # acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
-                    accxsf = 0.004
-                    accysf = 0.005
-                    acczsf = 1.03
+
+                    accxsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'x'))
+                    accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
+                    acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
                     # detect event
                     event = detectEvent(
-                        [timestamp, speed, accysf, accxsf, acczsf, gyox, gyoy, gyoz])
+                        [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
                     yevent = detectYEvent(
-                        [timestamp, speed, accysf, accxsf, acczsf, gyox, gyoy, gyoz])
+                        [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
                     # dataQueue.put([row, timestamp])
@@ -535,7 +532,6 @@ def detectEvent(data):
     bflag = False
     xarray = []
     stdXArray = []  # use to get the smallest std, which will be the beginning of an event
-    minLength = int(samplingRate * 1.2)  # the minimum length that the event should be
     faultNum = int(2 * samplingRate / 5)
 
     xstdQueue.put(data)
@@ -814,8 +810,8 @@ def main():
     thread1.start()
 
     # start the thread for SVM
-    thread2 = SVMthread()
-    thread2.start()
+    # thread2 = SVMthread()
+    # thread2.start()
 
     # start lda thread
     lda_thread = Thread_for_lda()
