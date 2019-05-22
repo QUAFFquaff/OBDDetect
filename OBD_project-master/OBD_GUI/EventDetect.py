@@ -175,9 +175,6 @@ class detectThread(threading.Thread):  # threading.Thread
                 lowpass.put(acc)
                 lowpassCount = lowpassCount + 1
                 if (lowpassCount > 29):
-                    timestamp = int(round(time.time() * 1000))
-
-
                     accxsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'x'))
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
