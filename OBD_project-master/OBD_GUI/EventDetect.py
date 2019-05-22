@@ -185,7 +185,8 @@ class detectThread(threading.Thread):  # threading.Thread
                     #start a thread to store data into databse
                     dataQueue.put([row,timestamp])
                     try:
-                        threading.Thread(target=SaveInDatabase)
+                        save = threading.Thread(target=SaveInDatabase,arg=(0,))
+                        save.start()
                     except:
                         print("Error: unable to start thread")
 
@@ -236,7 +237,7 @@ class detectThread(threading.Thread):  # threading.Thread
         self.__running.clear()
 
 
-def SaveInDatabase():
+def SaveInDatabase(nothing):
     global dataQueue
     temp = dataQueue.get()
     row = temp[0]
@@ -376,7 +377,7 @@ class SVMthread(threading.Thread):
         self.write_data([start, end, result], newWs, rowNum)
         newwb.save('ForLDA.xls')
 
-    def write_data(dataTemp, table, row):
+    def write_data(self,dataTemp, table, row):
         # data = np.array(dataTemp)
         l = len(dataTemp)  # l is the number of column
         for j in range(l):
