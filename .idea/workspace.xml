@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f3943f5-1002-43e1-b3a9-180fe4d3da2c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="713" column="17" selection-start-line="713" selection-start-column="17" selection-end-line="713" selection-end-column="17" />
+            <state relative-caret-position="8911">
+              <caret line="737" column="36" lean-forward="true" selection-start-line="737" selection-start-column="36" selection-end-line="737" selection-end-column="36" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#1258#1934#0" />
@@ -30,11 +29,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="22" selection-start-line="22" selection-end-line="24" selection-end-column="50" />
+            <state relative-caret-position="323">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -61,8 +63,8 @@
       <list>
         <option value="$PROJECT_DIR$/OBD_project-master/OBD_GUI/Kmeans.py" />
         <option value="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetection.py" />
-        <option value="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" />
         <option value="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py" />
+        <option value="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" />
       </list>
     </option>
   </component>
@@ -175,12 +177,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1558309731408</updated>
-      <workItem from="1558309732614" duration="31119000" />
+      <workItem from="1558309732614" duration="31325000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31119000" />
+    <option name="totallyTimeSpent" value="31325000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -314,17 +316,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="22" selection-start-line="22" selection-end-line="24" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="713" column="17" selection-start-line="713" selection-start-column="17" selection-end-line="713" selection-end-column="17" />
+        <state relative-caret-position="8911">
+          <caret line="737" column="36" lean-forward="true" selection-start-line="737" selection-start-column="36" selection-end-line="737" selection-end-column="36" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <element signature="e#1258#1934#0" />
@@ -332,6 +327,16 @@
             <element signature="e#6375#6933#0" />
             <element signature="e#7073#10255#0" />
             <element signature="e#12743#15830#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
