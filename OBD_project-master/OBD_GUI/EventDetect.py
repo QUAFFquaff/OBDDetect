@@ -9,6 +9,7 @@ import pymysql
 import pymysql.cursors
 from sklearn.externals import joblib
 import sys
+
 sys.path.append('../dataHandler/')
 from LDAForEvent import *
 from change_numbers_to_alphabet import change_n_to_a
@@ -26,9 +27,9 @@ matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 30  # time window for a word in LDA
+time_window = 20  # time window for a word in LDA
 svm_label_buffer = ""  # the word in a time window
-trip_svm_buffer = ""    # save the whole trip's SVm label
+trip_svm_buffer = ""  # save the whole trip's SVm label
 LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
 time_window_score = 50
 trip_score = 50
@@ -42,18 +43,20 @@ gpsLo = None
 # lock = threading.Lock()
 eventQueue = queue.Queue()
 SVMResultQueue = queue.Queue()
-dataQueue = queue.Queue() # put data into dataQueue for databse
+dataQueue = queue.Queue()  # put data into dataQueue for databse
 SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
 overlapNum = 0  # the number of overlapped events
 
 xstdQueue = queue.Queue(maxsize=19)
 ystdQueue = queue.Queue(maxsize=19)
 
+
 def getSerial():
     ser = serial.Serial(port='/dev/rfcomm0', baudrate=57600, timeout=0.5)
     if not ser.is_open:
         ser.open()
-    return  ser
+    return ser
+
 
 def connectDB():
     connection = pymysql.connect(host='35.197.95.95',
@@ -63,6 +66,7 @@ def connectDB():
                                  port=3306,
                                  charset='utf8')
     return connection
+
 
 # record the events detected
 class Event(object):
@@ -100,6 +104,7 @@ class Event(object):
     def setType(self, type):
         self.type = type
 
+
 # to get the result label from SVM
 class SVMResult(object):
     def __init__(self, start, end, label):
@@ -115,9 +120,6 @@ class SVMResult(object):
 
     def getLabel(self):
         return self.label
-
-
-
 
 
 class detectThread(threading.Thread):  # threading.Thread
@@ -163,15 +165,15 @@ class detectThread(threading.Thread):  # threading.Thread
                 gyox = row[5]
                 gyoy = row[6]
                 gyoz = row[7]
-                acc = np.array([accy,accx,accz])
+                acc = np.array([accy, accx, accz])
                 acc = acc.astype(np.float64)
 
-                #calibration
+                # calibration
                 acc = np.dot(matrix, acc)
                 lowpass.put(acc)
                 lowpassCount = lowpassCount + 1
-                if(lowpassCount>29):
-                    timestamp = int(round(time.time()*1000))
+                if (lowpassCount > 29):
+                    timestamp = int(round(time.time() * 1000))
 
                     cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
                     # low pass filter
@@ -186,8 +188,8 @@ class detectThread(threading.Thread):  # threading.Thread
                     yevent = detectYEvent(
                         [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
 
-                    #start a thread to store data into databse
-                    dataQueue.put([row,timestamp])
+                    # start a thread to store data into databse
+                    dataQueue.put([row, timestamp])
 
                     # # save data into data base thread
                     # data_thread = DataThread()
@@ -219,7 +221,7 @@ class detectThread(threading.Thread):  # threading.Thread
             else:
                 print("something wrong with bluetooth")
 
-    def getLowPass(self,lowpass, opt):
+    def getLowPass(self, lowpass, opt):
         acc = []
         if opt == 'x':
             for i in range(lowpass.qsize()):
@@ -238,7 +240,6 @@ class detectThread(threading.Thread):  # threading.Thread
                 acc.append(temp[2])
 
         return acc
-
 
     def stop(self):
         self.__running.clear()
@@ -259,16 +260,17 @@ class DataThread(threading.Thread):
             # 获取一个游标
             connection = connectDB()
             connection.autocommit(True)
-            if len(data)>0:
-                for i in range(0,len(data)):
+            if len(data) > 0:
+                for i in range(0, len(data)):
                     temp = data[i]
                     row = temp[0]
                     timestamp = temp[1]
 
                     mycursor = connection.cursor()
                     sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                    val = (row[0],"deviceid",timestamp,row[1],row[2],row[3],row[4],"","",row[5],row[6],row[7])
-                    mycursor.execute(sql,val)
+                    val = (
+                    row[0], "deviceid", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6], row[7])
+                    mycursor.execute(sql, val)
                     mycursor.close()
         finally:
             connection.close()
@@ -367,7 +369,7 @@ class SVMthread(threading.Thread):
                         eventList[i] = None
         return eventList
 
-    def nomalization(self,vect):
+    def nomalization(self, vect):
         max = [0.619, 0.944, 0.546, 0.418, 0.208, 0.281, 6.075, 17.258, 0.286, 0.349, 3.901, 26.569, 22.12, 60.271,
                0.594,
                0.932, 0.097, 0.191, 90, 136,
@@ -380,7 +382,7 @@ class SVMthread(threading.Thread):
             vect[i] = (vect[i] - min[i]) / (max[i] - min[i])
         return vect
 
-    def calcData(self,data):
+    def calcData(self, data):
         maxAX = max(data[:, 3])
         maxAY = max(data[:, 2])
         minAX = min(data[:, 3])
@@ -407,7 +409,7 @@ class SVMthread(threading.Thread):
         return [rangeAX, rangeAY, startAY, endAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOX,
                 maxOY, maxAX, maxAY, minAX, minAY, differenceSP, maxSP, meanSP, varSP, t]
 
-    def saveResult(self,start, end, result):
+    def saveResult(self, start, end, result):
         oldwd = open_workbook('ForLDA.xls', formatting_info=True)
         sheet = oldwd.sheet_by_index(0)
         rowNum = sheet.nrows
@@ -416,7 +418,7 @@ class SVMthread(threading.Thread):
         self.write_data([start, end, result], newWs, rowNum)
         newwb.save('ForLDA.xls')
 
-    def write_data(self,dataTemp, table, row):
+    def write_data(self, dataTemp, table, row):
         # data = np.array(dataTemp)
         l = len(dataTemp)  # l is the number of column
         for j in range(l):
@@ -436,7 +438,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         self.type = 0
 
     # set driver type
-    def setType(self, type = 0):
+    def setType(self, type=0):
         self.type = type
 
     # main function in the thread
@@ -459,26 +461,25 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 trip_svm_buffer += temp_word
                 svm_label_buffer = ""
                 if temp_word != "":
-                    result = ldaforevent.LDATest(ldaforevent, [temp_word])
+                    result_time_window = ldaforevent.LDATest(ldaforevent, [temp_word])
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
                     print(result_trip)
                     trip_score = self.result_to_score(result_trip)
                     # self.renew_trip_score(self,ldaforevent)
-                    self.score_queue.append(self.result_to_score( result))
+                    self.score_queue.append(self.result_to_score(result_time_window))
                 elif temp_word == "":
                     self.score_queue.append(100)
 
                 if len(self.score_queue) > 6:
                     self.score_queue.pop()
-                    window_score = self.calc_window_socre()
-                    time_window_score = window_score
-                # time.sleep(time_window)
+
+                time_window_score = self.calc_window_socre()
 
     # change trip score
-    def renew_trip_score(self,ldaforevent):
+    def renew_trip_score(self, ldaforevent):
         global trip_score
         result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
-        trip_score = self.result_to_score(self,result_trip)
+        trip_score = self.result_to_score(self, result_trip)
 
     # calculate window score using LDA
     def calc_window_socre(self):
@@ -507,7 +508,6 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
 
     def stop(self):
         self.__running.clear()
-
 
 
 thresholdnum = 0
@@ -585,10 +585,9 @@ def detectEvent(data):
                 SVM_flag = SVM_flag - 1
                 LDA_flag = True
                 print("dismis the speedup")
-        elif thresholdnum>0:
+        elif thresholdnum > 0:
             thresholdnum = thresholdnum + 1
             sflag = True
-
 
         if accx < -0.12 and max(stdXArray) > 0.02 and bthresholdnum == 0:
             bthresholdnum = bthresholdnum + 1
@@ -620,7 +619,7 @@ def detectEvent(data):
                 SVM_flag = SVM_flag - 1
                 LDA_flag = True
                 print("dimiss the break")
-        elif bthresholdnum>0:
+        elif bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
             bflag = True
 
@@ -707,7 +706,7 @@ def detectYEvent(data):
                     SVM_flag = SVM_flag - 1
                     LDA_flag = True
                     print("dismiss the turn")
-            elif tthresholdnum>0:
+            elif tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
 
@@ -746,7 +745,7 @@ def detectYEvent(data):
                     SVM_flag = SVM_flag - 1
                     LDA_flag = True
                     print("dismiss the turn")
-            elif tthresholdnum>0:
+            elif tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
 
@@ -758,8 +757,8 @@ def splitByte(obdData):
     row = obdData.split(b"\r")[0]
     row = row.split(b",")
     newrow = []
-    if row!=b"":
-        if 9>len(row)>7:
+    if row != b"":
+        if 9 > len(row) > 7:
             newrow.append(str(row[0], encoding="utf-8"))
             newrow.append(int(str(row[1], encoding="utf-8")))
             newrow.append(float(str(row[2], encoding="utf-8")))
@@ -774,6 +773,7 @@ def splitByte(obdData):
         newrow = ""
 
     return newrow
+
 
 def main():
     # initialize the sampling rate of the data reading
@@ -803,8 +803,8 @@ def main():
     xstdQueue = queue.Queue(maxsize=(2 * std_window - 1))
     ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
 
-    print('samplingrate--'+str(samplingRate))
-    print('std_window:',str(std_window))
+    print('samplingrate--' + str(samplingRate))
+    print('std_window:', str(std_window))
 
     # start the data collection and event detection thread
     thread1 = detectThread()
@@ -841,11 +841,6 @@ def main():
             # table = file_w.add_sheet(u'Data', cell_overwrite_ok=True)  # 创建sheet
             # write_data(np.array(resultMatrix), table)
             # file_w.save('ForLDA.xls')
-
-
-def LDATest():
-    ldaforevent = LDAForEvent
-    ldaforevent.LDATest(ldaforevent, [""])
 
 
 if __name__ == "__main__":
