@@ -4,7 +4,6 @@ import numpy as np
 import queue
 import GUI
 import threading
-import _thread
 from scipy import signal
 import pymysql
 import pymysql.cursors
@@ -177,7 +176,6 @@ class detectThread(threading.Thread):  # threading.Thread
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
-                    print([accysf[-2], accxsf[-2], acczsf[-2]])
                     # detect event
                     event = detectEvent(
                         [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
@@ -187,7 +185,7 @@ class detectThread(threading.Thread):  # threading.Thread
                     #start a thread to store data into databse
                     dataQueue.put([row,timestamp])
                     try:
-                        _thread.start_new_thread(SaveInDatabase)
+                        threading.Thread(target=SaveInDatabase)
                     except:
                         print("Error: unable to start thread")
 
