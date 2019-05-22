@@ -183,38 +183,38 @@ class detectThread(threading.Thread):  # threading.Thread
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
                     # detect event
-                    event = detectEvent(
-                        [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
-                    yevent = detectYEvent(
-                        [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
+                    # event = detectEvent(
+                    #     [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
+                    # yevent = detectYEvent(
+                    #     [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
-                    dataQueue.put([row, timestamp])
+                    # dataQueue.put([row, timestamp])
 
                     # # save data into data base thread
                     # data_thread = DataThread()
                     # data_thread.start()
 
                     # put the event into Queue
-                    if not event is None:
-
-                        if SVM_flag > 0:
-                            overlapNum = overlapNum + 1
-                        eventQueue.put(event)
-                        SVM_flag = SVM_flag - 1
-                        print("put acceleration or brake into svm")
-                        LDA_flag = False
-                    if not yevent is None:
-                        data = yevent.getValue()
-                        # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
-                        # if max_gyo < 15:
-                        #     yevent.setType(yevent.getType() + 2)
-                        if SVM_flag > 0:
-                            overlapNum = overlapNum + 1
-                        eventQueue.put(yevent)
-                        SVM_flag = SVM_flag - 1
-                        print("put turn into svm")
-                        LDA_flag = False
+                    # if not event is None:
+                    #
+                    #     if SVM_flag > 0:
+                    #         overlapNum = overlapNum + 1
+                    #     eventQueue.put(event)
+                    #     SVM_flag = SVM_flag - 1
+                    #     print("put acceleration or brake into svm")
+                    #     LDA_flag = False
+                    # if not yevent is None:
+                    #     data = yevent.getValue()
+                    #     # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
+                    #     # if max_gyo < 15:
+                    #     #     yevent.setType(yevent.getType() + 2)
+                    #     if SVM_flag > 0:
+                    #         overlapNum = overlapNum + 1
+                    #     eventQueue.put(yevent)
+                    #     SVM_flag = SVM_flag - 1
+                    #     print("put turn into svm")
+                    #     LDA_flag = False
 
                     lowpass.get()
                     lowpassCount = lowpassCount - 1
