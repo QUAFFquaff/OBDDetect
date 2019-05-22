@@ -151,7 +151,6 @@ class detectThread(threading.Thread):  # threading.Thread
 
         while True:
             row = obddata + BTserial.readline()
-            print(row)
             if row != b'':
                 row = splitByte(row)
                 speed = row[1]
@@ -716,14 +715,17 @@ def splitByte(obdData):
     row = obdData.split(b"\r")[0]
     row = row.split(b",")
     newrow = []
-    newrow.append(str(row[0], encoding="utf-8"))
-    newrow.append(int(str(row[1], encoding="utf-8")))
-    newrow.append(float(str(row[2], encoding="utf-8")))
-    newrow.append(float(str(row[3], encoding="utf-8")))
-    newrow.append(float(str(row[4], encoding="utf-8")))
-    newrow.append(float(str(row[5], encoding="utf-8")))
-    newrow.append(float(str(row[6], encoding="utf-8")))
-    newrow.append(float(str(row[7], encoding="utf-8")))
+    if str(row[1]==b"0"):
+        newrow.append(str(row[0], encoding="utf-8"))
+        newrow.append(int(str(row[1], encoding="utf-8")))
+        newrow.append(float(str(row[2], encoding="utf-8")))
+        newrow.append(float(str(row[3], encoding="utf-8")))
+        newrow.append(float(str(row[4], encoding="utf-8")))
+        newrow.append(float(str(row[5], encoding="utf-8")))
+        newrow.append(float(str(row[6], encoding="utf-8")))
+        newrow.append(float(str(row[7], encoding="utf-8")))
+    else:
+        newrow.append(0)
 
     return newrow
 
