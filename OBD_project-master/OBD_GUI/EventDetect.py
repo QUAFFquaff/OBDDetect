@@ -186,9 +186,9 @@ class detectThread(threading.Thread):  # threading.Thread
                     #start a thread to store data into databse
                     dataQueue.put([row,timestamp])
 
-                    # save data into data base thread
-                    data_thread = DataThread()
-                    data_thread.start()
+                    # # save data into data base thread
+                    # data_thread = DataThread()
+                    # data_thread.start()
 
                     # put the event into Queue
                     if not event is None:
@@ -756,7 +756,7 @@ def splitByte(obdData):
     row = row.split(b",")
     newrow = []
     if row!=b"":
-        if len(row)>7:
+        if 9>len(row)>7:
             newrow.append(str(row[0], encoding="utf-8"))
             newrow.append(int(str(row[1], encoding="utf-8")))
             newrow.append(float(str(row[2], encoding="utf-8")))
