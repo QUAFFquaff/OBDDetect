@@ -739,13 +739,14 @@ def main():
         if row != b'':
             row = splitByte(row)
             print(row)
-            timestamp.append(row[2])
-            # calculate the sampling rate of the car
-            samplingRate = 14 / ((timestamp[0] - timestamp[-1]) / 1000)
-            std_window = int(samplingRate + 0.5)
-            xstdQueue = queue.Queue(maxsize=(2*std_window - 1))
-            ystdQueue = queue.Queue(maxsize=(2*std_window - 1))
+            timestamp.append(int(round(time.time()*1000)))
+
             countDown = countDown - 1
+    # calculate the sampling rate of the car
+    samplingRate = 14 / ((timestamp[0] - timestamp[-1]) / 1000)
+    std_window = int(samplingRate + 0.5)
+    xstdQueue = queue.Queue(maxsize=(2 * std_window - 1))
+    ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
 
     sfault = bfault = int(2 * int(samplingRate + 0.5) / 5)
     tfault = int(8 * int(samplingRate + 0.5) / 15)
