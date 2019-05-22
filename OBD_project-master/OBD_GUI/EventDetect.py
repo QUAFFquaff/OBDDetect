@@ -142,14 +142,14 @@ class detectThread(threading.Thread):  # threading.Thread
         global dataQueue
 
         lowpass = queue.Queue()
-        serial = getSerial()
+        BTserial = getSerial()
         obddata = ''
         obddata = obddata.encode('utf-8')
 
         lowpassCount = 0
 
         while True:
-            row = obddata + serial.readline()
+            row = obddata + BTserial.readline()
             if row != b'':
                 row = splitByte(row)
                 speed = row[1]
@@ -523,12 +523,12 @@ def detectEvent(data):
             thresholdnum = thresholdnum + 1
             sfault = faultNum
             sflag = True
-        elif accx < 0.05 and sfault > 0 and thresholdnum > 0:
+        elif accx <= 0.05 and sfault > 0 and thresholdnum > 0:
             sfault = sfault - 1
             thresholdnum = thresholdnum + 1
             sflag = True
-        elif (accx < 0.05 or stdX < 0.01) and thresholdnum > 0:
-            if thresholdnum > 15:
+        elif (accx <= 0.05 or stdX < 0.01) and thresholdnum > 0:
+            if thresholdnum > 10:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
                 thresholdnum = 0
@@ -550,19 +550,19 @@ def detectEvent(data):
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 bevent.addValue(xarray[i])
             bflag = True
-            SVM_flag += 1  # set the flag to denote the event starts
+            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
             LDA_flag = False
             print("catch a break")
         elif accx < -0.05 and bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
             bfault = faultNum
             bflag = True
-        elif accx > -0.05 and bfault > 0 and bthresholdnum > 0:
+        elif accx >= -0.05 and bfault > 0 and bthresholdnum > 0:
             bfault = bfault - 1
             bthresholdnum = bthresholdnum + 1
             bflag = True
-        elif (accx > -0.05 or stdX < 0.01) and bthresholdnum > 0:
-            if bthresholdnum > 15:
+        elif (accx >= -0.05 or stdX < 0.01) and bthresholdnum > 0:
+            if bthresholdnum > 10:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
                 bthresholdnum = 0
@@ -596,7 +596,6 @@ def detectYEvent(data):
     global tthresholdnum
     global tevent
     global tfault
-    global swerveFlag
     global positive
     global negative
     global SVM_flag
@@ -606,7 +605,7 @@ def detectYEvent(data):
     tflag = False
     minLength = int(samplingRate * 1.2)
     maxLength = int(samplingRate * 14)
-    faultNum = int(8 * samplingRate / 15)
+    faultNum = int(5 * samplingRate / 10)
     ystdQueue.put(data)
 
     if ystdQueue.full():
@@ -636,17 +635,18 @@ def detectYEvent(data):
                 tflag = True
                 negative = False
                 SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
+                LDA_flag = False
                 print("catch turn")
-            elif accy > 0.05 and tthresholdnum > 0:
+            elif accy > 0.06 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
                 tflag = True
-            elif (accy < 0.05 or stdY < 0.015) and tfault > 0 and tthresholdnum > 0:
+            elif accy <= 0.06 and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy < 0.05 or stdY < 0.015) and tthresholdnum > 0:
-                if 15 < tthresholdnum < maxLength:
+            elif (accy <= 0.06 or stdY < 0.015) and tthresholdnum > 0:
+                if 10 < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
                     tthresholdnum = 0
@@ -672,16 +672,17 @@ def detectYEvent(data):
                 tflag = True
                 positive = False
                 SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
+                LDA_flag = False
                 print("catch the turn")
-            elif accy < -0.05 and tthresholdnum > 0:
+            elif accy < -0.06 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
                 tflag = True
-            elif (accy > -0.05 or stdY < 0.015) and tfault > 0 and tthresholdnum > 0:
+            elif accy >= -0.06 and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy > -0.05 or stdY < 0.03) and tthresholdnum > 0:
+            elif (accy >= -0.06 or stdY < 0.03) and tthresholdnum > 0:
                 if 15 < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
@@ -730,13 +731,13 @@ def main():
     global SVMResultQueue
     global GUI_flag
 
-    serial = getSerial()
+    BTserial = getSerial()
     countDown = 15
     obddata = ''
     obddata = obddata.encode('utf-8')
     timestamp = []
     while countDown > 0:
-        row = obddata + serial.readline()
+        row = obddata + BTserial.readline()
         if row != b'':
             row = splitByte(row)
             print(row)
