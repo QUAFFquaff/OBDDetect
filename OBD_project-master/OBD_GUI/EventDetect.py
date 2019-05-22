@@ -185,7 +185,7 @@ class detectThread(threading.Thread):  # threading.Thread
                     #start a thread to store data into databse
                     dataQueue.put([row,timestamp])
                     try:
-                        save = threading.Thread(target=SaveInDatabase,arg=(0,))
+                        save = threading.Thread(target=SaveInDatabase,args=(0,))
                         save.start()
                     except:
                         print("Error: unable to start thread")
