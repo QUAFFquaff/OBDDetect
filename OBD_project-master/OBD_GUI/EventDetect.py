@@ -150,9 +150,12 @@ class detectThread(threading.Thread):  # threading.Thread
 
         while True:
             row = obddata + BTserial.readline()
-            print(row)
+
             row = splitByte(row)
             if row != "":
+                print(row)
+                timestamp = int(round(time.time() * 1000))
+                print(timestamp)
                 speed = row[1]
                 accy = row[2]
                 accx = row[3]
@@ -790,8 +793,9 @@ def main():
         row = obddata + BTserial.readline()
         row = splitByte(row)
         if row != "":
+            print(row)
             timestamp.append(int(round(time.time()*1000)))
-
+            print(timestamp[-1])
             countDown = countDown - 1
     # calculate the sampling rate of the car
     samplingRate = 14 / ((timestamp[-1] - timestamp[0]) / 1000)
