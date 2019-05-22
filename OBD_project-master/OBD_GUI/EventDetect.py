@@ -20,9 +20,9 @@ from xlutils.copy import copy
 #                    [-0.026682913, 0.63608, -0.770697297],
 #                    [0.021995888, 0.77162, 0.635319376]])
 
-matrix = np.array([[0.989992983, 0.00E+00, -0.141116597],
-                   [-0.140675553,0.079, -0.9869],
-                   [0.0111482, 0.99687, 0.07821]])
+matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
+                   [-0.993610238,0.079, -0.079680179],
+                   [0.079680205, 0.99687, 0.006389762]])
 
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
