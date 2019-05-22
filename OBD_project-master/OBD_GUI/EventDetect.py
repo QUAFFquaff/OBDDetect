@@ -184,11 +184,10 @@ class detectThread(threading.Thread):  # threading.Thread
 
                     #start a thread to store data into databse
                     dataQueue.put([row,timestamp])
-                    try:
-                        save = threading.Thread(target=SaveInDatabase,args=(0,))
-                        save.start()
-                    except:
-                        print("Error: unable to start thread")
+
+                    # save data into data base thread
+                    data_thread = DataThread()
+                    data_thread.start()
 
                     # put the event into Queue
                     if not event is None:
@@ -241,21 +240,37 @@ class detectThread(threading.Thread):  # threading.Thread
         self.__running.clear()
 
 
-def SaveInDatabase(nothing):
-    global dataQueue
-    temp = dataQueue.get()
-    row = temp[0]
-    timestamp = temp[1]
-    try:
-        # 获取一个游标
-        connection = connectDB()
-        connection.autocommit(True)
-        mycursor = connection.cursor()
-        sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-        val = (row[0],"deviceid",timestamp,row[1],row[2],row[3],row[4],"","",row[5],row[6],row[7])
-        mycursor.execute(sql,val)
-    finally:
-        connection.close()
+class DataThread(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.__running = threading.Event()
+        self.__running.set()
+
+    def run(self):
+        global dataQueue
+        data = []
+        while not dataQueue.empty():
+            data.append(dataQueue.get())
+        try:
+            # 获取一个游标
+            connection = connectDB()
+            connection.autocommit(True)
+            if len(data)>0:
+                for i in range(0,len(data)):
+                    temp = data[i]
+                    row = temp[0]
+                    timestamp = temp[1]
+
+                    mycursor = connection.cursor()
+                    sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                    val = (row[0],"deviceid",timestamp,row[1],row[2],row[3],row[4],"","",row[5],row[6],row[7])
+                    mycursor.execute(sql,val)
+                    mycursor.close()
+        finally:
+            connection.close()
+
+    def stop(self):
+        self.__running.clear()
 
 
 # this thread for SVM classification
@@ -322,6 +337,14 @@ class SVMthread(threading.Thread):
                                 result = [4]
                             elif index == 2:
                                 result = [8]
+                        elif eventList[i].getType() == 1:
+                            index = np.argmax([score[1], score[5], score[9]])
+                            if index == 0:
+                                result = [1]
+                            elif index == 1:
+                                result = [2]
+                            elif index == 2:
+                                result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
@@ -550,6 +573,7 @@ def detectEvent(data):
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
                 thresholdnum = 0
+                sevent.addValue(data)
                 return sevent
             else:
                 thresholdnum = 0
@@ -571,19 +595,20 @@ def detectEvent(data):
             SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
             LDA_flag = False
             print("catch a break")
-        elif accx < -0.05 and bthresholdnum > 0:
+        elif accx < -0.06 and bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
             bfault = faultNum
             bflag = True
-        elif accx >= -0.05 and bfault > 0 and bthresholdnum > 0:
+        elif accx >= -0.06 and bfault > 0 and bthresholdnum > 0:
             bfault = bfault - 1
             bthresholdnum = bthresholdnum + 1
             bflag = True
-        elif (accx >= -0.05 or stdX < 0.01) and bthresholdnum > 0:
+        elif (accx >= -0.06 or stdX < 0.01) and bthresholdnum > 0:
             if bthresholdnum > 10:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
                 bthresholdnum = 0
+                bevent.addValue(data)
                 return bevent
             else:
                 bfault = faultNum
@@ -669,6 +694,7 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     negative = True
+                    tevent.addValue(data)
                     return tevent
                 else:
                     tfault = faultNum
@@ -706,6 +732,7 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     positive = True
+                    tevent.addValue(data)
                     return tevent
                 else:
                     tfault = faultNum

@@ -15,9 +15,8 @@
 #         print('get data:',obddata)
 #         millis = int(round(time.time()*1000))
 #         print(millis)
-obdData = b"Time,0,0.23,0.234,1.234,0.234,1.21,3.14"
-row = obdData.split(b"\r")[0]
-row = row.split(b",")
-print(len(row))
+data=[0,1]
+for i in range(0,len(data)):
+    print(i)
 
 
