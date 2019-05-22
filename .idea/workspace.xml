@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6f3943f5-1002-43e1-b3a9-180fe4d3da2c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/OutOBDX.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/OutOBDX.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/rawX.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/rawX.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="216" column="53" selection-start-line="216" selection-start-column="53" selection-end-line="216" selection-end-column="53" />
+            <state relative-caret-position="266">
+              <caret line="17" selection-start-line="17" selection-end-line="19" selection-end-column="56" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#1258#1934#0" />
@@ -280,12 +276,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1558309731408</updated>
-      <workItem from="1558309732614" duration="49345000" />
+      <workItem from="1558309732614" duration="49400000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49345000" />
+    <option name="totallyTimeSpent" value="49400000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1913" y="-7" width="1550" height="934" extended-state="6" />
@@ -447,8 +443,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/OBD_project-master/OBD_GUI/EventDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="216" column="53" selection-start-line="216" selection-start-column="53" selection-end-line="216" selection-end-column="53" />
+        <state relative-caret-position="266">
+          <caret line="17" selection-start-line="17" selection-end-line="19" selection-end-column="56" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
             <element signature="e#1258#1934#0" />

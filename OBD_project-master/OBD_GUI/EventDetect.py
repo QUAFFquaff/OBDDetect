@@ -15,13 +15,13 @@ from change_numbers_to_alphabet import change_n_to_a
 from xlrd import *
 from xlutils.copy import copy
 
-# matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
-#                    [-0.026682913, 0.63608, -0.770697297],
-#                    [0.021995888, 0.77162, 0.635319376]])
+matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
+                   [-0.026682913, 0.63608, -0.770697297],
+                   [0.021995888, 0.77162, 0.635319376]])
 
-matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
-                   [-0.993610238,0.079, -0.079680179],
-                   [0.079680205, 0.99687, 0.006389762]])
+# matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
+#                    [-0.993610238,0.079, -0.079680179],
+#                    [0.079680205, 0.99687, 0.006389762]])
 
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
