@@ -167,7 +167,8 @@ class detectThread(threading.Thread):  # threading.Thread
                 #calibration
                 acc = np.dot(matrix, acc)
                 lowpass.put(acc)
-                if(lowpassCount>=29):
+                lowpassCount = lowpassCount + 1
+                if(lowpassCount>29):
                     timestamp = int(round(time.time()*1000))
 
                     cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
@@ -209,6 +210,9 @@ class detectThread(threading.Thread):  # threading.Thread
                         eventQueue.put(yevent)
                         SVM_flag = SVM_flag - 1
                         LDA_flag = False
+
+                    lowpass.get()
+                    lowpassCount = lowpassCount - 1
 
     def getLowPass(self,lowpass, opt):
         acc = []
