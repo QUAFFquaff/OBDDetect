@@ -29,7 +29,7 @@ pl.plot(axis_x,x)
 pl.title(u'raw x data')
 pl.axis('tight')
 
-b,a = signal.butter(3,0.04,'low')
+b,a = signal.butter(3,0.133,'low')
 sf = signal.filtfilt(b,a,x)
 
 

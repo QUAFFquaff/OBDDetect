@@ -15,7 +15,8 @@
 #         print('get data:',obddata)
 #         millis = int(round(time.time()*1000))
 #         print(millis)
+data=[0,1]
+for i in range(0,len(data)):
+    print(i)
 
-a1 = [1,2,3,4]
-time = 3
-print([a1,time])
+
