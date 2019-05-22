@@ -456,20 +456,19 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 trip_svm_buffer += temp_word
                 svm_label_buffer = ""
                 if temp_word != "":
-                    result = ldaforevent.LDATest(ldaforevent, [temp_word])
+                    result_time_window = ldaforevent.LDATest(ldaforevent, [temp_word])
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
                     print(result_trip)
                     trip_score = self.result_to_score(result_trip)
                     # self.renew_trip_score(self,ldaforevent)
-                    self.score_queue.append(self.result_to_score( result))
+                    self.score_queue.append(self.result_to_score(result_time_window))
                 elif temp_word == "":
                     self.score_queue.append(100)
 
                 if len(self.score_queue) > 6:
                     self.score_queue.pop()
-                    window_score = self.calc_window_socre()
-                    time_window_score = window_score
-                # time.sleep(time_window)
+
+                time_window_score = self.calc_window_socre()
 
     # change trip score
     def renew_trip_score(self,ldaforevent):
