@@ -26,7 +26,7 @@ matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 5  # time window for a word in LDA
+time_window = 30  # time window for a word in LDA
 svm_label_buffer = ""  # the word in a time window
 trip_svm_buffer = ""    # save the whole trip's SVm label
 LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
