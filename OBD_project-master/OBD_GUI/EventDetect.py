@@ -150,6 +150,7 @@ class detectThread(threading.Thread):  # threading.Thread
 
         while True:
             row = obddata + BTserial.readline()
+            print(row)
             row = splitByte(row)
             if row != "":
                 speed = row[1]
@@ -715,6 +716,7 @@ def detectYEvent(data):
                     tevent.addValue(yarray[i])
                 tflag = True
                 positive = False
+
                 SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
                 LDA_flag = False
                 print("catch the turn")
