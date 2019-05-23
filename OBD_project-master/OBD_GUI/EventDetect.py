@@ -9,8 +9,8 @@ import pymysql
 import pymysql.cursors
 from sklearn.externals import joblib
 import sys
-from multicpu import multi_cpu
 
+import concurrent.futures
 sys.path.append('../dataHandler/')
 from LDAForEvent import *
 from change_numbers_to_alphabet import change_n_to_a
@@ -841,6 +841,6 @@ def main(job):
 
 
 if __name__ == "__main__":
-    jobs = [1]
-    result = multi_cpu(main, jobs, 10, 3)
-    # main()
+
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        executor.map(main())
