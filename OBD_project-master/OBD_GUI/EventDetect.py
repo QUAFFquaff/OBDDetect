@@ -772,7 +772,7 @@ def splitByte(obdData):
     return newrow
 
 
-def main(job):
+def main():
     # initialize the sampling rate of the data reading
     global samplingRate
     global xstdQueue
