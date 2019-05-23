@@ -807,12 +807,12 @@ def main():
     thread1.start()
 
     # start the thread for SVM
-    thread2 = SVMthread()
-    thread2.start()
-
-    # start lda thread
-    lda_thread = Thread_for_lda()
-    lda_thread.start()
+    # thread2 = SVMthread()
+    # thread2.start()
+    #
+    # # start lda thread
+    # lda_thread = Thread_for_lda()
+    # lda_thread.start()
 
     Panel = GUI.Panel()
     Panel.drawPanel()
