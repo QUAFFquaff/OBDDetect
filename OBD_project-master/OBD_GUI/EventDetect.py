@@ -9,6 +9,7 @@ import pymysql
 import pymysql.cursors
 from sklearn.externals import joblib
 import sys
+import multiprocessing
 
 import concurrent.futures
 sys.path.append('../dataHandler/')
@@ -42,9 +43,9 @@ gpsLa = None
 gpsLo = None
 
 # lock = threading.Lock()
-eventQueue = queue.Queue()
+# eventQueue = queue.Queue()
 SVMResultQueue = queue.Queue()
-dataQueue = queue.Queue()  # put data into dataQueue for databse
+# dataQueue = queue.Queue()  # put data into dataQueue for databse
 SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
 overlapNum = 0  # the number of overlapped events
 
@@ -123,12 +124,10 @@ class SVMResult(object):
         return self.label
 
 
-class detectThread(threading.Thread):  # threading.Thread
+class detectProcess(multiprocessing.Process):  # threading.Thread
 
     def __init__(self):
-        threading.Thread.__init__(self)
-        self.__running = threading.Event()
-        self.__running.set()
+        multiprocessing.Process.__init__(self)
 
     def run(self):
         newrecord = 0
@@ -187,11 +186,7 @@ class detectThread(threading.Thread):  # threading.Thread
                         [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
-                    # dataQueue.put([row, timestamp])
-
-                    # # save data into data base thread
-                    # data_thread = DataThread()
-                    # data_thread.start()
+                    dataQueue.put([row, timestamp])
 
                     # put the event into Queue
                     if not event is None:
@@ -239,8 +234,6 @@ class detectThread(threading.Thread):  # threading.Thread
 
         return acc
 
-    def stop(self):
-        self.__running.clear()
 
 
 class DataThread(threading.Thread):
@@ -811,6 +804,10 @@ def main():
     thread2 = SVMthread()
     thread2.start()
 
+    # # save data into data base thread
+    # data_thread = DataThread()
+    # data_thread.start()
+
     # start lda thread
     lda_thread = Thread_for_lda()
     lda_thread.start()
@@ -841,6 +838,6 @@ def main():
 
 
 if __name__ == "__main__":
-
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        executor.map(main())
+    eventQueue = multiprocessing.Queue()
+    dataQueue = multiprocessing.Queue()
+    main()
