@@ -9,6 +9,7 @@ import pymysql
 import pymysql.cursors
 from sklearn.externals import joblib
 import sys
+from multicpu import multi_cpu
 
 sys.path.append('../dataHandler/')
 from LDAForEvent import *
@@ -27,7 +28,7 @@ matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 20  # time window for a word in LDA
+time_window = 10  # time window for a word in LDA
 svm_label_buffer = ""  # the word in a time window
 trip_svm_buffer = ""  # save the whole trip's SVm label
 LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
@@ -771,7 +772,7 @@ def splitByte(obdData):
     return newrow
 
 
-def main():
+def main(job):
     # initialize the sampling rate of the data reading
     global samplingRate
     global xstdQueue
@@ -840,4 +841,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    jobs = [1]
+    result = multi_cpu(main, jobs, 10, 3)
+    # main()
