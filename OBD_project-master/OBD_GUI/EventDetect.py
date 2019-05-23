@@ -7,7 +7,7 @@ import threading
 from scipy import signal
 import pymysql
 import pymysql.cursors
-from sklearn.externals import joblib
+import joblib
 import sys
 import multiprocessing
 
@@ -157,7 +157,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
             row = splitByte(row)
             if row != "":
-                print(row)
+                #print(row)
                 timestamp = int(round(time.time() * 1000))
                 print(timestamp)
                 speed = row[1]
@@ -244,25 +244,26 @@ class DataThread(threading.Thread):
 
     def run(self):
         global dataQueue
-        data = []
-        while not dataQueue.empty():
-            data.append(dataQueue.get())
         try:
             # 获取一个游标
             connection = connectDB()
             connection.autocommit(True)
-            if len(data) > 0:
-                for i in range(0, len(data)):
-                    temp = data[i]
-                    row = temp[0]
-                    timestamp = temp[1]
+            while True:
+                data = []
+                while not dataQueue.empty():
+                    data.append(dataQueue.get())
+        
+                if len(data) > 0:
+                    for i in range(0, len(data)):
+                        temp = data[i]
+                        row = temp[0]
+                        timestamp = temp[1]
 
-                    mycursor = connection.cursor()
-                    sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                    val = (
-                    row[0], "deviceid", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6], row[7])
-                    mycursor.execute(sql, val)
-                    mycursor.close()
+                        mycursor = connection.cursor()
+                        sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                        val = (row[0], "quaff", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6], row[7])
+                        mycursor.execute(sql, val)
+                        mycursor.close()
         finally:
             connection.close()
 
@@ -783,9 +784,7 @@ def main():
         row = obddata + BTserial.readline()
         row = splitByte(row)
         if row != "":
-            print(row)
             timestamp.append(int(round(time.time()*1000)))
-            print(timestamp[-1])
             countDown = countDown - 1
     # calculate the sampling rate of the car
     samplingRate = 14 / ((timestamp[-1] - timestamp[0]) / 1000)
@@ -797,16 +796,16 @@ def main():
     print('std_window:', str(std_window))
 
     # start the data collection and event detection thread
-    thread1 = detectThread()
-    thread1.start()
+    process1 = detectProcess()
+    process1.start()
 
     # start the thread for SVM
     thread2 = SVMthread()
     thread2.start()
 
     # # save data into data base thread
-    # data_thread = DataThread()
-    # data_thread.start()
+    data_thread = DataThread()
+    data_thread.start()
 
     # start lda thread
     lda_thread = Thread_for_lda()
@@ -827,14 +826,6 @@ def main():
             end = time.strftime("%H:%M:%S", time_local)
             Panel.showEvent(start, end, result.getLabel())
 
-
-
-            # print('total ',eventNum,'turns')
-            # print(resultMatrix)
-            # file_w = Workbook()
-            # table = file_w.add_sheet(u'Data', cell_overwrite_ok=True)  # 创建sheet
-            # write_data(np.array(resultMatrix), table)
-            # file_w.save('ForLDA.xls')
 
 
 if __name__ == "__main__":
