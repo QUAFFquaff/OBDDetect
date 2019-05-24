@@ -526,6 +526,7 @@ def detectEvent(data):
     xarray = []
     stdXArray = []  # use to get the smallest std, which will be the beginning of an event
     faultNum = int(2 * samplingRate / 5)
+    minLength = int(samplingRate)
 
     xstdQueue.put(data)
 
@@ -565,7 +566,7 @@ def detectEvent(data):
             thresholdnum = thresholdnum + 1
             sflag = True
         elif (accx <= 0.05 or stdX < 0.01) and thresholdnum > 0:
-            if thresholdnum > 10:
+            if thresholdnum > minLength:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
                 thresholdnum = 0
@@ -599,7 +600,7 @@ def detectEvent(data):
             bthresholdnum = bthresholdnum + 1
             bflag = True
         elif (accx >= -0.06 or stdX < 0.01) and bthresholdnum > 0:
-            if bthresholdnum > 10:
+            if bthresholdnum > minLength:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
                 bthresholdnum = 0
@@ -684,7 +685,7 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
             elif (accy <= 0.06 or stdY < 0.015) and tthresholdnum > 0:
-                if 10 < tthresholdnum < maxLength:
+                if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
                     tthresholdnum = 0
@@ -723,7 +724,7 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
             elif (accy >= -0.06 or stdY < 0.03) and tthresholdnum > 0:
-                if 15 < tthresholdnum < maxLength:
+                if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
                     tthresholdnum = 0
