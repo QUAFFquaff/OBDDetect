@@ -190,7 +190,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
                     # put the event into Queue
                     if not event is None:
-
+                        print(SVM_flag)
                         if SVM_flag > 0:
                             overlapNum = overlapNum + 1
                         eventQueue.put(event)
@@ -287,6 +287,7 @@ class SVMthread(threading.Thread):
         global eventQueue
         global SVMResultQueue
         global LDA_flag
+        global SVM_flag
         global svm_label_buffer
 
         while True:
