@@ -18,7 +18,7 @@
 
 import xlrd
 import numpy as np
-from fuzzywuzzy import fuzz
+#from fuzzywuzzy import fuzz
 from gensim.corpora import Dictionary
 from gensim.models import LdaModel
 from nltk.tokenize import RegexpTokenizer

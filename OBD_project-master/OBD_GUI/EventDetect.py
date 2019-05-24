@@ -7,8 +7,9 @@ import threading
 from scipy import signal
 import pymysql
 import pymysql.cursors
-from sklearn.externals import joblib
+import joblib
 import sys
+import multiprocessing
 
 import concurrent.futures
 sys.path.append('../dataHandler/')
@@ -28,7 +29,7 @@ matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 10  # time window for a word in LDA
+time_window = 30  # time window for a word in LDA
 svm_label_buffer = ""  # the word in a time window
 trip_svm_buffer = ""  # save the whole trip's SVm label
 LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
@@ -42,9 +43,9 @@ gpsLa = None
 gpsLo = None
 
 # lock = threading.Lock()
-eventQueue = queue.Queue()
+# eventQueue = queue.Queue()
 SVMResultQueue = queue.Queue()
-dataQueue = queue.Queue()  # put data into dataQueue for databse
+# dataQueue = queue.Queue()  # put data into dataQueue for databse
 SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
 overlapNum = 0  # the number of overlapped events
 
@@ -123,12 +124,10 @@ class SVMResult(object):
         return self.label
 
 
-class detectThread(threading.Thread):  # threading.Thread
+class detectProcess(multiprocessing.Process):  # threading.Thread
 
     def __init__(self):
-        threading.Thread.__init__(self)
-        self.__running = threading.Event()
-        self.__running.set()
+        multiprocessing.Process.__init__(self)
 
     def run(self):
         newrecord = 0
@@ -158,9 +157,8 @@ class detectThread(threading.Thread):  # threading.Thread
 
             row = splitByte(row)
             if row != "":
-                print(row)
+                #print(row)
                 timestamp = int(round(time.time() * 1000))
-                print(timestamp)
                 speed = row[1]
                 accy = row[2]
                 accx = row[3]
@@ -180,6 +178,7 @@ class detectThread(threading.Thread):  # threading.Thread
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
+                    print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
                     # detect event
                     event = detectEvent(
                         [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
@@ -187,11 +186,7 @@ class detectThread(threading.Thread):  # threading.Thread
                         [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
-                    # dataQueue.put([row, timestamp])
-
-                    # # save data into data base thread
-                    # data_thread = DataThread()
-                    # data_thread.start()
+                    dataQueue.put([row, timestamp])
 
                     # put the event into Queue
                     if not event is None:
@@ -239,8 +234,6 @@ class detectThread(threading.Thread):  # threading.Thread
 
         return acc
 
-    def stop(self):
-        self.__running.clear()
 
 
 class DataThread(threading.Thread):
@@ -251,27 +244,29 @@ class DataThread(threading.Thread):
 
     def run(self):
         global dataQueue
-        data = []
-        while not dataQueue.empty():
-            data.append(dataQueue.get())
-        try:
-            # 获取一个游标
-            connection = connectDB()
-            connection.autocommit(True)
-            if len(data) > 0:
-                for i in range(0, len(data)):
-                    temp = data[i]
-                    row = temp[0]
-                    timestamp = temp[1]
+        while True:
+            if dataQueue.qsize()>60:
+                data = []
+                while not dataQueue.empty():
+                    data.append(dataQueue.get())
+                try:
+                    # 获取一个游标
+                    connection = connectDB()
+                    connection.autocommit(True)
 
-                    mycursor = connection.cursor()
-                    sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                    val = (
-                    row[0], "deviceid", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6], row[7])
-                    mycursor.execute(sql, val)
-                    mycursor.close()
-        finally:
-            connection.close()
+                    if len(data) > 0:
+                        for i in range(0, len(data)):
+                            temp = data[i]
+                            row = temp[0]
+                            timestamp = temp[1]
+
+                            mycursor = connection.cursor()
+                            sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                            val = (row[0], "zahraa", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6], row[7])
+                            mycursor.execute(sql, val)
+                            mycursor.close()
+                finally:
+                    connection.close()
 
     def stop(self):
         self.__running.clear()
@@ -531,6 +526,7 @@ def detectEvent(data):
     xarray = []
     stdXArray = []  # use to get the smallest std, which will be the beginning of an event
     faultNum = int(2 * samplingRate / 5)
+    minLength = int(samplingRate)
 
     xstdQueue.put(data)
 
@@ -570,7 +566,7 @@ def detectEvent(data):
             thresholdnum = thresholdnum + 1
             sflag = True
         elif (accx <= 0.05 or stdX < 0.01) and thresholdnum > 0:
-            if thresholdnum > 10:
+            if thresholdnum > minLength:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
                 thresholdnum = 0
@@ -604,7 +600,7 @@ def detectEvent(data):
             bthresholdnum = bthresholdnum + 1
             bflag = True
         elif (accx >= -0.06 or stdX < 0.01) and bthresholdnum > 0:
-            if bthresholdnum > 10:
+            if bthresholdnum > minLength:
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
                 bthresholdnum = 0
@@ -670,7 +666,7 @@ def detectYEvent(data):
         timestamp = data[0]
 
         if positive:
-            if accy > 0.12 and max(stdYArray) > 0.015 and tthresholdnum == 0:
+            if accy > 0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 2)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
@@ -689,7 +685,7 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
             elif (accy <= 0.06 or stdY < 0.015) and tthresholdnum > 0:
-                if 10 < tthresholdnum < maxLength:
+                if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
                     tthresholdnum = 0
@@ -708,7 +704,7 @@ def detectYEvent(data):
                 tflag = True
 
         if negative:
-            if accy < -0.12 and max(stdYArray) > 0.015 and tthresholdnum == 0:
+            if accy < -0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 3)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
@@ -728,7 +724,7 @@ def detectYEvent(data):
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
             elif (accy >= -0.06 or stdY < 0.03) and tthresholdnum > 0:
-                if 15 < tthresholdnum < maxLength:
+                if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
                     tthresholdnum = 0
@@ -790,9 +786,7 @@ def main():
         row = obddata + BTserial.readline()
         row = splitByte(row)
         if row != "":
-            print(row)
             timestamp.append(int(round(time.time()*1000)))
-            print(timestamp[-1])
             countDown = countDown - 1
     # calculate the sampling rate of the car
     samplingRate = 14 / ((timestamp[-1] - timestamp[0]) / 1000)
@@ -804,12 +798,16 @@ def main():
     print('std_window:', str(std_window))
 
     # start the data collection and event detection thread
-    thread1 = detectThread()
-    thread1.start()
+    process1 = detectProcess()
+    process1.start()
 
     # start the thread for SVM
     thread2 = SVMthread()
     thread2.start()
+
+    # # save data into data base thread
+    # data_thread = DataThread()
+    # data_thread.start()
 
     # start lda thread
     lda_thread = Thread_for_lda()
@@ -832,15 +830,10 @@ def main():
 
 
 
-            # print('total ',eventNum,'turns')
-            # print(resultMatrix)
-            # file_w = Workbook()
-            # table = file_w.add_sheet(u'Data', cell_overwrite_ok=True)  # 创建sheet
-            # write_data(np.array(resultMatrix), table)
-            # file_w.save('ForLDA.xls')
-
-
 if __name__ == "__main__":
-    main()
+    # main()
     # with concurrent.futures.ProcessPoolExecutor() as executor:
     #     executor.map(main())
+    eventQueue = multiprocessing.Queue()
+    dataQueue = multiprocessing.Queue()
+    main()
