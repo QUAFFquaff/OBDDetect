@@ -291,7 +291,10 @@ class SVMthread(threading.Thread):
 
         while True:
             #  define type and intensity
+            if SVM_flag==0:
+                print("svm flag is 0")
             if (not eventQueue.empty()) and SVM_flag == 0:
+                print("get event from detection")
                 eventNum = overlapNum
                 overlapNum = 0
                 eventList = []
