@@ -159,7 +159,6 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
             if row != "":
                 #print(row)
                 timestamp = int(round(time.time() * 1000))
-                print(timestamp)
                 speed = row[1]
                 accy = row[2]
                 accx = row[3]
@@ -179,6 +178,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
+                    print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
                     # detect event
                     event = detectEvent(
                         [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
@@ -666,7 +666,7 @@ def detectYEvent(data):
         timestamp = data[0]
 
         if positive:
-            if accy > 0.12 and max(stdYArray) > 0.015 and tthresholdnum == 0:
+            if accy > 0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 2)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
@@ -704,7 +704,7 @@ def detectYEvent(data):
                 tflag = True
 
         if negative:
-            if accy < -0.12 and max(stdYArray) > 0.015 and tthresholdnum == 0:
+            if accy < -0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 3)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
