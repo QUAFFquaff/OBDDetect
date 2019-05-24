@@ -833,6 +833,9 @@ def main():
 
 
 if __name__ == "__main__":
+    # main()
+    # with concurrent.futures.ProcessPoolExecutor() as executor:
+    #     executor.map(main())
     eventQueue = multiprocessing.Queue()
     dataQueue = multiprocessing.Queue()
     main()
