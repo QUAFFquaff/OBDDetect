@@ -841,6 +841,6 @@ def main():
 
 
 if __name__ == "__main__":
-
-    with concurrent.futures.ProcessPoolExecutor() as executor:
-        executor.map(main())
+    main()
+    # with concurrent.futures.ProcessPoolExecutor() as executor:
+    #     executor.map(main())
