@@ -291,10 +291,8 @@ class SVMthread(threading.Thread):
 
         while True:
             #  define type and intensity
-            if SVM_flag==0:
-                print("svm flag is 0")
             if (not eventQueue.empty()) and SVM_flag == 0:
-                print("get event from detection")
+                # print("get event from detection")
                 eventNum = overlapNum
                 overlapNum = 0
                 eventList = []
@@ -556,6 +554,7 @@ def detectEvent(data):
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 sevent.addValue(xarray[i])
+            print("after get start")
             sflag = True
             SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
             LDA_flag = False
