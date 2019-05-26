@@ -10,6 +10,7 @@ import pymysql.cursors
 import joblib
 import sys
 import multiprocessing
+from ctypes import c_bool
 
 import concurrent.futures
 sys.path.append('../dataHandler/')
@@ -32,7 +33,7 @@ std_window = 0  # the time window for standard deviation
 time_window = 30  # time window for a word in LDA
 svm_label_buffer = ""  # the word in a time window
 trip_svm_buffer = ""  # save the whole trip's SVm label
-LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
+# LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
 time_window_score = 50
 trip_score = 50
 GUI_flag = False
@@ -46,8 +47,8 @@ gpsLo = None
 # eventQueue = queue.Queue()
 SVMResultQueue = queue.Queue()
 # dataQueue = queue.Queue()  # put data into dataQueue for databse
-SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
-overlapNum = 0  # the number of overlapped events
+# SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
+# overlapNum = 0  # the number of overlapped events
 
 xstdQueue = queue.Queue(maxsize=19)
 ystdQueue = queue.Queue(maxsize=19)
@@ -128,24 +129,45 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
     def __init__(self):
         multiprocessing.Process.__init__(self)
-
-    def run(self):
-        newrecord = 0
-
-        global timestamp
-        global speed
-        # global gpsLa
-        # global gpsLo
-        global eventQueue
         global overlapNum
         global SVM_flag
         global LDA_flag
+        global processLock
+        self.SVM_flag = SVM_flag
+        self.overlapNum = overlapNum
+        self.LDA_flag = LDA_flag
+        self.processLock = processLock
+
+    def run(self):
+        global samplingRate
+        global xstdQueue
+        global ystdQueue
+        global std_window
+        global timestamp
+        global speed
+        global eventQueue
         global dataQueue
 
         lowpass = queue.Queue()
         BTserial = getSerial()
-        obddata = ''
-        obddata = obddata.encode('utf-8')
+        obddata = ''.encode('utf-8')
+
+        # initialize the sampling rate of the data reading
+        countDown = 15
+        timetemp = []
+        while countDown > 0:
+            row = obddata + BTserial.readline()
+            row = splitByte(row)
+            if row != "":
+                timetemp.append(int(round(time.time() * 1000)))
+                countDown = countDown - 1
+        # calculate the sampling rate of the car
+        samplingRate = 14 / ((timetemp[-1] - timetemp[0]) / 1000)
+        std_window = int(samplingRate + 0.5)
+        xstdQueue = queue.Queue(maxsize=(2 * std_window - 1))
+        ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
+        print('samplingrate--' + str(samplingRate))
+        print('std_window:', str(std_window))
 
         lowpassCount = 0
         cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
@@ -190,24 +212,26 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
                     # put the event into Queue
                     if not event is None:
-
-                        if SVM_flag > 0:
-                            overlapNum = overlapNum + 1
+                        print(self.SVM_flag.value)
+                        self.processLock.acquire() #get the lock
+                        if self.SVM_flag.value > 0:
+                            self.overlapNum.value += 1
                         eventQueue.put(event)
-                        SVM_flag = SVM_flag - 1
+                        self.SVM_flag.value -= 1
+                        self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
-                        LDA_flag = False
                     if not yevent is None:
                         data = yevent.getValue()
                         # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
                         # if max_gyo < 15:
                         #     yevent.setType(yevent.getType() + 2)
-                        if SVM_flag > 0:
-                            overlapNum = overlapNum + 1
+                        self.processLock.acquire()  # get the lock
+                        if self.SVM_flag.value > 0:
+                            self.overlapNum.value += 1
                         eventQueue.put(yevent)
-                        SVM_flag = SVM_flag - 1
+                        self.SVM_flag.value -= 1
+                        self.processLock.release()  # release the process lock
                         print("put turn into svm")
-                        LDA_flag = False
 
                     lowpass.get()
                     lowpassCount = lowpassCount - 1
@@ -287,19 +311,21 @@ class SVMthread(threading.Thread):
         global eventQueue
         global SVMResultQueue
         global LDA_flag
+        global SVM_flag
         global svm_label_buffer
+        global processLock
 
         while True:
             #  define type and intensity
-            if SVM_flag==0:
-                print("svm flag is 0")
-            if (not eventQueue.empty()) and SVM_flag == 0:
-                print("get event from detection")
-                eventNum = overlapNum
-                overlapNum = 0
+            if (not eventQueue.empty()) and SVM_flag.value == 0:
+                # print("get event from detection")
+                processLock.acquire()  # get the lock
+                eventNum = overlapNum.value
+                overlapNum.value = 0
                 eventList = []
                 for i in range(0, eventNum):
                     eventList.append(eventQueue.get())
+                processLock.release()  # release the process lock
                 eventList = self.makeDecision(eventList)
 
                 for i in range(0, eventNum):
@@ -351,7 +377,7 @@ class SVMthread(threading.Thread):
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
                         svm_label_buffer = svm_label_buffer + change_n_to_a(result[0])
-                        LDA_flag = True
+                        LDA_flag.value = True
 
     def makeDecision(self, eventList):
         for i in range(0, len(eventList) - 2):
@@ -450,7 +476,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         #  monitor time-window
         time.sleep(time_window)
         while True:
-            if time.time() - start_time > time_window and LDA_flag:
+            if time.time() - start_time > time_window and LDA_flag.value:
                 GUI_flag = True
                 start_time = time.time()
                 temp_word = svm_label_buffer
@@ -524,6 +550,7 @@ def detectEvent(data):
     global bfault
     global SVM_flag
     global LDA_flag
+    global processLock
     sflag = False
     bflag = False
     xarray = []
@@ -556,9 +583,12 @@ def detectEvent(data):
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 sevent.addValue(xarray[i])
+            print("after get start")
             sflag = True
-            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
-            LDA_flag = False
+            processLock.acquire()  # get the lock
+            SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
+            LDA_flag.value = False
+            processLock.release()  # release the process lock
             print("catch acceleration")
         elif accx > 0.05 and thresholdnum > 0:
             thresholdnum = thresholdnum + 1
@@ -578,8 +608,10 @@ def detectEvent(data):
             else:
                 thresholdnum = 0
                 sfault = faultNum
-                SVM_flag = SVM_flag - 1
-                LDA_flag = True
+                processLock.acquire()  # get the lock
+                SVM_flag.value = SVM_flag.value - 1
+                LDA_flag.value = True
+                processLock.release()  # release the process lock
                 print("dismis the speedup")
         elif thresholdnum > 0:
             thresholdnum = thresholdnum + 1
@@ -591,8 +623,10 @@ def detectEvent(data):
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 bevent.addValue(xarray[i])
             bflag = True
-            SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
-            LDA_flag = False
+            processLock.acquire()  # get the lock
+            SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
+            LDA_flag.value = False
+            processLock.release()  # release the process lock
             print("catch a break")
         elif accx < -0.06 and bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
@@ -612,8 +646,10 @@ def detectEvent(data):
             else:
                 bfault = faultNum
                 bthresholdnum = 0
-                SVM_flag = SVM_flag - 1
-                LDA_flag = True
+                processLock.acquire()  # get the lock
+                SVM_flag.value = SVM_flag.value - 1
+                LDA_flag.value = True
+                processLock.release()  # release the process lock
                 print("dimiss the break")
         elif bthresholdnum > 0:
             bthresholdnum = bthresholdnum + 1
@@ -628,7 +664,6 @@ def detectEvent(data):
 tthresholdnum = 0
 tevent = Event(0, -1)
 tfault = 3
-swerveFlag = False
 positive = True
 negative = True
 
@@ -676,8 +711,10 @@ def detectYEvent(data):
                     tevent.addValue(yarray[i])
                 tflag = True
                 negative = False
-                SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
-                LDA_flag = False
+                processLock.acquire()  # get the lock
+                SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
+                LDA_flag.value = False
+                processLock.release()  # release the process lock
                 print("catch turn")
             elif accy > 0.06 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
@@ -699,8 +736,10 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     negative = True
-                    SVM_flag = SVM_flag - 1
-                    LDA_flag = True
+                    processLock.acquire()  # get the lock
+                    SVM_flag.value = SVM_flag.value - 1
+                    LDA_flag.value = True
+                    processLock.release()  # release the process lock
                     print("dismiss the turn")
             elif tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
@@ -714,9 +753,8 @@ def detectYEvent(data):
                     tevent.addValue(yarray[i])
                 tflag = True
                 positive = False
-
-                SVM_flag = SVM_flag + 1  # set the flag to denote the event starts
-                LDA_flag = False
+                SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
+                LDA_flag.value = False
                 print("catch the turn")
             elif accy < -0.06 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
@@ -738,8 +776,10 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     positive = True
-                    SVM_flag = SVM_flag - 1
-                    LDA_flag = True
+                    processLock.acquire()  # get the lock
+                    SVM_flag.value = SVM_flag.value - 1
+                    LDA_flag.value = True
+                    processLock.release()  # release the process lock
                     print("dismiss the turn")
             elif tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
@@ -772,33 +812,8 @@ def splitByte(obdData):
 
 
 def main():
-    # initialize the sampling rate of the data reading
-    global samplingRate
-    global xstdQueue
-    global ystdQueue
-    global std_window
     global SVMResultQueue
     global GUI_flag
-
-    BTserial = getSerial()
-    countDown = 15
-    obddata = ''
-    obddata = obddata.encode('utf-8')
-    timestamp = []
-    while countDown > 0:
-        row = obddata + BTserial.readline()
-        row = splitByte(row)
-        if row != "":
-            timestamp.append(int(round(time.time()*1000)))
-            countDown = countDown - 1
-    # calculate the sampling rate of the car
-    samplingRate = 14 / ((timestamp[-1] - timestamp[0]) / 1000)
-    std_window = int(samplingRate + 0.5)
-    xstdQueue = queue.Queue(maxsize=(2 * std_window - 1))
-    ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
-
-    print('samplingrate--' + str(samplingRate))
-    print('std_window:', str(std_window))
 
     # start the data collection and event detection thread
     process1 = detectProcess()
@@ -834,9 +849,10 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
-    # with concurrent.futures.ProcessPoolExecutor() as executor:
-    #     executor.map(main())
+    processLock = multiprocessing.Lock()
+    SVM_flag = multiprocessing.Value("i",0)  # if bigger than 0, there are overlapped events in queue
+    overlapNum = multiprocessing.Value("i",0)  # the number of overlapped events
+    LDA_flag = multiprocessing.Value(c_bool,True)  # if False, there are a event holding a time window, we should waiting for the end of event
     eventQueue = multiprocessing.Queue()
     dataQueue = multiprocessing.Queue()
     main()
