@@ -478,6 +478,9 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 GUI_flag = True
                 start_time = time.time()
                 temp_word = svm_label_buffer
+                print("__________________")
+                print("temp word:   "+temp_word)
+                print("__________________")
                 trip_svm_buffer += temp_word
                 svm_label_buffer = ""
                 if temp_word != "":
