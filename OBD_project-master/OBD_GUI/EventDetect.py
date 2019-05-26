@@ -472,15 +472,16 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         ldaforevent.LDALoad(ldaforevent)
         start_time = time.time()
         #  monitor time-window
-        time.sleep(time_window)
+        time.sleep(time_window/2)
         while True:
             if time.time() - start_time > time_window and LDA_flag.value:
                 GUI_flag = True
-                start_time = time.time()
                 temp_word = svm_label_buffer
                 print("__________________")
-                print("temp word:   "+temp_word)
+                print("temp word       :   "+temp_word)
+                print("time window size:   "+str(time.time()-start_time))
                 print("__________________")
+                start_time = time.time()
                 trip_svm_buffer += temp_word
                 svm_label_buffer = ""
                 if temp_word != "":
