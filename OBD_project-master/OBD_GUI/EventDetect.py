@@ -340,6 +340,7 @@ class SVMthread(threading.Thread):
                         result = svm.predict([vect])  # result of SVM
                         score = svm.decision_function([vect])  # score of SVM for each tyeps
                         score = np.array(score[0])
+                        print("event is ",str(eventList[i].getType()),":",score)
 
                         if eventList[i].getType() >= 2:
                             index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
