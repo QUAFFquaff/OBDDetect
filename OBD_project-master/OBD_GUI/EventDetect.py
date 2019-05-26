@@ -313,16 +313,19 @@ class SVMthread(threading.Thread):
         global LDA_flag
         global SVM_flag
         global svm_label_buffer
+        global processLock
 
         while True:
             #  define type and intensity
             if (not eventQueue.empty()) and SVM_flag.value == 0:
                 # print("get event from detection")
+                processLock.acquire()  # get the lock
                 eventNum = overlapNum.value
                 overlapNum.value = 0
                 eventList = []
                 for i in range(0, eventNum):
                     eventList.append(eventQueue.get())
+                processLock.release()  # release the process lock
                 eventList = self.makeDecision(eventList)
 
                 for i in range(0, eventNum):
@@ -813,7 +816,7 @@ def main():
     global GUI_flag
 
     # start the data collection and event detection thread
-    process1 = detectProcess(processLock,)
+    process1 = detectProcess()
     process1.start()
 
     # start the thread for SVM
