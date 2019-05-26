@@ -200,7 +200,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
-                    print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
+                    # print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
                     # detect event
                     event = detectEvent(
                         [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
@@ -822,8 +822,8 @@ def main():
     thread2.start()
 
     # # save data into data base thread
-    # data_thread = DataThread()
-    # data_thread.start()
+    data_thread = DataThread()
+    data_thread.start()
 
     # start lda thread
     lda_thread = Thread_for_lda()
