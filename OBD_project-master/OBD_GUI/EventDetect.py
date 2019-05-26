@@ -319,13 +319,11 @@ class SVMthread(threading.Thread):
             #  define type and intensity
             if (not eventQueue.empty()) and SVM_flag.value == 0:
                 # print("get event from detection")
-                processLock.acquire()  # get the lock
                 eventNum = overlapNum.value
                 overlapNum.value = 0
                 eventList = []
                 for i in range(0, eventNum):
                     eventList.append(eventQueue.get())
-                processLock.release()  # release the process lock
                 eventList = self.makeDecision(eventList)
 
                 for i in range(0, eventNum):
@@ -579,24 +577,24 @@ def detectEvent(data):
         timestamp = data[0]
 
         if accx > 0.1 and max(stdXArray) > 0.02 and thresholdnum == 0:
-            thresholdnum = thresholdnum + 1
+            thresholdnum += 1
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 sevent.addValue(xarray[i])
             print("after get start")
             sflag = True
             processLock.acquire()  # get the lock
-            SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
+            SVM_flag.value += 1  # set the flag to denote the event starts
             LDA_flag.value = False
             processLock.release()  # release the process lock
             print("catch acceleration")
         elif accx > 0.05 and thresholdnum > 0:
-            thresholdnum = thresholdnum + 1
+            thresholdnum += 1
             sfault = faultNum
             sflag = True
         elif accx <= 0.05 and sfault > 0 and thresholdnum > 0:
-            sfault = sfault - 1
-            thresholdnum = thresholdnum + 1
+            sfault -= 1
+            thresholdnum += 1
             sflag = True
         elif (accx <= 0.05 or stdX < 0.01) and thresholdnum > 0:
             if thresholdnum > minLength:
@@ -609,32 +607,32 @@ def detectEvent(data):
                 thresholdnum = 0
                 sfault = faultNum
                 processLock.acquire()  # get the lock
-                SVM_flag.value = SVM_flag.value - 1
+                SVM_flag.value -= 1
                 LDA_flag.value = True
                 processLock.release()  # release the process lock
                 print("dismis the speedup")
         elif thresholdnum > 0:
-            thresholdnum = thresholdnum + 1
+            thresholdnum += 1
             sflag = True
 
         if accx < -0.12 and max(stdXArray) > 0.02 and bthresholdnum == 0:
-            bthresholdnum = bthresholdnum + 1
+            bthresholdnum += 1
             bevent = Event(xarray[startIndex][0], 1)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 bevent.addValue(xarray[i])
             bflag = True
             processLock.acquire()  # get the lock
-            SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
+            SVM_flag.value += 1  # set the flag to denote the event starts
             LDA_flag.value = False
             processLock.release()  # release the process lock
             print("catch a break")
         elif accx < -0.06 and bthresholdnum > 0:
-            bthresholdnum = bthresholdnum + 1
+            bthresholdnum += 1
             bfault = faultNum
             bflag = True
         elif accx >= -0.06 and bfault > 0 and bthresholdnum > 0:
-            bfault = bfault - 1
-            bthresholdnum = bthresholdnum + 1
+            bfault -= 1
+            bthresholdnum += 1
             bflag = True
         elif (accx >= -0.06 or stdX < 0.01) and bthresholdnum > 0:
             if bthresholdnum > minLength:
@@ -647,12 +645,12 @@ def detectEvent(data):
                 bfault = faultNum
                 bthresholdnum = 0
                 processLock.acquire()  # get the lock
-                SVM_flag.value = SVM_flag.value - 1
+                SVM_flag.value -= 1
                 LDA_flag.value = True
                 processLock.release()  # release the process lock
                 print("dimiss the break")
         elif bthresholdnum > 0:
-            bthresholdnum = bthresholdnum + 1
+            bthresholdnum += 1
             bflag = True
 
     if sflag:
@@ -705,14 +703,14 @@ def detectYEvent(data):
 
         if positive:
             if accy > 0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
-                tthresholdnum = tthresholdnum + 1
+                tthresholdnum += 1
                 tevent = Event(yarray[startIndex][0], 2)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
                     tevent.addValue(yarray[i])
                 tflag = True
                 negative = False
                 processLock.acquire()  # get the lock
-                SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
+                SVM_flag.value += 1  # set the flag to denote the event starts
                 LDA_flag.value = False
                 processLock.release()  # release the process lock
                 print("catch turn")
