@@ -491,7 +491,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
             weight = [0.06684435423, 0.09224520883, 0.1265973246, 0.1724409706, 0.2325203058, 0.309351836]
         elif 4 == self.type:
             weight = [0.02485508984, 0.04823130184, 0.09134744503, 0.1651632657, 0.2743477661, 0.3960551315]
-        for i in range(len(weight)):
+        for i in range(len(self.score_queue)):
             temp_sum += weight[i] * self.score_queue[i]
         return temp_sum
 
