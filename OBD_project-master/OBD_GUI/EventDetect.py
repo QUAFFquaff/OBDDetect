@@ -208,7 +208,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
-                    dataQueue.put([row, timestamp])
+                    dataQueue.put([[speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz], timestamp])
 
                     # put the event into Queue
                     if not event is None:
@@ -528,7 +528,12 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
     def result_to_score(self, result):
         score = 0
         for node in result:
-            score += (node[0] + 1) * 25 * node[1]
+            if node[0] == 1:
+                score += 100 * node[1]
+            elif node[0] == 0:
+                score += 75 * node[1]
+            else:
+                score += (node[0] + 1) * 25 * node[1]
         return score
 
     def stop(self):
