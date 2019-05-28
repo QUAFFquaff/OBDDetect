@@ -194,6 +194,28 @@ class LDAForEvent:
             texts.append(temp_context)
             temp_context = []
         print(texts)
+        texts = [
+            ['oha', 'hvva', 'hv', 'ah', 'ah', 'ch', 'a', 'h', 'ajc', 'va', 'ohx', 'ajcva', 'oa', 'h', 'va', 'o', 'qjch',
+             'vcoa', 'h', 'qajc', 'v', 'h', 'ha', 'ha', 'va', 'h', 'a', 'h', 'a', 'h', 'qoo'],
+            ['o', 'oo', 'oooh', 'aoah', 'aha', 'oh', 'aa', 'h', 'a', 'h', 'vv', 'a', 'ahh', 'oao', 'a', 'o', 'ho', 'o',
+             'o', 'o', 'ojcojc', 'jcx', 'h', 'xa', 'o', 'a', 'hah', 'jcj', 'cxa', 'a', 'h', 'ah', 'ah', 'aho',
+             'jccjcca', 'qj', 'a', 'oa', 'ho', 'haa', 'oooo', 'oa', 'ojxcoo', 'o', 'ha', 'o', 'hh', 'a', 'a', 'h', 'a',
+             'h', 'ah', 'a', 'h', 'aq', 'qo', 'o'],
+            ['h', 'haa', 'oahah', 'oahoo', 'iahah', 'hbibh', 'hp', 'bvbhoo', 'oah', 'aohaoo', 'a', 'hah', 'ao', 'obhb',
+             'hoa', 'ao', 'a', 'ojcch', 'o', 'ah', 'bh'],
+            ['hah', 'ao', 'o', 'ahah', 'hhhah', 'h', 'hhahah', 'h', 'b', 'aaaa', 'a', 'ahha', 'a', 'a', 'a', 'a', 'aa',
+             'aa', 'aba', 'a', 'a', 'ah', 'a', 'a', 'a', 'ah', 'bhaha', 'hh', 'hihh', 'a', 'aa', 'aaha', 'ab'],
+            ['oaoo', 'ohao', 'aoao', 'aoao', 'aha', 'oh', 'a', 'h', 'a', 'h', 'a', 'oa', 'oa', 'hoao', 'hao', 'ha', 'h',
+             'a', 'vva', 'oa', 'ahaah', 'aha', 'ho', 'aoaoo', 'o', 'oo', 'oah', 'hoha', 'hv', 'aoa', 'oaooo', 'aoa',
+             'oib', 'jcoqq', 'qjaha', 'ajaajwa', 'q', 'va', 'b', 'oh', 'o', 'oho', 'piaq', 'jj', 'v', 'jxaq', 'ia',
+             'iajaia', 'qjcxqa', 'oojxc', 'q', 'bioapa', 'pa', 'ho', 'va', 'hoib', 'ha', 'h', 'c', 'h', 'h', 'b', 'h',
+             'ch', 'ah', 'j', 'bo', 'ivjcp', 'jah', 'bv', 'ho']
+            , ['a', 'a', 'a', 'a', 'a', 'h', 'h', 'ah', 'ahh', 'ahh', 'ha', 'hha', 'hah', 'hh', 'aa']
+            , ['o', 'v', 'a', 'av', 'aoo', 'oo', 'a', 'h', 'ho', 'oh', 'av', 'hv', 'oa', 'ov'],
+            ['aahh', 'ahahh', 'haha', 'ahha'],
+            ['b', 'i', 'i', 'b', 'bi', 'ib', 'pw'],
+            ['c', 'j', 'cj', 'qx', 'c', 'cjcj', 'jc', 'xc', 'cjxc', 'j'],
+            ['b', 'bibi', 'ib', 'bi', 'bp', 'pi', 'bpi', 'w', 'bw', 'ip', 'ipp', 'bbi', 'iib']]
         # turn our tokenized documents into a id <-> term dictionary
         dictionary = corpora.Dictionary(texts)
 
