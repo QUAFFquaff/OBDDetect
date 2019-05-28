@@ -576,7 +576,7 @@ def detectEvent(data):
         xstdQueue.get()
 
         stdX = stdXArray[-1]
-        startIndex = stdXArray.index(max(stdXArray))
+        startIndex = stdXArray.index(max(stdXArray[0:int(std_window/2)]))
 
         accx = data[3]
         timestamp = data[0]
@@ -701,7 +701,7 @@ def detectYEvent(data):
         ystdQueue.get()
         stdY = stdYArray[-1]
 
-        startIndex = stdYArray.index(max(stdYArray))
+        startIndex = stdYArray.index(max(stdYArray[0:int(std_window/2)]))
 
         accy = data[2]
         timestamp = data[0]
