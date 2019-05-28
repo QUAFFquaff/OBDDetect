@@ -181,6 +181,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
             if row != "":
                 #print(row)
                 timestamp = int(round(time.time() * 1000))
+                device = row[0]
                 speed = row[1]
                 accy = row[2]
                 accx = row[3]
@@ -208,7 +209,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
-                    dataQueue.put([[row[0],speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz], timestamp])
+                    dataQueue.put([[device,speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz], timestamp])
 
                     # put the event into Queue
                     if not event is None:
@@ -282,6 +283,7 @@ class DataThread(threading.Thread):
                         for i in range(0, len(data)):
                             temp = data[i]
                             row = temp[0]
+                            print(row)
                             timestamp = temp[1]
 
                             mycursor = connection.cursor()
