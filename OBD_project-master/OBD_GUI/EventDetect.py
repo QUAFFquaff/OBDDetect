@@ -209,7 +209,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
-                    dataQueue.put([[device,speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz], timestamp])
+                    dataQueue.put([np.array[device,speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz], timestamp])
 
                     # put the event into Queue
                     if not event is None:

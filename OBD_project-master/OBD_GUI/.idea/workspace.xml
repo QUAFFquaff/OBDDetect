@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/../.idea/OBD_project-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/OBD_project-master.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EventDetect.py" beforeDir="false" afterPath="$PROJECT_DIR$/EventDetect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/svm.pkl" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="210" column="43" selection-start-line="210" selection-start-column="43" selection-end-line="210" selection-end-column="43" />
+            <state relative-caret-position="374">
+              <caret line="211" column="43" selection-start-line="211" selection-start-column="43" selection-end-line="211" selection-end-column="43" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -339,12 +338,12 @@
       <workItem from="1557183890855" duration="20465000" />
       <workItem from="1558232875053" duration="489000" />
       <workItem from="1558982269739" duration="7319000" />
-      <workItem from="1559067260973" duration="1907000" />
+      <workItem from="1559067260973" duration="2312000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="144833000" />
+    <option name="totallyTimeSpent" value="145238000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -452,8 +451,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/EventDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="210" column="43" selection-start-line="210" selection-start-column="43" selection-end-line="210" selection-end-column="43" />
+        <state relative-caret-position="374">
+          <caret line="211" column="43" selection-start-line="211" selection-start-column="43" selection-end-line="211" selection-end-column="43" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
