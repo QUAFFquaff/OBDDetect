@@ -208,7 +208,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
-                    dataQueue.put([[speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz], timestamp])
+                    dataQueue.put([[row[0],speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz], timestamp])
 
                     # put the event into Queue
                     if not event is None:
@@ -342,36 +342,36 @@ class SVMthread(threading.Thread):
                         score = np.array(score[0])
                         print("event is ",str(eventList[i].getType()),":",score)
 
-                        if eventList[i].getType() >= 2:
-                            index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
-                            if index == 0:
-                                result = [2]
-                            elif index == 1:
-                                result = [3]
-                            elif index == 2:
-                                result = [6]
-                            elif index == 3:
-                                result = [7]
-                            elif index == 4:
-                                result = [10]
-                            else:
-                                result = [11]
-                        elif eventList[i].getType() == 0:
-                            index = np.argmax([score[0], score[4], score[8]])
-                            if index == 0:
-                                result = [0]
-                            elif index == 1:
-                                result = [4]
-                            elif index == 2:
-                                result = [8]
-                        elif eventList[i].getType() == 1:
-                            index = np.argmax([score[1], score[5], score[9]])
-                            if index == 0:
-                                result = [1]
-                            elif index == 1:
-                                result = [2]
-                            elif index == 2:
-                                result = [9]
+                        # if eventList[i].getType() >= 2:
+                        #     index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
+                        #     if index == 0:
+                        #         result = [2]
+                        #     elif index == 1:
+                        #         result = [3]
+                        #     elif index == 2:
+                        #         result = [6]
+                        #     elif index == 3:
+                        #         result = [7]
+                        #     elif index == 4:
+                        #         result = [10]
+                        #     else:
+                        #         result = [11]
+                        # elif eventList[i].getType() == 0:
+                        #     index = np.argmax([score[0], score[4], score[8]])
+                        #     if index == 0:
+                        #         result = [0]
+                        #     elif index == 1:
+                        #         result = [4]
+                        #     elif index == 2:
+                        #         result = [8]
+                        # elif eventList[i].getType() == 1:
+                        #     index = np.argmax([score[1], score[5], score[9]])
+                        #     if index == 0:
+                        #         result = [1]
+                        #     elif index == 1:
+                        #         result = [2]
+                        #     elif index == 2:
+                        #         result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
@@ -591,7 +591,6 @@ def detectEvent(data):
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 sevent.addValue(xarray[i])
-            print("after get start")
             sflag = True
             processLock.acquire()  # get the lock
             SVM_flag.value += 1  # set the flag to denote the event starts
