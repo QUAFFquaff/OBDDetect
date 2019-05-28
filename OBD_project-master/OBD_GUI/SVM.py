@@ -95,7 +95,8 @@ def svm_test(data):
         y_pro = model.predict_proba(predict[:,:23])
         y_score = model.decision_function(predict[:,:23])
         if(y_hat!=predict[:,-1]):
-            print("prob", y_pro)
+            # print("prob", y_pro)
+            print(predict[:,:23])
             print("score", y_score)
             y_score = np.array(y_score[0])
             print(np.argmax([y_score[2],y_score[3],y_score[6],y_score[7],y_score[10],y_score[11]]))
@@ -187,8 +188,16 @@ def init(datamatrix):
     file_w.save('ForLDA.xls')
 
     # linear normalization
-    max = np.max(vect, axis=0)
-    min = np.min(vect, axis=0)
+    # max = np.max(vect, axis=0)
+    # min = np.min(vect, axis=0)
+    max = [0.619, 0.944, 0.546, 0.418, 0.208, 0.281, 6.075, 17.258, 0.286, 0.349, 3.901, 26.569, 22.12, 60.271,
+           0.594,
+           0.932, 0.097, 0.191, 90, 136,
+           122.637, 29.291, 24.982]
+    min = [0.034, 0.021, -0.302, -0.249, 0.009, 0.004, 0.325, 0.575, -0.312, -0.281, -3.816, -20.210, -0.061,
+           -1.291,
+           -0.063, -0.067, -0.539, -0.818, -76, 5,
+           4.979, 0.408, 1.581]
     for i in range(len(vect[0])-1):
         # print(max[i])
         # print(min[i])

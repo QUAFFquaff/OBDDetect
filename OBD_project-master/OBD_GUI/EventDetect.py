@@ -203,9 +203,9 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     # print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
                     # detect event
                     event = detectEvent(
-                        [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
+                        [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
                     yevent = detectYEvent(
-                        [timestamp, speed, accysf[-2], accxsf[-2], acczsf[-2], gyox, gyoy, gyoz])
+                        [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
 
                     # start a thread to store data into databse
                     dataQueue.put([row, timestamp])
@@ -340,6 +340,7 @@ class SVMthread(threading.Thread):
                         result = svm.predict([vect])  # result of SVM
                         score = svm.decision_function([vect])  # score of SVM for each tyeps
                         score = np.array(score[0])
+                        print("event is ",str(eventList[i].getType()),":",score)
 
                         if eventList[i].getType() >= 2:
                             index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
@@ -558,7 +559,7 @@ def detectEvent(data):
     xarray = []
     stdXArray = []  # use to get the smallest std, which will be the beginning of an event
     faultNum = int(2 * samplingRate / 5)
-    minLength = int(samplingRate)
+    minLength = int(samplingRate*1.2)
 
     xstdQueue.put(data)
 
@@ -575,12 +576,12 @@ def detectEvent(data):
         xstdQueue.get()
 
         stdX = stdXArray[-1]
-        startIndex = stdXArray.index(max(stdXArray))
+        startIndex = stdXArray.index(max(stdXArray[0:int(std_window/2)]))
 
         accx = data[3]
         timestamp = data[0]
 
-        if accx > 0.1 and max(stdXArray) > 0.02 and thresholdnum == 0:
+        if accx > 0.12 and max(stdXArray) > 0.02 and thresholdnum == 0:
             thresholdnum += 1
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -619,7 +620,7 @@ def detectEvent(data):
             thresholdnum += 1
             sflag = True
 
-        if accx < -0.12 and max(stdXArray) > 0.02 and bthresholdnum == 0:
+        if accx < -0.15 and max(stdXArray) > 0.02 and bthresholdnum == 0:
             bthresholdnum += 1
             bevent = Event(xarray[startIndex][0], 1)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
@@ -682,7 +683,7 @@ def detectYEvent(data):
     yarray = []
     stdYArray = []  # use to get the smallest std, which will be the beginning of an event
     tflag = False
-    minLength = int(samplingRate * 1.2)
+    minLength = int(samplingRate * 1.5)
     maxLength = int(samplingRate * 14)
     faultNum = int(5 * samplingRate / 10)
     ystdQueue.put(data)
@@ -700,7 +701,7 @@ def detectYEvent(data):
         ystdQueue.get()
         stdY = stdYArray[-1]
 
-        startIndex = stdYArray.index(max(stdYArray))
+        startIndex = stdYArray.index(max(stdYArray[0:int(std_window/2)]))
 
         accy = data[2]
         timestamp = data[0]
