@@ -196,7 +196,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                 acc = np.dot(matrix, acc)
                 lowpass.put(acc)
                 lowpassCount = lowpassCount + 1
-                if (lowpassCount > 29):
+                if (lowpassCount > 59):
                     accxsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'x'))
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
@@ -343,36 +343,36 @@ class SVMthread(threading.Thread):
                         score = np.array(score[0])
                         print("event is ",str(eventList[i].getType()),":",score)
 
-                        # if eventList[i].getType() >= 2:
-                        #     index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
-                        #     if index == 0:
-                        #         result = [2]
-                        #     elif index == 1:
-                        #         result = [3]
-                        #     elif index == 2:
-                        #         result = [6]
-                        #     elif index == 3:
-                        #         result = [7]
-                        #     elif index == 4:
-                        #         result = [10]
-                        #     else:
-                        #         result = [11]
-                        # elif eventList[i].getType() == 0:
-                        #     index = np.argmax([score[0], score[4], score[8]])
-                        #     if index == 0:
-                        #         result = [0]
-                        #     elif index == 1:
-                        #         result = [4]
-                        #     elif index == 2:
-                        #         result = [8]
-                        # elif eventList[i].getType() == 1:
-                        #     index = np.argmax([score[1], score[5], score[9]])
-                        #     if index == 0:
-                        #         result = [1]
-                        #     elif index == 1:
-                        #         result = [2]
-                        #     elif index == 2:
-                        #         result = [9]
+                        if eventList[i].getType() >= 2:
+                            index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
+                            if index == 0:
+                                result = [2]
+                            elif index == 1:
+                                result = [3]
+                            elif index == 2:
+                                result = [6]
+                            elif index == 3:
+                                result = [7]
+                            elif index == 4:
+                                result = [10]
+                            else:
+                                result = [11]
+                        elif eventList[i].getType() == 0:
+                            index = np.argmax([score[0], score[4], score[8]])
+                            if index == 0:
+                                result = [0]
+                            elif index == 1:
+                                result = [4]
+                            elif index == 2:
+                                result = [8]
+                        elif eventList[i].getType() == 1:
+                            index = np.argmax([score[1], score[5], score[9]])
+                            if index == 0:
+                                result = [1]
+                            elif index == 1:
+                                result = [2]
+                            elif index == 2:
+                                result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
@@ -598,15 +598,15 @@ def detectEvent(data):
             LDA_flag.value = False
             processLock.release()  # release the process lock
             print("catch acceleration")
-        elif accx > 0.05 and thresholdnum > 0:
+        elif accx > 0.06 and thresholdnum > 0:
             thresholdnum += 1
             sfault = faultNum
             sflag = True
-        elif accx <= 0.05 and sfault > 0 and thresholdnum > 0:
+        elif accx <= 0.06 and sfault > 0 and thresholdnum > 0:
             sfault -= 1
             thresholdnum += 1
             sflag = True
-        elif (accx <= 0.05 or stdX < 0.01) and thresholdnum > 0:
+        elif (accx <= 0.06 or stdX < 0.01) and thresholdnum > 0:
             if thresholdnum > minLength:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
@@ -712,6 +712,7 @@ def detectYEvent(data):
         timestamp = data[0]
 
         if positive:
+            startIndex = stdYArray.index(min(stdYArray))
             if accy > 0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum += 1
                 tevent = Event(yarray[startIndex][0], 2)
@@ -754,6 +755,7 @@ def detectYEvent(data):
                 tflag = True
 
         if negative:
+            startIndex = stdYArray.index(max(stdYArray))
             if accy < -0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 3)
