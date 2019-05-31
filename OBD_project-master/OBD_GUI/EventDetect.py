@@ -98,6 +98,18 @@ class Event(object):
         self.vect = temp
         return self.vect
 
+    def filter(self, b, a):
+        temp = np.array(self.vect)
+        temp = temp.astype(np.float64)
+        y = signal.filtfilt(b, a, temp[:,2])
+        x = signal.filtfilt(b, a, temp[:,3])
+        z = signal.filtfilt(b, a, temp[:,4])
+        for i in range(0, len(temp)):
+            self.vect[i][2] = y[i]
+            self.vect[i][3] = x[i]
+            self.vect[i][4] = z[i]
+
+
     def getValue(self):
         return self.vect
 
@@ -204,16 +216,16 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     # print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
                     # detect event
                     event = detectEvent(
-                        [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
+                        [timestamp, speed, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
                     yevent = detectYEvent(
-                        [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
+                        [timestamp, speed, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
 
                     # start a thread to store data into databse
-                    dataQueue.put([np.array([device,speed, round(accysf[-4],6), round(accxsf[-4],6), round(acczsf[-4],6), gyox, gyoy, gyoz]), timestamp])
+                    dataQueue.put([np.array([device,speed, accy, accx, accz, gyox, gyoy, gyoz]), timestamp])
 
                     # put the event into Queue
                     if not event is None:
-                        print(self.SVM_flag.value)
+                        event.filter(b,a)
                         self.processLock.acquire() #get the lock
                         if self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
@@ -222,6 +234,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
                     if not yevent is None:
+                        event.filter(b, a)
                         data = yevent.getValue()
                         # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
                         # if max_gyo < 15:
@@ -392,14 +405,10 @@ class SVMthread(threading.Thread):
         return eventList
 
     def nomalization(self, vect):
-        max = [0.619, 0.944, 0.546, 0.418, 0.208, 0.281, 6.075, 17.258, 0.286, 0.349, 3.901, 26.569, 22.12, 60.271,
-               0.594,
-               0.932, 0.097, 0.191, 90, 136,
-               122.637, 29.291, 24.982]
-        min = [0.034, 0.021, -0.302, -0.249, 0.009, 0.004, 0.325, 0.575, -0.312, -0.281, -3.816, -20.210, -0.061,
-               -1.291,
-               -0.063, -0.067, -0.539, -0.818, -76, 5,
-               4.979, 0.408, 1.581]
+        max = [0.7614, 0.6011, 0.2729, 0.2104, 11.510, 4.6303, 0.2529, 0.2861, 13.922, 1.6740, 3.901, 31.65, 0.51791,
+               0.54475,0.1544, 0.0674, 75.0, 94.7125, 29.1634, 17.16]
+        min = [0.06909, 0.0079, 0.0206, 0.0020, 0.3709, 0.7642, -0.356, -0.277, -16.325, -2.0252, 2.27, -0.0867,
+               -0.0405, -0.748, -0.589, -90.0, 2.67796, 0.40508, 1.848]
         for i in range(len(vect)):
             vect[i] = (vect[i] - min[i]) / (max[i] - min[i])
         return vect
@@ -423,13 +432,13 @@ class SVMthread(threading.Thread):
         meanOY = np.mean(data[:, 5])
         maxOX = max(data[:, 6])
         maxOY = max(data[:, 5])
+        maxOri = max(maxOX, maxOY)
         t = (data[-1, 0] - data[0, 0]) / 1000
         meanSP = np.mean(data[:, 1])
         varSP = np.std(data[:, 1])
         differenceSP = data[-1, 2] - data[0, 2]
         maxSP = max(data[:, 2])
-        return [rangeAX, rangeAY, startAY, endAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOX,
-                maxOY, maxAX, maxAY, minAX, minAY, differenceSP, maxSP, meanSP, varSP, t]
+        return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, varSP, t]
 
     def saveResult(self, start, end, result):
         oldwd = open_workbook('ForLDA.xls', formatting_info=True)
@@ -573,18 +582,17 @@ def detectEvent(data):
         t = []  # transform the queue to array
         for i in range(xstdQueue.qsize()):
             temp = xstdQueue.get()
-            t.append(temp[3])
+            t.append(temp[9])
             if i > std_window - 2:
                 stdXArray.append(np.std(t[i - std_window + 1:i], ddof=1))
-                xarray.append(temp)
-                # x.append(temp[3])
+            xarray.append(temp[0:8])
             xstdQueue.put(temp)
         xstdQueue.get()
 
         stdX = stdXArray[-1]
-        startIndex = stdXArray.index(max(stdXArray[0:int(std_window/2)]))
+        startIndex = std_window - 1 + stdXArray.index(min(stdXArray[0:int(std_window/2)])) - 4
 
-        accx = data[3]
+        accx = data[9]
         timestamp = data[0]
 
         if accx > 0.12 and max(stdXArray) > 0.02 and thresholdnum == 0:
@@ -611,7 +619,7 @@ def detectEvent(data):
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
                 thresholdnum = 0
-                sevent.addValue(data)
+                sevent.addValue(data[0:8])
                 return sevent
             else:
                 thresholdnum = 0
@@ -649,7 +657,7 @@ def detectEvent(data):
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
                 bthresholdnum = 0
-                bevent.addValue(data)
+                bevent.addValue(data[0:8])
                 return bevent
             else:
                 bfault = faultNum
@@ -664,9 +672,9 @@ def detectEvent(data):
             bflag = True
 
     if sflag:
-        sevent.addValue(data)
+        sevent.addValue(data[0:8])
     if bflag:
-        bevent.addValue(data)
+        bevent.addValue(data[0:8])
 
 
 tthresholdnum = 0
@@ -697,22 +705,20 @@ def detectYEvent(data):
         t = []  # transform the queue to array
         for i in range(ystdQueue.qsize()):
             temp = ystdQueue.get()
-            t.append(temp[2])
+            t.append(temp[8])
             if i > std_window - 2:  # calculate the standard deviation from list
                 stdYArray.append(np.std(t[i - std_window + 1:i], ddof=1))
-                yarray.append(temp)
-            # y.append(temp[2])
+            yarray.append(temp[0:8])
             ystdQueue.put(temp)
         ystdQueue.get()
         stdY = stdYArray[-1]
 
-        startIndex = stdYArray.index(max(stdYArray[0:int(std_window/2)]))
+        startIndex = std_window - 1 + stdYArray.index(min(stdYArray[0:int(std_window/2)]))-4
 
-        accy = data[2]
+        accy = data[8]
         timestamp = data[0]
 
         if positive:
-            startIndex = stdYArray.index(min(stdYArray))
             if accy > 0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum += 1
                 tevent = Event(yarray[startIndex][0], 2)
@@ -739,7 +745,7 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     negative = True
-                    tevent.addValue(data)
+                    tevent.addValue(data[0:8])
                     return tevent
                 else:
                     tfault = faultNum
@@ -755,7 +761,6 @@ def detectYEvent(data):
                 tflag = True
 
         if negative:
-            startIndex = stdYArray.index(max(stdYArray))
             if accy < -0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
                 tthresholdnum = tthresholdnum + 1
                 tevent = Event(yarray[startIndex][0], 3)
@@ -780,7 +785,7 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     positive = True
-                    tevent.addValue(data)
+                    tevent.addValue(data[0:8])
                     return tevent
                 else:
                     tfault = faultNum
@@ -796,7 +801,7 @@ def detectYEvent(data):
                 tflag = True
 
     if tflag:
-        tevent.addValue(data)
+        tevent.addValue(data[0:8])
 
 
 def splitByte(obdData):
