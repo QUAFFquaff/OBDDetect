@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/OBD_project-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/OBD_project-master.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EventDetect.py" beforeDir="false" afterPath="$PROJECT_DIR$/EventDetect.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4737">
-              <caret line="622" column="29" lean-forward="true" selection-start-line="622" selection-start-column="29" selection-end-line="622" selection-end-column="29" />
+            <state relative-caret-position="457">
+              <caret line="872" column="39" lean-forward="true" selection-start-line="872" selection-start-column="39" selection-end-line="872" selection-end-column="39" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -91,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EventDetection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="655" column="40" lean-forward="true" selection-start-line="655" selection-start-column="40" selection-end-line="655" selection-end-column="40" />
+            <state relative-caret-position="333">
+              <caret line="656" column="35" lean-forward="true" selection-start-line="656" selection-start-column="35" selection-end-line="656" selection-end-column="35" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -155,11 +154,11 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="1905" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1440" />
-    <option name="height" value="780" />
+    <option name="width" value="1936" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -375,12 +374,12 @@
       <workItem from="1558982269739" duration="7319000" />
       <workItem from="1559067260973" duration="5625000" />
       <workItem from="1559105638074" duration="19464000" />
-      <workItem from="1559258651144" duration="31263000" />
+      <workItem from="1559258651144" duration="32742000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="199278000" />
+    <option name="totallyTimeSpent" value="200757000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -392,7 +391,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1176" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.499385" visible="true" weight="0.123667374" />
@@ -400,7 +399,7 @@
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28379673" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3206934" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3978907" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -513,16 +512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EventDetection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="655" column="40" lean-forward="true" selection-start-line="655" selection-start-column="40" selection-end-line="655" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SVM.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="747">
@@ -533,10 +522,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/EventDetection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="656" column="35" lean-forward="true" selection-start-line="656" selection-start-column="35" selection-end-line="656" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/EventDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4737">
-          <caret line="622" column="29" lean-forward="true" selection-start-line="622" selection-start-column="29" selection-end-line="622" selection-end-column="29" />
+        <state relative-caret-position="457">
+          <caret line="872" column="39" lean-forward="true" selection-start-line="872" selection-start-column="39" selection-end-line="872" selection-end-column="39" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
