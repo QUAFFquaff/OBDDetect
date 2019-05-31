@@ -5,6 +5,8 @@ import xlrd
 import numpy as np
 # Create SVM classification object
 from xlwt import Workbook
+import random
+from sklearn.neighbors import NearestNeighbors
 
 def calcData(data):
     maxAX = max(data[:, 4])
@@ -115,11 +117,71 @@ def write_excel(data, file_name):
     write_data(data, table)
     file_w.save(file_name)
 
+class Smote:
+    def __init__(self, samples, N=10, k=5):
+        self.n_samples, self.n_attrs = samples.shape
+        self.N = N
+        self.k = k
+        self.samples = samples
+        self.newindex = 0
+
+    def over_sampling(self):
+        N = int(self.N / 100)
+        self.synthetic = np.zeros((self.n_samples * N, self.n_attrs))
+        neighbors = NearestNeighbors(n_neighbors=self.k).fit(self.samples)
+        # print('neighbors', neighbors)
+        for i in range(len(self.samples)):
+            print('samples', self.samples[i])
+            nnarray = neighbors.kneighbors(self.samples[i].reshape((1, -1)), return_distance=False)[
+                0]  # Finds the K-neighbors of a point.
+            print('nna', nnarray)
+            self._populate(N, i, nnarray)
+        return self.synthetic
+
+    def _populate(self, N, i, nnarray):
+        for j in range(N):
+            # print('j', j)
+            nn = random.randint(0, self.k - 1)  # 包括end
+            dif = self.samples[nnarray[nn]] - self.samples[i]
+            gap = random.random()
+            self.synthetic[self.newindex] = self.samples[i] + gap * dif
+            self.newindex += 1
+            # print(self.newindex)
+
+def read_excel2():
+    data = xlrd.open_workbook('Smote.xlsx')
+    table = data.sheets()[0]
+
+    start = 0  # 开始的行
+    end = 9 # 结束的行
+    # end = 6847  # 结束的行
+    rows = end - start
+
+    list_values = []
+    for x in range(start, end):
+        values = []
+        row = table.row_values(x)
+        # all data from excel
+        for i in range(19):
+            # print(value)
+            values.append(row[i])
+        list_values.append(values)
+    datamatrix = np.array(list_values)
+    datamatrix = datamatrix.astype(np.float64)
+    # print(datamatrix)
+    return datamatrix
+
 def main():
-    datamatrix = read_excel('label data.xlsx')
-    vect = np.array(init(datamatrix))
-    print(vect)
-    write_excel(vect, 'vect.xls')
+    # datamatrix = read_excel('label data.xlsx')
+    # vect = np.array(init(datamatrix))
+    # print(vect)
+    # write_excel(vect, 'vect.xls')
+
+    a = read_excel2()
+    s = Smote(a, N=100)
+    oversampling = s.over_sampling()
+    print(oversampling)
+    write_excel(oversampling,'SmoteOutput.xls')
 
 
 if __name__ == "__main__":
