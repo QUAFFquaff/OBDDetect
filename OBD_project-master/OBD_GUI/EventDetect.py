@@ -225,7 +225,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
                     # put the event into Queue
                     if not event is None:
-                        event.filter(b,a)
+                        event.filter(b, a)
                         self.processLock.acquire() #get the lock
                         if self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
@@ -234,7 +234,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
                     if not yevent is None:
-                        event.filter(b, a)
+                        yevent.filter(b, a)
                         data = yevent.getValue()
                         # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
                         # if max_gyo < 15:
