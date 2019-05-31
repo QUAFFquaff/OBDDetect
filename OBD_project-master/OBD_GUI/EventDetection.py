@@ -42,7 +42,7 @@ overlapNum = 0  # the number of overlapped events
 
 
 def connectDB():
-    connection = pymysql.connect(host='localhost',
+    connection = pymysql.connect(host='35.197.95.95',
                                  user='root',
                                  password='password',
                                  db='DRIVINGDB',

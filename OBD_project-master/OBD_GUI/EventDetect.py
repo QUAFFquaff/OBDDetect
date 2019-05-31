@@ -62,7 +62,7 @@ def getSerial():
 
 
 def connectDB():
-    connection = pymysql.connect(host='35.197.95.95',
+    connection = pymysql.connect(host='localhost',
                                  user='root',
                                  password='obd12345',
                                  db='DRIVINGDB',
