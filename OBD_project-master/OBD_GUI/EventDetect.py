@@ -779,7 +779,7 @@ def detectYEvent(data):
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy >= -0.06 or stdY < 0.03) and tthresholdnum > 0:
+            elif (accy >= -0.06 or stdY < 0.015) and tthresholdnum > 0:
                 if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
