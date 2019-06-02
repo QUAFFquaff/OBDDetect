@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffdf47d7-dff2-4541-80b8-295fcf894a85" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/OBD_project-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/OBD_project-master.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CalculateFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/CalculateFeatures.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EventDetect.py" beforeDir="false" afterPath="$PROJECT_DIR$/EventDetect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ForLDA.xls" beforeDir="false" afterPath="$PROJECT_DIR$/ForLDA.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OutOBDX.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OutOBDX.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SVM.py" beforeDir="false" afterPath="$PROJECT_DIR$/SVM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Smote.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Smote.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmoteOutput.xls" beforeDir="false" afterPath="$PROJECT_DIR$/SmoteOutput.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/label data.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rawX.txt" beforeDir="false" afterPath="$PROJECT_DIR$/rawX.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/svm.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vect.xls" beforeDir="false" afterPath="$PROJECT_DIR$/vect.xls" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="64" column="51" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
+            <state>
+              <caret column="21" selection-start-column="21" selection-end-column="21" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -399,12 +385,12 @@
       <workItem from="1559105638074" duration="19464000" />
       <workItem from="1559258651144" duration="33386000" />
       <workItem from="1559437086274" duration="1952000" />
-      <workItem from="1559500910669" duration="3666000" />
+      <workItem from="1559500910669" duration="3876000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207019000" />
+    <option name="totallyTimeSpent" value="207229000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -550,8 +536,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/EventDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="64" column="51" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
+        <state>
+          <caret column="21" selection-start-column="21" selection-end-column="21" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
