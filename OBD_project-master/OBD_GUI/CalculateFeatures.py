@@ -42,7 +42,7 @@ def read_excel(file):
     table = data.sheets()[0]
 
     start = 0  # 开始的行
-    end = 21456 # 结束的行
+    end = 23041 # 结束的行
 
     list_values = []
     for x in range(start, end):
@@ -153,7 +153,7 @@ def read_excel2():
     table = data.sheets()[0]
 
     start = 0  # 开始的行
-    end = 9 # 结束的行
+    end = 6 # 结束的行
     # end = 6847  # 结束的行
     rows = end - start
 
@@ -172,16 +172,16 @@ def read_excel2():
     return datamatrix
 
 def main():
-    datamatrix = read_excel('label data.xlsx')
-    vect = np.array(init(datamatrix))
-    print(vect)
-    write_excel(vect, 'vect.xls')
+    # datamatrix = read_excel('label data.xlsx')
+    # vect = np.array(init(datamatrix))
+    # print(vect)
+    # write_excel(vect, 'vect.xls')
 
-    # a = read_excel2()
-    # s = Smote(a, N=100)
-    # oversampling = s.over_sampling()
-    # print(oversampling)
-    # write_excel(oversampling,'SmoteOutput.xls')
+    a = read_excel2()
+    s = Smote(a, N=100)
+    oversampling = s.over_sampling()
+    print(oversampling)
+    write_excel(oversampling,'SmoteOutput.xls')
 
 
 if __name__ == "__main__":

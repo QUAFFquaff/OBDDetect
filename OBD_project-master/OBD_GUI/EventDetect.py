@@ -62,7 +62,7 @@ def getSerial():
 
 
 def connectDB():
-    connection = pymysql.connect(host='localhost',
+    connection = pymysql.connect(host='35.197.95.95',
                                  user='root',
                                  password='obd12345',
                                  db='DRIVINGDB',
@@ -247,6 +247,10 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         self.processLock.release()  # release the process lock
                         print("put turn into svm")
 
+                    if speed==0 and dataQueue.qsize()>900:
+                        data_thread = DataThread()
+                        data_thread.start()
+
                     lowpass.get()
                     lowpassCount = lowpassCount - 1
             else:
@@ -282,29 +286,29 @@ class DataThread(threading.Thread):
 
     def run(self):
         global dataQueue
-        while True:
-            if dataQueue.qsize()>60:
-                data = []
-                while not dataQueue.empty():
-                    data.append(dataQueue.get())
-                try:
-                    # 获取一个游标
-                    connection = connectDB()
-                    connection.autocommit(True)
+        data = []
+        qsize = dataQueue.qsize()
+        while qsize>0:
+            data.append(dataQueue.get())
+            qsize-=1
+        try:
+            # 获取一个游标
+            connection = connectDB()
+            connection.autocommit(True)
 
-                    if len(data) > 0:
-                        for i in range(0, len(data)):
-                            temp = data[i]
-                            row = temp[0]
-                            timestamp = temp[1]
+            if len(data) > 0:
+                for i in range(0, len(data)):
+                    temp = data[i]
+                    row = temp[0]
+                    timestamp = temp[1]
 
-                            mycursor = connection.cursor()
-                            sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                            val = (row[0], "zahraa", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6], row[7])
-                            mycursor.execute(sql, val)
-                            mycursor.close()
-                finally:
-                    connection.close()
+                    mycursor = connection.cursor()
+                    sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                    val = (row[0], "zahraa", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6], row[7])
+                    mycursor.execute(sql, val)
+                    mycursor.close()
+        finally:
+            connection.close()
 
     def stop(self):
         self.__running.clear()
@@ -383,7 +387,7 @@ class SVMthread(threading.Thread):
                             if index == 0:
                                 result = [1]
                             elif index == 1:
-                                result = [2]
+                                result = [5]
                             elif index == 2:
                                 result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
@@ -839,8 +843,8 @@ def main():
     thread2.start()
 
     # # save data into data base thread
-    data_thread = DataThread()
-    data_thread.start()
+    # data_thread = DataThread()
+    # data_thread.start()
 
     # start lda thread
     lda_thread = Thread_for_lda()
