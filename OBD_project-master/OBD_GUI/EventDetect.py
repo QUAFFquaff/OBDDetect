@@ -52,7 +52,6 @@ trip_score = 50
 GUI_flag = False
 
 timestamp = 0
-speed = 0
 gpsLa = None
 gpsLo = None
 
@@ -237,7 +236,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                 # print(row)
                 timestamp = int(round(time.time() * 1000))
                 device = row[0]
-                speed = row[1]
+                speed.value = row[1]
                 accy = row[2]
                 accx = row[3]
                 accz = row[4]
@@ -259,12 +258,12 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     # print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
                     # detect event
                     event = detectEvent(
-                        [timestamp, speed, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
+                        [timestamp, speed.value, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
                     yevent = detectYEvent(
-                        [timestamp, speed, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
+                        [timestamp, speed.value, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
 
                     # start a thread to store data into databse
-                    dataQueue.put([np.array([device,speed, accy, accx, accz, gyox, gyoy, gyoz]), timestamp])
+                    dataQueue.put([np.array([device,speed.value, accy, accx, accz, gyox, gyoy, gyoz]), timestamp])
 
                     # put the event into Queue
                     if not event is None:
@@ -294,8 +293,8 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         self.processLock.release()  # release the process lock
                         log.logger.info("put turn into svm")
 
-                    print("Speed:",str(speed))
-                    if speed==0 and dataQueue.qsize()>900:
+
+                    if speed.value==0 and dataQueue.qsize()>900:
                         data_thread = DataThread()
                         data_thread.start()
 
@@ -555,6 +554,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                     trip_score = self.result_to_score(result_trip)
                     log.logger.info("trip score       :   " + str(trip_score))
                     log.logger.info("__________________")
+                    print("Speed:",str(speed.value))
                     # self.renew_trip_score(self,ldaforevent)
                     self.score_queue.append(self.result_to_score(time_window_result))
                 elif temp_word == "":
@@ -925,6 +925,7 @@ if __name__ == "__main__":
     overlapNum = multiprocessing.Value("i", 0)  # the number of overlapped events
     LDA_flag = multiprocessing.Value(c_bool,
                                      True)  # if False, there are a event holding a time window, we should waiting for the end of event
+    speed = multiprocessing.Value("i", 0)
     eventQueue = multiprocessing.Queue()
     dataQueue = multiprocessing.Queue()
     main()
