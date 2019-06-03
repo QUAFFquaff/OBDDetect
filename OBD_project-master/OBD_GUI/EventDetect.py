@@ -273,10 +273,12 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         event.filter(b, a)
                         self.processLock.acquire() #get the lock
 
-                        if self.SVM_flag.value > 0:
+                        if 4>self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
                         eventQueue.put(event)
                         self.SVM_flag.value -= 1
+                        if self.SVM_flag.value == 2:
+                            self.SVM_flag =0
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
                     if not yevent is None:
@@ -286,10 +288,12 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         # if max_gyo < 15:
                         #     yevent.setType(yevent.getType() + 2)
                         self.processLock.acquire()  # get the lock
-                        if self.SVM_flag.value > 0:
+                        if 4>self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
                         eventQueue.put(yevent)
                         self.SVM_flag.value -= 1
+                        if self.SVM_flag.value ==2:
+                            self.SVM_flag.value=0
                         self.processLock.release()  # release the process lock
                         log.logger.info("put turn into svm")
 
@@ -788,15 +792,15 @@ def detectYEvent(data):
                 LDA_flag.value = False
                 processLock.release()  # release the process lock
                 log.logger.info("catch turn")
-            elif accy > 0.06 and tthresholdnum > 0:
+            elif accy > 0.08 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
                 tflag = True
-            elif accy <= 0.06 and tfault > 0 and tthresholdnum > 0:
+            elif accy <= 0.08 and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy <= 0.06 or stdY < 0.015) and tthresholdnum > 0:
+            elif (accy <= 0.08 or stdY < 0.015) and tthresholdnum > 0:
                 if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
@@ -828,15 +832,15 @@ def detectYEvent(data):
                 SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
                 LDA_flag.value = False
                 log.logger.info("catch the turn")
-            elif accy < -0.06 and tthresholdnum > 0:
+            elif accy < -0.08 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
                 tflag = True
-            elif accy >= -0.06 and tfault > 0 and tthresholdnum > 0:
+            elif accy >= -0.08 and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy >= -0.06 or stdY < 0.015) and tthresholdnum > 0:
+            elif (accy >= -0.08 or stdY < 0.015) and tthresholdnum > 0:
                 if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum

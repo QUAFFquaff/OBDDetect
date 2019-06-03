@@ -102,8 +102,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="556" column="52" selection-start-line="556" selection-start-column="52" selection-end-line="556" selection-end-column="52" />
+            <state relative-caret-position="811">
+              <caret line="862" lean-forward="true" selection-start-line="862" selection-end-line="862" />
               <folding>
                 <element signature="e#22#35#0" expanded="true" />
               </folding>
@@ -145,6 +145,7 @@
     <findStrings>
       <find>data</find>
       <find>speed</find>
+      <find>LDA_flag</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -390,12 +391,12 @@
       <workItem from="1559258651144" duration="33386000" />
       <workItem from="1559437086274" duration="1952000" />
       <workItem from="1559500910669" duration="5428000" />
-      <workItem from="1559591133990" duration="1935000" />
+      <workItem from="1559591133990" duration="3053000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="210716000" />
+    <option name="totallyTimeSpent" value="211834000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -544,8 +545,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/EventDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="556" column="52" selection-start-line="556" selection-start-column="52" selection-end-line="556" selection-end-column="52" />
+        <state relative-caret-position="811">
+          <caret line="862" lean-forward="true" selection-start-line="862" selection-end-line="862" />
           <folding>
             <element signature="e#22#35#0" expanded="true" />
           </folding>
