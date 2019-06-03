@@ -335,6 +335,7 @@ class DataThread(threading.Thread):
 
         data = []
         qsize = dataQueue.qsize()
+        print("Data buffer size for database:"+str(qsize))
         while qsize>0:
             data.append(dataQueue.get())
             qsize-=1
