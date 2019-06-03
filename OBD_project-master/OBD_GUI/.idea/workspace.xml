@@ -102,8 +102,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="811">
-              <caret line="862" lean-forward="true" selection-start-line="862" selection-end-line="862" />
+            <state relative-caret-position="352">
+              <caret line="280" column="47" selection-start-line="280" selection-start-column="47" selection-end-line="280" selection-end-column="47" />
               <folding>
                 <element signature="e#22#35#0" expanded="true" />
               </folding>
@@ -219,7 +219,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.EventDetect">
     <configuration name="CalculateFeatures" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="OBD" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -234,6 +234,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CalculateFeatures.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="EventDetect" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="OBD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EventDetect.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -286,28 +308,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="python2" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="OBD" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="OBD" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -335,15 +335,15 @@
       <item itemvalue="Python.SVM" />
       <item itemvalue="Python.LowPass" />
       <item itemvalue="Python.CalculateFeatures" />
-      <item itemvalue="Python.python2" />
+      <item itemvalue="Python.EventDetect" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.EventDetect" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.SVM" />
         <item itemvalue="Python.CalculateFeatures" />
         <item itemvalue="Python.LowPass" />
-        <item itemvalue="Python.python2" />
       </list>
     </recent_temporary>
   </component>
@@ -391,12 +391,12 @@
       <workItem from="1559258651144" duration="33386000" />
       <workItem from="1559437086274" duration="1952000" />
       <workItem from="1559500910669" duration="5428000" />
-      <workItem from="1559591133990" duration="3053000" />
+      <workItem from="1559591133990" duration="3217000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="211834000" />
+    <option name="totallyTimeSpent" value="211998000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -442,7 +442,7 @@
     <SUITE FILE_PATH="coverage/OBD_GUI$EventDetection.coverage" NAME="EventDetection Coverage Results" MODIFIED="1558233007865" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OBD_GUI$python2.coverage" NAME="python2 Coverage Results" MODIFIED="1559324979368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OBD_GUI$SVM.coverage" NAME="SVM Coverage Results" MODIFIED="1559503382122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/OBD_GUI$EventDetect.coverage" NAME="EventDetect Coverage Results" MODIFIED="1559187548796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/OBD_GUI$EventDetect.coverage" NAME="EventDetect Coverage Results" MODIFIED="1559594363433" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OBD_GUI$LowPass.coverage" NAME="LowPass Coverage Results" MODIFIED="1559439176717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/OBD_GUI$test.coverage" NAME="test Coverage Results" MODIFIED="1559503455128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
@@ -545,8 +545,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/EventDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="811">
-          <caret line="862" lean-forward="true" selection-start-line="862" selection-end-line="862" />
+        <state relative-caret-position="352">
+          <caret line="280" column="47" selection-start-line="280" selection-start-column="47" selection-end-line="280" selection-end-column="47" />
           <folding>
             <element signature="e#22#35#0" expanded="true" />
           </folding>

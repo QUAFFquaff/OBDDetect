@@ -278,7 +278,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         eventQueue.put(event)
                         self.SVM_flag.value -= 1
                         if self.SVM_flag.value == 2:
-                            self.SVM_flag =0
+                            self.SVM_flag.value = 0
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
                     if not yevent is None:
@@ -292,8 +292,8 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                             self.overlapNum.value += 1
                         eventQueue.put(yevent)
                         self.SVM_flag.value -= 1
-                        if self.SVM_flag.value ==2:
-                            self.SVM_flag.value=0
+                        if self.SVM_flag.value == 2:
+                            self.SVM_flag.value = 0
                         self.processLock.release()  # release the process lock
                         log.logger.info("put turn into svm")
 
