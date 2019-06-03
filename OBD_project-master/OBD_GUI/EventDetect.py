@@ -15,6 +15,7 @@ from ctypes import c_bool
 
 import logging .config
 import logging
+from logging import handlers
 
 logging.basicConfig(level=logging.INFO,#控制台打印的日志级别
                     filename='new.log',
