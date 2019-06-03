@@ -222,7 +222,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
         print('samplingrate--' + str(samplingRate))
         print('std_window:', str(std_window))
         log.logger.info('samplingrate--' + str(samplingRate))
-        log.logger.info('std_window:', str(std_window))
+        log.logger.info('std_window:'+ str(std_window))
 
         lowpassCount = 0
         cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
