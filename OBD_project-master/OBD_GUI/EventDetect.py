@@ -24,7 +24,6 @@ logging.basicConfig(level=logging.INFO,#控制台打印的日志级别
                     '%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
                     #日志格式
                     )
-import concurrent.futures
 
 sys.path.append('../dataHandler/')
 from LDAForEvent import *
@@ -94,6 +93,7 @@ class Logger(object):
         self.logger.addHandler(sh) #把对象加到logger里
         self.logger.addHandler(th)
 
+log = Logger('all.log', level='debug')
 def getSerial():
     ser = serial.Serial(port='/dev/rfcomm0', baudrate=57600, timeout=0.5)
     if not ser.is_open:
@@ -220,6 +220,8 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
         ystdQueue = queue.Queue(maxsize=(2 * std_window - 1))
         print('samplingrate--' + str(samplingRate))
         print('std_window:', str(std_window))
+        log.logger.info('samplingrate--' + str(samplingRate))
+        log.logger.info('std_window:', str(std_window))
 
         lowpassCount = 0
         cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
@@ -266,7 +268,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     # put the event into Queue
                     if not event is None:
 
-                        print(self.SVM_flag.value)
+                        log.logger.info(self.SVM_flag.value)
 
                         event.filter(b, a)
                         self.processLock.acquire() #get the lock
@@ -289,7 +291,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         eventQueue.put(yevent)
                         self.SVM_flag.value -= 1
                         self.processLock.release()  # release the process lock
-                        print("put turn into svm")
+                        log.logger.info("put turn into svm")
 
                     if speed==0 and dataQueue.qsize()>900:
                         data_thread = DataThread()
@@ -298,7 +300,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     lowpass.get()
                     lowpassCount = lowpassCount - 1
             else:
-                print("something wrong with bluetooth")
+                log.logger.info("something wrong with bluetooth")
 
     def getLowPass(self, lowpass, opt):
         acc = []
@@ -563,10 +565,10 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
             if time.time() - start_time > time_window and LDA_flag.value:
                 GUI_flag = True
                 temp_word = svm_label_buffer
-                print("__________________")
-                print("temp word       :   " + temp_word)
-                print("time window size:   " + str(time.time() - start_time))
-                print("__________________")
+                log.logger.info("__________________")
+                log.logger.info("temp word       :   " + temp_word)
+                log.logger.info("time window size:   " + str(time.time() - start_time))
+                log.logger.info("__________________")
                 logging.INFO("__________________")
                 logging.INFO("temp word       :   " + temp_word)
                 logging.INFO("time window size:   " + str(time.time() - start_time))
@@ -577,7 +579,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 if temp_word != "":
                     result_time_window = ldaforevent.LDATest(ldaforevent, [temp_word])
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
-                    print(result_trip)
+                    log.logger.info(result_trip)
                     trip_score = self.result_to_score(result_trip)
                     # self.renew_trip_score(self,ldaforevent)
                     self.score_queue.append(self.result_to_score(result_time_window))
@@ -683,7 +685,7 @@ def detectEvent(data):
             SVM_flag.value += 1  # set the flag to denote the event starts
             LDA_flag.value = False
             processLock.release()  # release the process lock
-            print("catch acceleration")
+            log.logger.info("catch acceleration")
         elif accx > 0.06 and thresholdnum > 0:
             thresholdnum += 1
             sfault = faultNum
@@ -706,7 +708,7 @@ def detectEvent(data):
                 SVM_flag.value -= 1
                 LDA_flag.value = True
                 processLock.release()  # release the process lock
-                print("dismis the speedup")
+                log.logger.info("dismis the speedup")
         elif thresholdnum > 0:
             thresholdnum += 1
             sflag = True
@@ -721,7 +723,7 @@ def detectEvent(data):
             SVM_flag.value += 1  # set the flag to denote the event starts
             LDA_flag.value = False
             processLock.release()  # release the process lock
-            print("catch a break")
+            log.logger.info("catch a break")
         elif accx < -0.06 and bthresholdnum > 0:
             bthresholdnum += 1
             bfault = faultNum
@@ -744,7 +746,7 @@ def detectEvent(data):
                 SVM_flag.value -= 1
                 LDA_flag.value = True
                 processLock.release()  # release the process lock
-                print("dimiss the break")
+                log.logger.info("dimiss the break")
         elif bthresholdnum > 0:
             bthresholdnum += 1
             bflag = True
@@ -810,7 +812,7 @@ def detectYEvent(data):
                 SVM_flag.value += 1  # set the flag to denote the event starts
                 LDA_flag.value = False
                 processLock.release()  # release the process lock
-                print("catch turn")
+                log.logger.info("catch turn")
             elif accy > 0.06 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
@@ -835,7 +837,7 @@ def detectYEvent(data):
                     SVM_flag.value = SVM_flag.value - 1
                     LDA_flag.value = True
                     processLock.release()  # release the process lock
-                    print("dismiss the turn")
+                    log.logger.info("dismiss the turn")
             elif tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
@@ -850,7 +852,7 @@ def detectYEvent(data):
                 positive = False
                 SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
                 LDA_flag.value = False
-                print("catch the turn")
+                log.logger.info("catch the turn")
             elif accy < -0.06 and tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tfault = faultNum
@@ -875,7 +877,7 @@ def detectYEvent(data):
                     SVM_flag.value = SVM_flag.value - 1
                     LDA_flag.value = True
                     processLock.release()  # release the process lock
-                    print("dismiss the turn")
+                    log.logger.info("dismiss the turn")
             elif tthresholdnum > 0:
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
