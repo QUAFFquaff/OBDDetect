@@ -333,32 +333,6 @@ class DataThread(threading.Thread):
     def run(self):
         global dataQueue
 
-        while True:
-            if dataQueue.qsize() > 900:
-                data = []
-                while not dataQueue.empty():
-                    data.append(dataQueue.get())
-                try:
-                    # 获取一个游标
-                    connection = connectDB()
-                    connection.autocommit(True)
-
-                    if len(data) > 0:
-                        for i in range(0, len(data)):
-                            temp = data[i]
-                            row = temp[0]
-                            timestamp = temp[1]
-
-                            mycursor = connection.cursor()
-                            sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-                            val = (
-                                row[0], "zahraa", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6],
-                                row[7])
-                            mycursor.execute(sql, val)
-                            mycursor.close()
-                finally:
-                    connection.close()
-
         data = []
         qsize = dataQueue.qsize()
         while qsize>0:
