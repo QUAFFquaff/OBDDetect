@@ -569,19 +569,22 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 log.logger.info("__________________")
                 log.logger.info("temp word       :   " + temp_word)
                 log.logger.info("time window size:   " + str(time.time() - start_time))
-                log.logger.info("__________________")
                 start_time = time.time()
                 trip_svm_buffer += temp_word
                 svm_label_buffer = ""
                 if temp_word != "":
-                    result_time_window = ldaforevent.LDATest(ldaforevent, [temp_word])
+                    time_window_result = ldaforevent.LDATest(ldaforevent, [temp_word])
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
                     log.logger.info(result_trip)
                     trip_score = self.result_to_score(result_trip)
                     # self.renew_trip_score(self,ldaforevent)
-                    self.score_queue.append(self.result_to_score(result_time_window))
+                    self.score_queue.append(self.result_to_score(time_window_result))
                 elif temp_word == "":
                     self.score_queue.append(100)
+
+                log.logger.info("time window score:   " + str(self.result_to_score(time_window_result)))
+                log.logger.info("trip score       :   " + str(trip_score))
+                log.logger.info("__________________")
 
                 if len(self.score_queue) > 6:
                     self.score_queue.pop()
