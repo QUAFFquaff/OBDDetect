@@ -14,6 +14,7 @@ import multiprocessing
 from ctypes import c_bool
 
 import concurrent.futures
+
 sys.path.append('../dataHandler/')
 from LDAForEvent import *
 from change_numbers_to_alphabet import change_n_to_a
@@ -192,7 +193,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
             row = splitByte(row)
             if row != "":
-                #print(row)
+                # print(row)
                 timestamp = int(round(time.time() * 1000))
                 device = row[0]
                 speed = row[1]
@@ -226,8 +227,13 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
                     # put the event into Queue
                     if not event is None:
+<<<<<<< HEAD
+                        print(self.SVM_flag.value)
+                        self.processLock.acquire()  # get the lock
+=======
                         event.filter(b, a)
                         self.processLock.acquire() #get the lock
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
                         if self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
                         eventQueue.put(event)
@@ -278,7 +284,6 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
         return acc
 
 
-
 class DataThread(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -287,6 +292,33 @@ class DataThread(threading.Thread):
 
     def run(self):
         global dataQueue
+<<<<<<< HEAD
+        while True:
+            if dataQueue.qsize() > 60:
+                data = []
+                while not dataQueue.empty():
+                    data.append(dataQueue.get())
+                try:
+                    # 获取一个游标
+                    connection = connectDB()
+                    connection.autocommit(True)
+
+                    if len(data) > 0:
+                        for i in range(0, len(data)):
+                            temp = data[i]
+                            row = temp[0]
+                            timestamp = temp[1]
+
+                            mycursor = connection.cursor()
+                            sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                            val = (
+                                row[0], "zahraa", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6],
+                                row[7])
+                            mycursor.execute(sql, val)
+                            mycursor.close()
+                finally:
+                    connection.close()
+=======
         data = []
         qsize = dataQueue.qsize()
         while qsize>0:
@@ -310,6 +342,7 @@ class DataThread(threading.Thread):
                     mycursor.close()
         finally:
             connection.close()
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 
     def stop(self):
         self.__running.clear()
@@ -359,7 +392,7 @@ class SVMthread(threading.Thread):
                         result = svm.predict([vect])  # result of SVM
                         score = svm.decision_function([vect])  # score of SVM for each tyeps
                         score = np.array(score[0])
-                        print("event is ",str(eventList[i].getType()),":",score)
+                        print("event is ", str(eventList[i].getType()), ":", score)
 
                         if eventList[i].getType() >= 2:
                             index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
@@ -488,14 +521,14 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         ldaforevent.LDALoad(ldaforevent)
         start_time = time.time()
         #  monitor time-window
-        time.sleep(time_window/2)
+        time.sleep(time_window / 2)
         while True:
             if time.time() - start_time > time_window and LDA_flag.value:
                 GUI_flag = True
                 temp_word = svm_label_buffer
                 print("__________________")
-                print("temp word       :   "+temp_word)
-                print("time window size:   "+str(time.time()-start_time))
+                print("temp word       :   " + temp_word)
+                print("time window size:   " + str(time.time() - start_time))
                 print("__________________")
                 start_time = time.time()
                 trip_svm_buffer += temp_word
@@ -579,7 +612,7 @@ def detectEvent(data):
     xarray = []
     stdXArray = []  # use to get the smallest std, which will be the beginning of an event
     faultNum = int(2 * samplingRate / 5)
-    minLength = int(samplingRate*1.2)
+    minLength = int(samplingRate * 1.2)
 
     xstdQueue.put(data)
 
@@ -595,7 +628,11 @@ def detectEvent(data):
         xstdQueue.get()
 
         stdX = stdXArray[-1]
+<<<<<<< HEAD
+        startIndex = stdXArray.index(max(stdXArray[0:int(std_window / 2)]))
+=======
         startIndex = std_window - 1 + stdXArray.index(min(stdXArray[0:int(std_window/2)])) - 4
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 
         accx = data[9]
         timestamp = data[0]
@@ -718,7 +755,11 @@ def detectYEvent(data):
         ystdQueue.get()
         stdY = stdYArray[-1]
 
+<<<<<<< HEAD
+        startIndex = stdYArray.index(max(stdYArray[0:int(std_window / 2)]))
+=======
         startIndex = std_window - 1 + stdYArray.index(min(stdYArray[0:int(std_window/2)]))-4
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 
         accy = data[8]
         timestamp = data[0]
@@ -867,13 +908,17 @@ def main():
             Panel.showEvent(start, end, result.getLabel())
 
 
+<<<<<<< HEAD
+=======
 
 
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 if __name__ == "__main__":
     processLock = multiprocessing.Lock()
-    SVM_flag = multiprocessing.Value("i",0)  # if bigger than 0, there are overlapped events in queue
-    overlapNum = multiprocessing.Value("i",0)  # the number of overlapped events
-    LDA_flag = multiprocessing.Value(c_bool,True)  # if False, there are a event holding a time window, we should waiting for the end of event
+    SVM_flag = multiprocessing.Value("i", 0)  # if bigger than 0, there are overlapped events in queue
+    overlapNum = multiprocessing.Value("i", 0)  # the number of overlapped events
+    LDA_flag = multiprocessing.Value(c_bool,
+                                     True)  # if False, there are a event holding a time window, we should waiting for the end of event
     eventQueue = multiprocessing.Queue()
     dataQueue = multiprocessing.Queue()
     main()

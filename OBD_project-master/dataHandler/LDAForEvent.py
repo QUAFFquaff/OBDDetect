@@ -92,8 +92,7 @@ class LDAForEvent:
     # second vision
     # using characters a-z A-Z
     def calcDis(self, char_1, char_2):
-        height1 = width1 = 0
-        height2 = width2 = 0
+
         if ord(char_1)>140:
             height1 = (ord(char_1) - ord('a'))%7
             width1 = (ord(char_1) - ord('a') )/7
@@ -113,9 +112,6 @@ class LDAForEvent:
     #   fuzzyEvent2
     #   used to match words with different length
     def fuzzyEvent(self, s1, s2):
-        sum_distance = 0
-        length_1 = len(s1)
-        lenght_2 = len(s2)
         match_matrix = [[0 for i in range(len(s2))] for i in
                         range(len(s1))]  # length of s1 is numbers of rows; s2 are columns
         for i in range(len(s1)):
@@ -132,7 +128,6 @@ class LDAForEvent:
                     match_matrix[i - 1][j] + self.add_weight, match_matrix[i][j - 1] + self.delete_weight)
 
         sum_distance = match_matrix[len(s1) - 1][len(s2) - 1]
-        # print(sum_distance)
         max_unit = 65  # should change while the add_weight and delete_weight changed
         return (max_unit - sum_distance) / max_unit
 
@@ -140,7 +135,6 @@ class LDAForEvent:
     # dic is the dictionary of lda model
     def testEvent(self, doc,dic):
         testV = []
-        # dic = self.dictionary
         for i in range(len(dic)):
             temp = [i, 0]
             testV.append(temp)
@@ -158,8 +152,6 @@ class LDAForEvent:
                 grade = self.fuzzyEvent(self,word, dic[index])
                 if f_max == grade:
                     testV[index][1] += 1 / flag
-        # print(testV)
-        # print(self.ldamodel[testV])
         return self.ldamodel[testV]
 
     def LDAtraining(self, doc_set):
@@ -178,17 +170,6 @@ class LDAForEvent:
             for j in i.split(" "):
                 if j != "":
                     temp_context.append(j)
-            # # clean and tokenize document string
-            # raw = i.lower()
-            # tokens = tokenizer.tokenize(raw)
-            #
-            # # remove stop words from tokens
-            # stopped_tokens = [i for i in tokens if not i in en_stop]
-            # print(stopped_tokens)
-            #
-            # # stem tokens
-            # stemmed_tokens = [p_stemmer.stem(i) for i in stopped_tokens]
-            # print(stemmed_tokens)
 
             # add tokens to list
             texts.append(temp_context)
