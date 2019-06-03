@@ -294,6 +294,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         self.processLock.release()  # release the process lock
                         log.logger.info("put turn into svm")
 
+                    print("Speed:",str(speed))
                     if speed==0 and dataQueue.qsize()>900:
                         data_thread = DataThread()
                         data_thread.start()
