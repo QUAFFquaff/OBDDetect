@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import serial
 import time
 import numpy as np
@@ -99,6 +100,18 @@ class Event(object):
         self.vect = temp
         return self.vect
 
+    def filter(self, b, a):
+        temp = np.array(self.vect)
+        temp = temp.astype(np.float64)
+        y = signal.filtfilt(b, a, temp[:,2])
+        x = signal.filtfilt(b, a, temp[:,3])
+        z = signal.filtfilt(b, a, temp[:,4])
+        for i in range(0, len(temp)):
+            self.vect[i][2] = y[i]
+            self.vect[i][3] = x[i]
+            self.vect[i][4] = z[i]
+
+
     def getValue(self):
         return self.vect
 
@@ -182,6 +195,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
             if row != "":
                 # print(row)
                 timestamp = int(round(time.time() * 1000))
+                device = row[0]
                 speed = row[1]
                 accy = row[2]
                 accx = row[3]
@@ -196,7 +210,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                 acc = np.dot(matrix, acc)
                 lowpass.put(acc)
                 lowpassCount = lowpassCount + 1
-                if (lowpassCount > 29):
+                if (lowpassCount > 59):
                     accxsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'x'))
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
@@ -204,17 +218,22 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     # print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
                     # detect event
                     event = detectEvent(
-                        [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
+                        [timestamp, speed, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
                     yevent = detectYEvent(
-                        [timestamp, speed, accysf[-4], accxsf[-4], acczsf[-4], gyox, gyoy, gyoz])
+                        [timestamp, speed, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
 
                     # start a thread to store data into databse
-                    dataQueue.put([row, timestamp])
+                    dataQueue.put([np.array([device,speed, accy, accx, accz, gyox, gyoy, gyoz]), timestamp])
 
                     # put the event into Queue
                     if not event is None:
+<<<<<<< HEAD
                         print(self.SVM_flag.value)
                         self.processLock.acquire()  # get the lock
+=======
+                        event.filter(b, a)
+                        self.processLock.acquire() #get the lock
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
                         if self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
                         eventQueue.put(event)
@@ -222,6 +241,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         self.processLock.release()  # release the process lock
                         print("put acceleration or brake into svm")
                     if not yevent is None:
+                        yevent.filter(b, a)
                         data = yevent.getValue()
                         # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
                         # if max_gyo < 15:
@@ -233,6 +253,10 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         self.SVM_flag.value -= 1
                         self.processLock.release()  # release the process lock
                         print("put turn into svm")
+
+                    if speed==0 and dataQueue.qsize()>900:
+                        data_thread = DataThread()
+                        data_thread.start()
 
                     lowpass.get()
                     lowpassCount = lowpassCount - 1
@@ -268,6 +292,7 @@ class DataThread(threading.Thread):
 
     def run(self):
         global dataQueue
+<<<<<<< HEAD
         while True:
             if dataQueue.qsize() > 60:
                 data = []
@@ -293,6 +318,31 @@ class DataThread(threading.Thread):
                             mycursor.close()
                 finally:
                     connection.close()
+=======
+        data = []
+        qsize = dataQueue.qsize()
+        while qsize>0:
+            data.append(dataQueue.get())
+            qsize-=1
+        try:
+            # 获取一个游标
+            connection = connectDB()
+            connection.autocommit(True)
+
+            if len(data) > 0:
+                for i in range(0, len(data)):
+                    temp = data[i]
+                    row = temp[0]
+                    timestamp = temp[1]
+
+                    mycursor = connection.cursor()
+                    sql = "INSERT INTO STATUS(VIN,DEVICEID,TIME,SPEED,PARAM_1,PARAM_2,PARAM_3,LONGITUDE,LATITUDE,GYROX,GYROY,GYROZ) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                    val = (row[0], "zahraa", timestamp, row[1], row[2], row[3], row[4], "", "", row[5], row[6], row[7])
+                    mycursor.execute(sql, val)
+                    mycursor.close()
+        finally:
+            connection.close()
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 
     def stop(self):
         self.__running.clear()
@@ -371,7 +421,7 @@ class SVMthread(threading.Thread):
                             if index == 0:
                                 result = [1]
                             elif index == 1:
-                                result = [2]
+                                result = [5]
                             elif index == 2:
                                 result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
@@ -393,14 +443,10 @@ class SVMthread(threading.Thread):
         return eventList
 
     def nomalization(self, vect):
-        max = [0.619, 0.944, 0.546, 0.418, 0.208, 0.281, 6.075, 17.258, 0.286, 0.349, 3.901, 26.569, 22.12, 60.271,
-               0.594,
-               0.932, 0.097, 0.191, 90, 136,
-               122.637, 29.291, 24.982]
-        min = [0.034, 0.021, -0.302, -0.249, 0.009, 0.004, 0.325, 0.575, -0.312, -0.281, -3.816, -20.210, -0.061,
-               -1.291,
-               -0.063, -0.067, -0.539, -0.818, -76, 5,
-               4.979, 0.408, 1.581]
+        max = [0.7614, 0.6011, 0.2729, 0.2104, 11.510, 4.6303, 0.2529, 0.2861, 13.922, 1.6740, 31.65, 0.51791,
+               0.54475,0.1544, 0.0674, 75.0, 94.7125, 29.1634, 17.16]
+        min = [0.06909, 0.0079, 0.0206, 0.0020, 0.3709, 0.7642, -0.356, -0.277, -16.325, -2.0252, 2.27, -0.0867,
+               -0.0405, -0.748, -0.589, -90.0, 2.67796, 0.40508, 1.848]
         for i in range(len(vect)):
             vect[i] = (vect[i] - min[i]) / (max[i] - min[i])
         return vect
@@ -424,13 +470,13 @@ class SVMthread(threading.Thread):
         meanOY = np.mean(data[:, 5])
         maxOX = max(data[:, 6])
         maxOY = max(data[:, 5])
+        maxOri = max(maxOX, maxOY)
         t = (data[-1, 0] - data[0, 0]) / 1000
         meanSP = np.mean(data[:, 1])
         varSP = np.std(data[:, 1])
         differenceSP = data[-1, 2] - data[0, 2]
         maxSP = max(data[:, 2])
-        return [rangeAX, rangeAY, startAY, endAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOX,
-                maxOY, maxAX, maxAY, minAX, minAY, differenceSP, maxSP, meanSP, varSP, t]
+        return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, varSP, t]
 
     def saveResult(self, start, end, result):
         oldwd = open_workbook('ForLDA.xls', formatting_info=True)
@@ -574,18 +620,21 @@ def detectEvent(data):
         t = []  # transform the queue to array
         for i in range(xstdQueue.qsize()):
             temp = xstdQueue.get()
-            t.append(temp[3])
+            t.append(temp[9])
             if i > std_window - 2:
                 stdXArray.append(np.std(t[i - std_window + 1:i], ddof=1))
-                xarray.append(temp)
-                # x.append(temp[3])
+            xarray.append(temp[0:8])
             xstdQueue.put(temp)
         xstdQueue.get()
 
         stdX = stdXArray[-1]
+<<<<<<< HEAD
         startIndex = stdXArray.index(max(stdXArray[0:int(std_window / 2)]))
+=======
+        startIndex = std_window - 1 + stdXArray.index(min(stdXArray[0:int(std_window/2)])) - 4
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 
-        accx = data[3]
+        accx = data[9]
         timestamp = data[0]
 
         if accx > 0.12 and max(stdXArray) > 0.02 and thresholdnum == 0:
@@ -593,27 +642,26 @@ def detectEvent(data):
             sevent = Event(xarray[startIndex][0], 0)
             for i in range(startIndex, len(xarray)):  # add the previous data to event
                 sevent.addValue(xarray[i])
-            print("after get start")
             sflag = True
             processLock.acquire()  # get the lock
             SVM_flag.value += 1  # set the flag to denote the event starts
             LDA_flag.value = False
             processLock.release()  # release the process lock
             print("catch acceleration")
-        elif accx > 0.05 and thresholdnum > 0:
+        elif accx > 0.06 and thresholdnum > 0:
             thresholdnum += 1
             sfault = faultNum
             sflag = True
-        elif accx <= 0.05 and sfault > 0 and thresholdnum > 0:
+        elif accx <= 0.06 and sfault > 0 and thresholdnum > 0:
             sfault -= 1
             thresholdnum += 1
             sflag = True
-        elif (accx <= 0.05 or stdX < 0.01) and thresholdnum > 0:
+        elif (accx <= 0.06 or stdX < 0.01) and thresholdnum > 0:
             if thresholdnum > minLength:
                 sevent.setEndtime(timestamp)
                 sfault = faultNum
                 thresholdnum = 0
-                sevent.addValue(data)
+                sevent.addValue(data[0:8])
                 return sevent
             else:
                 thresholdnum = 0
@@ -651,7 +699,7 @@ def detectEvent(data):
                 bevent.setEndtime(timestamp)
                 bfault = faultNum
                 bthresholdnum = 0
-                bevent.addValue(data)
+                bevent.addValue(data[0:8])
                 return bevent
             else:
                 bfault = faultNum
@@ -666,9 +714,9 @@ def detectEvent(data):
             bflag = True
 
     if sflag:
-        sevent.addValue(data)
+        sevent.addValue(data[0:8])
     if bflag:
-        bevent.addValue(data)
+        bevent.addValue(data[0:8])
 
 
 tthresholdnum = 0
@@ -699,18 +747,21 @@ def detectYEvent(data):
         t = []  # transform the queue to array
         for i in range(ystdQueue.qsize()):
             temp = ystdQueue.get()
-            t.append(temp[2])
+            t.append(temp[8])
             if i > std_window - 2:  # calculate the standard deviation from list
                 stdYArray.append(np.std(t[i - std_window + 1:i], ddof=1))
-                yarray.append(temp)
-            # y.append(temp[2])
+            yarray.append(temp[0:8])
             ystdQueue.put(temp)
         ystdQueue.get()
         stdY = stdYArray[-1]
 
+<<<<<<< HEAD
         startIndex = stdYArray.index(max(stdYArray[0:int(std_window / 2)]))
+=======
+        startIndex = std_window - 1 + stdYArray.index(min(stdYArray[0:int(std_window/2)]))-4
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 
-        accy = data[2]
+        accy = data[8]
         timestamp = data[0]
 
         if positive:
@@ -740,7 +791,7 @@ def detectYEvent(data):
                     tfault = faultNum
                     tthresholdnum = 0
                     negative = True
-                    tevent.addValue(data)
+                    tevent.addValue(data[0:8])
                     return tevent
                 else:
                     tfault = faultNum
@@ -774,13 +825,13 @@ def detectYEvent(data):
                 tfault = tfault - 1
                 tthresholdnum = tthresholdnum + 1
                 tflag = True
-            elif (accy >= -0.06 or stdY < 0.03) and tthresholdnum > 0:
+            elif (accy >= -0.06 or stdY < 0.015) and tthresholdnum > 0:
                 if minLength < tthresholdnum < maxLength:
                     tevent.setEndtime(timestamp)
                     tfault = faultNum
                     tthresholdnum = 0
                     positive = True
-                    tevent.addValue(data)
+                    tevent.addValue(data[0:8])
                     return tevent
                 else:
                     tfault = faultNum
@@ -796,7 +847,7 @@ def detectYEvent(data):
                 tflag = True
 
     if tflag:
-        tevent.addValue(data)
+        tevent.addValue(data[0:8])
 
 
 def splitByte(obdData):
@@ -834,8 +885,8 @@ def main():
     thread2.start()
 
     # # save data into data base thread
-    data_thread = DataThread()
-    data_thread.start()
+    # data_thread = DataThread()
+    # data_thread.start()
 
     # start lda thread
     lda_thread = Thread_for_lda()
@@ -857,6 +908,11 @@ def main():
             Panel.showEvent(start, end, result.getLabel())
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 if __name__ == "__main__":
     processLock = multiprocessing.Lock()
     SVM_flag = multiprocessing.Value("i", 0)  # if bigger than 0, there are overlapped events in queue
