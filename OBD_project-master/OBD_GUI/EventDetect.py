@@ -571,7 +571,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 log.logger.info("time window size:   " + str(time.time() - start_time))
                 log.logger.info("__________________")
                 logging.INFO("__________________")
-                logging.INFO("temp word       :   " + temp_word)
+                logging.INFO("temp word       :   " + str(temp_word))
                 logging.INFO("time window size:   " + str(time.time() - start_time))
                 logging.INFO("__________________")
                 start_time = time.time()
