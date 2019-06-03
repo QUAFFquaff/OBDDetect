@@ -1,65 +1,11 @@
-2019-06-03 12:17:53,319 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:17:55,573 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:17:55,575 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['eps', 'trees', 'human', 'response', 'survey']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:21:59,443 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:22:00,706 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:22:00,707 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['computer', 'minors', 'survey', 'eps', 'trees']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:22:00,854 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 12:22:00,859 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:22:00,870 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 12:22:00,897 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 12:22:00,904 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 12:22:00,906 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 12:22:00,964 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 12:22:00,982 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 12:22:01,068 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:22:02,482 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 12:22:02,808 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:22:06,578 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:22:06,583 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:22:07,037 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:22:37,103 - EventDetect.py[line:569] - INFO: __________________
 2019-06-03 12:22:37,116 - EventDetect.py[line:570] - INFO: temp word       :   
 2019-06-03 12:22:37,119 - EventDetect.py[line:571] - INFO: time window size:   30.057547330856323
 2019-06-03 12:22:37,278 - EventDetect.py[line:572] - INFO: __________________
-2019-06-03 12:26:13,472 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:26:14,729 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:26:14,731 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['interface', 'trees', 'system', 'survey', 'time']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:26:14,852 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 12:26:14,854 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:26:14,871 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 12:26:15,731 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 12:26:16,458 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 12:26:16,558 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 12:26:17,108 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 12:26:17,340 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 12:26:17,918 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:26:21,524 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 12:26:22,118 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:26:23,234 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:26:23,698 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:26:27,935 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:26:58,788 - EventDetect.py[line:569] - INFO: __________________
 2019-06-03 12:26:59,978 - EventDetect.py[line:570] - INFO: temp word       :   
 2019-06-03 12:27:00,838 - EventDetect.py[line:571] - INFO: time window size:   32.609394788742065
 2019-06-03 12:27:02,238 - EventDetect.py[line:572] - INFO: __________________
-2019-06-03 12:27:55,225 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:27:56,483 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:27:56,484 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['interface', 'survey', 'system', 'minors', 'eps']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:27:56,606 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 12:27:56,609 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:27:56,621 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 12:27:56,651 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 12:27:56,657 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 12:27:56,658 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 12:27:56,659 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 12:27:56,660 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 12:27:56,662 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:27:56,932 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 12:27:57,038 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:27:57,144 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:27:57,146 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:27:59,609 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:28:32,618 - EventDetect.py[line:569] - INFO: __________________
 2019-06-03 12:28:34,648 - EventDetect.py[line:570] - INFO: temp word       :   
 2019-06-03 12:28:35,078 - EventDetect.py[line:571] - INFO: time window size:   33.3896210193634
@@ -96,24 +42,7 @@
 2019-06-03 12:32:49,261 - EventDetect.py[line:570] - INFO: temp word       :   
 2019-06-03 12:32:49,345 - EventDetect.py[line:571] - INFO: time window size:   30.514741897583008
 2019-06-03 12:32:49,372 - EventDetect.py[line:572] - INFO: __________________
-2019-06-03 12:33:15,191 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:33:16,539 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:33:16,541 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['trees', 'eps', 'response', 'survey', 'system']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:33:16,681 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 12:33:16,684 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:33:16,695 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 12:33:16,725 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 12:33:17,198 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 12:33:17,898 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 12:33:17,908 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 12:33:18,618 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 12:33:18,913 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:33:19,762 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 12:33:20,028 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:33:20,504 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:33:20,543 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
 2019-06-03 12:33:20,548 - EventDetect.py[line:224] - INFO: samplingrate--15.4015401540154
-2019-06-03 12:33:21,953 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:33:32,568 - EventDetect.py[line:685] - INFO: catch acceleration
 2019-06-03 12:33:35,414 - EventDetect.py[line:852] - INFO: catch the turn
 2019-06-03 12:33:35,893 - EventDetect.py[line:272] - INFO: 2
@@ -124,9 +53,6 @@
 2019-06-03 12:33:52,055 - EventDetect.py[line:570] - INFO: temp word       :   hoh
 2019-06-03 12:33:52,058 - EventDetect.py[line:571] - INFO: time window size:   30.03931713104248
 2019-06-03 12:33:52,060 - EventDetect.py[line:572] - INFO: __________________
-2019-06-03 12:33:52,062 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:33:52,063 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:33:52,126 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:34:09,268 - EventDetect.py[line:723] - INFO: catch a break
 2019-06-03 12:34:09,856 - EventDetect.py[line:746] - INFO: dimiss the break
 2019-06-03 12:34:10,447 - EventDetect.py[line:812] - INFO: catch turn
@@ -153,9 +79,6 @@
 2019-06-03 12:35:45,879 - EventDetect.py[line:723] - INFO: catch a break
 2019-06-03 12:36:44,150 - EventDetect.py[line:295] - INFO: put turn into svm
 2019-06-03 12:36:47,511 - EventDetect.py[line:272] - INFO: 1
-2019-06-03 12:36:47,667 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:36:47,668 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:36:47,707 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:37:19,925 - EventDetect.py[line:685] - INFO: catch acceleration
 2019-06-03 12:37:28,629 - EventDetect.py[line:272] - INFO: 1
 2019-06-03 12:37:39,818 - EventDetect.py[line:723] - INFO: catch a break
@@ -170,9 +93,6 @@
 2019-06-03 12:39:36,821 - EventDetect.py[line:570] - INFO: temp word       :   oaahvovoah
 2019-06-03 12:39:36,832 - EventDetect.py[line:571] - INFO: time window size:   344.77060866355896
 2019-06-03 12:39:36,837 - EventDetect.py[line:572] - INFO: __________________
-2019-06-03 12:39:36,869 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:39:36,874 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:39:37,355 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:41:03,136 - EventDetect.py[line:272] - INFO: 1
 2019-06-03 12:42:22,052 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
 2019-06-03 12:42:22,651 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
@@ -412,24 +332,7 @@
 2019-06-03 12:44:56,321 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
 2019-06-03 12:44:56,903 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
 2019-06-03 12:44:57,657 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
-2019-06-03 12:47:22,028 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:47:23,463 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:47:23,465 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['trees', 'minors', 'interface', 'human', 'time']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:47:23,612 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 12:47:23,617 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:47:23,627 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 12:47:23,712 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 12:47:23,754 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 12:47:23,760 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 12:47:23,761 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 12:47:23,762 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 12:47:24,178 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:47:25,328 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 12:47:25,330 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
 2019-06-03 12:47:26,121 - EventDetect.py[line:224] - INFO: samplingrate--16.786570743405278
-2019-06-03 12:47:26,139 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:47:26,248 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:47:33,206 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:48:04,278 - EventDetect.py[line:569] - INFO: __________________
 2019-06-03 12:48:04,783 - EventDetect.py[line:570] - INFO: temp word       :   
 2019-06-03 12:48:05,041 - EventDetect.py[line:571] - INFO: time window size:   31.023284912109375
@@ -478,64 +381,13 @@
 2019-06-03 12:53:43,238 - EventDetect.py[line:570] - INFO: temp word       :   
 2019-06-03 12:53:43,898 - EventDetect.py[line:571] - INFO: time window size:   31.081542253494263
 2019-06-03 12:53:44,208 - EventDetect.py[line:572] - INFO: __________________
-2019-06-03 12:54:09,799 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:54:11,307 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:54:11,309 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['human', 'time', 'computer', 'graph', 'survey']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:54:11,455 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 12:54:11,459 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:54:11,472 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 12:54:11,509 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 12:54:11,516 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 12:54:11,518 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 12:54:11,520 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 12:54:11,555 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 12:54:11,556 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:54:11,669 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 12:54:11,711 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:54:11,999 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:54:12,013 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:54:12,603 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:54:13,473 - EventDetect.py[line:224] - INFO: samplingrate--15.250544662309368
 2019-06-03 12:54:13,485 - EventDetect.py[line:225] - INFO: std_window:15
 2019-06-03 12:54:43,221 - EventDetect.py[line:569] - INFO: __________________
 2019-06-03 12:54:43,346 - EventDetect.py[line:570] - INFO: temp word       :   
 2019-06-03 12:54:43,492 - EventDetect.py[line:571] - INFO: time window size:   30.827627897262573
-2019-06-03 12:57:22,449 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:57:23,910 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:57:23,912 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['trees', 'interface', 'user', 'eps', 'graph']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:57:24,053 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 12:57:24,057 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:57:24,074 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 12:57:24,102 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 12:57:24,109 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 12:57:24,110 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 12:57:24,137 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 12:57:24,478 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 12:57:24,558 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:57:25,461 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 12:57:25,629 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
 2019-06-03 12:57:26,259 - EventDetect.py[line:224] - INFO: samplingrate--15.677491601343785
 2019-06-03 12:57:26,278 - EventDetect.py[line:225] - INFO: std_window:16
-2019-06-03 12:57:26,976 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:57:26,992 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:57:31,077 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
-2019-06-03 12:59:03,559 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 12:59:04,837 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 12:59:04,839 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['system', 'user', 'response', 'time', 'survey']...) from 9 documents (total 29 corpus positions)
-2019-06-03 12:59:04,961 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 12:59:04,971 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:59:04,980 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 12:59:05,007 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 12:59:05,013 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 12:59:05,014 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 12:59:05,015 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 12:59:05,017 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 12:59:05,018 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:59:05,193 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 12:59:05,210 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:59:05,379 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 12:59:05,385 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 12:59:05,520 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 12:59:06,915 - EventDetect.py[line:224] - INFO: samplingrate--15.538290788013319
 2019-06-03 12:59:06,918 - EventDetect.py[line:225] - INFO: std_window:16
 2019-06-03 12:59:35,923 - EventDetect.py[line:543] - INFO: __________________
@@ -546,12 +398,9 @@
 2019-06-03 13:00:10,638 - EventDetect.py[line:543] - INFO: __________________
 2019-06-03 13:00:12,438 - EventDetect.py[line:544] - INFO: temp word       :   o
 2019-06-03 13:00:13,138 - EventDetect.py[line:545] - INFO: time window size:   32.777100563049316
-2019-06-03 13:00:13,811 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 13:00:13,813 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
 2019-06-03 13:00:14,317 - EventDetect.py[line:700] - INFO: catch a break
 2019-06-03 13:00:15,318 - EventDetect.py[line:829] - INFO: catch the turn
 2019-06-03 13:00:18,067 - EventDetect.py[line:272] - INFO: 2
-2019-06-03 13:00:18,110 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 13:00:19,396 - EventDetect.py[line:295] - INFO: put turn into svm
 2019-06-03 13:00:22,457 - EventDetect.py[line:700] - INFO: catch a break
 2019-06-03 13:00:26,224 - EventDetect.py[line:272] - INFO: 1
@@ -563,9 +412,6 @@
 2019-06-03 13:00:49,732 - EventDetect.py[line:685] - INFO: dismis the speedup
 2019-06-03 13:00:54,254 - EventDetect.py[line:700] - INFO: catch a break
 2019-06-03 13:00:54,978 - EventDetect.py[line:551] - INFO: time window score:   80.29192462563515
-2019-06-03 13:00:55,492 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 13:00:55,718 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:00:58,184 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 13:00:58,305 - EventDetect.py[line:272] - INFO: 1
 2019-06-03 13:00:58,457 - EventDetect.py[line:662] - INFO: catch acceleration
 2019-06-03 13:00:58,539 - EventDetect.py[line:829] - INFO: catch the turn
@@ -583,9 +429,6 @@
 2019-06-03 13:01:37,495 - EventDetect.py[line:543] - INFO: __________________
 2019-06-03 13:01:37,510 - EventDetect.py[line:544] - INFO: temp word       :   aoaobaov
 2019-06-03 13:01:37,540 - EventDetect.py[line:545] - INFO: time window size:   83.72885036468506
-2019-06-03 13:01:37,559 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 13:01:37,564 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:01:38,898 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 13:01:42,204 - EventDetect.py[line:662] - INFO: catch acceleration
 2019-06-03 13:01:45,655 - EventDetect.py[line:272] - INFO: 1
 2019-06-03 13:01:46,292 - EventDetect.py[line:662] - INFO: catch acceleration
@@ -639,45 +482,11 @@
 2019-06-03 13:05:37,341 - EventDetect.py[line:700] - INFO: catch a break
 2019-06-03 13:05:38,320 - EventDetect.py[line:829] - INFO: catch the turn
 2019-06-03 13:05:42,231 - EventDetect.py[line:295] - INFO: put turn into svm
-2019-06-03 13:40:57,634 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 13:40:59,892 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 13:40:59,893 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['graph', 'response', 'minors', 'computer', 'human']...) from 9 documents (total 29 corpus positions)
-2019-06-03 13:41:00,107 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 13:41:00,120 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:41:00,132 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 13:41:00,179 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 13:41:00,196 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 13:41:00,403 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 13:41:00,655 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 13:41:01,045 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 13:41:01,325 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
 2019-06-03 13:41:02,432 - EventDetect.py[line:223] - INFO: samplingrate--15.4015401540154
 2019-06-03 13:41:02,436 - EventDetect.py[line:224] - INFO: std_window:15
-2019-06-03 13:41:02,750 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 13:41:03,015 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:41:06,753 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 13:41:06,901 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
 2019-06-03 13:41:10,003 - EventDetect.py[line:667] - INFO: catch acceleration
-2019-06-03 13:41:10,775 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 13:41:12,557 - EventDetect.py[line:834] - INFO: catch the turn
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       2019-06-03 13:43:19,246 - /home/pi/.local/lib/python3.5/site-packages/gensim/summarization/textcleaner.py[line:37] - INFO: 'pattern' package not found; tag filters are not available for English
-2019-06-03 13:43:21,516 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:202] - INFO: adding document #0 to Dictionary(0 unique tokens: [])
-2019-06-03 13:43:21,518 - /home/pi/.local/lib/python3.5/site-packages/gensim/corpora/dictionary.py[line:209] - INFO: built Dictionary(12 unique tokens: ['interface', 'survey', 'trees', 'human', 'response']...) from 9 documents (total 29 corpus positions)
-2019-06-03 13:43:21,736 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaModel object from fixed_time_window_lda.model
-2019-06-03 13:43:21,740 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:43:21,767 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:461] - INFO: loading expElogbeta from fixed_time_window_lda.model.expElogbeta.npy with mmap=None
-2019-06-03 13:43:21,833 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute dispatcher to None
-2019-06-03 13:43:21,866 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute state to None
-2019-06-03 13:43:21,905 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:494] - INFO: setting ignored attribute id2word to None
-2019-06-03 13:43:21,908 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model
-2019-06-03 13:43:21,927 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading LdaState object from fixed_time_window_lda.model.state
-2019-06-03 13:43:21,974 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:43:22,050 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded fixed_time_window_lda.model.state
-2019-06-03 13:43:22,145 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:43:22,454 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 13:43:22,474 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:43:22,804 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
-2019-06-03 13:43:24,155 - EventDetect.py[line:223] - INFO: samplingrate--15.555555555555555
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       2019-06-03 13:43:24,155 - EventDetect.py[line:223] - INFO: samplingrate--15.555555555555555
 2019-06-03 13:43:24,162 - EventDetect.py[line:224] - INFO: std_window:16
 2019-06-03 13:43:34,878 - EventDetect.py[line:834] - INFO: catch the turn
 2019-06-03 13:43:36,854 - EventDetect.py[line:298] - INFO: put turn into svm
@@ -688,9 +497,6 @@
 2019-06-03 13:43:53,524 - EventDetect.py[line:548] - INFO: temp word       :   v
 2019-06-03 13:43:53,839 - EventDetect.py[line:549] - INFO: time window size:   30.986268043518066
 2019-06-03 13:43:54,159 - EventDetect.py[line:271] - INFO: 1
-2019-06-03 13:43:54,252 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 13:43:54,259 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:43:54,372 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 13:43:59,392 - EventDetect.py[line:667] - INFO: catch acceleration
 2019-06-03 13:44:10,275 - EventDetect.py[line:271] - INFO: 1
 2019-06-03 13:44:16,306 - EventDetect.py[line:705] - INFO: catch a break
@@ -699,9 +505,6 @@
 2019-06-03 13:44:25,660 - EventDetect.py[line:271] - INFO: 1
 2019-06-03 13:44:34,639 - EventDetect.py[line:705] - INFO: catch a break
 2019-06-03 13:44:40,893 - EventDetect.py[line:555] - INFO: time window score:   80.00856600701809
-2019-06-03 13:44:40,930 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 13:44:40,931 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:44:45,947 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 13:44:54,966 - EventDetect.py[line:271] - INFO: 1
 2019-06-03 13:44:57,034 - EventDetect.py[line:705] - INFO: catch a break
 2019-06-03 13:45:02,437 - EventDetect.py[line:271] - INFO: 1
@@ -721,9 +524,6 @@
 2019-06-03 13:45:29,709 - EventDetect.py[line:547] - INFO: __________________
 2019-06-03 13:45:29,711 - EventDetect.py[line:548] - INFO: temp word       :   ahaaachooo
 2019-06-03 13:45:29,718 - EventDetect.py[line:549] - INFO: time window size:   95.46641826629639
-2019-06-03 13:45:29,730 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:422] - INFO: loading Dictionary object from lda_dictionary.model
-2019-06-03 13:45:29,736 - /home/pi/.local/lib/python3.5/site-packages/smart_open/smart_open_lib.py[line:385] - WARNING: this function is deprecated, use smart_open.open instead
-2019-06-03 13:45:30,049 - /home/pi/.local/lib/python3.5/site-packages/gensim/utils.py[line:428] - INFO: loaded lda_dictionary.model
 2019-06-03 13:45:49,665 - EventDetect.py[line:705] - INFO: catch a break
 2019-06-03 13:46:00,786 - EventDetect.py[line:271] - INFO: 1
 2019-06-03 13:46:06,737 - EventDetect.py[line:705] - INFO: catch a break
