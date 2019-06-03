@@ -31,40 +31,86 @@ def makeLevel0():
             index = random.randint(0, 3)
             term += notebook[index]
         else:
-            term += notebook[random.randint(3, 11)]
-    print(term)
+            term += notebook[random.randint(4, 11)]
     return "'" + term + "'"
 
 
 def makeLevel1():
-    length = int(random.gauss(3.1, 2))
+    length = int(random.gauss(2.5, 2))
     if length <= 0:
-        return
+        return "!"
     term = ''
     for i in range(length):
-        threshold = random.randint(0, 9)
-        if threshold != 9:
+        threshold = random.randint(0, 99)
+        if threshold < 35:
             index = random.randint(0, 3)
             term += notebook[index]
+        elif threshold>90:
+            term += notebook[random.randint(8, 11)]
         else:
-            term += notebook[random.randint(3, 11)]
-    print(term)
+            term += notebook[random.randint(4, 7)]
+    return "'" + term + "'"
+
+def makeLevel2():
+    length = int(random.gauss(2.9, 1.9))
+    if length <= 0:
+        return "!"
+    term = ''
+    for i in range(length):
+        threshold = random.randint(0, 99)
+        if threshold < 20:
+            index = random.randint(0, 3)
+            term += notebook[index]
+        elif threshold > 70:
+            term += notebook[random.randint(8, 11)]
+        else:
+            term += notebook[random.randint(4, 7)]
+    return "'" + term + "'"
+
+def makeLevel3():
+    length = int(random.gauss(3, 1.9))
+    if length <= 0:
+        return "!"
+    term = ''
+    for i in range(length):
+        threshold = random.randint(0, 99)
+        if threshold < 20:
+            index = random.randint(0, 3)
+            term += notebook[index]
+        elif threshold > 40:
+            term += notebook[random.randint(8, 11)]
+        else:
+            term += notebook[random.randint(4, 7)]
+    return "'" + term + "'"
 
 
-def makeDocument():
+
+
+def makeDocument(level):
     document = '['
     for i in range(100):
-        temp = makeLevel0()
+        if level == 0:
+            temp = makeLevel0()
+        elif level == 1:
+            temp = makeLevel1()
+        elif level == 2:
+            temp = makeLevel2()
+        elif level == 3:
+            temp = makeLevel3()
         if temp == "!": continue
         document += temp + ", "
     return document + "]"
 
+
 def main():
     data = ""
-    for i in range(50):
-        data += makeDocument()+",\n"
-    print(data)
+    for j in range(4):
+        for i in range(50):
+            data += makeDocument(j) + ",\n"
     write(data)
+    data1 = readText()
+    print(readText())
+
 
 def write(data):
     try:
@@ -73,5 +119,18 @@ def write(data):
     finally:
         if f:
             f.close()
+
+
+def readText():
+    try:
+        f = open('fakeData.txt', 'r')  # 打开文件
+        data = f.read()  # 读取文件内容
+        print(data)
+        # return data[0]
+    finally:
+        if f:
+            f.close()
+            return
+
 
 main()

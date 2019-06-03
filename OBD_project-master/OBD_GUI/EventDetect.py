@@ -227,13 +227,12 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
                     # put the event into Queue
                     if not event is None:
-<<<<<<< HEAD
+
                         print(self.SVM_flag.value)
-                        self.processLock.acquire()  # get the lock
-=======
+
                         event.filter(b, a)
                         self.processLock.acquire() #get the lock
->>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
+
                         if self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
                         eventQueue.put(event)
@@ -292,7 +291,7 @@ class DataThread(threading.Thread):
 
     def run(self):
         global dataQueue
-<<<<<<< HEAD
+
         while True:
             if dataQueue.qsize() > 60:
                 data = []
@@ -318,7 +317,7 @@ class DataThread(threading.Thread):
                             mycursor.close()
                 finally:
                     connection.close()
-=======
+
         data = []
         qsize = dataQueue.qsize()
         while qsize>0:
@@ -342,7 +341,7 @@ class DataThread(threading.Thread):
                     mycursor.close()
         finally:
             connection.close()
->>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
+
 
     def stop(self):
         self.__running.clear()
@@ -576,12 +575,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
     def result_to_score(self, result):
         score = 0
         for node in result:
-            if node[0] == 1:
-                score += 100 * node[1]
-            elif node[0] == 0:
-                score += 75 * node[1]
-            else:
-                score += (node[0] + 1) * 25 * node[1]
+            score += (node[0] + 1) * 25 * node[1]
         return score
 
     def stop(self):
@@ -628,11 +622,11 @@ def detectEvent(data):
         xstdQueue.get()
 
         stdX = stdXArray[-1]
-<<<<<<< HEAD
+
         startIndex = stdXArray.index(max(stdXArray[0:int(std_window / 2)]))
-=======
+
         startIndex = std_window - 1 + stdXArray.index(min(stdXArray[0:int(std_window/2)])) - 4
->>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
+
 
         accx = data[9]
         timestamp = data[0]
@@ -755,11 +749,9 @@ def detectYEvent(data):
         ystdQueue.get()
         stdY = stdYArray[-1]
 
-<<<<<<< HEAD
-        startIndex = stdYArray.index(max(stdYArray[0:int(std_window / 2)]))
-=======
+
         startIndex = std_window - 1 + stdYArray.index(min(stdYArray[0:int(std_window/2)]))-4
->>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
+
 
         accy = data[8]
         timestamp = data[0]
@@ -908,11 +900,6 @@ def main():
             Panel.showEvent(start, end, result.getLabel())
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9b12b87f450fa8c7f30cef3629209e53c0c5f395
 if __name__ == "__main__":
     processLock = multiprocessing.Lock()
     SVM_flag = multiprocessing.Value("i", 0)  # if bigger than 0, there are overlapped events in queue
