@@ -561,7 +561,6 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         ldaforevent.LDALoad(ldaforevent)
         start_time = time.time()
         #  monitor time-window
-        time.sleep(time_window / 2)
         while True:
             if time.time() - start_time > time_window and LDA_flag.value:
                 GUI_flag = True
