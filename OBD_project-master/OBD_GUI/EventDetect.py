@@ -334,7 +334,7 @@ class DataThread(threading.Thread):
         global dataQueue
 
         while True:
-            if dataQueue.qsize() > 60:
+            if dataQueue.qsize() > 900:
                 data = []
                 while not dataQueue.empty():
                     data.append(dataQueue.get())
