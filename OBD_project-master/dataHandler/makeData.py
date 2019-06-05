@@ -75,7 +75,7 @@ def makeLevel0():
         return "!"
     term = ''
     for i in range(length):
-        threshold = random.randint(0, 9)
+        threshold = random.randint(0, 99)
         if threshold != 9:
             index = random.randint(0, 3)
             term += notebook[index]
@@ -91,27 +91,25 @@ def makeLevel1():
     term = ''
     for i in range(length):
         threshold = random.randint(0, 99)
-        if threshold < 35:
+        if threshold < 30:
             index = random.randint(0, 3)
             term += notebook[index]
-        elif threshold>90:
-            term += notebook[random.randint(8, 11)]
         else:
             term += notebook[random.randint(4, 7)]
     return "'" + term + "'"
 
 def makeLevel2():
-    length = int(random.gauss(2.9, 1.9))
+    length = int(random.gauss(3.5, 1.5))
     if length <= 0:
         return "!"
     term = ''
     for i in range(length):
         threshold = random.randint(0, 99)
-        if threshold < 20:
-            index = random.randint(0, 3)
+        if threshold < 10:
+            index = random.randint(0, 11)
             term += notebook[index]
-        elif threshold > 70:
-            term += notebook[random.randint(8, 11)]
+        elif threshold > 75:
+            term += notebook[random.randint(4, 11)]
         else:
             term += notebook[random.randint(4, 7)]
     return "'" + term + "'"
@@ -123,13 +121,11 @@ def makeLevel3():
     term = ''
     for i in range(length):
         threshold = random.randint(0, 99)
-        if threshold < 20:
-            index = random.randint(0, 3)
+        if threshold < 10:
+            index = random.randint(4, 7)
             term += notebook[index]
-        elif threshold > 40:
-            term += notebook[random.randint(8, 11)]
         else:
-            term += notebook[random.randint(4, 7)]
+            term += notebook[random.randint(8, 11)]
     return "'" + term + "'"
 
 
