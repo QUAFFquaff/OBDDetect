@@ -780,12 +780,12 @@ def detectYEvent(data):
                 processLock.release()  # release the process lock
                 log.logger.info("catch turn")
             elif accy > 0.08 and tthresholdnum > 0:
-                tthresholdnum = tthresholdnum + 1
+                tthresholdnum += 1
                 tfault = faultNum
                 tflag = True
             elif accy <= 0.08 and tfault > 0 and tthresholdnum > 0:
-                tfault = tfault - 1
-                tthresholdnum = tthresholdnum + 1
+                tfault -= 1
+                tthresholdnum += 1
                 tflag = True
             elif (accy <= 0.08 or stdY < 0.015) and tthresholdnum > 0:
                 if minLength < tthresholdnum < maxLength:
@@ -800,31 +800,31 @@ def detectYEvent(data):
                     tthresholdnum = 0
                     negative = True
                     processLock.acquire()  # get the lock
-                    SVM_flag.value = SVM_flag.value - 1
+                    SVM_flag.value -= 1
                     LDA_flag.value = True
                     processLock.release()  # release the process lock
                     log.logger.info("dismiss the turn")
             elif tthresholdnum > 0:
-                tthresholdnum = tthresholdnum + 1
+                tthresholdnum += 1
                 tflag = True
 
         if negative:
             if accy < -0.15 and max(stdYArray) > 0.015 and tthresholdnum == 0:
-                tthresholdnum = tthresholdnum + 1
+                tthresholdnum += 1
                 tevent = Event(yarray[startIndex][0], 3)
                 for i in range(startIndex, len(stdYArray)):  # add the previous data to event
                     tevent.addValue(yarray[i])
                 tflag = True
                 positive = False
-                SVM_flag.value = SVM_flag.value + 1  # set the flag to denote the event starts
+                SVM_flag.value += 1  # set the flag to denote the event starts
                 LDA_flag.value = False
                 log.logger.info("catch the turn")
             elif accy < -0.08 and tthresholdnum > 0:
-                tthresholdnum = tthresholdnum + 1
+                tthresholdnum += 1
                 tfault = faultNum
                 tflag = True
             elif accy >= -0.08 and tfault > 0 and tthresholdnum > 0:
-                tfault = tfault - 1
+                tfault -= 1
                 tthresholdnum += 1
                 tflag = True
             elif (accy >= -0.08 or stdY < 0.015) and tthresholdnum > 0:
