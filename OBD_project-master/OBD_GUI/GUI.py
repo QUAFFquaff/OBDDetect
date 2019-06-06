@@ -58,16 +58,40 @@ class Panel(object):
         self.moneyMsg.draw(win)
         self.tripscoreMsg = Text(Point(41.5, 5), "")
         self.tripscoreMsg.draw(win)
+        self.initBarList()
 
     def initBarList(self):
         y = self._y
         for i in range(6):
+            # a bars
+            aBar = Polygon(Point(self._a1, y - 3), Point(self._a1, y - 1), Point(self._a2, y),
+                           Point(self._a3, y - 1),
+                           Point(self._a3, y - 3), Point(self._a2, y - 2))
+            aBar.setFill(color_rgb(208, 173, 44))
+            self._aList.append(aBar)
 
-            self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
+            # b Bar
+            bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(self._b2, y),
+                                Point(self._b3, y - 1),
+                                Point(self._b3, y - 3), Point(self._b2, y - 2))
+            bBar.setFill(color_rgb(208, 173, 44))
+            self._bList.append(bBar)
+
+            # c Bar
+            cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
                                 Point(self._c3, y - 1),
                                 Point(self._c3, y - 3), Point(self._c2, y - 2))
-            self.bBar.setFill(color_rgb(208, 173, 44))
-            self.bBar.draw(self.win)
+            cBar.setFill(color_rgb(208, 173, 44))
+            self._cList.append(cBar)
+
+
+            # d Bar
+            dBar = Polygon(Point(self._d1, y - 3), Point(self._d1, y - 1), Point(self._d2, y),
+                                Point(self._d3, y - 1),
+                                Point(self._d3, y - 3), Point(self._d2, y - 2))
+            dBar.setFill(color_rgb(208, 173, 44))
+            self._dList.append(dBar)
+
             y += 3
 
     def drawPanel(self):
@@ -176,49 +200,36 @@ class Panel(object):
             return "high swerve"
 
     def drawBar(self, event_type):
-        if event_type %4 == 0:
+        if event_type % 4 == 0:
             self.addaBar(event_type)
-        elif event_type %4 == 1:
+        elif event_type % 4 == 1:
             self.addbBar(event_type)
-        if event_type %4 == 2:
+        if event_type % 4 == 2:
             self.addcBar(event_type)
-        if event_type %4 == 3:
+        if event_type % 4 == 3:
             self.adddBar(event_type)
-
 
     def addaBar(self, event_type):
         block_num = 2 * int(event_type / 4) + 1
         y = self._y
         while block_num > 0:
-            self.aBar = Polygon(Point(self._a1, y - 3), Point(self._a1, y - 1), Point(self._a2, y),
-                                Point(self._a3, y - 1),
-                                Point(self._a3, y - 3), Point(self._a2, y - 2))
-            self.aBar.setFill(color_rgb(208, 173, 44))
-            self.aBar.draw(self.win)
+            self._aList[block_num].draw()
             block_num -= 1
             y += 3
 
-    def addbBar(self,event_type):
-        block_num = 2 * int(event_type/4)+1
+    def addbBar(self, event_type):
+        block_num = 2 * int(event_type / 4) + 1
         y = self._y
         while block_num > 0:
-            self.bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(self._b2, y),
-                                Point(self._b3, y - 1),
-                                Point(self._b3, y - 3), Point(self._b2, y - 2))
-            self.bBar.setFill(color_rgb(208, 173, 44))
-            self.bBar.draw(self.win)
+            self._bList[block_num].draw(self.win)
             block_num -= 1
             y += 3
-
 
     def addcBar(self, event_type):
         block_num = 2 * int(event_type / 4) + 1
         y = self._y
         while block_num > 0:
-            self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
-                                Point(self._c3, y - 1),
-                                Point(self._c3, y - 3), Point(self._c2, y - 2))
-            self.cBar.setFill(color_rgb(208, 173, 44))
+            self._cList[block_num].draw(self.win)
             self.cBar.draw(self.win)
             block_num -= 1
             y += 3
@@ -227,16 +238,26 @@ class Panel(object):
         block_num = 2 * int(event_type / 4) + 1
         y = self._y
         while block_num > 0:
-            self.dBar = Polygon(Point(self._d1, y - 3), Point(self._d1, y - 1), Point(self._d2, y),
-                                Point(self._d3, y - 1),
-                                Point(self._d3, y - 3), Point(self._d2, y - 2))
-            self.dBar.setFill(color_rgb(208, 173, 44))
-            self.dBar.draw(self.win)
+            self._dList[block_num].draw(self.win)
             block_num -= 1
             y += 3
-
+    def clean_bars(self):
+        self.removeaBar()
+        self.removebBar()
+        self.removecBar()
+        self.removedBar()
+    def removeaBar(self):
+        for node in self._aList:
+            node.undraw()
     def removebBar(self):
-        self.bBar.undraw()
+        for node in self._bList:
+            node.undraw()
+    def removecBar(self):
+        for node in self._cList:
+            node.undraw()
+    def removedBar(self):
+        for node in self._dList:
+            node.undraw()
 
     def happySound(self):
         file = 'sound/POP Brust 16 copy.mp3'
