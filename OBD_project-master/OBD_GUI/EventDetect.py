@@ -544,15 +544,14 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 if temp_word != "":
                     trip_svm_buffer += temp_word+" "
                     log.logger.info("computing the score...")
-                    time_window_result = ldaforevent.LDATest(ldaforevent, [temp_word])
+                    time_window_result = ldaforevent.testEvent(ldaforevent, [temp_word])
                     log.logger.info("time window score:   " + str(self.result_to_score(time_window_result))+"\n")
-                    result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
+                    result_trip = ldaforevent.testEvent(ldaforevent, [trip_svm_buffer])
                     log.logger.info(result_trip)
                     trip_score = self.result_to_score(result_trip)
                     log.logger.info("trip score       :   " + str(trip_score)+"\n")
                     log.logger.info("__________________\n")
                     print("Speed:",str(speed.value))
-                    # self.renew_trip_score(self,ldaforevent)
                     self.score_queue.append(self.result_to_score(time_window_result))
                 elif temp_word == "":
                     self.score_queue.append(100)
@@ -560,13 +559,12 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
 
                 if len(self.score_queue) > 6:
                     self.score_queue.pop()
-
                 time_window_score = self.calc_window_socre()
 
     # change trip score
     def renew_trip_score(self, ldaforevent):
         global trip_score
-        result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
+        result_trip = ldaforevent.testEvent(ldaforevent, [trip_svm_buffer])
         trip_score = self.result_to_score(self, result_trip)
 
     # calculate window score using LDA

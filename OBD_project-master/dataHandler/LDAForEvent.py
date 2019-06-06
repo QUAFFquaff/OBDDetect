@@ -438,7 +438,6 @@ def main():
     ldamodel.LDALoad(ldamodel)
     test = ['ahivp']
     start = time.time()
-
     # result = ldamodel.LDATest(ldamodel,test)
     result = ldamodel.testEvent(ldamodel,test)
     print(result)
