@@ -27,7 +27,7 @@ from nltk.stem.porter import PorterStemmer
 from gensim import corpora, models
 import gensim
 from gensim.test.utils import datapath
-
+import time
 
 class LDAForEvent:
     height_weight = 8  # the weight of height in Manhattan distance
@@ -454,6 +454,7 @@ def main():
     ldamodel.LDAPreProcessing(ldamodel)
     ldamodel.LDALoad(ldamodel)
     test = ['ahivp']
+    start = time.time()
     result = ldamodel.LDATest(ldamodel,test)
     print(result)
     score =0
@@ -468,6 +469,8 @@ def main():
             score += 25 * node[1]
 
     print(score)
+    print(time.time()-start )
+    start = time.time()
     test = ['ah']
     result = ldamodel.LDATest(ldamodel, test)
     print(result)
@@ -483,7 +486,7 @@ def main():
             score += 25 * node[1]
 
     print(score)
-
+    print(time.time()-start)
 
 if __name__ == '__main__':
     main()
