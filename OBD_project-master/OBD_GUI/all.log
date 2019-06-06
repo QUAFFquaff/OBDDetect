@@ -1,0 +1,55 @@
+2019-06-06 16:29:39,930 - EventDetect.py[line:219] - INFO: samplingrate--15.267175572519083
+2019-06-06 16:29:39,932 - EventDetect.py[line:220] - INFO: std_window:15
+2019-06-06 16:30:00,597 - EventDetect.py[line:821] - INFO: catch the turn
+2019-06-06 16:31:51,817 - EventDetect.py[line:219] - INFO: samplingrate--15.350877192982455
+2019-06-06 16:31:51,819 - EventDetect.py[line:220] - INFO: std_window:15
+2019-06-06 16:32:21,909 - EventDetect.py[line:537] - INFO: __________________
+
+2019-06-06 16:32:22,195 - EventDetect.py[line:538] - INFO: temp word       :   
+
+2019-06-06 16:32:22,230 - EventDetect.py[line:539] - INFO: time window size:   31.51153540611267
+
+2019-06-06 16:32:52,283 - EventDetect.py[line:537] - INFO: __________________
+
+2019-06-06 16:32:52,596 - EventDetect.py[line:538] - INFO: temp word       :   
+
+2019-06-06 16:32:52,876 - EventDetect.py[line:539] - INFO: time window size:   30.593225717544556
+
+2019-06-06 16:33:00,666 - EventDetect.py[line:656] - INFO: catch acceleration
+
+2019-06-06 16:33:01,581 - EventDetect.py[line:679] - INFO: dismis the speedup
+
+2019-06-06 16:33:03,482 - EventDetect.py[line:656] - INFO: catch acceleration
+
+2019-06-06 16:33:05,724 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 16:33:08,926 - EventDetect.py[line:781] - INFO: catch turn
+2019-06-06 16:33:12,066 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 16:33:13,943 - EventDetect.py[line:781] - INFO: catch turn
+2019-06-06 16:33:16,924 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 16:33:19,143 - EventDetect.py[line:656] - INFO: catch acceleration
+
+2019-06-06 16:33:22,301 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 16:33:24,125 - EventDetect.py[line:694] - INFO: catch a break
+2019-06-06 16:33:28,110 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 16:33:37,647 - EventDetect.py[line:781] - INFO: catch turn
+2019-06-06 16:33:39,805 - EventDetect.py[line:694] - INFO: catch a break
+2019-06-06 16:33:40,400 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 16:33:43,149 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 16:33:58,847 - EventDetect.py[line:781] - INFO: catch turn
+2019-06-06 16:34:02,355 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 16:34:03,546 - EventDetect.py[line:656] - INFO: catch acceleration
+
+2019-06-06 16:34:05,750 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 16:34:07,221 - EventDetect.py[line:694] - INFO: catch a break
+2019-06-06 16:34:10,944 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 16:34:14,369 - EventDetect.py[line:656] - INFO: catch acceleration
+
+2019-06-06 16:34:16,710 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 16:34:18,826 - EventDetect.py[line:781] - INFO: catch turn
+2019-06-06 16:34:21,834 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 16:34:25,694 - EventDetect.py[line:781] - INFO: catch turn
+2019-06-06 16:34:27,469 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 16:34:31,135 - EventDetect.py[line:781] - INFO: catch turn
+2019-06-06 16:34:32,588 - EventDetect.py[line:694] - INFO: catch a break
+2019-06-06 16:34:33,809 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 16:34:35,524 - EventDetect.py[line:265] - INFO: 1
