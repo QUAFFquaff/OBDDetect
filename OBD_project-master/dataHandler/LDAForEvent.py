@@ -36,6 +36,7 @@ class LDAForEvent:
     ldamodel = LdaModel
     dictionary = corpora.Dictionary
     temp_dic = []
+    dictionary = Dictionary.load("lda_dictionary.model")
     # load raw data into workspace
     @staticmethod
     def read_excel(file):
@@ -82,11 +83,6 @@ class LDAForEvent:
         # print(datamatrix)
         return list_values
 
-    # # used to calculate the distance between two character
-    # def calcDis(self, num_1, num_2):
-    #     partA = self.height_weight * abs(num_1 / 4 - num_2 / 4)
-    #     partB = abs(num_1 % 4 - num_2 % 4)
-    #     return partA + partB
 
     # used to calculate the distance between two character
     # second vision
@@ -112,23 +108,21 @@ class LDAForEvent:
     #   fuzzyEvent2
     #   used to match words with different length
     def fuzzyEvent(self, s1, s2):
-        match_matrix = [[0 for i in range(len(s2))] for i in
-                        range(len(s1))]  # length of s1 is numbers of rows; s2 are columns
+        match_matrix = [[0 for i in range(len(s2)+1)] for i in
+                        range(len(s1)+1)]  # length of s1 is numbers of rows; s2 are columns
+
         for i in range(len(s1)):
-            for j in range(len(s2)):
-                match_matrix[i][j] = self.calcDis(self, s1[i], s2[j])
-        for i in range(len(s1)):
-            match_matrix[i][0] = self.add_weight * i + match_matrix[0][0]
+            match_matrix[i][0] = self.add_weight * i
         for j in range(len(s2)):
-            match_matrix[0][j] = self.delete_weight * j + match_matrix[0][0]
-        for i in range(1, len(s1)):
-            for j in range(1, len(s2)):
+            match_matrix[0][j] = self.delete_weight * j
+        for i in range(1, len(s1)+1):
+            for j in range(1, len(s2)+1):
                 match_matrix[i][j] = min(
-                    match_matrix[i - 1][j - 1] + self.calcDis(self, s1[i],s2[j]),
+                    match_matrix[i - 1][j - 1] + self.calcDis(self, s1[i-1],s2[j-1]),
                     match_matrix[i - 1][j] + self.add_weight, match_matrix[i][j - 1] + self.delete_weight)
 
-        sum_distance = match_matrix[len(s1) - 1][len(s2) - 1]
-        max_unit = 65  # should change while the add_weight and delete_weight changed
+        sum_distance = match_matrix[len(s1)][len(s2)]
+        max_unit = 100  # should change while the add_weight and delete_weight changed
         return (max_unit - sum_distance) / max_unit
 
     # doc is test document
@@ -142,6 +136,7 @@ class LDAForEvent:
             f_max = 0
             flag = 1
 
+            temp_testV = [0 for i in range(len(testV))]
             for index in range(len(dic)):
                 grade = self.fuzzyEvent(self,word, dic[index])
                 if f_max < grade:
@@ -149,16 +144,17 @@ class LDAForEvent:
                     flag = 1
                 elif f_max == grade:
                     flag += 1
-            for index in range(len(dic)):
-                grade = self.fuzzyEvent(self,word, dic[index])
-                if f_max == grade:
+                temp_testV[index] = grade
+            for index in range(len(testV)):
+
+                if f_max == temp_testV[index]:
                     testV[index][1] += 1 / flag
         for node in testV:
             if node[1]>0:
                 print(node)
         return self.ldamodel[testV]
 
-    def LDAtraining(self, doc_set):
+    def LDAtraining(self, doc_set=[]):
         texts = []
         tokenizer = RegexpTokenizer(r'\w+')
 
@@ -417,23 +413,9 @@ class LDAForEvent:
         return self.ldamodel, dictionary
 
     def LDAPreProcessing(self):
-        # datamatrix1 = self.read_excel('ForLDA1alph.xls')
-        # datamatrix2 = self.read_excel('ForLDA2alph.xls')
-        # datamatrix3 = self.read_excel('ForLDA3alph.xls')
-        # datamatrix4 = self.read_excel('ForLDA4alph.xls')
-        # datamatrix5 = self.read_excel('ForLDA0415alph.xls')
-        # print(datamatrix5)
-        # print(datamatrix5[0:126])
-        # datamatrix = read_excel('ForLDA.xls')
-        # print(datamatrix[0][102:180])
-        # doc_set = [datamatrix[0], datamatrix[0][0:5] + datamatrix[0][8:17], datamatrix[0][18:31], datamatrix[0][85:105],
-        #            datamatrix[0][127:150], "a8 8b1 ba1228b9"]
-        doc_set = []
-        #     datam]atrix1,datamatrix2,datamatrix3,
-        #            datamatrix4,datamatrix5]
 
-        # print(doc_set)
-        # doc_set = [datamatrix[0]]
+        doc_set = []
+
         ldamodel2, dictionary = self.LDAtraining(self,doc_set)
         # ldamodel = LdaModel.load(datapath('model'))
 
@@ -444,8 +426,7 @@ class LDAForEvent:
         # print(len(self.dictionary))
 
     def LDATest(self, test):
-        dictionary = Dictionary.load("lda_dictionary.model")
-        result = self.testEvent(self, test,dictionary)
+        result = self.testEvent(self, test,self.dictionary)
         return result
 
 
