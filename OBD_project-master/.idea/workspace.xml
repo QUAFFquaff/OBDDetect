@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="44de97c5-061b-49ff-b1d1-67eeacc70fb9" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OBD_GUI/EventDetection.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/EventDetection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OBD_GUI/GUI.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/GUI.py" afterDir="false" />
     </list>
-=======
-    <list default="true" id="0547c4ae-ab38-441b-8213-fbc7e410c1d2" name="Default" comment="" />
->>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,13 +28,8 @@
       <file leaf-file-name="EventDetection.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetection.py">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="314">
               <caret line="264" column="38" selection-start-line="264" selection-start-column="38" selection-end-line="264" selection-end-column="38" />
-=======
-            <state relative-caret-position="594">
-              <caret line="239" column="40" lean-forward="false" selection-start-line="239" selection-start-column="40" selection-end-line="239" selection-end-column="40" />
->>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <marker date="1557902279709" expanded="true" signature="23603:23840" ph="..." />
@@ -51,22 +42,15 @@
       <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/test.py">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="332">
               <caret line="256" selection-start-line="256" selection-end-line="256" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
-=======
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
->>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/pic3.gif">
           <provider selected="true" editor-type-id="images" />
@@ -85,59 +69,6 @@
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
-=======
-      <file leaf-file-name="SVM.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OBD_GUI/SVM.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="553">
-              <caret line="200" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="206" selection-end-column="0" />
-              <folding>
-                <element signature="e#172#195#0" expanded="true" />
-                <marker date="1557902279401" expanded="true" signature="1158:3707" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="3013:3707" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="3236:3707" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="3621:3707" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="3729:4654" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="4455:4653" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="4709:5287" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="4922:5130" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="5034:5095" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="5335:6405" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="5531:5814" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="5604:5814" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="6197:6389" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="6280:6389" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="6440:6599" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="6530:6599" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="6635:6787" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="6813:7986" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="7116:7261" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="8000:8161" ph="..." />
-                <marker date="1557902279401" expanded="true" signature="8209:8818" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LDAForEvent.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataHandler/LDAForEvent.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="727">
-              <caret line="260" column="12" lean-forward="true" selection-start-line="260" selection-start-column="12" selection-end-line="260" selection-end-column="12" />
-              <folding>
-                <element signature="e#150#161#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/xlrd/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="115" column="0" lean-forward="false" selection-start-line="115" selection-start-column="0" selection-end-line="115" selection-end-column="0" />
-              <folding />
->>>>>>> d375e78cb03aef0ca0ff7b4e29c825a51ec37ae2
             </state>
           </provider>
         </entry>
