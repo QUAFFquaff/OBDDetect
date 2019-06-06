@@ -1,0 +1,550 @@
+2019-06-03 12:22:37,103 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:22:37,116 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:22:37,119 - EventDetect.py[line:571] - INFO: time window size:   30.057547330856323
+2019-06-03 12:22:37,278 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:26:58,788 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:26:59,978 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:27:00,838 - EventDetect.py[line:571] - INFO: time window size:   32.609394788742065
+2019-06-03 12:27:02,238 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:28:32,618 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:28:34,648 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:28:35,078 - EventDetect.py[line:571] - INFO: time window size:   33.3896210193634
+2019-06-03 12:28:35,728 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:29:06,918 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:29:07,528 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:29:08,179 - EventDetect.py[line:571] - INFO: time window size:   31.711048364639282
+2019-06-03 12:29:08,734 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:29:39,818 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:29:42,258 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:29:42,578 - EventDetect.py[line:571] - INFO: time window size:   33.22891974449158
+2019-06-03 12:29:42,928 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:30:13,683 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:30:13,716 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:30:13,748 - EventDetect.py[line:571] - INFO: time window size:   30.070206880569458
+2019-06-03 12:30:14,349 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:30:45,064 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:30:45,080 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:30:45,244 - EventDetect.py[line:571] - INFO: time window size:   30.33058452606201
+2019-06-03 12:30:45,498 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:31:16,919 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:31:16,933 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:31:16,959 - EventDetect.py[line:571] - INFO: time window size:   30.04964256286621
+2019-06-03 12:31:16,963 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:31:47,378 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:31:47,880 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:31:48,448 - EventDetect.py[line:571] - INFO: time window size:   31.478001832962036
+2019-06-03 12:31:48,491 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:32:18,572 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:32:18,756 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:32:18,778 - EventDetect.py[line:571] - INFO: time window size:   30.278849840164185
+2019-06-03 12:32:18,829 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:32:48,886 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:32:49,261 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:32:49,345 - EventDetect.py[line:571] - INFO: time window size:   30.514741897583008
+2019-06-03 12:32:49,372 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:33:20,548 - EventDetect.py[line:224] - INFO: samplingrate--15.4015401540154
+2019-06-03 12:33:32,568 - EventDetect.py[line:685] - INFO: catch acceleration
+2019-06-03 12:33:35,414 - EventDetect.py[line:852] - INFO: catch the turn
+2019-06-03 12:33:35,893 - EventDetect.py[line:272] - INFO: 2
+2019-06-03 12:33:38,576 - EventDetect.py[line:685] - INFO: catch acceleration
+2019-06-03 12:33:41,772 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 12:33:45,315 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 12:33:52,053 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:33:52,055 - EventDetect.py[line:570] - INFO: temp word       :   hoh
+2019-06-03 12:33:52,058 - EventDetect.py[line:571] - INFO: time window size:   30.03931713104248
+2019-06-03 12:33:52,060 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:34:09,268 - EventDetect.py[line:723] - INFO: catch a break
+2019-06-03 12:34:09,856 - EventDetect.py[line:746] - INFO: dimiss the break
+2019-06-03 12:34:10,447 - EventDetect.py[line:812] - INFO: catch turn
+2019-06-03 12:34:17,468 - EventDetect.py[line:723] - INFO: catch a break
+2019-06-03 12:34:27,237 - EventDetect.py[line:837] - INFO: dismiss the turn
+2019-06-03 12:34:32,227 - EventDetect.py[line:852] - INFO: catch the turn
+2019-06-03 12:34:35,000 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 12:34:36,612 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 12:34:51,885 - EventDetect.py[line:723] - INFO: catch a break
+2019-06-03 12:35:10,251 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 12:35:10,706 - EventDetect.py[line:685] - INFO: catch acceleration
+2019-06-03 12:35:14,506 - EventDetect.py[line:812] - INFO: catch turn
+2019-06-03 12:35:15,070 - EventDetect.py[line:837] - INFO: dismiss the turn
+2019-06-03 12:35:16,566 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 12:35:22,405 - EventDetect.py[line:852] - INFO: catch the turn
+2019-06-03 12:35:27,964 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 12:35:30,483 - EventDetect.py[line:812] - INFO: catch turn
+2019-06-03 12:35:30,631 - EventDetect.py[line:685] - INFO: catch acceleration
+2019-06-03 12:35:31,690 - EventDetect.py[line:708] - INFO: dismis the speedup
+2019-06-03 12:35:34,101 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 12:35:40,252 - EventDetect.py[line:852] - INFO: catch the turn
+2019-06-03 12:35:44,757 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 12:35:44,831 - EventDetect.py[line:812] - INFO: catch turn
+2019-06-03 12:35:45,879 - EventDetect.py[line:723] - INFO: catch a break
+2019-06-03 12:36:44,150 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 12:36:47,511 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 12:37:19,925 - EventDetect.py[line:685] - INFO: catch acceleration
+2019-06-03 12:37:28,629 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 12:37:39,818 - EventDetect.py[line:723] - INFO: catch a break
+2019-06-03 12:38:16,655 - EventDetect.py[line:852] - INFO: catch the turn
+2019-06-03 12:38:16,750 - EventDetect.py[line:272] - INFO: 2
+2019-06-03 12:38:18,496 - EventDetect.py[line:685] - INFO: catch acceleration
+2019-06-03 12:38:24,513 - EventDetect.py[line:708] - INFO: dismis the speedup
+2019-06-03 12:38:24,553 - EventDetect.py[line:723] - INFO: catch a break
+2019-06-03 12:38:29,990 - EventDetect.py[line:877] - INFO: dismiss the turn
+2019-06-03 12:39:36,699 - EventDetect.py[line:579] - INFO: [(0, 0.13288553), (1, 0.13864897), (2, 0.1297928), (3, 0.5986727)]
+2019-06-03 12:39:36,767 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:39:36,821 - EventDetect.py[line:570] - INFO: temp word       :   oaahvovoah
+2019-06-03 12:39:36,832 - EventDetect.py[line:571] - INFO: time window size:   344.77060866355896
+2019-06-03 12:39:36,837 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:41:03,136 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 12:42:22,052 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:22,651 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:23,215 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:23,753 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:24,390 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:24,974 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:25,528 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:26,082 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:26,600 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:27,191 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:27,994 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:28,659 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:29,525 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:30,229 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:30,841 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:31,601 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:32,130 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:32,705 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:33,310 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:33,849 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:34,414 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:35,437 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:36,047 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:36,772 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:37,310 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:37,872 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:38,471 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:39,053 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:39,811 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:40,520 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:41,053 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:41,674 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:42,266 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:42,866 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:43,583 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:44,429 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:44,982 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:45,609 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:46,122 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:46,756 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:47,613 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:48,208 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:48,804 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:49,394 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:49,922 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:50,728 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:51,353 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:51,967 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:52,708 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:53,702 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:54,226 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:54,871 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:55,654 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:56,186 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:57,149 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:57,772 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:58,472 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:58,989 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:42:59,606 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:00,159 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:00,773 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:01,419 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:02,141 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:02,780 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:03,295 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:04,325 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:04,883 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:05,498 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:06,303 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:07,054 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:07,589 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:08,117 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:08,656 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:09,204 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:09,776 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:10,344 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:10,980 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:11,617 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:12,414 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:12,941 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:13,464 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:14,053 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:14,618 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:15,476 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:16,007 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:16,723 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:17,294 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:17,813 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:18,462 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:19,021 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:19,671 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:20,293 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:20,886 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:22,083 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:22,683 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:23,359 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:23,921 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:24,689 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:26,544 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:27,177 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:27,726 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:28,362 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:28,885 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:29,595 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:30,121 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:31,200 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:31,724 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:32,379 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:32,929 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:33,665 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:34,285 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:34,831 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:35,499 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:36,112 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:36,812 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:37,431 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:37,986 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:38,560 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:39,094 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:39,725 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:40,462 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:41,060 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:41,897 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:42,496 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:43,016 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:43,695 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:44,421 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:45,084 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:45,612 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:46,662 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:47,260 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:48,109 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:49,008 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:49,809 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:50,326 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:50,981 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:51,637 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:52,159 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:52,708 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:53,239 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:53,853 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:54,429 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:55,161 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:55,830 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:56,358 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:57,222 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:57,850 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:58,656 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:59,387 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:43:59,966 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:00,489 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:01,010 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:01,638 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:02,167 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:02,739 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:03,504 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:04,093 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:04,694 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:05,332 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:05,917 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:06,480 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:07,080 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:07,856 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:08,598 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:09,161 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:09,913 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:10,468 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:10,977 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:11,568 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:12,121 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:12,699 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:13,323 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:14,128 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:15,245 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:16,172 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:16,911 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:17,641 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:18,217 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:18,757 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:19,306 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:20,017 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:20,621 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:21,296 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:21,948 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:22,580 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:23,401 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:23,968 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:24,654 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:25,489 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:26,292 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:27,191 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:27,909 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:28,854 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:29,429 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:29,986 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:30,511 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:31,666 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:32,218 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:32,801 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:33,576 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:34,122 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:34,705 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:35,283 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:36,030 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:36,568 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:37,182 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:37,695 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:38,595 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:39,146 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:39,819 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:40,382 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:41,042 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:41,706 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:42,347 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:42,903 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:43,518 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:44,131 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:44,708 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:45,875 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:46,485 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:47,144 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:47,768 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:48,350 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:48,884 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:49,510 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:50,123 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:50,749 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:51,293 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:52,052 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:52,668 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:53,211 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:53,848 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:54,422 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:54,951 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:55,596 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:56,321 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:56,903 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:44:57,657 - EventDetect.py[line:304] - INFO: something wrong with bluetooth
+2019-06-03 12:47:26,121 - EventDetect.py[line:224] - INFO: samplingrate--16.786570743405278
+2019-06-03 12:48:04,278 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:48:04,783 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:48:05,041 - EventDetect.py[line:571] - INFO: time window size:   31.023284912109375
+2019-06-03 12:48:05,230 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:48:35,298 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:48:35,369 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:48:35,374 - EventDetect.py[line:571] - INFO: time window size:   30.082530736923218
+2019-06-03 12:48:35,923 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:49:06,372 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:49:06,455 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:49:06,487 - EventDetect.py[line:571] - INFO: time window size:   30.431785345077515
+2019-06-03 12:49:06,492 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:49:36,536 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:49:36,652 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:49:36,858 - EventDetect.py[line:571] - INFO: time window size:   30.34390878677368
+2019-06-03 12:49:36,862 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:50:08,008 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:50:08,022 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:50:08,237 - EventDetect.py[line:571] - INFO: time window size:   31.331167697906494
+2019-06-03 12:50:08,321 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:50:38,575 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:50:38,873 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:50:38,875 - EventDetect.py[line:571] - INFO: time window size:   30.440552234649658
+2019-06-03 12:50:38,882 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:51:08,908 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:51:09,137 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:51:09,735 - EventDetect.py[line:571] - INFO: time window size:   30.848800659179688
+2019-06-03 12:51:09,929 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:51:40,334 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:51:40,831 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:51:40,865 - EventDetect.py[line:571] - INFO: time window size:   30.533807516098022
+2019-06-03 12:51:40,955 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:52:11,181 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:52:11,777 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:52:11,823 - EventDetect.py[line:571] - INFO: time window size:   30.802111387252808
+2019-06-03 12:52:11,958 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:52:42,184 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:52:42,249 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:52:42,257 - EventDetect.py[line:571] - INFO: time window size:   30.253427982330322
+2019-06-03 12:52:42,260 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:53:12,460 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:53:12,548 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:53:12,651 - EventDetect.py[line:571] - INFO: time window size:   30.384124279022217
+2019-06-03 12:53:12,792 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:53:42,851 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:53:43,238 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:53:43,898 - EventDetect.py[line:571] - INFO: time window size:   31.081542253494263
+2019-06-03 12:53:44,208 - EventDetect.py[line:572] - INFO: __________________
+2019-06-03 12:54:13,473 - EventDetect.py[line:224] - INFO: samplingrate--15.250544662309368
+2019-06-03 12:54:13,485 - EventDetect.py[line:225] - INFO: std_window:15
+2019-06-03 12:54:43,221 - EventDetect.py[line:569] - INFO: __________________
+2019-06-03 12:54:43,346 - EventDetect.py[line:570] - INFO: temp word       :   
+2019-06-03 12:54:43,492 - EventDetect.py[line:571] - INFO: time window size:   30.827627897262573
+2019-06-03 12:57:26,259 - EventDetect.py[line:224] - INFO: samplingrate--15.677491601343785
+2019-06-03 12:57:26,278 - EventDetect.py[line:225] - INFO: std_window:16
+2019-06-03 12:59:06,915 - EventDetect.py[line:224] - INFO: samplingrate--15.538290788013319
+2019-06-03 12:59:06,918 - EventDetect.py[line:225] - INFO: std_window:16
+2019-06-03 12:59:35,923 - EventDetect.py[line:543] - INFO: __________________
+2019-06-03 12:59:38,318 - EventDetect.py[line:544] - INFO: temp word       :   
+2019-06-03 12:59:38,449 - EventDetect.py[line:545] - INFO: time window size:   32.89682173728943
+2019-06-03 13:00:04,783 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:00:08,692 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:00:10,638 - EventDetect.py[line:543] - INFO: __________________
+2019-06-03 13:00:12,438 - EventDetect.py[line:544] - INFO: temp word       :   o
+2019-06-03 13:00:13,138 - EventDetect.py[line:545] - INFO: time window size:   32.777100563049316
+2019-06-03 13:00:14,317 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:00:15,318 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:00:18,067 - EventDetect.py[line:272] - INFO: 2
+2019-06-03 13:00:19,396 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:00:22,457 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:00:26,224 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:00:37,092 - EventDetect.py[line:789] - INFO: catch turn
+2019-06-03 13:00:39,056 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:00:45,364 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:00:47,859 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:00:48,689 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:00:49,732 - EventDetect.py[line:685] - INFO: dismis the speedup
+2019-06-03 13:00:54,254 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:00:54,978 - EventDetect.py[line:551] - INFO: time window score:   80.29192462563515
+2019-06-03 13:00:58,305 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:00:58,457 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:00:58,539 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:00:59,501 - EventDetect.py[line:685] - INFO: dismis the speedup
+2019-06-03 13:00:59,504 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:01:00,287 - EventDetect.py[line:723] - INFO: dimiss the break
+2019-06-03 13:01:03,030 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:01:09,295 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:01:13,108 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:01:14,487 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:01:37,185 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:01:37,243 - EventDetect.py[line:553] - INFO: [(0, 0.13073646), (1, 0.13216132), (2, 0.13193813), (3, 0.6051641)]
+2019-06-03 13:01:37,248 - EventDetect.py[line:555] - INFO: trip score       :   80.2882481366396
+2019-06-03 13:01:37,249 - EventDetect.py[line:556] - INFO: __________________
+2019-06-03 13:01:37,495 - EventDetect.py[line:543] - INFO: __________________
+2019-06-03 13:01:37,510 - EventDetect.py[line:544] - INFO: temp word       :   aoaobaov
+2019-06-03 13:01:37,540 - EventDetect.py[line:545] - INFO: time window size:   83.72885036468506
+2019-06-03 13:01:42,204 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:01:45,655 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:01:46,292 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:01:47,214 - EventDetect.py[line:685] - INFO: dismis the speedup
+2019-06-03 13:01:47,848 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:01:50,522 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:01:55,715 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:01:57,709 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:02:08,215 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:02:09,967 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:02:10,792 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:02:14,577 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:02:16,536 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:02:24,011 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:03:04,271 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:03:05,633 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:03:05,937 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:03:06,902 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:03:10,902 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:03:15,954 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:03:16,743 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:03:24,017 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:03:26,323 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:03:37,050 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:03:37,669 - EventDetect.py[line:854] - INFO: dismiss the turn
+2019-06-03 13:03:37,938 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:03:43,624 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:03:50,415 - EventDetect.py[line:789] - INFO: catch turn
+2019-06-03 13:03:53,345 - EventDetect.py[line:272] - INFO: 2
+2019-06-03 13:03:54,224 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:03:54,889 - EventDetect.py[line:685] - INFO: dismis the speedup
+2019-06-03 13:03:55,116 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:03:55,707 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:04:20,280 - EventDetect.py[line:854] - INFO: dismiss the turn
+2019-06-03 13:04:37,288 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:04:43,467 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:04:53,047 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:05:02,594 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:05:03,323 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:05:05,423 - EventDetect.py[line:272] - INFO: 1
+2019-06-03 13:05:10,051 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:05:12,214 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:05:16,489 - EventDetect.py[line:272] - INFO: 2
+2019-06-03 13:05:18,766 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:05:25,494 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:05:27,284 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:05:32,868 - EventDetect.py[line:662] - INFO: catch acceleration
+2019-06-03 13:05:32,889 - EventDetect.py[line:272] - INFO: 3
+2019-06-03 13:05:34,009 - EventDetect.py[line:685] - INFO: dismis the speedup
+2019-06-03 13:05:35,812 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:05:37,341 - EventDetect.py[line:700] - INFO: catch a break
+2019-06-03 13:05:38,320 - EventDetect.py[line:829] - INFO: catch the turn
+2019-06-03 13:05:42,231 - EventDetect.py[line:295] - INFO: put turn into svm
+2019-06-03 13:41:02,432 - EventDetect.py[line:223] - INFO: samplingrate--15.4015401540154
+2019-06-03 13:41:02,436 - EventDetect.py[line:224] - INFO: std_window:15
+2019-06-03 13:41:10,003 - EventDetect.py[line:667] - INFO: catch acceleration
+2019-06-03 13:41:12,557 - EventDetect.py[line:834] - INFO: catch the turn
+                                                                                                                                                                                                                                                                                                                                                                                                                      2019-06-03 13:43:24,155 - EventDetect.py[line:223] - INFO: samplingrate--15.555555555555555
+2019-06-03 13:43:24,162 - EventDetect.py[line:224] - INFO: std_window:16
+2019-06-03 13:43:34,878 - EventDetect.py[line:834] - INFO: catch the turn
+2019-06-03 13:43:36,854 - EventDetect.py[line:298] - INFO: put turn into svm
+2019-06-03 13:43:39,113 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:43:39,129 - EventDetect.py[line:834] - INFO: catch the turn
+2019-06-03 13:43:40,048 - EventDetect.py[line:859] - INFO: dismiss the turn
+2019-06-03 13:43:53,481 - EventDetect.py[line:547] - INFO: __________________
+2019-06-03 13:43:53,524 - EventDetect.py[line:548] - INFO: temp word       :   v
+2019-06-03 13:43:53,839 - EventDetect.py[line:549] - INFO: time window size:   30.986268043518066
+2019-06-03 13:43:54,159 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:43:59,392 - EventDetect.py[line:667] - INFO: catch acceleration
+2019-06-03 13:44:10,275 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:44:16,306 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:44:20,063 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:44:23,452 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:44:25,660 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:44:34,639 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:44:40,893 - EventDetect.py[line:555] - INFO: time window score:   80.00856600701809
+2019-06-03 13:44:54,966 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:44:57,034 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:45:02,437 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:45:10,700 - EventDetect.py[line:667] - INFO: catch acceleration
+2019-06-03 13:45:11,884 - EventDetect.py[line:834] - INFO: catch the turn
+2019-06-03 13:45:12,607 - EventDetect.py[line:271] - INFO: 2
+2019-06-03 13:45:14,734 - EventDetect.py[line:298] - INFO: put turn into svm
+2019-06-03 13:45:17,240 - EventDetect.py[line:834] - INFO: catch the turn
+2019-06-03 13:45:20,268 - EventDetect.py[line:298] - INFO: put turn into svm
+2019-06-03 13:45:21,101 - EventDetect.py[line:794] - INFO: catch turn
+2019-06-03 13:45:22,155 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:45:24,529 - EventDetect.py[line:298] - INFO: put turn into svm
+2019-06-03 13:45:28,001 - EventDetect.py[line:557] - INFO: [(0, 0.13526414), (1, 0.13182509), (2, 0.13024424), (3, 0.6026665)]
+2019-06-03 13:45:28,059 - EventDetect.py[line:559] - INFO: trip score       :   80.00782579183578
+2019-06-03 13:45:28,062 - EventDetect.py[line:560] - INFO: __________________
+2019-06-03 13:45:29,528 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:45:29,709 - EventDetect.py[line:547] - INFO: __________________
+2019-06-03 13:45:29,711 - EventDetect.py[line:548] - INFO: temp word       :   ahaaachooo
+2019-06-03 13:45:29,718 - EventDetect.py[line:549] - INFO: time window size:   95.46641826629639
+2019-06-03 13:45:49,665 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:46:00,786 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:46:06,737 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:46:09,896 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:46:17,041 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:46:21,513 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:46:21,636 - EventDetect.py[line:667] - INFO: catch acceleration
+2019-06-03 13:46:24,724 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:46:26,542 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:46:30,154 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:46:38,070 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:46:43,871 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:46:52,963 - EventDetect.py[line:834] - INFO: catch the turn
+2019-06-03 13:46:58,421 - EventDetect.py[line:298] - INFO: put turn into svm
+2019-06-03 13:47:00,261 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:47:04,384 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:47:05,337 - EventDetect.py[line:667] - INFO: catch acceleration
+2019-06-03 13:47:06,168 - EventDetect.py[line:690] - INFO: dismis the speedup
+2019-06-03 13:47:10,329 - EventDetect.py[line:705] - INFO: catch a break
+2019-06-03 13:47:13,375 - EventDetect.py[line:271] - INFO: 1
+2019-06-03 13:49:45,666 - EventDetect.py[line:308] - INFO: something wrong with bluetooth
+2019-06-03 13:49:45,676 - EventDetect.py[line:308] - INFO: something wrong with bluetooth
+2019-06-03 13:49:45,687 - EventDetect.py[line:308] - INFO: something wrong with bluetooth
+2019-06-03 13:49:45,740 - EventDetect.py[line:308] - INFO: something wrong with bluetooth

@@ -17,28 +17,19 @@ import logging .config
 import logging
 from logging import handlers
 
-logging.basicConfig(level=logging.INFO,#控制台打印的日志级别
-                    filename='new.log',
-                    filemode='a',##模式，有w和a，w就是写模式，每次都会重新写日志，覆盖之前的日志
-                    #a是追加模式，默认如果不写的话，就是追加模式
-                    format=
-                    '%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
-                    #日志格式
-                    )
-
 sys.path.append('../dataHandler/')
 from LDAForEvent import *
 from change_numbers_to_alphabet import change_n_to_a
 from xlrd import *
 from xlutils.copy import copy
 
-matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
-                   [-0.026682913, 0.63608, -0.770697297],
-                   [0.021995888, 0.77162, 0.635319376]])
+# matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
+#                    [-0.026682913, 0.63608, -0.770697297],
+#                    [0.021995888, 0.77162, 0.635319376]])
 
-# matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
-#                    [-0.993610238,0.079, -0.079680179],
-#                    [0.079680205, 0.99687, 0.006389762]])
+matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
+                   [-0.993610238,0.079, -0.079680179],
+                   [0.079680205, 0.99687, 0.006389762]])
 
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
@@ -544,20 +535,22 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
             if time.time() - start_time > time_window and LDA_flag.value:
                 GUI_flag = True
                 temp_word = svm_label_buffer
+                svm_label_buffer = ""
                 log.logger.info("__________________")
                 log.logger.info("temp word       :   " + temp_word)
-                log.logger.info("time window size:   " + str(time.time() - start_time))
+                log.logger.info("time window size:   " + str(time.time() - start_time)+"\n")
                 start_time = time.time()
-                trip_svm_buffer += temp_word
-                svm_label_buffer = ""
+
                 if temp_word != "":
+                    trip_svm_buffer += temp_word+" "
+                    log.logger.info("computing the score...")
                     time_window_result = ldaforevent.LDATest(ldaforevent, [temp_word])
-                    log.logger.info("time window score:   " + str(self.result_to_score(time_window_result)))
+                    log.logger.info("time window score:   " + str(self.result_to_score(time_window_result))+"\n")
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
                     log.logger.info(result_trip)
                     trip_score = self.result_to_score(result_trip)
-                    log.logger.info("trip score       :   " + str(trip_score))
-                    log.logger.info("__________________")
+                    log.logger.info("trip score       :   " + str(trip_score)+"\n")
+                    log.logger.info("__________________\n")
                     print("Speed:",str(speed.value))
                     # self.renew_trip_score(self,ldaforevent)
                     self.score_queue.append(self.result_to_score(time_window_result))
