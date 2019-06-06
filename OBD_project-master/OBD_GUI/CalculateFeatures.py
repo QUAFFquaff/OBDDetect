@@ -172,16 +172,16 @@ def read_excel2():
     return datamatrix
 
 def main():
-    # datamatrix = read_excel('label data.xlsx')
-    # vect = np.array(init(datamatrix))
-    # print(vect)
-    # write_excel(vect, 'vect.xls')
+    datamatrix = read_excel('label data.xlsx')
+    vect = np.array(init(datamatrix))
+    print(vect)
+    write_excel(vect, 'vect.xls')
 
-    a = read_excel2()
-    s = Smote(a, N=100)
-    oversampling = s.over_sampling()
-    print(oversampling)
-    write_excel(oversampling,'SmoteOutput.xls')
+    # a = read_excel2()
+    # s = Smote(a, N=100)
+    # oversampling = s.over_sampling()
+    # print(oversampling)
+    # write_excel(oversampling,'SmoteOutput.xls')
 
 
 if __name__ == "__main__":
