@@ -894,20 +894,20 @@ def main():
     lda_thread = Thread_for_lda()
     lda_thread.start()
 
-    Panel = GUI.Panel()
-    Panel.drawPanel()
+    panel = GUI.Panel()
+    panel.drawPanel()
     while True:
-        Panel.refresh()
+        panel.refresh()
         if GUI_flag:
             GUI_flag = False
-            Panel.change_score(time_window_score, trip_score)
+            panel.change_score(time_window_score, trip_score)
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
             time_local = time.localtime(float(result.getStart() / 1000))
             start = time.strftime("%H:%M:%S", time_local)
             time_local = time.localtime(float(result.getEnd() / 1000))
             end = time.strftime("%H:%M:%S", time_local)
-            Panel.showEvent(start, end, result.getLabel())
+            panel.showEvent(start, end, result.getLabel())
 
 
 if __name__ == "__main__":

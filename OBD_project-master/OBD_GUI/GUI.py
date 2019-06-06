@@ -1,4 +1,4 @@
-from .graphics import *
+from graphics import *
 import time
 import datetime
 import pygame
@@ -305,3 +305,7 @@ class Panel(object):
         pygame.mixer.music.play()
         time.sleep(0.1)
         pygame.mixer.music.stop()
+
+
+
+
