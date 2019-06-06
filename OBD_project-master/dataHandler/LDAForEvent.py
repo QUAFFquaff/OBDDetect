@@ -417,20 +417,20 @@ class LDAForEvent:
         return self.ldamodel, dictionary
 
     def LDAPreProcessing(self):
-        datamatrix1 = self.read_excel('ForLDA1alph.xls')
-        datamatrix2 = self.read_excel('ForLDA2alph.xls')
-        datamatrix3 = self.read_excel('ForLDA3alph.xls')
-        datamatrix4 = self.read_excel('ForLDA4alph.xls')
-        datamatrix5 = self.read_excel('ForLDA0415alph.xls')
+        # datamatrix1 = self.read_excel('ForLDA1alph.xls')
+        # datamatrix2 = self.read_excel('ForLDA2alph.xls')
+        # datamatrix3 = self.read_excel('ForLDA3alph.xls')
+        # datamatrix4 = self.read_excel('ForLDA4alph.xls')
+        # datamatrix5 = self.read_excel('ForLDA0415alph.xls')
         # print(datamatrix5)
         # print(datamatrix5[0:126])
         # datamatrix = read_excel('ForLDA.xls')
         # print(datamatrix[0][102:180])
         # doc_set = [datamatrix[0], datamatrix[0][0:5] + datamatrix[0][8:17], datamatrix[0][18:31], datamatrix[0][85:105],
         #            datamatrix[0][127:150], "a8 8b1 ba1228b9"]
-        doc_set = [
-            datamatrix1,datamatrix2,datamatrix3,
-                   datamatrix4,datamatrix5]
+        doc_set = []
+        #     datam]atrix1,datamatrix2,datamatrix3,
+        #            datamatrix4,datamatrix5]
 
         # print(doc_set)
         # doc_set = [datamatrix[0]]
@@ -483,12 +483,6 @@ def main():
             score += 25 * node[1]
 
     print(score)
-    # test = ['04000', '42044', '24024', '02022', '02000', '24022', '02206', '02200', '00624', '00624', '04442', '42004',
-    #         '44024']
-    # test = ['21222','01212','12121', '21012', '01010', '12121', '02120', '12010', '13312',
-    #         '11011', '01010', '21212', '22222', '10020', '10312', '12122', '21212']
-    # test = ['2122','01', '1212', '2121', '1', '01', '1', '1', '1','2120','20',  '31']
-    # testEvent(test, ldamodel, dictionary)
 
 
 if __name__ == '__main__':
