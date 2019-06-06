@@ -45,10 +45,30 @@ class Panel(object):
         self._d3 = self._d2 + 2
 
         # parameters for sth
+        self._y = 11
+
+        # generate Bar list
+        self._aList = []
+        self._bList = []
+        self._cList = []
+        self._dList = []
+
+        # parameters for sth
         self.moneyMsg = Text(Point(41.5, 20), "")
         self.moneyMsg.draw(win)
         self.tripscoreMsg = Text(Point(41.5, 5), "")
         self.tripscoreMsg.draw(win)
+
+    def initBarList(self):
+        y = self._y
+        for i in range(6):
+
+            self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
+                                Point(self._c3, y - 1),
+                                Point(self._c3, y - 3), Point(self._c2, y - 2))
+            self.bBar.setFill(color_rgb(208, 173, 44))
+            self.bBar.draw(self.win)
+            y += 3
 
     def drawPanel(self):
         # draw the background
@@ -155,130 +175,65 @@ class Panel(object):
         if Eventtype == 11:
             return "high swerve"
 
-    def drawBar(self, Eventtype):
+    def drawBar(self, event_type):
+        if event_type %4 == 0:
+            self.addaBar(event_type)
+        elif event_type %4 == 1:
+            self.addbBar(event_type)
+        if event_type %4 == 2:
+            self.addcBar(event_type)
+        if event_type %4 == 3:
+            self.adddBar(event_type)
 
-        y = 11
-        if Eventtype < 4:
-            if Eventtype == 0:
-                self.bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(b2, y),
-                                    Point(self._b3, y - 1),
-                                    Point(self._b3, y - 3), Point(b2, y - 2))
-                self.bBar.setFill(color_rgb(39, 244, 106))
-                self.bBar.draw(self.win)
-            if Eventtype == 1:
-                self.aBar = Polygon(Point(self._a1, y - 3), Point(self._a1, y - 1), Point(self._a2, y),
-                                    Point(self._a3, y - 1),
-                                    Point(self._a3, y - 3), Point(self._a2, y - 2))
-                self.aBar.setFill(color_rgb(39, 244, 106))
-                self.aBar.draw(self.win)
-            if Eventtype == 2:
-                self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
-                                    Point(self._c3, y - 1),
-                                    Point(self._c3, y - 3), Point(self._c2, y - 2))
-                self.cBar.setFill(color_rgb(39, 244, 106))
-                self.cBar.draw(self.win)
-            if Eventtype == 3:
-                self.dBar = Polygon(Point(self._self._d1, y - 3), Point(self._self._d1, y - 1), Point(self._d2, y),
-                                    Point(self._d3, y - 1),
-                                    Point(self._d3, y - 3), Point(self._d2, y - 2))
-                self.dBar.setFill(color_rgb(39, 244, 106))
-                self.dBar.draw(self.win)
-        elif 3 < Eventtype < 8:
-            blocknum = 3
-            if Eventtype == 4:
-                while blocknum > 0:
-                    self.bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(b2, y),
-                                        Point(self._b3, y - 1),
-                                        Point(self._b3, y - 3), Point(b2, y - 2))
-                    self.bBar.setFill(color_rgb(208, 173, 44))
-                    self.bBar.draw(self.win)
-                    blocknum -= 1
-                    y += 3
-            if Eventtype == 5:
-                while blocknum > 0:
-                    self.aBar = Polygon(Point(self._a1, y - 3), Point(self._a1, y - 1), Point(self._a2, y),
-                                        Point(self._a3, y - 1),
-                                        Point(self._a3, y - 3), Point(self._a2, y - 2))
-                    self.aBar.setFill(color_rgb(208, 173, 44))
-                    self.aBar.draw(self.win)
-                    blocknum -= 1
-                    y += 3
-            if Eventtype == 6:
-                while blocknum > 0:
-                    self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
-                                        Point(self._c3, y - 1),
-                                        Point(self._c3, y - 3), Point(self._c2, y - 2))
-                    self.cBar.setFill(color_rgb(208, 173, 44))
-                    self.cBar.draw(self.win)
-                    blocknum = blocknum - 1
-                    y = y + 3
-            if Eventtype == 7:
-                while blocknum > 0:
-                    self.dBar = Polygon(Point(self._self._d1, y - 3), Point(self._self._d1, y - 1), Point(self._d2, y),
-                                        Point(self._d3, y - 1),
-                                        Point(self._d3, y - 3), Point(self._d2, y - 2))
-                    self.dBar.setFill(color_rgb(208, 173, 44))
-                    self.dBar.draw(self.win)
-                    blocknum = blocknum - 1
-                    y = y + 3
-        elif 7 < Eventtype < 12:
-            blocknum = 6
-            if Eventtype == 8:
-                while blocknum > 0:
-                    self.bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(b2, y),
-                                        Point(self._b3, y - 1),
-                                        Point(self._b3, y - 3), Point(b2, y - 2))
-                    self.bBar.setFill(color_rgb(243, 30, 51))
-                    self.bBar.draw(self.win)
-                    blocknum -= 1
-                    y += 3
-            if Eventtype == 9:
-                while blocknum > 0:
-                    self.aBar = Polygon(Point(self._a1, y - 3), Point(self._a1, y - 1), Point(self._a2, y),
-                                        Point(self._a3, y - 1),
-                                        Point(self._a3, y - 3), Point(self._a2, y - 2))
-                    self.aBar.setFill(color_rgb(243, 30, 51))
-                    self.aBar.draw(self.win)
-                    blocknum = blocknum - 1
-                    y = y + 3
-            if Eventtype == 10:
-                while blocknum > 0:
-                    self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
-                                        Point(self._c3, y - 1),
-                                        Point(self._c3, y - 3), Point(self._c2, y - 2))
-                    self.cBar.setFill(color_rgb(243, 30, 51))
-                    self.cBar.draw(self.win)
-                    blocknum = blocknum - 1
-                    y = y + 3
-            if Eventtype == 11:
-                while blocknum > 0:
-                    self.dBar = Polygon(Point(self._self._d1, y - 3), Point(self._self._d1, y - 1), Point(self._d2, y),
-                                        Point(self._d3, y - 1),
-                                        Point(self._d3, y - 3), Point(self._d2, y - 2))
-                    self.dBar.setFill(color_rgb(243, 30, 51))
-                    self.dBar.draw(self.win)
-                    blocknum -= 1
-                    y += 3
 
-    def addBar(self):
-        self._a2 = 8
-        self._a1 = self._a2 - 2
-        self._a3 = self._a2 + 2
-        b2 = 15
-        self._b1 = b2 - 2
-        self._b3 = b2 + 2
-        self._c2 = 22
-        self._c1 = self._c2 - 2
-        self._c3 = self._c2 + 2
-        self._d2 = 29
-        self._d1 = self._d2 - 2
-        self._d3 = self._d2 + 2
-        y = 11
+    def addaBar(self, event_type):
+        block_num = 2 * int(event_type / 4) + 1
+        y = self._y
+        while block_num > 0:
+            self.aBar = Polygon(Point(self._a1, y - 3), Point(self._a1, y - 1), Point(self._a2, y),
+                                Point(self._a3, y - 1),
+                                Point(self._a3, y - 3), Point(self._a2, y - 2))
+            self.aBar.setFill(color_rgb(208, 173, 44))
+            self.aBar.draw(self.win)
+            block_num -= 1
+            y += 3
 
-        self.bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(b2, y), Point(self._b3, y - 1),
-                            Point(self._b3, y - 3), Point(b2, y - 2))
-        self.bBar.setFill(color_rgb(39, 244, 106))
-        self.bBar.draw(self.win)
+    def addbBar(self,event_type):
+        block_num = 2 * int(event_type/4)+1
+        y = self._y
+        while block_num > 0:
+            self.bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(self._b2, y),
+                                Point(self._b3, y - 1),
+                                Point(self._b3, y - 3), Point(self._b2, y - 2))
+            self.bBar.setFill(color_rgb(208, 173, 44))
+            self.bBar.draw(self.win)
+            block_num -= 1
+            y += 3
+
+
+    def addcBar(self, event_type):
+        block_num = 2 * int(event_type / 4) + 1
+        y = self._y
+        while block_num > 0:
+            self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
+                                Point(self._c3, y - 1),
+                                Point(self._c3, y - 3), Point(self._c2, y - 2))
+            self.cBar.setFill(color_rgb(208, 173, 44))
+            self.cBar.draw(self.win)
+            block_num -= 1
+            y += 3
+
+    def adddBar(self, event_type):
+        block_num = 2 * int(event_type / 4) + 1
+        y = self._y
+        while block_num > 0:
+            self.dBar = Polygon(Point(self._d1, y - 3), Point(self._d1, y - 1), Point(self._d2, y),
+                                Point(self._d3, y - 1),
+                                Point(self._d3, y - 3), Point(self._d2, y - 2))
+            self.dBar.setFill(color_rgb(208, 173, 44))
+            self.dBar.draw(self.win)
+            block_num -= 1
+            y += 3
 
     def removebBar(self):
         self.bBar.undraw()
