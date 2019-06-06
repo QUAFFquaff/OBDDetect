@@ -825,7 +825,7 @@ def detectYEvent(data):
                 tflag = True
             elif accy >= -0.08 and tfault > 0 and tthresholdnum > 0:
                 tfault = tfault - 1
-                tthresholdnum = tthresholdnum + 1
+                tthresholdnum += 1
                 tflag = True
             elif (accy >= -0.08 or stdY < 0.015) and tthresholdnum > 0:
                 if minLength < tthresholdnum < maxLength:
@@ -840,12 +840,12 @@ def detectYEvent(data):
                     tthresholdnum = 0
                     positive = True
                     processLock.acquire()  # get the lock
-                    SVM_flag.value = SVM_flag.value - 1
+                    SVM_flag.value -= 1
                     LDA_flag.value = True
                     processLock.release()  # release the process lock
                     log.logger.info("dismiss the turn")
             elif tthresholdnum > 0:
-                tthresholdnum = tthresholdnum + 1
+                tthresholdnum += 1
                 tflag = True
 
     if tflag:
