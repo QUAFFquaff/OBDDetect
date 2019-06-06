@@ -497,7 +497,6 @@ class SVMthread(threading.Thread):
         newwb.save('ForLDA.xls')
 
     def write_data(self, dataTemp, table, row):
-        # data = np.array(dataTemp)
         l = len(dataTemp)  # l is the number of column
         for j in range(l):
             table.write(row, j, dataTemp[j])
@@ -535,20 +534,25 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 GUI_flag = True
                 temp_word = svm_label_buffer
                 svm_label_buffer = ""
-                log.logger.info("__________________")
-                log.logger.info("temp word       :   " + temp_word)
+                log.logger.info("__________________\n")
+                log.logger.info("temp word       :   " + temp_word+"\n")
                 log.logger.info("time window size:   " + str(time.time() - start_time) + "\n")
                 start_time = time.time()
 
                 if temp_word != "":
                     trip_svm_buffer += temp_word + " "
                     log.logger.info("computing the score...")
+                    start_compute_time = time.time()
                     time_window_result = ldaforevent.testEvent(ldaforevent, [temp_word])
+                    log.logger.info("computing time:."+str(time.time()-start_compute_time))
                     log.logger.info("time window score:   " + str(self.result_to_score(time_window_result)) + "\n")
                     result_trip = ldaforevent.testEvent(ldaforevent, [trip_svm_buffer])
                     log.logger.info(result_trip)
                     trip_score = self.result_to_score(result_trip)
+                    log.logger.info("computing the trip score...")
+                    start_compute_time = time.time()
                     log.logger.info("trip score       :   " + str(trip_score) + "\n")
+                    log.logger.info("computing time:."+str(time.time()-start_compute_time))
                     log.logger.info("__________________\n")
                     print("Speed:", str(speed.value))
                     self.score_queue.append(self.result_to_score(time_window_result))
