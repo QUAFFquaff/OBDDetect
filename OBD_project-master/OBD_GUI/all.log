@@ -1,0 +1,107 @@
+2019-06-05 18:18:53,699 - EventDetect.py[line:214] - INFO: samplingrate--13.295346628679964
+2019-06-05 18:18:53,702 - EventDetect.py[line:215] - INFO: std_window:13
+2019-06-05 18:19:25,690 - EventDetect.py[line:539] - INFO: __________________
+2019-06-05 18:19:25,693 - EventDetect.py[line:540] - INFO: temp word       :   
+2019-06-05 18:19:25,695 - EventDetect.py[line:541] - INFO: time window size:   30.01020359992981
+
+2019-06-05 18:19:51,330 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:19:53,554 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:19:56,130 - EventDetect.py[line:539] - INFO: __________________
+2019-06-05 18:19:56,132 - EventDetect.py[line:540] - INFO: temp word       :   o
+2019-06-05 18:19:56,134 - EventDetect.py[line:541] - INFO: time window size:   30.433703422546387
+
+2019-06-05 18:19:56,137 - EventDetect.py[line:546] - INFO: computing the score...
+2019-06-05 18:20:11,185 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:20:13,430 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:20:21,460 - EventDetect.py[line:548] - INFO: time window score:   80.29192462563515
+
+2019-06-05 18:20:28,403 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:20:30,906 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:20:41,240 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:20:44,521 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:20:46,583 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:20:47,938 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:20:55,104 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:20:59,631 - EventDetect.py[line:827] - INFO: catch the turn
+2019-06-05 18:21:00,015 - EventDetect.py[line:262] - INFO: 2
+2019-06-05 18:21:02,617 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:21:07,392 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:21:08,964 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:21:10,649 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:21:15,392 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:21:16,807 - EventDetect.py[line:827] - INFO: catch the turn
+2019-06-05 18:21:20,823 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:21:24,637 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:21:27,995 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:21:39,994 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:21:40,905 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:21:44,005 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:21:48,614 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:22:56,347 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:22:58,899 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:23:00,751 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:23:05,694 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:23:27,041 - EventDetect.py[line:827] - INFO: catch the turn
+2019-06-05 18:23:27,887 - EventDetect.py[line:852] - INFO: dismiss the turn
+2019-06-05 18:23:44,575 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:23:49,492 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:23:52,688 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:23:54,667 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:25:03,191 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:25:06,469 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:25:18,009 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:25:20,692 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:25:22,485 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:25:28,480 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:25:35,541 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:25:41,556 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:25:44,041 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:25:53,555 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:25:58,780 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:26:00,641 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:26:10,350 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:26:13,955 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:26:28,616 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:28:57,036 - EventDetect.py[line:214] - INFO: samplingrate--12.715712988192552
+2019-06-05 18:28:57,039 - EventDetect.py[line:215] - INFO: std_window:13
+2019-06-05 18:29:16,239 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:29:25,019 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:29:27,260 - EventDetect.py[line:539] - INFO: __________________
+2019-06-05 18:29:27,733 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:29:27,780 - EventDetect.py[line:540] - INFO: temp word       :   a
+2019-06-05 18:29:28,600 - EventDetect.py[line:541] - INFO: time window size:   32.470380544662476
+
+2019-06-05 18:29:29,961 - EventDetect.py[line:546] - INFO: computing the score...
+2019-06-05 18:29:30,443 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:29:33,867 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:29:38,385 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:29:43,118 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:29:48,877 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:30:11,274 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:30:15,082 - EventDetect.py[line:548] - INFO: time window score:   80.04004918038845
+
+2019-06-05 18:30:15,616 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:30:17,249 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:30:26,326 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:30:38,929 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:30:39,705 - EventDetect.py[line:812] - INFO: dismiss the turn
+2019-06-05 18:30:44,252 - EventDetect.py[line:550] - INFO: [(0, 0.1331213), (1, 0.13391116), (2, 0.13087475), (3, 0.60209274)]
+2019-06-05 18:30:44,291 - EventDetect.py[line:552] - INFO: trip score       :   80.04847131669521
+
+2019-06-05 18:30:44,301 - EventDetect.py[line:553] - INFO: __________________
+
+2019-06-05 18:30:44,323 - EventDetect.py[line:539] - INFO: __________________
+2019-06-05 18:30:44,370 - EventDetect.py[line:540] - INFO: temp word       :   ohiah
+2019-06-05 18:30:44,375 - EventDetect.py[line:541] - INFO: time window size:   74.41398906707764
+
+2019-06-05 18:30:44,389 - EventDetect.py[line:546] - INFO: computing the score...
+2019-06-05 18:30:49,341 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:30:51,139 - EventDetect.py[line:262] - INFO: 1
+2019-06-05 18:30:51,675 - EventDetect.py[line:660] - INFO: catch acceleration
+2019-06-05 18:30:53,882 - EventDetect.py[line:787] - INFO: catch turn
+2019-06-05 18:30:55,197 - EventDetect.py[line:262] - INFO: 2
+2019-06-05 18:30:57,929 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-05 18:31:02,451 - EventDetect.py[line:698] - INFO: catch a break
+2019-06-05 18:31:03,445 - EventDetect.py[line:721] - INFO: dimiss the break
+2019-06-05 18:33:11,691 - EventDetect.py[line:548] - INFO: time window score:   56.24953508377075
+

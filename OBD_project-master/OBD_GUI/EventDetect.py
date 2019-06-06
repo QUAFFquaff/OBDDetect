@@ -547,7 +547,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                     time_window_result = ldaforevent.LDATest(ldaforevent, [temp_word])
                     log.logger.info("time window score:   " + str(self.result_to_score(time_window_result))+"\n")
                     result_trip = ldaforevent.LDATest(ldaforevent, [trip_svm_buffer])
-                    log.logger.info(result_trip+"\n")
+                    log.logger.info(result_trip)
                     trip_score = self.result_to_score(result_trip)
                     log.logger.info("trip score       :   " + str(trip_score)+"\n")
                     log.logger.info("__________________\n")
