@@ -7,7 +7,9 @@ def main():
     time.sleep(2)
     panel.addBar()
     time.sleep(2)
-    panel.removeBar()
+    panel.removebBar()
+    time.sleep(2)
+    panel.addBar()
     time.sleep(2)
 
 if __name__ == "__main__":
