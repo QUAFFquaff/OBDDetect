@@ -148,10 +148,8 @@ class Panel(object):
         self.eventMsg.undraw()
         self.eventMsg.setText(start + "--" + end + "[" + self.transfer(event_type) + "]")
         self.eventMsg.draw(self.win)
-
         self.drawBar(event_type)
 
-    #     eraseTimer = Timer(2,)
     def transfer(self, Eventtype):
         if Eventtype == 0:
             return "normal speedup"
