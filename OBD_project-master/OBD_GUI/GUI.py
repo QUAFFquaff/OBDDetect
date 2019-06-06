@@ -5,7 +5,10 @@ import pygame
 
 
 class Panel(object):
+
+
     def __init__(self):
+
         # === creating the graphic window ===
         win = GraphWin("event detection", 480, 320)
         win.setCoords(0, 0, 48, 32)
@@ -110,11 +113,6 @@ class Panel(object):
         image4 = Image(Point(28.5, 4), "pic4.gif")
         image4.draw(win)
 
-        # image5 = Image(Point(41.5, 15.5), "pic5.gif")
-        # image5.draw(win)
-        #
-        # image6 = Image(Point(41.5, 5.5), "pic6.gif")
-        # image6.draw(win
 
     def change_score(self, time_window_score, trip_score):
 
@@ -253,8 +251,8 @@ class Panel(object):
                                         Point(b3, y - 3), Point(b2, y - 2))
                     self.bBar.setFill(color_rgb(243, 30, 51))
                     self.bBar.draw(self.win)
-                    blocknum = blocknum - 1
-                    y = y + 3
+                    blocknum -= 1
+                    y += 3
             if Eventtype == 9:
                 while blocknum > 0:
                     self.aBar = Polygon(Point(a1, y - 3), Point(a1, y - 1), Point(a2, y), Point(a3, y - 1),
@@ -277,8 +275,30 @@ class Panel(object):
                                         Point(d3, y - 3), Point(d2, y - 2))
                     self.dBar.setFill(color_rgb(243, 30, 51))
                     self.dBar.draw(self.win)
-                    blocknum = blocknum - 1
-                    y = y + 3
+                    blocknum -= 1
+                    y += 3
+
+    def addBar(self):
+        a2 = 8
+        a1 = a2 - 2
+        a3 = a2 + 2
+        b2 = 15
+        b1 = b2 - 2
+        b3 = b2 + 2
+        c2 = 22
+        c1 = c2 - 2
+        c3 = c2 + 2
+        d2 = 29
+        d1 = d2 - 2
+        d3 = d2 + 2
+        y = 11
+        self.bBar = Polygon(Point(b1, y - 3), Point(b1, y - 1), Point(b2, y), Point(b3, y - 1),
+                            Point(b3, y - 3), Point(b2, y - 2))
+        self.bBar.setFill(color_rgb(39, 244, 106))
+        self.bBar.draw(self.win)
+
+    def removeBar(self):
+        self.bBar.undraw()
 
     def happySound(self):
         file = 'sound/POP Brust 16 copy.mp3'
