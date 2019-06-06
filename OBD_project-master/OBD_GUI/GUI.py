@@ -47,11 +47,28 @@ class Panel(object):
         # parameters for sth
         self._y = 11
 
+        # generate Bar list
+        self._aList = []
+        self._bList = []
+        self._cList = []
+        self._dList = []
+
         # parameters for sth
         self.moneyMsg = Text(Point(41.5, 20), "")
         self.moneyMsg.draw(win)
         self.tripscoreMsg = Text(Point(41.5, 5), "")
         self.tripscoreMsg.draw(win)
+
+    def initBarList(self):
+        y = self._y
+        for i in range(6):
+
+            self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
+                                Point(self._c3, y - 1),
+                                Point(self._c3, y - 3), Point(self._c2, y - 2))
+            self.bBar.setFill(color_rgb(208, 173, 44))
+            self.bBar.draw(self.win)
+            y += 3
 
     def drawPanel(self):
         # draw the background
@@ -176,8 +193,8 @@ class Panel(object):
             self.aBar = Polygon(Point(self._a1, y - 3), Point(self._a1, y - 1), Point(self._a2, y),
                                 Point(self._a3, y - 1),
                                 Point(self._a3, y - 3), Point(self._a2, y - 2))
-            self.bBar.setFill(color_rgb(208, 173, 44))
-            self.bBar.draw(self.win)
+            self.aBar.setFill(color_rgb(208, 173, 44))
+            self.aBar.draw(self.win)
             block_num -= 1
             y += 3
 
@@ -201,8 +218,8 @@ class Panel(object):
             self.cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
                                 Point(self._c3, y - 1),
                                 Point(self._c3, y - 3), Point(self._c2, y - 2))
-            self.bBar.setFill(color_rgb(208, 173, 44))
-            self.bBar.draw(self.win)
+            self.cBar.setFill(color_rgb(208, 173, 44))
+            self.cBar.draw(self.win)
             block_num -= 1
             y += 3
 
@@ -213,8 +230,8 @@ class Panel(object):
             self.dBar = Polygon(Point(self._d1, y - 3), Point(self._d1, y - 1), Point(self._d2, y),
                                 Point(self._d3, y - 1),
                                 Point(self._d3, y - 3), Point(self._d2, y - 2))
-            self.bBar.setFill(color_rgb(208, 173, 44))
-            self.bBar.draw(self.win)
+            self.dBar.setFill(color_rgb(208, 173, 44))
+            self.dBar.draw(self.win)
             block_num -= 1
             y += 3
 
