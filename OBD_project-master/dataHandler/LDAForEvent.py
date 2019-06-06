@@ -127,7 +127,9 @@ class LDAForEvent:
 
     # doc is test document
     # dic is the dictionary of lda model
-    def testEvent(self, doc,dic):
+    def testEvent(self, doc,dic=[]):
+        if len(dic)==0:
+            dic = self.dictionary
         testV = []
         for i in range(len(dic)):
             temp = [i, 0]
@@ -436,7 +438,9 @@ def main():
     ldamodel.LDALoad(ldamodel)
     test = ['ahivp']
     start = time.time()
-    result = ldamodel.LDATest(ldamodel,test)
+
+    # result = ldamodel.LDATest(ldamodel,test)
+    result = ldamodel.testEvent(ldamodel,test)
     print(result)
     score =0
     for node in result:
