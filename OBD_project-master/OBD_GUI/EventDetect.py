@@ -13,7 +13,7 @@ import sys
 import multiprocessing
 from ctypes import c_bool
 
-import logging .config
+import logging.config
 import logging
 from logging import handlers
 
@@ -28,7 +28,7 @@ from xlutils.copy import copy
 #                    [0.021995888, 0.77162, 0.635319376]])
 
 matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
-                   [-0.993610238,0.079, -0.079680179],
+                   [-0.993610238, 0.079, -0.079680179],
                    [0.079680205, 0.99687, 0.006389762]])
 
 samplingRate = 0  # the sampling rate of the data reading
@@ -56,35 +56,41 @@ SVMResultQueue = queue.Queue()
 xstdQueue = queue.Queue(maxsize=19)
 ystdQueue = queue.Queue(maxsize=19)
 
+
 class Logger(object):
     level_relations = {
-        'debug':logging.DEBUG,
-        'info':logging.INFO,
-        'warning':logging.WARNING,
-        'error':logging.ERROR,
-        'crit':logging.CRITICAL
-    }#日志级别关系映射
+        'debug': logging.DEBUG,
+        'info': logging.INFO,
+        'warning': logging.WARNING,
+        'error': logging.ERROR,
+        'crit': logging.CRITICAL
+    }  # 日志级别关系映射
 
-    def __init__(self,filename,level='info',when='D',backCount=3,fmt='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'):
+    def __init__(self, filename, level='info', when='D', backCount=3,
+                 fmt='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'):
         self.logger = logging.getLogger(filename)
-        format_str = logging.Formatter(fmt)#设置日志格式
-        self.logger.setLevel(self.level_relations.get(level))#设置日志级别
-        sh = logging.StreamHandler()#往屏幕上输出
-        sh.setFormatter(format_str) #设置屏幕上显示的格式
-        th = handlers.TimedRotatingFileHandler(filename=filename,when=when,backupCount=backCount,encoding='utf-8')#往文件里写入#指定间隔时间自动生成文件的处理器
-        #实例化TimedRotatingFileHandler
-        #interval是时间间隔，backupCount是备份文件的个数，如果超过这个个数，就会自动删除，when是间隔的时间单位，单位有以下几种：
+        format_str = logging.Formatter(fmt)  # 设置日志格式
+        self.logger.setLevel(self.level_relations.get(level))  # 设置日志级别
+        sh = logging.StreamHandler()  # 往屏幕上输出
+        sh.setFormatter(format_str)  # 设置屏幕上显示的格式
+        th = handlers.TimedRotatingFileHandler(filename=filename, when=when, backupCount=backCount,
+                                               encoding='utf-8')  # 往文件里写入#指定间隔时间自动生成文件的处理器
+        # 实例化TimedRotatingFileHandler
+        # interval是时间间隔，backupCount是备份文件的个数，如果超过这个个数，就会自动删除，when是间隔的时间单位，单位有以下几种：
         # S 秒
         # M 分
         # H 小时、
         # D 天、
         # W 每星期（interval==0时代表星期一）
         # midnight 每天凌晨
-        th.setFormatter(format_str)#设置文件里写入的格式
-        self.logger.addHandler(sh) #把对象加到logger里
+        th.setFormatter(format_str)  # 设置文件里写入的格式
+        self.logger.addHandler(sh)  # 把对象加到logger里
         self.logger.addHandler(th)
 
+
 log = Logger('all.log', level='debug')
+
+
 def getSerial():
     ser = serial.Serial(port='/dev/rfcomm0', baudrate=57600, timeout=0.5)
     if not ser.is_open:
@@ -132,14 +138,13 @@ class Event(object):
     def filter(self, b, a):
         temp = np.array(self.vect)
         temp = temp.astype(np.float64)
-        y = signal.filtfilt(b, a, temp[:,2])
-        x = signal.filtfilt(b, a, temp[:,3])
-        z = signal.filtfilt(b, a, temp[:,4])
+        y = signal.filtfilt(b, a, temp[:, 2])
+        x = signal.filtfilt(b, a, temp[:, 3])
+        z = signal.filtfilt(b, a, temp[:, 4])
         for i in range(0, len(temp)):
             self.vect[i][2] = y[i]
             self.vect[i][3] = x[i]
             self.vect[i][4] = z[i]
-
 
     def getValue(self):
         return self.vect
@@ -203,7 +208,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
             row = splitByte(row)
             if row != "":
                 timetemp.append(int(round(time.time() * 1000)))
-                countDown = countDown - 1
+                countDown -= 1
         # calculate the sampling rate of the car
         samplingRate = 14 / ((timetemp[-1] - timetemp[0]) / 1000)
         std_window = int(samplingRate + 0.5)
@@ -212,7 +217,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
         print('samplingrate--' + str(samplingRate))
         print('std_window:', str(std_window))
         log.logger.info('samplingrate--' + str(samplingRate))
-        log.logger.info('std_window:'+ str(std_window))
+        log.logger.info('std_window:' + str(std_window))
 
         lowpassCount = 0
         cutoff = 2 * (1 / samplingRate)  # cutoff frequency of low pass filter
@@ -221,7 +226,6 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
 
         while True:
             row = obddata + BTserial.readline()
-
             row = splitByte(row)
             if row != "":
                 # print(row)
@@ -246,7 +250,6 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     accysf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'y'))
                     acczsf = signal.filtfilt(b, a, self.getLowPass(lowpass, 'z'))
 
-                    # print([speed,accxsf[-2],accysf[-2],acczsf[-2]])
                     # detect event
                     event = detectEvent(
                         [timestamp, speed.value, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
@@ -254,7 +257,7 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         [timestamp, speed.value, acc[0], acc[1], acc[2], gyox, gyoy, gyoz, accysf[-4], accxsf[-4]])
 
                     # start a thread to store data into databse
-                    dataQueue.put([np.array([device,speed.value, accy, accx, accz, gyox, gyoy, gyoz]), timestamp])
+                    dataQueue.put([np.array([device, speed.value, accy, accx, accz, gyox, gyoy, gyoz]), timestamp])
 
                     # put the event into Queue
                     if not event is None:
@@ -262,9 +265,9 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         log.logger.info(self.SVM_flag.value)
 
                         event.filter(b, a)
-                        self.processLock.acquire() #get the lock
+                        self.processLock.acquire()  # get the lock
 
-                        if 4>self.SVM_flag.value > 0:
+                        if 4 > self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
                         eventQueue.put(event)
                         self.SVM_flag.value -= 1
@@ -275,11 +278,8 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                     if not yevent is None:
                         yevent.filter(b, a)
                         data = yevent.getValue()
-                        # max_gyo = max(max(data[:, 5:6]), abs(min(data[:, 5:6])))
-                        # if max_gyo < 15:
-                        #     yevent.setType(yevent.getType() + 2)
                         self.processLock.acquire()  # get the lock
-                        if 4>self.SVM_flag.value > 0:
+                        if 4 > self.SVM_flag.value > 0:
                             self.overlapNum.value += 1
                         eventQueue.put(yevent)
                         self.SVM_flag.value -= 1
@@ -288,13 +288,12 @@ class detectProcess(multiprocessing.Process):  # threading.Thread
                         self.processLock.release()  # release the process lock
                         log.logger.info("put turn into svm")
 
-
-                    if speed.value==0 and dataQueue.qsize()>900:
+                    if speed.value == 0 and dataQueue.qsize() > 900:
                         data_thread = DataThread()
                         data_thread.start()
 
                     lowpass.get()
-                    lowpassCount = lowpassCount - 1
+                    lowpassCount -= 1
             else:
                 log.logger.info("something wrong with bluetooth")
 
@@ -330,10 +329,10 @@ class DataThread(threading.Thread):
 
         data = []
         qsize = dataQueue.qsize()
-        print("Data buffer size for database:"+str(qsize))
-        while qsize>0:
+        print("Data buffer size for database:" + str(qsize))
+        while qsize > 0:
             data.append(dataQueue.get())
-            qsize-=1
+            qsize -= 1
         try:
             # 获取一个游标
             connection = connectDB()
@@ -352,7 +351,6 @@ class DataThread(threading.Thread):
                     mycursor.close()
         finally:
             connection.close()
-
 
     def stop(self):
         self.__running.clear()
@@ -454,7 +452,7 @@ class SVMthread(threading.Thread):
 
     def nomalization(self, vect):
         max = [0.7614, 0.6011, 0.2729, 0.2104, 11.510, 4.6303, 0.2529, 0.2861, 13.922, 1.6740, 31.65, 0.51791,
-               0.54475,0.1544, 0.0674, 75.0, 94.7125, 29.1634, 17.16]
+               0.54475, 0.1544, 0.0674, 75.0, 94.7125, 29.1634, 17.16]
         min = [0.06909, 0.0079, 0.0206, 0.0020, 0.3709, 0.7642, -0.356, -0.277, -16.325, -2.0252, 2.27, -0.0867,
                -0.0405, -0.748, -0.589, -90.0, 2.67796, 0.40508, 1.848]
         for i in range(len(vect)):
@@ -486,7 +484,8 @@ class SVMthread(threading.Thread):
         varSP = np.std(data[:, 1])
         differenceSP = data[-1, 2] - data[0, 2]
         maxSP = max(data[:, 2])
-        return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, varSP, t]
+        return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOri, maxAX, maxAY,
+                minAX, minAY, differenceSP, meanSP, varSP, t]
 
     def saveResult(self, start, end, result):
         oldwd = open_workbook('ForLDA.xls', formatting_info=True)
@@ -538,24 +537,23 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 svm_label_buffer = ""
                 log.logger.info("__________________")
                 log.logger.info("temp word       :   " + temp_word)
-                log.logger.info("time window size:   " + str(time.time() - start_time)+"\n")
+                log.logger.info("time window size:   " + str(time.time() - start_time) + "\n")
                 start_time = time.time()
 
                 if temp_word != "":
-                    trip_svm_buffer += temp_word+" "
+                    trip_svm_buffer += temp_word + " "
                     log.logger.info("computing the score...")
                     time_window_result = ldaforevent.testEvent(ldaforevent, [temp_word])
-                    log.logger.info("time window score:   " + str(self.result_to_score(time_window_result))+"\n")
+                    log.logger.info("time window score:   " + str(self.result_to_score(time_window_result)) + "\n")
                     result_trip = ldaforevent.testEvent(ldaforevent, [trip_svm_buffer])
                     log.logger.info(result_trip)
                     trip_score = self.result_to_score(result_trip)
-                    log.logger.info("trip score       :   " + str(trip_score)+"\n")
+                    log.logger.info("trip score       :   " + str(trip_score) + "\n")
                     log.logger.info("__________________\n")
-                    print("Speed:",str(speed.value))
+                    print("Speed:", str(speed.value))
                     self.score_queue.append(self.result_to_score(time_window_result))
                 elif temp_word == "":
                     self.score_queue.append(100)
-
 
                 if len(self.score_queue) > 6:
                     self.score_queue.pop()
@@ -636,11 +634,7 @@ def detectEvent(data):
         xstdQueue.get()
 
         stdX = stdXArray[-1]
-
-        startIndex = stdXArray.index(max(stdXArray[0:int(std_window / 2)]))
-
-        startIndex = std_window - 1 + stdXArray.index(min(stdXArray[0:int(std_window/2)])) - 4
-
+        startIndex = std_window - 1 + stdXArray.index(min(stdXArray[0:int(std_window / 2)])) - 4
 
         accx = data[9]
         timestamp = data[0]
@@ -655,7 +649,7 @@ def detectEvent(data):
             SVM_flag.value += 1  # set the flag to denote the event starts
             LDA_flag.value = False
             processLock.release()  # release the process lock
-            log.logger.info("catch acceleration")
+            log.logger.info("catch acceleration\n")
         elif accx > 0.06 and thresholdnum > 0:
             thresholdnum += 1
             sfault = faultNum
@@ -678,7 +672,7 @@ def detectEvent(data):
                 SVM_flag.value -= 1
                 LDA_flag.value = True
                 processLock.release()  # release the process lock
-                log.logger.info("dismis the speedup")
+                log.logger.info("dismis the speedup\n")
         elif thresholdnum > 0:
             thresholdnum += 1
             sflag = True
@@ -716,7 +710,7 @@ def detectEvent(data):
                 SVM_flag.value -= 1
                 LDA_flag.value = True
                 processLock.release()  # release the process lock
-                log.logger.info("dimiss the break")
+                log.logger.info("dimiss the break\n")
         elif bthresholdnum > 0:
             bthresholdnum += 1
             bflag = True
@@ -763,9 +757,7 @@ def detectYEvent(data):
         ystdQueue.get()
         stdY = stdYArray[-1]
 
-
-        startIndex = std_window - 1 + stdYArray.index(min(stdYArray[0:int(std_window/2)]))-4
-
+        startIndex = std_window - 1 + stdYArray.index(min(stdYArray[0:int(std_window / 2)])) - 4
 
         accy = data[8]
         timestamp = data[0]
