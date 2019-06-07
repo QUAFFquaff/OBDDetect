@@ -151,9 +151,6 @@ class LDAForEvent:
 
                 if f_max == temp_testV[index]:
                     testV[index][1] += 1 / flag
-        for node in testV:
-            if node[1]>0:
-                print(node)
         return self.ldamodel[testV]
 
     def LDAtraining(self, doc_set=[]):
