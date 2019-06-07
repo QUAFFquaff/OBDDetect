@@ -140,6 +140,11 @@ class LDAForEvent:
 
             temp_testV = [0 for i in range(len(testV))]
             for index in range(len(dic)):
+                if dic[index] == word:
+                    testV[index][1] += 1
+                    break
+                if abs(len(word)-len(dic[index]))>3:
+                    continue
                 grade = self.fuzzyEvent(self,word, dic[index])
                 if f_max < grade:
                     f_max = grade
@@ -148,7 +153,6 @@ class LDAForEvent:
                     flag += 1
                 temp_testV[index] = grade
             for index in range(len(testV)):
-
                 if f_max == temp_testV[index]:
                     testV[index][1] += 1 / flag
         return self.ldamodel[testV]
@@ -452,7 +456,7 @@ def main():
     print(score)
     print(time.time()-start )
     start = time.time()
-    test = ['ah']
+    test = ['aahiavohh']
     result = ldamodel.LDATest(ldamodel, test)
     print(result)
     score = 0

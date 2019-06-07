@@ -17,4 +17,6 @@
 '''
 lista = ['a','b','v']
 for j in range(1, len(lista)+1):
-    print(j)
+    for i in range(1, len(lista)+1):
+        print(i)
+        if i == 2:break

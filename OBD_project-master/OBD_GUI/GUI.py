@@ -72,23 +72,22 @@ class Panel(object):
 
             # b Bar
             bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(self._b2, y),
-                                Point(self._b3, y - 1),
-                                Point(self._b3, y - 3), Point(self._b2, y - 2))
+                           Point(self._b3, y - 1),
+                           Point(self._b3, y - 3), Point(self._b2, y - 2))
             bBar.setFill(color_rgb(208, 173, 44))
             self._bList.append(bBar)
 
             # c Bar
             cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
-                                Point(self._c3, y - 1),
-                                Point(self._c3, y - 3), Point(self._c2, y - 2))
+                           Point(self._c3, y - 1),
+                           Point(self._c3, y - 3), Point(self._c2, y - 2))
             cBar.setFill(color_rgb(208, 173, 44))
             self._cList.append(cBar)
 
-
             # d Bar
             dBar = Polygon(Point(self._d1, y - 3), Point(self._d1, y - 1), Point(self._d2, y),
-                                Point(self._d3, y - 1),
-                                Point(self._d3, y - 3), Point(self._d2, y - 2))
+                           Point(self._d3, y - 1),
+                           Point(self._d3, y - 3), Point(self._d2, y - 2))
             dBar.setFill(color_rgb(208, 173, 44))
             self._dList.append(dBar)
 
@@ -241,20 +240,25 @@ class Panel(object):
             self._dList[block_num].draw(self.win)
             block_num -= 1
             y += 3
+
     def clean_bars(self):
         self.removeaBar()
         self.removebBar()
         self.removecBar()
         self.removedBar()
+
     def removeaBar(self):
         for node in self._aList:
             node.undraw()
+
     def removebBar(self):
         for node in self._bList:
             node.undraw()
+
     def removecBar(self):
         for node in self._cList:
             node.undraw()
+
     def removedBar(self):
         for node in self._dList:
             node.undraw()

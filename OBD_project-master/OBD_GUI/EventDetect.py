@@ -27,7 +27,7 @@ matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
                    [-0.026682913, 0.63608, -0.770697297],
                    [0.021995888, 0.77162, 0.635319376]])
 
-#matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
+# matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
 #                   [-0.993610238, 0.079, -0.079680179],
 #                   [0.079680205, 0.99687, 0.006389762]])
 
@@ -539,7 +539,7 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                 temp_word = svm_label_buffer
                 svm_label_buffer = ""
                 log.logger.info("__________________\n")
-                log.logger.info("temp word       :   " + temp_word+"\n")
+                log.logger.info("temp word       :   " + temp_word + "\n")
                 log.logger.info("time window size:   " + str(time.time() - start_time) + "\n")
                 start_time = time.time()
 
@@ -548,13 +548,13 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
                     log.logger.info("computing the score...")
                     start_compute_time = time.time()
                     time_window_result = ldaforevent.testEvent(ldaforevent, [temp_word])
-                    log.logger.info("computing time:."+str(time.time()-start_compute_time))
+                    log.logger.info("computing time:." + str(time.time() - start_compute_time))
                     log.logger.info("time window score:   " + str(self.result_to_score(time_window_result)) + "\n")
 
                     log.logger.info("computing the trip score...")
                     start_compute_time = time.time()
                     result_trip = ldaforevent.testEvent(ldaforevent, [trip_svm_buffer])
-                    log.logger.info("computing time:."+str(time.time()-start_compute_time))
+                    log.logger.info("computing time:." + str(time.time() - start_compute_time))
                     # log.logger.info(result_trip)
                     trip_score = self.result_to_score(result_trip)
                     log.logger.info("trip score       :   " + str(trip_score) + "\n")
@@ -598,6 +598,26 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
         for node in result:
             score += (node[0] + 1) * 25 * node[1]
         return score
+
+    def stop(self):
+        self.__running.clear()
+
+
+GUI_Bar_flag = False
+
+
+# this thread for time-window monitor and LDA detection
+class Thread_for_GUI_timer(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.__running = threading.Event()
+        self.__running.set()
+
+    def run(self):
+        global GUI_Bar_flag
+        time.sleep(2)
+        GUI_Bar_flag = True
+        self.stop()
 
     def stop(self):
         self.__running.clear()
@@ -882,6 +902,7 @@ def splitByte(obdData):
 def main():
     global SVMResultQueue
     global GUI_flag
+    global GUI_Bar_flag
 
     # start the data collection and event detection thread
     process1 = detectProcess()
@@ -913,6 +934,10 @@ def main():
             time_local = time.localtime(float(result.getEnd() / 1000))
             end = time.strftime("%H:%M:%S", time_local)
             panel.showEvent(start, end, result.getLabel())
+            GUI_timer = Thread_for_GUI_timer()
+            GUI_timer.start()
+        if GUI_Bar_flag:
+            panel.cleanBars()
 
 
 if __name__ == "__main__":
