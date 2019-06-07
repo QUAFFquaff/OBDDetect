@@ -448,3 +448,53 @@
 2019-06-06 17:17:04,084 - EventDetect.py[line:552] - INFO: time window score:   56.25947639346123
 
 2019-06-06 17:17:04,086 - EventDetect.py[line:554] - INFO: computing the trip score...
+2019-06-06 20:17:44,549 - EventDetect.py[line:219] - INFO: samplingrate--15.135135135135135
+2019-06-06 20:17:44,551 - EventDetect.py[line:220] - INFO: std_window:15
+2019-06-06 20:18:18,525 - EventDetect.py[line:541] - INFO: __________________
+
+2019-06-06 20:18:19,895 - EventDetect.py[line:542] - INFO: temp word       :   
+
+2019-06-06 20:18:20,046 - EventDetect.py[line:543] - INFO: time window size:   35.26298522949219
+
+2019-06-06 20:18:50,757 - EventDetect.py[line:541] - INFO: __________________
+
+2019-06-06 20:18:50,839 - EventDetect.py[line:542] - INFO: temp word       :   
+
+2019-06-06 20:18:51,057 - EventDetect.py[line:543] - INFO: time window size:   30.311309337615967
+
+2019-06-06 20:19:22,367 - EventDetect.py[line:265] - INFO: 2
+2019-06-06 20:19:22,806 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 20:19:23,305 - EventDetect.py[line:541] - INFO: __________________
+
+2019-06-06 20:19:23,314 - EventDetect.py[line:542] - INFO: temp word       :   h
+
+2019-06-06 20:19:23,350 - EventDetect.py[line:543] - INFO: time window size:   32.01934194564819
+
+2019-06-06 20:19:23,365 - EventDetect.py[line:548] - INFO: computing the score...
+2019-06-06 20:19:23,933 - EventDetect.py[line:551] - INFO: computing time:.0.5665075778961182
+2019-06-06 20:19:24,005 - EventDetect.py[line:552] - INFO: time window score:   53.96402329206467
+
+2019-06-06 20:19:24,339 - EventDetect.py[line:554] - INFO: computing the trip score...
+2019-06-06 20:19:48,565 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 20:20:27,701 - EventDetect.py[line:557] - INFO: computing time:.63.03238534927368
+2019-06-06 20:20:27,899 - EventDetect.py[line:560] - INFO: trip score       :   65.98663739860058
+
+2019-06-06 20:20:27,989 - EventDetect.py[line:561] - INFO: __________________
+
+2019-06-06 20:20:28,446 - EventDetect.py[line:541] - INFO: __________________
+
+2019-06-06 20:20:30,935 - EventDetect.py[line:542] - INFO: temp word       :   oo
+
+2019-06-06 20:20:32,844 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 20:20:32,286 - EventDetect.py[line:543] - INFO: time window size:   68.92057371139526
+
+2019-06-06 20:20:32,935 - EventDetect.py[line:548] - INFO: computing the score...
+2019-06-06 20:20:33,236 - EventDetect.py[line:551] - INFO: computing time:.0.29583168029785156
+2019-06-06 20:20:33,251 - EventDetect.py[line:552] - INFO: time window score:   54.171646758913994
+
+2019-06-06 20:20:33,268 - EventDetect.py[line:554] - INFO: computing the trip score...
+2019-06-06 20:20:49,110 - EventDetect.py[line:265] - INFO: 1
+2019-06-06 20:21:04,769 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 20:21:20,139 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 20:21:30,601 - EventDetect.py[line:289] - INFO: put turn into svm
+2019-06-06 20:21:41,659 - EventDetect.py[line:265] - INFO: 1
