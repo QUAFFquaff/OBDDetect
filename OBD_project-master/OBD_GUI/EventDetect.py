@@ -601,6 +601,9 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
     def stop(self):
         self.__running.clear()
 
+# this thread for time-window monitor and LDA detection
+class Thread_for_lda(threading.Thread):
+
 
 thresholdnum = 0
 bthresholdnum = 0

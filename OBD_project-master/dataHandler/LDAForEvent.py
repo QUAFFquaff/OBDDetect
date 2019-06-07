@@ -140,6 +140,8 @@ class LDAForEvent:
 
             temp_testV = [0 for i in range(len(testV))]
             for index in range(len(dic)):
+                if abs(len(word)-len(dic[index]))>3:
+                    continue
                 grade = self.fuzzyEvent(self,word, dic[index])
                 if f_max < grade:
                     f_max = grade
