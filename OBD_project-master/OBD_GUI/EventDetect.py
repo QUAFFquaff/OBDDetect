@@ -329,7 +329,7 @@ class DataThread(threading.Thread):
 
         data = []
         qsize = dataQueue.qsize()
-        print("Data buffer size for database:" + str(qsize))
+        # print("Data buffer size for database:" + str(qsize))
         while qsize > 0:
             data.append(dataQueue.get())
             qsize -= 1
@@ -375,10 +375,12 @@ class SVMthread(threading.Thread):
         global svm_label_buffer
         global processLock
 
+        startTime = time.time()
         while True:
             #  define type and intensity
             if (not eventQueue.empty()) and SVM_flag.value == 0:
                 # print("get event from detection")
+                startTime = time.time()
                 eventNum = overlapNum.value
                 overlapNum.value = 0
                 eventList = []
@@ -400,7 +402,7 @@ class SVMthread(threading.Thread):
                         result = svm.predict([vect])  # result of SVM
                         score = svm.decision_function([vect])  # score of SVM for each tyeps
                         score = np.array(score[0])
-                        print("event is ", str(eventList[i].getType()), ":", score)
+                        # print("event is ", str(eventList[i].getType()), ":", score)
 
                         if eventList[i].getType() >= 2:
                             index = np.argmax([score[2], score[3], score[6], score[7], score[10], score[11]])
@@ -436,6 +438,7 @@ class SVMthread(threading.Thread):
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
                         svm_label_buffer = svm_label_buffer + change_n_to_a(result[0])
+                        print("SVM takes:", str(time.time()-startTime))
                         LDA_flag.value = True
 
     def makeDecision(self, eventList):
@@ -653,7 +656,7 @@ def detectEvent(data):
             SVM_flag.value += 1  # set the flag to denote the event starts
             LDA_flag.value = False
             processLock.release()  # release the process lock
-            log.logger.info("catch acceleration\n")
+            # log.logger.info("catch acceleration\n")
         elif accx > 0.06 and thresholdnum > 0:
             thresholdnum += 1
             sfault = faultNum
@@ -676,7 +679,7 @@ def detectEvent(data):
                 SVM_flag.value -= 1
                 LDA_flag.value = True
                 processLock.release()  # release the process lock
-                log.logger.info("dismis the speedup\n")
+                # log.logger.info("dismis the speedup\n")
         elif thresholdnum > 0:
             thresholdnum += 1
             sflag = True
@@ -691,7 +694,7 @@ def detectEvent(data):
             SVM_flag.value += 1  # set the flag to denote the event starts
             LDA_flag.value = False
             processLock.release()  # release the process lock
-            log.logger.info("catch a break")
+            # log.logger.info("catch a break")
         elif accx < -0.06 and bthresholdnum > 0:
             bthresholdnum += 1
             bfault = faultNum
@@ -714,7 +717,7 @@ def detectEvent(data):
                 SVM_flag.value -= 1
                 LDA_flag.value = True
                 processLock.release()  # release the process lock
-                log.logger.info("dimiss the break\n")
+                # log.logger.info("dimiss the break\n")
         elif bthresholdnum > 0:
             bthresholdnum += 1
             bflag = True
@@ -778,7 +781,7 @@ def detectYEvent(data):
                 SVM_flag.value += 1  # set the flag to denote the event starts
                 LDA_flag.value = False
                 processLock.release()  # release the process lock
-                log.logger.info("catch turn")
+                # log.logger.info("catch turn")
             elif accy > 0.08 and tthresholdnum > 0:
                 tthresholdnum += 1
                 tfault = faultNum
@@ -803,7 +806,7 @@ def detectYEvent(data):
                     SVM_flag.value -= 1
                     LDA_flag.value = True
                     processLock.release()  # release the process lock
-                    log.logger.info("dismiss the turn")
+                    # log.logger.info("dismiss the turn")
             elif tthresholdnum > 0:
                 tthresholdnum += 1
                 tflag = True
@@ -818,7 +821,7 @@ def detectYEvent(data):
                 positive = False
                 SVM_flag.value += 1  # set the flag to denote the event starts
                 LDA_flag.value = False
-                log.logger.info("catch the turn")
+                # log.logger.info("catch the turn")
             elif accy < -0.08 and tthresholdnum > 0:
                 tthresholdnum += 1
                 tfault = faultNum
@@ -843,7 +846,7 @@ def detectYEvent(data):
                     SVM_flag.value -= 1
                     LDA_flag.value = True
                     processLock.release()  # release the process lock
-                    log.logger.info("dismiss the turn")
+                    # log.logger.info("dismiss the turn")
             elif tthresholdnum > 0:
                 tthresholdnum += 1
                 tflag = True
