@@ -331,3 +331,11 @@
 
 2019-06-06 17:01:21,143 - EventDetect.py[line:679] - INFO: dismis the speedup
 
+2019-06-06 17:04:51,600 - EventDetect.py[line:219] - INFO: samplingrate--15.469613259668508
+2019-06-06 17:04:51,602 - EventDetect.py[line:220] - INFO: std_window:15
+2019-06-06 17:05:36,389 - EventDetect.py[line:540] - INFO: __________________
+
+2019-06-06 17:05:37,120 - EventDetect.py[line:541] - INFO: temp word       :   
+
+2019-06-06 17:05:37,122 - EventDetect.py[line:542] - INFO: time window size:   32.168771743774414
+
