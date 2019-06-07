@@ -438,8 +438,9 @@ class SVMthread(threading.Thread):
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
                         svm_label_buffer = svm_label_buffer + change_n_to_a(result[0])
-                        print("SVM takes:", str(time.time()-startTime))
+
                         LDA_flag.value = True
+                print("SVM takes:", str(time.time() - startTime))
 
     def makeDecision(self, eventList):
         for i in range(0, len(eventList) - 2):
