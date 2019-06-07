@@ -615,7 +615,7 @@ class Thread_for_GUI_timer(threading.Thread):
 
     def run(self):
         global GUI_Bar_flag
-        time.sleep(0.01)
+        time.sleep(2)
         GUI_Bar_flag = True
         self.stop()
 
