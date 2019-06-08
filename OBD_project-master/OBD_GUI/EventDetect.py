@@ -555,7 +555,7 @@ class Thread_for_lda(multiprocessing.Process):  # threading.Thread
                 start_time = time.time()
 
                 if temp_word != "":
-                    self.trip_svm_buffer.value += temp_word + " "
+                    self.trip_svm_buffer += temp_word + " "
 
                     # time window part
                     log.logger.info("computing the score...")
