@@ -35,11 +35,11 @@ samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
 time_window = 30  # time window for a word in LDA
-svm_label_buffer = ""  # the word in a time window
+# svm_label_buffer = ""  # the word in a time window
 trip_svm_buffer = ""  # save the whole trip's SVm label
 # LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
-time_window_score = 50
-trip_score = 50
+# time_window_score = 50
+# trip_score = 50
 GUI_flag = False
 
 timestamp = 0
@@ -52,6 +52,7 @@ SVMResultQueue = queue.Queue()
 # dataQueue = queue.Queue()  # put data into dataQueue for databse
 # SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
 # overlapNum = 0  # the number of overlapped events
+
 
 xstdQueue = queue.Queue(maxsize=19)
 ystdQueue = queue.Queue(maxsize=19)
@@ -510,9 +511,9 @@ class SVMthread(threading.Thread):
 
 
 # this thread for time-window monitor and LDA detection
-class Thread_for_lda(threading.Thread):  # threading.Thread
+class Thread_for_lda(multiprocessing.Process):  # threading.Thread
     def __init__(self):
-        threading.Thread.__init__(self)
+        multiprocessing.Process.__init__(self)
         self.__running = threading.Event()
         self.__running.set()
         self.score_queue = []
@@ -943,6 +944,13 @@ if __name__ == "__main__":
     LDA_flag = multiprocessing.Value(c_bool,
                                      True)  # if False, there are a event holding a time window, we should waiting for the end of event
     speed = multiprocessing.Value("i", 0)
+
+    # parameters for LDA
+    trip_score = multiprocessing.Value("f", 0)  # if bigger than 0, there are overlapped events in queue
+    time_window_score = multiprocessing.Value("f", 0)  # if bigger than 0, there are overlapped events in queue
+    svm_label_buffer = multiprocessing.Value("z", "")  # if bigger than 0, there are overlapped events in queue
+
+
     eventQueue = multiprocessing.Queue()
     dataQueue = multiprocessing.Queue()
     main()
