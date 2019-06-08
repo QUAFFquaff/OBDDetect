@@ -42,7 +42,7 @@ time_window = 30  # time window for a word in LDA
 # LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
 # time_window_score = 50
 # trip_score = 50
-GUI_flag = False
+# GUI_flag = False
 
 timestamp = 0
 gpsLa = None
@@ -530,6 +530,7 @@ class Thread_for_lda(multiprocessing.Process):  # threading.Thread
         global time_window_score
         global trip_score
         global GUI_flag
+        global LDA_flag
         ldaforevent = LDAForEvent
         ldaforevent.LDALoad(ldaforevent)
         start_time = time.time()
@@ -951,6 +952,8 @@ if __name__ == "__main__":
     trip_score = multiprocessing.Value("f", 0)  # set the init trip score as 0
     time_window_score = multiprocessing.Value("f", 0)  # set init time window score as 0
     svm_label_buffer = multiprocessing.Value(ctypes.c_wchar_p, "")  # init svm label buffer
+    GUI_flag = multiprocessing.Value(c_bool,
+                                     False)
 
 
     eventQueue = multiprocessing.Queue()
