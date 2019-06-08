@@ -21,7 +21,6 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import xlrd
 import numpy as np
-import pandas as pd
 
 
 # data=[[0.404120557,0,1,0,0],
@@ -70,10 +69,10 @@ ax.scatter(centers[2][1],centers[2][2],centers[2][3],marker='P',c='g')
 
 ax.legend(loc='best')
 
-ax.set_zlabel('high num', fontdict={'size': 15, 'color': 'red'})
-ax.set_ylabel('medium num', fontdict={'size': 15, 'color': 'red'})
-ax.set_xlabel('normal num', fontdict={'size': 15, 'color': 'red'})
-
+ax.set_zlabel('medium risk frequency', fontdict={'size': 13, 'color': 'black'})
+ax.set_ylabel('low risk frequency', fontdict={'size': 13, 'color': 'black'})
+ax.set_xlabel('normal frequency', fontdict={'size': 13, 'color': 'black'})
+plt.savefig("distribution1.png")
 plt.show()
 
 
@@ -87,9 +86,10 @@ for num_clusters in range(1,6):
     km_cluster.fit(Data)
     SSE.append(km_cluster.inertia_)
 X = range(1,6)
-plt.xlabel('k')
-plt.ylabel('SSE')
+plt.xlabel('number of clusters')
+plt.ylabel('SSE(Sum Of the Squared Errors')
 plt.plot(X,SSE,'o-')
+plt.savefig("elbowMethod.png")
 plt.show()
 # labels = km_cluster.labels_
 center = km_cluster.cluster_centers_
@@ -108,7 +108,8 @@ for num_clusters in range(2,6):
     km_cluster.fit(Data)
     Scores.append(silhouette_score(Data,km_cluster.labels_,metric='euclidean'))
 X = range(2,6)
-plt.xlabel('k')
+plt.xlabel('number of clusters')
 plt.ylabel('average silhouette width ')
 plt.plot(X,Scores,'o-')
+plt.savefig("silhouetteMethod.png")
 plt.show()
