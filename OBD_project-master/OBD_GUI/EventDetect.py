@@ -439,8 +439,10 @@ class SVMthread(threading.Thread):
                                 result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
-                        print(svm_label_buffer.value.type)
-                        print(change_n_to_a(result[0]).type)
+                        print(svm_label_buffer.value)
+                        print(change_n_to_a(result[0]))
+                        print(type(svm_label_buffer.value))
+                        print(type(change_n_to_a(result[0])))
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
                         svm_label_buffer.value.append(change_n_to_a(result[0]))
 
