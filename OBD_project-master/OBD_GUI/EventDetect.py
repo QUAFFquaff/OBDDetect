@@ -36,7 +36,7 @@ matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 10  # time window for a word in LDA
+time_window = 30  # time window for a word in LDA
 # svm_label_buffer = ""  # the word in a time window
 # trip_svm_buffer = ""  # save the whole trip's SVm label
 # LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
@@ -543,8 +543,7 @@ class Thread_for_lda(multiprocessing.Process):  # threading.Thread
         #  monitor time-window
         while True:
             if time.time() - start_time > time_window and self.LDA_flag.value:
-                self._GUI_flag = True
-                print(self.svm_label_buffer)
+                self._GUI_flag.value = True
                 temp_word = self.tempword
                 self.svm_label_buffer.value = ""
                 log.logger.info("__________________\n")
@@ -930,8 +929,8 @@ def main():
     panel.drawPanel()
     while True:
         panel.refresh()
-        if GUI_flag:
-            GUI_flag = False
+        if GUI_flag.value:
+            GUI_flag.value = False
             panel.change_score(time_window_score.value, trip_score.value)
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
