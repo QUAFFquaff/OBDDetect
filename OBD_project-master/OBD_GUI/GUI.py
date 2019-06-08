@@ -232,7 +232,6 @@ class Panel(object):
         y = self._y
         while block_num > 0:
             self._cList[block_num].draw(self.win)
-            self.cBar.draw(self.win)
             block_num -= 1
             y += 3
 
