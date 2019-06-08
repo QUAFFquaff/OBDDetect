@@ -930,6 +930,8 @@ def main():
 
     panel = GUI.Panel()
     panel.drawPanel()
+    GUI_timer = Thread_for_GUI_timer()
+    GUI_timer.start()
     while True:
         panel.refresh()
         if GUI_flag.value:
@@ -942,8 +944,7 @@ def main():
             time_local = time.localtime(float(result.getEnd() / 1000))
             end = time.strftime("%H:%M:%S", time_local)
             panel.showEvent(start, end, result.getLabel())
-            GUI_timer = Thread_for_GUI_timer()
-            GUI_timer.start()
+            GUI_timer.run()
         if GUI_Bar_flag:
             panel.clean_bars()
 
