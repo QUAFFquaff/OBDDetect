@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="936eb228-d965-497a-9489-c47e56446a4f" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_GUI/EventDetect.py" afterPath="$PROJECT_DIR$/OBD_GUI/EventDetect.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_GUI/GUI.py" afterPath="$PROJECT_DIR$/OBD_GUI/GUI.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_GUI/all.log" afterPath="$PROJECT_DIR$/OBD_GUI/all.log" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -12,7 +15,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/OBD_project-master$EventDetect.coverage" NAME="EventDetect Coverage Results" MODIFIED="1560022301481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project-master$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1560023828601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project-master$EventDetect.coverage" NAME="EventDetect Coverage Results" MODIFIED="1560024669553" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -23,20 +27,40 @@
       <file leaf-file-name="EventDetect.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="955" column="42" lean-forward="false" selection-start-line="955" selection-start-column="42" selection-end-line="955" selection-end-column="42" />
+            <state relative-caret-position="184">
+              <caret line="957" column="64" lean-forward="false" selection-start-line="957" selection-start-column="64" selection-end-line="957" selection-end-column="64" />
               <folding>
                 <element signature="e#22#35#0" expanded="true" />
                 <element signature="e#5302#9843#0" expanded="false" />
                 <element signature="e#9893#10446#0" expanded="false" />
                 <element signature="e#10489#11704#0" expanded="false" />
                 <element signature="e#11780#18216#0" expanded="false" />
-                <element signature="e#22336#22637#0" expanded="false" />
-                <element signature="e#22847#27093#0" expanded="false" />
-                <element signature="e#27244#31924#0" expanded="false" />
-                <element signature="e#31955#32664#0" expanded="false" />
-                <marker date="1560022301393" expanded="true" signature="11247:11396" ph="INSERT INTO STATUS... " />
+                <element signature="e#22557#22858#0" expanded="false" />
+                <element signature="e#23068#27314#0" expanded="false" />
+                <element signature="e#27465#32145#0" expanded="false" />
+                <element signature="e#32176#32885#0" expanded="false" />
+                <marker date="1560024669499" expanded="true" signature="11247:11396" ph="INSERT INTO STATUS... " />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/ctypes/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="245" column="6" lean-forward="false" selection-start-line="245" selection-start-column="6" selection-end-line="245" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="process.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/multiprocessing/process.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="248" column="0" lean-forward="false" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -54,11 +78,21 @@
       <file leaf-file-name="GUI.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/GUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-54">
-              <caret line="226" column="34" lean-forward="false" selection-start-line="226" selection-start-column="34" selection-end-line="226" selection-end-column="34" />
+            <state relative-caret-position="262">
+              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graphics.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OBD_GUI/graphics.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="46">
+              <caret line="438" column="8" lean-forward="false" selection-start-line="438" selection-start-column="8" selection-end-line="438" selection-end-column="8" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -73,6 +107,9 @@
       <find>c_char</find>
       <find>c_char_p</find>
       <find>trip_svm_buffer</find>
+      <find>GUI_flag</find>
+      <find>overlapNum</find>
+      <find>LDA_flag</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -167,6 +204,24 @@
       <module name="OBD_project-master" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OBD_GUI/EventDetect.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OBD_GUI" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="OBD_project-master" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OBD_GUI/GUI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -379,12 +434,14 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Python.EventDetect" />
+      <item index="1" class="java.lang.String" itemvalue="Python.GUI" />
     </list>
     <recent_temporary>
-      <list size="1">
+      <list size="2">
         <item index="0" class="java.lang.String" itemvalue="Python.EventDetect" />
+        <item index="1" class="java.lang.String" itemvalue="Python.GUI" />
       </list>
     </recent_temporary>
   </component>
@@ -432,20 +489,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/OBD_GUI/GUI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-54">
-          <caret line="226" column="34" lean-forward="false" selection-start-line="226" selection-start-column="34" selection-end-line="226" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/multiprocessing/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-280">
@@ -478,29 +527,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/GUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OBD_GUI/graphics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="438" column="8" lean-forward="false" selection-start-line="438" selection-start-column="8" selection-end-line="438" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/ctypes/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-226">
-          <caret line="234" column="14" lean-forward="false" selection-start-line="234" selection-start-column="6" selection-end-line="234" selection-end-column="14" />
+        <state relative-caret-position="208">
+          <caret line="245" column="6" lean-forward="false" selection-start-line="245" selection-start-column="6" selection-end-line="245" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/multiprocessing/process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="248" column="0" lean-forward="false" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="955" column="42" lean-forward="false" selection-start-line="955" selection-start-column="42" selection-end-line="955" selection-end-column="42" />
+        <state relative-caret-position="184">
+          <caret line="957" column="64" lean-forward="false" selection-start-line="957" selection-start-column="64" selection-end-line="957" selection-end-column="64" />
           <folding>
             <element signature="e#22#35#0" expanded="true" />
             <element signature="e#5302#9843#0" expanded="false" />
             <element signature="e#9893#10446#0" expanded="false" />
             <element signature="e#10489#11704#0" expanded="false" />
             <element signature="e#11780#18216#0" expanded="false" />
-            <element signature="e#22336#22637#0" expanded="false" />
-            <element signature="e#22847#27093#0" expanded="false" />
-            <element signature="e#27244#31924#0" expanded="false" />
-            <element signature="e#31955#32664#0" expanded="false" />
-            <marker date="1560022301393" expanded="true" signature="11247:11396" ph="INSERT INTO STATUS... " />
+            <element signature="e#22557#22858#0" expanded="false" />
+            <element signature="e#23068#27314#0" expanded="false" />
+            <element signature="e#27465#32145#0" expanded="false" />
+            <element signature="e#32176#32885#0" expanded="false" />
+            <marker date="1560024669499" expanded="true" signature="11247:11396" ph="INSERT INTO STATUS... " />
           </folding>
         </state>
       </provider>
