@@ -439,10 +439,10 @@ class SVMthread(threading.Thread):
                                 result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
-                        self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
-                        svm_label_buffer.value.append(change_n_to_a(result[0]))
                         print(svm_label_buffer.value.type)
                         print(change_n_to_a(result[0]).type)
+                        self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
+                        svm_label_buffer.value.append(change_n_to_a(result[0]))
 
                         LDA_flag.value = True
                 print("SVM takes:", str(time.time() - startTime))
@@ -958,7 +958,7 @@ if __name__ == "__main__":
     # parameters for LDA
     trip_score = multiprocessing.Value("f", 50)  # set the init trip score as 0
     time_window_score = multiprocessing.Value("f", 50)  # set init time window score as 0
-    svm_label_buffer = multiprocessing.Value(ctypes.c_wchar_p, '')  # init svm label buffer
+    svm_label_buffer = multiprocessing.Value(ctypes.c_wchar_p, 'ah')  # init svm label buffer
     GUI_flag = multiprocessing.Value(c_bool,
                                      False)
 
