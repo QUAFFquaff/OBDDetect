@@ -962,7 +962,7 @@ if __name__ == "__main__":
     # parameters for LDA
     trip_score = multiprocessing.Value("f", 50)  # set the init trip score as 0
     time_window_score = multiprocessing.Value("f", 50)  # set init time window score as 0
-    svm_label_buffer = multiprocessing.Value(ctypes.c_wchar_p, '')  # init svm label buffer
+    svm_label_buffer = multiprocessing.Value(ctypes.c_char_p, '')  # init svm label buffer
     GUI_flag = multiprocessing.Value(c_bool,
                                      False)
 
