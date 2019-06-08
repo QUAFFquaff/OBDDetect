@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import ctypes
+
 import serial
 import time
 import numpy as np
@@ -34,13 +36,13 @@ matrix = np.array([[0.9988042, 0.00E+00, -0.03458038],
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 30  # time window for a word in LDA
-svm_label_buffer = ""  # the word in a time window
-trip_svm_buffer = ""  # save the whole trip's SVm label
+time_window = 10  # time window for a word in LDA
+# svm_label_buffer = ""  # the word in a time window
+# trip_svm_buffer = ""  # save the whole trip's SVm label
 # LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
-time_window_score = 50
-trip_score = 50
-GUI_flag = False
+# time_window_score = 50
+# trip_score = 50
+# GUI_flag = False
 
 timestamp = 0
 gpsLa = None
@@ -52,6 +54,7 @@ SVMResultQueue = queue.Queue()
 # dataQueue = queue.Queue()  # put data into dataQueue for databse
 # SVM_flag = 0  # if bigger than 0, there are overlapped events in queue
 # overlapNum = 0  # the number of overlapped events
+
 
 xstdQueue = queue.Queue(maxsize=19)
 ystdQueue = queue.Queue(maxsize=19)
@@ -510,13 +513,20 @@ class SVMthread(threading.Thread):
 
 
 # this thread for time-window monitor and LDA detection
-class Thread_for_lda(threading.Thread):  # threading.Thread
+class Thread_for_lda(multiprocessing.Process):  # threading.Thread
     def __init__(self):
-        threading.Thread.__init__(self)
-        self.__running = threading.Event()
-        self.__running.set()
+        multiprocessing.Process.__init__(self)
+        global LDA_flag
+        global svm_label_buffer
+        global time_window_score
+        global trip_score
         self.score_queue = []
         self.type = 0
+        self._trip_svm_buffer = ""
+        self._LDA_flag = LDA_flag
+        self._svm_label_buffer = svm_label_buffer.value
+        self._time_window_score = time_window_score.value
+        self._trip_score = trip_score.value
 
     # set driver type
     def setType(self, type=0):
@@ -524,54 +534,52 @@ class Thread_for_lda(threading.Thread):  # threading.Thread
 
     # main function in the thread
     def run(self):
-        global svm_label_buffer
-        global trip_svm_buffer
-        global time_window_score
-        global trip_score
         global GUI_flag
         ldaforevent = LDAForEvent
         ldaforevent.LDALoad(ldaforevent)
         start_time = time.time()
         #  monitor time-window
         while True:
-            if time.time() - start_time > time_window and LDA_flag.value:
+            if time.time() - start_time > time_window and self._LDA_flag.value:
                 GUI_flag = True
-                temp_word = svm_label_buffer
-                svm_label_buffer = ""
+                print( self._svm_label_buffer)
+                temp_word = self._svm_label_buffer
+                self._svm_label_buffer = ""
                 log.logger.info("__________________\n")
                 log.logger.info("temp word       :   " + temp_word + "\n")
                 log.logger.info("time window size:   " + str(time.time() - start_time) + "\n")
                 start_time = time.time()
 
                 if temp_word != "":
-                    trip_svm_buffer += temp_word + " "
+                    self._trip_svm_buffer += temp_word + " "
+
+                    # time window part
                     log.logger.info("computing the score...")
                     start_compute_time = time.time()
                     time_window_result = ldaforevent.testEvent(ldaforevent, [temp_word])
                     log.logger.info("computing time:." + str(time.time() - start_compute_time))
                     log.logger.info("time window score:   " + str(self.result_to_score(time_window_result)) + "\n")
 
+                    # trip part
                     log.logger.info("computing the trip score...")
                     start_compute_time = time.time()
-                    result_trip = ldaforevent.testEvent(ldaforevent, [trip_svm_buffer])
+                    result_trip = ldaforevent.testEvent(ldaforevent, [self._trip_svm_buffer])
                     log.logger.info("computing time:." + str(time.time() - start_compute_time))
-                    # log.logger.info(result_trip)
-                    trip_score = self.result_to_score(result_trip)
-                    log.logger.info("trip score       :   " + str(trip_score) + "\n")
-                    log.logger.info("__________________\n")
-                    print("Speed:", str(speed.value))
+                    self._trip_score = self.result_to_score(result_trip)
+                    log.logger.info("trip score       :   " + str(self._trip_score) + "\n")
                     self.score_queue.append(self.result_to_score(time_window_result))
                 elif temp_word == "":
                     self.score_queue.append(100)
 
+                log.logger.info("__________________\n")
                 if len(self.score_queue) > 6:
                     self.score_queue.pop()
-                time_window_score = self.calc_window_socre()
+                self._time_window_score = self.calc_window_socre()
 
     # change trip score
     def renew_trip_score(self, ldaforevent):
         global trip_score
-        result_trip = ldaforevent.testEvent(ldaforevent, [trip_svm_buffer])
+        result_trip = ldaforevent.testEvent(ldaforevent, [self._trip_svm_buffer])
         trip_score = self.result_to_score(self, result_trip)
 
     # calculate window score using LDA
@@ -922,7 +930,7 @@ def main():
         panel.refresh()
         if GUI_flag:
             GUI_flag = False
-            panel.change_score(time_window_score, trip_score)
+            panel.change_score(time_window_score.value, trip_score.value)
         if not SVMResultQueue.empty():
             result = SVMResultQueue.get()
             time_local = time.localtime(float(result.getStart() / 1000))
@@ -943,6 +951,15 @@ if __name__ == "__main__":
     LDA_flag = multiprocessing.Value(c_bool,
                                      True)  # if False, there are a event holding a time window, we should waiting for the end of event
     speed = multiprocessing.Value("i", 0)
+
+    # parameters for LDA
+    trip_score = multiprocessing.Value("f", 50)  # set the init trip score as 0
+    time_window_score = multiprocessing.Value("f", 50)  # set init time window score as 0
+    svm_label_buffer = multiprocessing.Value(ctypes.c_wchar_p, '')  # init svm label buffer
+    GUI_flag = multiprocessing.Value(c_bool,
+                                     False)
+
+
     eventQueue = multiprocessing.Queue()
     dataQueue = multiprocessing.Queue()
     main()

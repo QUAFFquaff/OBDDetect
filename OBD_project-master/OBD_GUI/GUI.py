@@ -13,7 +13,7 @@ class Panel(object):
 
         # === set the background color ===
         Ground = Rectangle(Point(0, 0), Point(48, 32))
-        Ground.setFill("light Green")
+        Ground.setFill("Gray")
         Ground.draw(win)
 
         self.win = win
@@ -59,6 +59,9 @@ class Panel(object):
         self.tripscoreMsg = Text(Point(41.5, 5), "")
         self.tripscoreMsg.draw(win)
         self.initBarList()
+
+        # score
+
 
     def initBarList(self):
         y = self._y

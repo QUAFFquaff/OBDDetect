@@ -498,3 +498,103 @@
 2019-06-06 20:21:20,139 - EventDetect.py[line:289] - INFO: put turn into svm
 2019-06-06 20:21:30,601 - EventDetect.py[line:289] - INFO: put turn into svm
 2019-06-06 20:21:41,659 - EventDetect.py[line:265] - INFO: 1
+2019-06-08 13:05:15,172 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:549] - INFO: __________________
+
+2019-06-08 13:05:53,190 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:546] - INFO: __________________
+
+2019-06-08 13:05:53,190 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:547] - INFO: temp word       :   sd
+
+2019-06-08 13:05:53,190 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: time window size:   10.000371217727661
+
+2019-06-08 13:05:53,190 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:555] - INFO: computing the score...
+2019-06-08 13:05:53,411 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:558] - INFO: computing time:.0.21987271308898926
+2019-06-08 13:05:53,411 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:559] - INFO: time window score:   65.98048955202103
+
+2019-06-08 13:05:53,412 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:562] - INFO: computing the trip score...
+2019-06-08 13:05:53,774 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:565] - INFO: computing time:.0.3617892265319824
+2019-06-08 13:05:53,774 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:567] - INFO: trip score       :   65.98663739860058
+
+2019-06-08 13:06:51,077 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:546] - INFO: __________________
+
+2019-06-08 13:06:51,077 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:547] - INFO: temp word       :   sd
+
+2019-06-08 13:06:51,077 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: time window size:   10.000829219818115
+
+2019-06-08 13:06:51,078 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:555] - INFO: computing the score...
+2019-06-08 13:06:51,330 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:558] - INFO: computing time:.0.2508547306060791
+2019-06-08 13:06:51,330 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:559] - INFO: time window score:   65.98048955202103
+
+2019-06-08 13:06:51,330 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:562] - INFO: computing the trip score...
+2019-06-08 13:06:51,719 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:565] - INFO: computing time:.0.38877367973327637
+2019-06-08 13:06:51,719 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:567] - INFO: trip score       :   65.98663739860058
+
+2019-06-08 13:06:51,720 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:572] - INFO: __________________
+
+2019-06-08 13:08:42,409 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: __________________
+
+2019-06-08 13:08:42,409 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:549] - INFO: temp word       :   sd
+
+2019-06-08 13:08:42,409 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:550] - INFO: time window size:   10.000048637390137
+
+2019-06-08 13:08:42,410 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:557] - INFO: computing the score...
+2019-06-08 13:08:42,652 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:560] - INFO: computing time:.0.24185967445373535
+2019-06-08 13:08:42,652 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:561] - INFO: time window score:   65.98048955202103
+
+2019-06-08 13:08:42,652 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:564] - INFO: computing the trip score...
+2019-06-08 13:08:43,017 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:567] - INFO: computing time:.0.36578822135925293
+2019-06-08 13:10:14,677 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: __________________
+
+2019-06-08 13:10:14,677 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:549] - INFO: temp word       :   sd
+
+2019-06-08 13:10:14,677 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:550] - INFO: time window size:   10.000434160232544
+
+2019-06-08 13:10:14,677 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:557] - INFO: computing the score...
+2019-06-08 13:10:14,880 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:560] - INFO: computing time:.0.20188307762145996
+2019-06-08 13:10:14,880 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:561] - INFO: time window score:   65.98048955202103
+
+2019-06-08 13:10:14,880 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:564] - INFO: computing the trip score...
+2019-06-08 13:10:15,246 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:567] - INFO: computing time:.0.3667867183685303
+2019-06-08 13:10:15,246 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:569] - INFO: trip score       :   65.98663739860058
+
+2019-06-08 13:10:15,246 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:574] - INFO: __________________
+
+2019-06-08 13:10:24,678 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: __________________
+
+2019-06-08 13:10:24,678 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:549] - INFO: temp word       :   
+
+2019-06-08 13:10:24,678 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:550] - INFO: time window size:   10.000974416732788
+
+2019-06-08 13:10:24,678 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:574] - INFO: __________________
+
+2019-06-08 13:10:34,678 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: __________________
+
+2019-06-08 13:10:34,678 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:549] - INFO: temp word       :   
+
+2019-06-08 13:10:34,678 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:550] - INFO: time window size:   10.000661134719849
+
+2019-06-08 13:10:34,678 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:574] - INFO: __________________
+
+2019-06-08 13:10:44,679 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: __________________
+
+2019-06-08 13:10:44,679 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:549] - INFO: temp word       :   
+
+2019-06-08 13:10:44,679 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:550] - INFO: time window size:   10.000428915023804
+
+2019-06-08 13:10:44,679 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:574] - INFO: __________________
+
+2019-06-08 13:10:54,679 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: __________________
+
+2019-06-08 13:10:54,679 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:549] - INFO: temp word       :   
+
+2019-06-08 13:10:54,679 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:550] - INFO: time window size:   10.000606060028076
+
+2019-06-08 13:10:54,679 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:574] - INFO: __________________
+
+2019-06-08 13:11:04,680 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:548] - INFO: __________________
+
+2019-06-08 13:11:04,680 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:549] - INFO: temp word       :   
+
+2019-06-08 13:11:04,680 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:550] - INFO: time window size:   10.000216245651245
+
+2019-06-08 13:11:04,680 - D:\Users\lenovo\Documents\!ProgramZone\Python\OBDdetect\OBD_project-master\OBD_GUI\EventDetect.py[line:574] - INFO: __________________
+
