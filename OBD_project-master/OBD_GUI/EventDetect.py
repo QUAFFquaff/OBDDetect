@@ -574,7 +574,7 @@ class Thread_for_lda(multiprocessing.Process):  # threading.Thread
     # change trip score
     def renew_trip_score(self, ldaforevent):
         global trip_score
-        result_trip = ldaforevent.testEvent(ldaforevent, [trip_svm_buffer])
+        result_trip = ldaforevent.testEvent(ldaforevent, [self._trip_svm_buffer])
         trip_score = self.result_to_score(self, result_trip)
 
     # calculate window score using LDA
