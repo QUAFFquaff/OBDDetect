@@ -213,35 +213,27 @@ class Panel(object):
 
     def addaBar(self, event_type):
         block_num = 2 * int(event_type / 4) + 1
-        y = self._y
         while block_num > 0:
             self._aList[block_num].draw(self.win)
             block_num -= 1
-            y += 3
 
     def addbBar(self, event_type):
         block_num = 2 * int(event_type / 4) + 1
-        y = self._y
         while block_num > 0:
             self._bList[block_num].draw(self.win)
             block_num -= 1
-            y += 3
 
     def addcBar(self, event_type):
         block_num = 2 * int(event_type / 4) + 1
-        y = self._y
         while block_num > 0:
             self._cList[block_num].draw(self.win)
             block_num -= 1
-            y += 3
 
     def adddBar(self, event_type):
         block_num = 2 * int(event_type / 4) + 1
-        y = self._y
         while block_num > 0:
             self._dList[block_num].draw(self.win)
             block_num -= 1
-            y += 3
 
     def clean_bars(self):
         self.removeaBar()

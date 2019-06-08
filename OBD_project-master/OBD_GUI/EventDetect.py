@@ -440,7 +440,9 @@ class SVMthread(threading.Thread):
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
-                        svm_label_buffer.value += str(change_n_to_a(result[0]))
+                        svm_label_buffer.value.append(change_n_to_a(result[0]))
+                        print(svm_label_buffer.value.type)
+                        print(change_n_to_a(result[0]).type)
 
                         LDA_flag.value = True
                 print("SVM takes:", str(time.time() - startTime))
