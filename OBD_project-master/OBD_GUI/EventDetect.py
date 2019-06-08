@@ -446,7 +446,7 @@ class SVMthread(threading.Thread):
                         print(type(self._svm_label_buffer))
                         print(type(change_n_to_a(result[0])))
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
-                        self._svm_label_buffer.value.append(change_n_to_a(result[0]))
+                        self._svm_label_buffer.value += change_n_to_a(result[0])    
 
                         LDA_flag.value = True
                 # print("SVM takes:", str(time.time() - startTime))
