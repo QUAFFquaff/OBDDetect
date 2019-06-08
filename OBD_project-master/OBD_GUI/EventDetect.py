@@ -441,12 +441,10 @@ class SVMthread(threading.Thread):
                                 result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
-                        print(self._svm_label_buffer)
                         print(change_n_to_a(result[0]))
-                        print(type(self._svm_label_buffer))
-                        print(type(change_n_to_a(result[0])))
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
-                        self._svm_label_buffer.value += change_n_to_a(result[0])    
+                        self._svm_label_buffer.value += change_n_to_a(result[0])
+                        print(self._svm_label_buffer.value)
 
                         LDA_flag.value = True
                 # print("SVM takes:", str(time.time() - startTime))
@@ -535,7 +533,6 @@ class Thread_for_lda(multiprocessing.Process):  # threading.Thread
         self.svm_label_buffer = svm_label_buffer
         self.time_window_score = time_window_score
         self.trip_score = trip_score
-        self.tempword = self.svm_label_buffer.value
 
     # set driver type
     def setType(self, type=0):
@@ -550,9 +547,8 @@ class Thread_for_lda(multiprocessing.Process):  # threading.Thread
         while True:
             if time.time() - start_time > time_window and self.LDA_flag.value:
                 self._GUI_flag.value = True
-                temp_word = self.tempword
+                temp_word = self.svm_label_buffer.value
                 self.svm_label_buffer.value = ""
-                print(self.svm_label_buffer.value)
                 log.logger.info("__________________\n")
                 log.logger.info("temp word       :   " + temp_word + "\n")
                 log.logger.info("time window size:   " + str(time.time() - start_time) + "\n")
