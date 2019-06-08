@@ -567,7 +567,7 @@ class Thread_for_lda(multiprocessing.Process):  # threading.Thread
                     # trip part
                     log.logger.info("computing the trip score...")
                     start_compute_time = time.time()
-                    result_trip = ldaforevent.testEvent(ldaforevent, [self.trip_svm_buffer.value])
+                    result_trip = ldaforevent.testEvent(ldaforevent, [self.trip_svm_buffer])
                     log.logger.info("computing time:." + str(time.time() - start_compute_time))
                     self.trip_score.value = self.result_to_score(result_trip)
                     log.logger.info("trip score       :   " + str(self.trip_score.value) + "\n")
