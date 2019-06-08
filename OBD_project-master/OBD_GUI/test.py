@@ -15,7 +15,7 @@ class Thread_for_GUI_timer(threading.Thread):
 
     def run(self):
         global GUI_Bar_flag
-        time.sleep(0.01)
+        time.sleep(1)
         GUI_Bar_flag = True
         self.stop()
 
@@ -36,8 +36,8 @@ def main():
             if GUI_Bar_flag:
                 panel.clean_bars()
                 break
-        time.sleep(0.01)
-        panel.addbBar(1)
+        time.sleep(1)
+        panel.addbBar(4)
 
 
 

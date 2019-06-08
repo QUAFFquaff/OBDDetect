@@ -912,10 +912,6 @@ def main():
     thread2 = SVMthread()
     thread2.start()
 
-    # # save data into data base thread
-    # data_thread = DataThread()
-    # data_thread.start()
-
     # start lda thread
     lda_thread = Thread_for_lda()
     lda_thread.start()

@@ -212,7 +212,7 @@ class Panel(object):
         block_num = 2 * int(event_type / 4) + 1
         y = self._y
         while block_num > 0:
-            self._aList[block_num].draw()
+            self._aList[block_num].draw(self.win)
             block_num -= 1
             y += 3
 
