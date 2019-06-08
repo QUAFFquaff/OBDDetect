@@ -440,7 +440,7 @@ class SVMthread(threading.Thread):
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
-                        svm_label_buffer.value = svm_label_buffer.value + change_n_to_a(result[0])
+                        svm_label_buffer.value += str(change_n_to_a(result[0]))
 
                         LDA_flag.value = True
                 print("SVM takes:", str(time.time() - startTime))
@@ -942,7 +942,7 @@ def main():
             GUI_timer = Thread_for_GUI_timer()
             GUI_timer.start()
         if GUI_Bar_flag:
-            panel.cleanBars()
+            panel.clean_bars()
 
 
 if __name__ == "__main__":
