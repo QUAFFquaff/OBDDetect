@@ -36,7 +36,7 @@ matrix = np.array([[0.079935974, 0.00E+00, -0.9968],
 samplingRate = 0  # the sampling rate of the data reading
 std_window = 0  # the time window for standard deviation
 
-time_window = 30  # time window for a word in LDA
+time_window = 3  # time window for a word in LDA
 # svm_label_buffer = ""  # the word in a time window
 # trip_svm_buffer = ""  # save the whole trip's SVm label
 # LDA_flag = True  # if False, there are a event holding a time window, we should waiting for the end of event
@@ -366,6 +366,8 @@ class SVMthread(threading.Thread):
         self.__running = threading.Event()
         self.__running.set()
         self.score_queue = []
+        global svm_label_buffer
+        self._svm_label_buffer = svm_label_buffer
 
     def run(self):
         resultMatrix = []
@@ -375,7 +377,7 @@ class SVMthread(threading.Thread):
         global SVMResultQueue
         global LDA_flag
         global SVM_flag
-        global svm_label_buffer
+        # global svm_label_buffer
         global processLock
 
         startTime = time.time()
@@ -439,12 +441,12 @@ class SVMthread(threading.Thread):
                                 result = [9]
                         SVMResultQueue.put(SVMResult(eventList[i].getStart(), eventList[i].getEnd(), result[0]))
 
-                        print(svm_label_buffer.value)
+                        print(self._svm_label_buffer.value)
                         print(change_n_to_a(result[0]))
-                        print(type(svm_label_buffer.value))
+                        print(type(self._svm_label_buffer.value))
                         print(type(change_n_to_a(result[0])))
                         self.saveResult(eventList[i].getStart(), eventList[i].getEnd(), result[0])
-                        svm_label_buffer.value.append(change_n_to_a(result[0]))
+                        self._svm_label_buffer.value.append(change_n_to_a(result[0]))
 
                         LDA_flag.value = True
                 print("SVM takes:", str(time.time() - startTime))
