@@ -106,19 +106,25 @@ class Panel(object):
         win = self.win
 
         # === draw the reward box ===
-        rewardB1 = Rectangle(Point(36, 15), Point(47, 28))
+        rewardB1 = Rectangle(Point(36, 22), Point(47, 31))
         rewardB1.setWidth(4)
         rewardB1.setFill("light gray")
         rewardB1.draw(win)
 
         # === draw the alert box ===
-        rewardB2 = Rectangle(Point(36, 1.5), Point(47, 13))
+        rewardB2 = Rectangle(Point(36, 12), Point(47, 21))
+        rewardB2.setWidth(4)
+        rewardB2.setFill("light gray")
+        rewardB2.draw(win)
+
+        # === draw the alert box ===
+        rewardB2 = Rectangle(Point(36, 1), Point(47, 11))
         rewardB2.setWidth(4)
         rewardB2.setFill("light gray")
         rewardB2.draw(win)
 
         # === draw the text on the box ===
-        pntMsg = Point(41.5, 25)
+        pntMsg = Point(41.5, 29)
         txtMsg = Text(pntMsg, "Time Window\nScore")
         txtMsg.setStyle("bold")
         txtMsg.setTextColor("purple")
@@ -126,7 +132,7 @@ class Panel(object):
         txtMsg.draw(win)
 
         # === draw the text on the box ===
-        pntMsg = Point(41.5, 10)
+        pntMsg = Point(41.5, 19)
         txtMsg = Text(pntMsg, "Trip\nScore")
         txtMsg.setStyle("bold")
         txtMsg.setTextColor("purple")
@@ -155,14 +161,14 @@ class Panel(object):
         self.tripscoreMsg.undraw()
 
         # === write time window score on the box ===
-        self.moneyMsg = Text(Point(41.5, 20), str(curve_time_window_score)[:4])
+        self.moneyMsg = Text(Point(41.5, 25), str(curve_time_window_score)[:4])
         self.moneyMsg.setStyle("bold")
         self.moneyMsg.setTextColor("dark green")
         self.moneyMsg.setSize(15)
         self.moneyMsg.draw(win)
 
         # === write trip score on the box ===
-        self.tripscoreMsg = Text(Point(41.5, 5), str(curve_trip_score)[0:4])
+        self.tripscoreMsg = Text(Point(41.5, 15), str(curve_trip_score)[0:4])
         self.tripscoreMsg.setStyle("bold")
         self.tripscoreMsg.setTextColor("dark green")
         self.tripscoreMsg.setSize(15)

@@ -28,16 +28,18 @@ def main():
     panel = GUI.Panel()
     panel.drawPanel()
     time.sleep(2)
-    panel.addbBar(9)
-    while True:
-        GUI_timer = Thread_for_GUI_timer()
-        GUI_timer.start()
-        while True:
-            if GUI_Bar_flag:
-                panel.clean_bars()
-                break
-        time.sleep(1)
-        panel.addbBar(4)
+    panel.addbBar(11)
+    panel.change_score(80,80)
+    time.sleep(200)
+    # while True:
+    #     GUI_timer = Thread_for_GUI_timer()
+    #     GUI_timer.start()
+    #     while True:
+    #         if GUI_Bar_flag:
+    #             panel.clean_bars()
+    #             break
+    #     time.sleep(1)
+    #     panel.addbBar(4)
 
 
 
