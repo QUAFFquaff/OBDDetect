@@ -28,7 +28,7 @@ def main():
     panel = GUI.Panel()
     panel.drawPanel()
     time.sleep(2)
-    panel.addbBar(4)
+    panel.addbBar(9)
     while True:
         GUI_timer = Thread_for_GUI_timer()
         GUI_timer.start()
@@ -42,6 +42,6 @@ def main():
 
 
 if __name__ == "__main__":
-    a = 'ahah'
-    print(type(a))
-    # main()
+    # a = 'ahah'
+    # print(type(a))
+    main()

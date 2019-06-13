@@ -181,7 +181,8 @@ class Panel(object):
                 self.dBar = Polygon(Point(self._self._d1, y - 3), Point(self._self._d1, y - 1), Point(self._d2, y),
                                     Point(self._d3, y - 1),
                                     Point(self._d3, y - 3), Point(self._d2, y - 2))
-                self.dBar.setFill(color_rgb(39, 244, 106))
+                color = color_rgb(39, 244, 106)
+                self.dBar.setFill(color)
                 self.dBar.draw(self.win)
         elif 3 < Eventtype < 8:
             blocknum = 3

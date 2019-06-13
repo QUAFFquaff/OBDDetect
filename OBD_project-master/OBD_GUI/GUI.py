@@ -66,32 +66,37 @@ class Panel(object):
     def initBarList(self):
         y = self._y
         for i in range(6):
+            bar_color = color_rgb(39, 244, 106)
+            if 2<=i<4:
+                bar_color = color_rgb(208, 173, 44)
+            elif 4<=i:
+                bar_color = color_rgb(243, 30, 51)
             # a bars
             aBar = Polygon(Point(self._a1, y - 3), Point(self._a1, y - 1), Point(self._a2, y),
                            Point(self._a3, y - 1),
                            Point(self._a3, y - 3), Point(self._a2, y - 2))
-            aBar.setFill(color_rgb(208, 173, 44))
+            aBar.setFill(bar_color)
             self._aList.append(aBar)
 
             # b Bar
             bBar = Polygon(Point(self._b1, y - 3), Point(self._b1, y - 1), Point(self._b2, y),
                            Point(self._b3, y - 1),
                            Point(self._b3, y - 3), Point(self._b2, y - 2))
-            bBar.setFill(color_rgb(208, 173, 44))
+            bBar.setFill(bar_color)
             self._bList.append(bBar)
 
             # c Bar
             cBar = Polygon(Point(self._c1, y - 3), Point(self._c1, y - 1), Point(self._c2, y),
                            Point(self._c3, y - 1),
                            Point(self._c3, y - 3), Point(self._c2, y - 2))
-            cBar.setFill(color_rgb(208, 173, 44))
+            cBar.setFill(bar_color)
             self._cList.append(cBar)
 
             # d Bar
             dBar = Polygon(Point(self._d1, y - 3), Point(self._d1, y - 1), Point(self._d2, y),
                            Point(self._d3, y - 1),
                            Point(self._d3, y - 3), Point(self._d2, y - 2))
-            dBar.setFill(color_rgb(208, 173, 44))
+            dBar.setFill(bar_color)
             self._dList.append(dBar)
 
             y += 3
