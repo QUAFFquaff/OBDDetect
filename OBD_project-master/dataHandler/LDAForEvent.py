@@ -437,7 +437,7 @@ def main():
     ldamodel = LDAForEvent
     ldamodel.LDAPreProcessing(ldamodel)
     ldamodel.LDALoad(ldamodel)
-    test = ['ahivp']
+    test = ['ah','a','h']
     start = time.time()
     # result = ldamodel.LDATest(ldamodel,test)
     result = ldamodel.testEvent(ldamodel,test)

@@ -168,7 +168,7 @@ class Panel(object):
         self.moneyMsg.draw(win)
 
         # === write trip score on the box ===
-        self.tripscoreMsg = Text(Point(41.5, 15), str(curve_trip_score)[0:4])
+        self.tripscoreMsg = Text(Point(4 1.5, 15), str(curve_trip_score)[0:4])
         self.tripscoreMsg.setStyle("bold")
         self.tripscoreMsg.setTextColor("dark green")
         self.tripscoreMsg.setSize(15)
