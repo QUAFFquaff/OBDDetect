@@ -144,18 +144,20 @@ class Panel(object):
     def change_score(self, time_window_score, trip_score):
 
         win = self.win
+        curve_time_window_score = (time_window_score-30)*50/70+50
+        curve_trip_score = (trip_score-30)*50/70+50
         self.moneyMsg.undraw()
         self.tripscoreMsg.undraw()
 
         # === write time window score on the box ===
-        self.moneyMsg = Text(Point(41.5, 20), str(time_window_score)[:4])
+        self.moneyMsg = Text(Point(41.5, 20), str(curve_time_window_score)[:4])
         self.moneyMsg.setStyle("bold")
         self.moneyMsg.setTextColor("dark green")
         self.moneyMsg.setSize(15)
         self.moneyMsg.draw(win)
 
         # === write trip score on the box ===
-        self.tripscoreMsg = Text(Point(41.5, 5), str(trip_score)[0:4])
+        self.tripscoreMsg = Text(Point(41.5, 5), str(curve_trip_score)[0:4])
         self.tripscoreMsg.setStyle("bold")
         self.tripscoreMsg.setTextColor("dark green")
         self.tripscoreMsg.setSize(15)
