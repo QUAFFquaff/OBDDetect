@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="936eb228-d965-497a-9489-c47e56446a4f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_GUI/EventDetect.py" afterPath="$PROJECT_DIR$/OBD_GUI/EventDetect.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OBD_GUI/all.log" afterPath="$PROJECT_DIR$/OBD_GUI/all.log" />
-=======
-    <list default="true" id="83f385fe-7253-4dc9-886d-9fba030ac2dc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/Kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/Kmeans.py" afterDir="false" />
->>>>>>> 8f292be3360c80f361d599da393740802dbf68a9
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +16,6 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/OBD_GUI/EventDetect.py">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
             <state relative-caret-position="27">
               <caret line="38" column="15" lean-forward="false" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
               <folding>
@@ -36,12 +29,6 @@
                 <element signature="e#27465#32145#0" expanded="false" />
                 <element signature="e#32176#32885#0" expanded="false" />
                 <marker date="1560030061919" expanded="true" signature="11247:11396" ph="INSERT INTO STATUS... " />
-=======
-            <state relative-caret-position="358">
-              <caret line="838" selection-start-line="838" selection-end-line="838" />
-              <folding>
-                <element signature="e#22#35#0" expanded="true" />
->>>>>>> 8f292be3360c80f361d599da393740802dbf68a9
               </folding>
             </state>
           </provider>
@@ -71,7 +58,6 @@
       </list>
     </option>
   </component>
-<<<<<<< HEAD
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsGulpfileManager">
@@ -83,13 +69,6 @@
     <option name="y" value="-8" />
     <option name="width" value="1490" />
     <option name="height" value="880" />
-=======
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="192" />
-    <option name="y" value="-24" />
-    <option name="width" value="1750" />
-    <option name="height" value="980" />
->>>>>>> 8f292be3360c80f361d599da393740802dbf68a9
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
