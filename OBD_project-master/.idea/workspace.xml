@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ede0ee12-7d37-4429-aaca-b2e4415022ee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/OBD_project-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/OBD_project-master.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/GenerateFakeData.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/GenerateFakeData.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -173,7 +172,8 @@
       <workItem from="1569564625581" duration="298000" />
       <workItem from="1570742255613" duration="44000" />
       <workItem from="1570989064734" duration="1623000" />
-      <workItem from="1571004377413" duration="25769000" />
+      <workItem from="1571004377413" duration="30009000" />
+      <workItem from="1571255053338" duration="2314000" />
     </task>
     <servers />
   </component>

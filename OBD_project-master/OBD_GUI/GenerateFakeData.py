@@ -7,18 +7,18 @@ import random
 notebook = "ahovbipwcjqx"
 durationOverspeed = 0
 duration = []
-termList = []
+termList = []  # put all the terms(event) in one trip
 
 
-def write_data(dataTemp, table, row):
+def write_data(dataTemp, table, row):  # write features in excel
     data = np.array(dataTemp)
     l = len(data)  # h为行数，l为列数
     for j in range(l):
         table.write(row, j, data[j])
 
 
-def makeLevel0():
-    length = int(random.gauss(2.5, 2))
+def makeLevel0():  # this is for safe driver
+    length = int(random.gauss(4, 1.5))
     if length <= 0:
         return "!"
     term = ''
@@ -30,7 +30,7 @@ def makeLevel0():
     for i in range(length):
         if totalTime>1:
             threshold = random.randint(0, 99)
-            if threshold != 9:
+            if threshold >= 3:
                 index = random.randint(0, 3)
                 term += notebook[index]
                 termList.append(notebook[index])
@@ -46,8 +46,8 @@ def makeLevel0():
     return "'" + term + "'"
 
 
-def makeLevel1():
-    length = int(random.gauss(2.5, 2))
+def makeLevel1():  # this is for anxious driver
+    length = int(random.gauss(6, 2.5))
     if length <= 0:
         return "!"
     term = ''
@@ -59,7 +59,7 @@ def makeLevel1():
     for i in range(length):
         if totalTime > 1:
             threshold = random.randint(0, 99)
-            if threshold < 30:
+            if threshold < 20:
                 index = random.randint(0, 3)
                 term += notebook[index]
                 termList.append(notebook[index])
@@ -134,7 +134,8 @@ def makeLevel3():
             break
     return "'" + term + "'"
 
-def calculateSafe():
+
+def calculateSafe():    # calculate the safe event frequency
     totalEvent = len(termList)
     safeEvent = 0;
     for i in termList:
@@ -143,7 +144,8 @@ def calculateSafe():
     frequency = safeEvent/totalEvent
     return frequency
 
-def calculateMedium():
+
+def calculateMedium():  # calculate the medium risk event frequency
     totalEvent = len(termList)
     mediumEvent = 0;
     for i in termList:
@@ -152,7 +154,8 @@ def calculateMedium():
     frequency = mediumEvent/totalEvent
     return frequency
 
-def calculateHigh():
+
+def calculateHigh():  # calculate the high risk event frequency
     totalEvent = len(termList)
     highEvent = 0;
     for i in termList:
@@ -161,7 +164,8 @@ def calculateHigh():
     frequency = highEvent/totalEvent
     return frequency
 
-def calculateDensity():
+
+def calculateDensity():  # calculate high risk event density
     totalTime = 0
     time_high = 0
     for i in range(len(termList)):
@@ -171,7 +175,8 @@ def calculateDensity():
     density = time_high / totalTime
     return density
 
-def calculateOverspeed():
+
+def calculateOverspeed():   # calculate the time of speed that over 65 (don't have speed, just add time when high risk speedup and changing line
     totalTime = 0
     time_overspeed = 0
     for i in range(len(termList)):
@@ -183,7 +188,8 @@ def calculateOverspeed():
     over = time_overspeed / totalTime
     return over
 
-def makeDocument(runNum):
+
+def makeDocument(runNum):  # random pick different level of pattern to compose the document
     level0 = random.randint(20,70)  # range of first level
     level1 = random.randint(10,level0)  # range of second level
     level2 = random.randint(0,level1)  # range of third level
@@ -203,8 +209,6 @@ def main():
     global duration
     global termList
     data = ""
-
-
 
     for j in range(500):
         totaltime = random.randint(50, 100)  # how many 40 sec in on trip, also the pattern
