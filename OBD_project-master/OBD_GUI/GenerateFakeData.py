@@ -5,7 +5,6 @@ import random
 
 
 notebook = "ahovbipwcjqx"
-durationOverspeed = 0
 duration = []
 termList = []  # put all the terms(event) in one trip
 
@@ -74,8 +73,10 @@ def makeLevel1():  # this is for anxious driver
             break
     return "'" + term + "'"
 
-def makeLevel2():
-    length = int(random.gauss(3.5, 1.5))
+reckless_Prob = 20
+def makeLevel2():  # this is for reckless driver
+    global  reckless_Prob
+    length = int(random.gauss(4, 1.5))
     if length <= 0:
         return "!"
     term = ''
@@ -91,23 +92,29 @@ def makeLevel2():
                 index = random.randint(0, 7)
                 term += notebook[index]
                 termList.append(notebook[index])
-            elif threshold > 75:
+            elif threshold <reckless_Prob:
                 index = random.randint(4, 11)
                 term += notebook[index]
                 termList.append(notebook[index])
             else:
-                index = random.randint(4, 7)
-                term += notebook[random.randint(4, 7)]
+                index = random.randint(8, 11)
+                term += notebook[index]
                 termList.append(notebook[index])
+                reckless_Prob+= 40
             eventTime = random.uniform(1, average)
             duration.append(eventTime)
             totalTime -= eventTime
+            if reckless_Prob > 200:
+                reckless_Prob = 20
         else:
             break
     return "'" + term + "'"
 
-def makeLevel3():
-    length = int(random.gauss(3, 1.9))
+
+angrey_Prob = 60
+def makeLevel3():  # this is for angrey driver
+    global angrey_Prob
+    length = int(random.gauss(5, 1.9))
     if length <= 0:
         return "!"
     term = ''
@@ -123,13 +130,22 @@ def makeLevel3():
                 index = random.randint(4, 7)
                 term += notebook[index]
                 termList.append(notebook[index])
+                angrey_Prob = 60
+            elif threshold < angrey_Prob:
+                index = random.randint(0, 3)
+                term += notebook[index]
+                termList.append(notebook[index])
+                angrey_Prob = 60
             else:
                 index = random.randint(8, 11)
                 term += notebook[index]
                 termList.append(notebook[index])
+                angrey_Prob -= 20
             eventTime = random.uniform(1, average)
             duration.append(eventTime)
             totalTime -= eventTime
+            if angrey_Prob<-20:
+                angrey_Prob = 60
         else:
             break
     return "'" + term + "'"
@@ -165,57 +181,29 @@ def calculateHigh():  # calculate the high risk event frequency
     return frequency
 
 
-def calculateDensity():  # calculate high risk event density
-    totalTime = 0
-    time_high = 0
-    for i in range(len(termList)):
-        totalTime += duration[i]
-        if termList[i] == 'c' or termList[i] == 'j' or termList[i] == 'q' or termList[i] == 'x':
-            time_high += duration[i]
-    density = time_high / totalTime
-    return density
 
-
-def calculateOverspeed():   # calculate the time of speed that over 65 (don't have speed, just add time when high risk speedup and changing line
-    totalTime = 0
-    time_overspeed = 0
-    for i in range(len(termList)):
-        totalTime += duration[i]
-        if  termList[i] == 'j' or termList[i] == 'x':
-            time_overspeed += duration[i]
-            if i< len(termList):
-                time_overspeed +=duration[i]
-    over = time_overspeed / totalTime
-    return over
-
-
-def makeDocument(runNum):  # random pick different level of pattern to compose the document
-    level0 = random.randint(20,70)  # range of first level
-    level1 = random.randint(10,level0)  # range of second level
-    level2 = random.randint(0,level1)  # range of third level
-    if runNum > level0:
+def makeDocument(runNum,safe, anxious, reckless):  # random pick different level of pattern to compose the document
+    if runNum > safe:
         temp = makeLevel0()
-    elif runNum > level1:
+    elif runNum > anxious:
         temp = makeLevel1()
-    elif runNum >level2:
+    elif runNum >reckless:
         temp = makeLevel2()
     else:
         temp = makeLevel3()
     return temp
 
-
-
-def main():
+def choosePersonality(data,safe, anxious, reckless ):
     global duration
     global termList
-    data = ""
 
-    for j in range(500):
-        totaltime = random.randint(50, 100)  # how many 40 sec in on trip, also the pattern
+
+    for j in range(100):  # generate 100 careful driver
+        totaltime = random.randint(100, 200)  # how many 40 sec in on trip, also the pattern
         document = '['
         for i in range(totaltime):
             runNum = random.uniform(0, 100)
-            word = makeDocument(runNum)
+            word = makeDocument(runNum, 15, 10, 5)
             if word == '!': continue
             document += word + ","
         document += "]"
@@ -223,11 +211,8 @@ def main():
         frequency_Safe = calculateSafe()
         frequency_Medium = calculateMedium()
         frequency_high = calculateHigh()
-        density_high = calculateDensity()
-        durationOverspeed = calculateOverspeed()
 
         data += document + ",\n"
-
 
         print(document)
         print(termList)
@@ -235,19 +220,25 @@ def main():
         print(frequency_Safe)
         print(frequency_Medium)
         print(frequency_high)
-        print(density_high)
-        print(durationOverspeed)
 
         oldwd = open_workbook('ForKMeans.xls', formatting_info=True)
         sheet = oldwd.sheet_by_index(0)
         rowNum = sheet.nrows
         newwb = copy(oldwd)
         newWs = newwb.get_sheet(0)
-        write_data(np.array([frequency_Safe, frequency_Medium, frequency_high, density_high,durationOverspeed]), newWs, rowNum)
+        write_data(np.array([frequency_Safe, frequency_Medium, frequency_high]), newWs, rowNum)
         newwb.save('ForKMeans.xls')
 
         duration = []
         termList = []
+    return data
+
+def main():
+    data = ""
+    data = choosePersonality(data, 15, 10, 5)
+    data = choosePersonality(data, 15, 5, 2)
+    data = choosePersonality(data, 15, 12, 2)
+    data = choosePersonality(data, 15, 13, 10)
     write(data)
 
 def write(data):
