@@ -16,7 +16,7 @@
 
 '''
 lista = ['a','b','v']
-for j in range(1, len(lista)+1):
-    for i in range(1, len(lista)+1):
-        print(i)
-        if i == 2:break
+import numpy as np
+
+alist = np.array([1,23,3,3])
+np.write()

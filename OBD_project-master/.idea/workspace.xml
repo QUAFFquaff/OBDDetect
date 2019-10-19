@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ede0ee12-7d37-4429-aaca-b2e4415022ee" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/OBD_GUI/result.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OBD_GUI/test2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OBD_GUI/ForKMeans.xls" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/ForKMeans.xls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OBD_GUI/GenerateFakeData.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/GenerateFakeData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/Kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/Kmeans.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/distribution1.png" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/distribution1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/elbowMethod.png" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/elbowMethod.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OBD_GUI/fakeData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/fakeData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/silhouetteMethod.png" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/silhouetteMethod.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataHandler/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataHandler/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,10 +42,18 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Irvine/OBD project/Daben/OBDDetect-master/OBDDetect-master/OBD_project-master/OBD_GUI" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/OBD_GUI" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Daben\Documents\PythonProject\OBDDetect\OBD_project-master\OBD_GUI" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Daben\Documents\PythonProject\OBDDetect\OBD_project-master\OBD_GUI" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -51,7 +67,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.GenerateFakeData">
+  <component name="RunManager" selected="Python.Kmeans">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -138,6 +154,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="OBD_project-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OBD_GUI" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OBD_GUI/test2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="js.build_tools.gulp">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -151,10 +189,13 @@
       <item itemvalue="Python.Kmeans" />
       <item itemvalue="Python.test" />
       <item itemvalue="Python.GenerateFakeData" />
+      <item itemvalue="Python.test2" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Kmeans" />
         <item itemvalue="Python.GenerateFakeData" />
+        <item itemvalue="Python.test2" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -177,7 +218,7 @@
       <workItem from="1571004377413" duration="30009000" />
       <workItem from="1571255053338" duration="11238000" />
       <workItem from="1571374738629" duration="3515000" />
-      <workItem from="1571418640463" duration="3353000" />
+      <workItem from="1571418640463" duration="21544000" />
     </task>
     <servers />
   </component>
@@ -198,7 +239,9 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/OBD_project_master$GenerateFakeData.coverage" NAME="GenerateFakeData Coverage Results" MODIFIED="1571376659728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
-    <SUITE FILE_PATH="coverage/OBD_project_master$Kmeans.coverage" NAME="Kmeans Coverage Results" MODIFIED="1560024673336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1571472416234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$test.coverage" NAME="test Coverage Results" MODIFIED="1571471663708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$GenerateFakeData.coverage" NAME="GenerateFakeData Coverage Results" MODIFIED="1571473068526" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$Kmeans.coverage" NAME="Kmeans Coverage Results" MODIFIED="1571512548165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
   </component>
 </project>
