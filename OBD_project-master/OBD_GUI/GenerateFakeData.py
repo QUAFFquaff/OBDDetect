@@ -193,17 +193,16 @@ def makeDocument(runNum,safe, anxious, reckless):  # random pick different level
         temp = makeLevel3()
     return temp
 
-def choosePersonality(data,safe, anxious, reckless ):
+def choosePersonality(data,safe, anxious, reckless):
     global duration
     global termList
-
 
     for j in range(100):  # generate 100 careful driver
         totaltime = random.randint(100, 200)  # how many 40 sec in on trip, also the pattern
         document = '['
         for i in range(totaltime):
             runNum = random.uniform(0, 100)
-            word = makeDocument(runNum, 15, 10, 5)
+            word = makeDocument(runNum, safe, anxious, reckless)
             if word == '!': continue
             document += word + ","
         document += "]"
