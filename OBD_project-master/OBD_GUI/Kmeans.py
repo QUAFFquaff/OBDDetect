@@ -42,7 +42,7 @@ for i in range(0,table.nrows):
 Data = np.array(Data)
 Data = Data.astype(np.float64)
 
-print(Data)
+# print(Data)
 
 
 km_cluster = KMeans(n_clusters=4, max_iter=300, n_init=40, init='k-means++',n_jobs=-1)
@@ -55,7 +55,7 @@ cluster3 =Data[(km_cluster.labels_==3)]
 print(labels)
 print("-----")
 centers = km_cluster.cluster_centers_
-print(centers)
+# print(centers)
 fig = plt.figure()
 ax = Axes3D(fig)
 ax.scatter(cluster0[:,2],cluster0[:,3],cluster0[:,5],c='r',label='first cluster')
@@ -77,31 +77,51 @@ plt.savefig("distribution1.png")
 plt.show()
 
 
-# using MDS method
-from sklearn.manifold import MDS
-clf = MDS(3)
-clf.fit(Data)
-personData = clf.fit_transform(Data)
-plt.scatter(personData[:,0],personData[:,1],c =km_cluster.labels_)
-# fig = plt.figure()
-# ax = Axes3D(fig)
-# ax.scatter(personData[:,0],personData[:,1], personData[:,2],c =km_cluster.labels_)
-# ax.legend(loc='best')
-plt.title('Using sklearn MDS in 3d')
-plt.savefig("MDS_2d.png")
-plt.show()
+# # using MDS method
+# from sklearn.manifold import MDS
+# clf = MDS(3)
+# clf.fit(Data)
+# personData = clf.fit_transform(Data)
+# plt.scatter(personData[:,0],personData[:,1],c =km_cluster.labels_)
+# # fig = plt.figure()
+# # ax = Axes3D(fig)
+# # ax.scatter(personData[:,0],personData[:,1], personData[:,2],c =km_cluster.labels_)
+# # ax.legend(loc='best')
+# plt.title('Using sklearn MDS in 3d')
+# plt.savefig("MDS_2d.png")
+# plt.show()
 
+
+from sklearn.metrics.pairwise import euclidean_distances
 
 # this is the elbow method
 SSE = []  # sum of the squared errors
+interDis = []
 # num_clusters = 2
-for num_clusters in range(1,6):
-    km_cluster = KMeans(n_clusters=num_clusters, max_iter=300, n_init=40, init='k-means++',n_jobs=-1)
+for num_clusters in range(2,7):
+    km_cluster = KMeans(n_clusters=num_clusters, max_iter=300, n_init=10, init='k-means++',n_jobs=-1)
     km_cluster.fit(Data)
     SSE.append(km_cluster.inertia_)
-X = range(1,6)
+
+    dist = euclidean_distances(km_cluster.cluster_centers_)
+    tri_dists = dist[np.triu_indices(num_clusters, 1)]
+
+    dis_inertia = []
+    for i in range(num_clusters):
+        distance = []
+        for point in range(len(Data[(km_cluster.labels_==i)])):
+            distance.append(euclidean_distances([Data[(km_cluster.labels_==i)][point],km_cluster.cluster_centers_[i]])[0][1])
+        dis_inertia.append(max(distance))
+
+    dunIndex = tri_dists.min() /max(dis_inertia)
+    print(tri_dists.min())
+    # print(tri_dists.max())
+    print(tri_dists.mean())
+    interDis.append(dunIndex)
+print(SSE)
+X = range(2,7)
 plt.xlabel('number of clusters')
-plt.ylabel('SSE(Sum Of the Squared Errors')
+plt.ylabel('SSE(Sum Of the  intra cluster distance)')
 plt.plot(X,SSE,'o-')
 plt.savefig("elbowMethod.png")
 plt.show()
@@ -111,19 +131,24 @@ center = km_cluster.cluster_centers_
 # print(labels)
 # print(center)
 # print(predict)
+# X = range(2,8)
+# plt.xlabel('number of clusters')
+# plt.ylabel('inter distance ')
+# plt.plot(X,interDis,'o-')
+# plt.savefig("elbowMethod2.png")
+# plt.show()
 
 
 
-
-# this is the Average silhouette method
-Scores = []
-for num_clusters in range(2,6):
-    km_cluster = KMeans(n_clusters=num_clusters, max_iter=300, n_init=40, init='k-means++', n_jobs=-1)
-    km_cluster.fit(Data)
-    Scores.append(silhouette_score(Data,km_cluster.labels_,metric='euclidean'))
-X = range(2,6)
-plt.xlabel('number of clusters')
-plt.ylabel('average silhouette width ')
-plt.plot(X,Scores,'o-')
-plt.savefig("silhouetteMethod.png")
-plt.show()
+# # this is the Average silhouette method
+# Scores = []
+# for num_clusters in range(2,6):
+#     km_cluster = KMeans(n_clusters=num_clusters, max_iter=300, n_init=40, init='k-means++', n_jobs=-1)
+#     km_cluster.fit(Data)
+#     Scores.append(silhouette_score(Data,km_cluster.labels_,metric='euclidean'))
+# X = range(2,6)
+# plt.xlabel('number of clusters')
+# plt.ylabel('average silhouette width ')
+# plt.plot(X,Scores,'o-')
+# plt.savefig("silhouetteMethod.png")
+# plt.show()
