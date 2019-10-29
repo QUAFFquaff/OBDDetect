@@ -1,0 +1,10 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides: bluetoothconn
+# Required-Start:       $all
+# Required-Stop:
+# Default-Start:        2 3 4 5
+# Default-Stop:
+# Short-Description: connect bluetooth
+### END INIT INFO
+eval "sudo rfcomm bind 0 24:0A:C4:06:5B:E2 2"
