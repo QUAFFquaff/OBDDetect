@@ -4,6 +4,9 @@ import numpy as np
 import pymysql
 import pymysql.cursors
 import threading
+from graphics import *
+
+Speed = 0;
 
 def getSerial():
     ser = serial.Serial(port='/dev/rfcomm0', baudrate=57600, timeout=0.5)
@@ -12,9 +15,9 @@ def getSerial():
     return ser
 
 def connectDB():
-    connection = pymysql.connect(host='35.197.95.95',
+    connection = pymysql.connect(host='localhost',
                                  user='root',
-                                 password='obd12345',
+                                 password='obd1234',
                                  db='DRIVINGDB',
                                  port=3306,
                                  charset='utf8')
@@ -27,6 +30,7 @@ class dataStore(threading.Thread):
         self.__running.set()
 
     def run(self):
+        global Speed
         BTserial = getSerial()
         obddata = ''.encode('utf-8')
 
@@ -45,6 +49,7 @@ class dataStore(threading.Thread):
                 gyoz = row[7]
                 acc = np.array([accy, accx, accz])
                 acc = acc.astype(np.float64)
+                Speed = speed
 
                 try:
                     # 获取一个游标
@@ -82,7 +87,44 @@ def splitByte(obdData):
 
 def main():
     thread = dataStore()
+    thread.setDaemon(True)
     thread.start()
+
+
+    def drawBackground():
+        backgroudcolor = color_rgb(33, 33, 33)
+        # === creating the graphic window ===
+        win = GraphWin("calibrate instruction", 1080, 600)
+        win.setCoords(0, 0, 40, 20)
+
+        # === set the background color ===
+        Ground = Rectangle(Point(0, 0), Point(40, 20))
+        Ground.setFill("light Green")
+        Ground.draw(win)
+
+        return win
+
+    win = drawBackground()
+
+    # === draw the calibrate ===
+    calibrateBtn = Rectangle(Point(15, 7), Point(25, 13))
+    calibrateBtn.setWidth(4)
+    calibrateBtn.setFill("light gray")
+    calibrateBtn.draw(win)
+
+    pntMsg = Point(20, 10)
+    txtMsg = Text(pntMsg, "start")
+    txtMsg.setStyle("bold")
+    txtMsg.setTextColor("blue")
+    txtMsg.setSize(36)
+    txtMsg.draw(win)
+    Msg = Text(Point(0,0), "")
+    thread.join(1)
+    while True:
+        txtMsg.setText(Speed)
+        Msg.draw(win)
+        Msg.undraw()
+
 
 if __name__ == "__main__":
     main()
