@@ -12,9 +12,9 @@ def getSerial():
     return ser
 
 def connectDB():
-    connection = pymysql.connect(host='35.197.95.95',
+    connection = pymysql.connect(host='localhost',
                                  user='root',
-                                 password='obd12345',
+                                 password='obd1234',
                                  db='DRIVINGDB',
                                  port=3306,
                                  charset='utf8')
