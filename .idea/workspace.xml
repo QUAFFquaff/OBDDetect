@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6f3943f5-1002-43e1-b3a9-180fe4d3da2c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_project-master/Arduino Code/firmware_custom/datalogger/datalogger.ino" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/Arduino Code/firmware_custom/datalogger/datalogger.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/Calibration2.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_project-master/OBD_GUI/Calibration2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,11 +26,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="921" />
-    <option name="width" value="943" />
-    <option name="height" value="1087" />
   </component>
   <component name="ProjectId" id="1SodAMsPqmtVOjmpVRnkH33sSNv" />
   <component name="PropertiesComponent">
@@ -189,6 +184,7 @@
       <workItem from="1572295203086" duration="7684000" />
       <workItem from="1572627887048" duration="24000" />
       <workItem from="1572843131369" duration="2782000" />
+      <workItem from="1572927976542" duration="749000" />
     </task>
     <servers />
   </component>
@@ -209,12 +205,12 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/OBDDetect$LowPass.coverage" NAME="LowPass Coverage Results" MODIFIED="1558976795706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
-    <SUITE FILE_PATH="coverage/OBDDetect$EventDetect.coverage" NAME="EventDetect Coverage Results" MODIFIED="1558517643682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
-    <SUITE FILE_PATH="coverage/OBDDetect$test.coverage" NAME="test Coverage Results" MODIFIED="1558982133266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
     <SUITE FILE_PATH="coverage/OBDDetect$Kmeans.coverage" NAME="Kmeans Coverage Results" MODIFIED="1558324572026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
-    <SUITE FILE_PATH="coverage/OBDDetect$Calibration2.coverage" NAME="Calibration2 Coverage Results" MODIFIED="1572234542292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
     <SUITE FILE_PATH="coverage/OBDDetect$DataStore.coverage" NAME="DataStore Coverage Results" MODIFIED="1572844762816" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBDDetect$Calibration2.coverage" NAME="Calibration2 Coverage Results" MODIFIED="1572234542292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBDDetect$EventDetect.coverage" NAME="EventDetect Coverage Results" MODIFIED="1558517643682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBDDetect$LowPass.coverage" NAME="LowPass Coverage Results" MODIFIED="1558976795706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBDDetect$test.coverage" NAME="test Coverage Results" MODIFIED="1558982133266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
     <SUITE FILE_PATH="coverage/OBDDetect$SVM.coverage" NAME="SVM Coverage Results" MODIFIED="1558508097362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_project-master/OBD_GUI" />
   </component>
 </project>
