@@ -41,14 +41,14 @@
 **************************************/
 #ifndef HAVE_CONFIG
 // enable(1)/disable(0) OBD-II reading
-#define USE_OBD 1
+#define USE_OBD OBD_SPI
 // #define USE_OBD 0
 // enable(1)/disable(0) GPS module
 #define USE_GPS 0
 // specify MEMS mode
 #define MEMS_MODE MEMS_9DOF
 // enable(1)/disable(0) quaternion calculation to get orientation
-#define ENABLE_ORIENTATION 1
+#define ENABLE_ORIENTATION 0
 #endif
 
 // GPS parameters
