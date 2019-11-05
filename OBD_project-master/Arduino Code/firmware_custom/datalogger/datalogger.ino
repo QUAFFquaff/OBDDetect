@@ -321,80 +321,80 @@ boolean obdConnected = true;
 void loop() {
   Serial.print("loop start");
 Serial.println((millis()));
-//#if USE_OBD
-//   if (!obdConnected) {
-//      sprintf(buf, "packets sent before OBD fail: %d", count);
-//      printer.println(buf);
-//      sprintf(buf, "resetting SPI interface", count);
-//      printer.println(buf);
-//      obd.end();
-//      //delay(50);
-//      obd.begin();
-//      sprintf(buf, "re-init OBD connection", count);
-//      printer.println(buf);
-//      while (!obd.init()) {
-//         printer.print(".");
-//      }
-//      printer.println("");
-//      obdConnected = true;
-//   }
-//
-//   // Serial.print('[');
-//   // Serial.print(millis());
-//   // Serial.print("] #");
-//   // Serial.print(count++);
-//   
-//   int value;
-//   // retrieve VIN
-//   //char buffer[128];
-//   //obd.getVIN(buffer, sizeof(buffer));
-//   String vinstring = String(buffer); 
-//   Serial.print("VIN ");
-//   Serial.println((millis() ));
-//   vinstring.replace(" ","");
-//   vinstring.replace("490201000000","");
-//   vinstring.replace("490202","");
-//   vinstring.replace("490203","");
-//   vinstring.replace("490204","");
-//   vinstring.replace("490205","");
-//   vinstring.replace("\r","");
-//    Serial.print("+++++++++++++VIN:");
-//    Serial.println(vinstring);
-//   char vinbuf[34];
-//   vinstring.toCharArray(vinbuf,34);
-//   
-////   strncpy(vin, buffer, sizeof(vin) - 1);
-//   printer.print(vinbuf);
-//   Serial.print("VIN BUF");
-//    Serial.println( (millis()));
-//
-//   if (obd.readPID(PID_SPEED,value)) { 
-//      // sprintf(buf, " SPEED:%d", value);
-//      sprintf(buf, ",%d,", value);
-//      printer.print(buf);
-//   }else {
-//      pidErrors++;
-//      // sprintf(buf, "PID errors: %d", pidErrors);
-//      printer.print(buf);
-//      // obd.reset();
-//      // while (!obd.init()) {
-//      //    printer.print(".");
-//      //    obd.reset();
-//      // }
-//      // do {
-//      //    obd.reset();
-//      // } while(!obd.init());
-//      // while (true) {
-//      //    sprintf(buf, "packets sent before OBD fail: %d", count);
-//      //    delay(1000);
-//      // }
-//      // ESP.restart();
-//      obdConnected = false;
-//      return;
-//   }
-//    Serial.print("SPEED BUF");
-//    Serial.println( (millis()));
-//#endif
+#if USE_OBD
+   if (!obdConnected) {
+      sprintf(buf, "packets sent before OBD fail: %d", count);
+      printer.println(buf);
+      sprintf(buf, "resetting SPI interface", count);
+      printer.println(buf);
+      obd.end();
+      //delay(50);
+      obd.begin();
+      sprintf(buf, "re-init OBD connection", count);
+      printer.println(buf);
+      while (!obd.init()) {
+         printer.print(".");
+      }
+      printer.println("");
+      obdConnected = true;
+   }
+
+   // Serial.print('[');
+   // Serial.print(millis());
+   // Serial.print("] #");
+   // Serial.print(count++);
+   
+   int value;
+   // retrieve VIN
+   //char buffer[128];
+   //obd.getVIN(buffer, sizeof(buffer));
+   String vinstring = String(buffer); 
+   Serial.print("VIN ");
+   Serial.println((millis() ));
+   vinstring.replace(" ","");
+   vinstring.replace("490201000000","");
+   vinstring.replace("490202","");
+   vinstring.replace("490203","");
+   vinstring.replace("490204","");
+   vinstring.replace("490205","");
+   vinstring.replace("\r","");
+    Serial.print("+++++++++++++VIN:");
+    Serial.println(vinstring);
+   char vinbuf[34];
+   vinstring.toCharArray(vinbuf,34);
+   
+//   strncpy(vin, buffer, sizeof(vin) - 1);
+   printer.print(vinbuf);
+   Serial.print("VIN BUF");
+    Serial.println( (millis()));
+
+   if (obd.readPID(PID_SPEED,value)) { 
+      // sprintf(buf, " SPEED:%d", value);
+      sprintf(buf, ",%d,", value);
+      printer.print(buf);
+   }else {
+      pidErrors++;
+      // sprintf(buf, "PID errors: %d", pidErrors);
+      printer.print(buf);
+      // obd.reset();
+      // while (!obd.init()) {
+      //    printer.print(".");
+      //    obd.reset();
+      // }
+      // do {
+      //    obd.reset();
+      // } while(!obd.init());
+      // while (true) {
+      //    sprintf(buf, "packets sent before OBD fail: %d", count);
+      //    delay(1000);
+      // }
+      // ESP.restart();
+      obdConnected = false;
+      return;
+   }
+    Serial.print("SPEED BUF");
+    Serial.println( (millis()));
+#endif
 
 #if MEMS_MODE
    if (true) {
