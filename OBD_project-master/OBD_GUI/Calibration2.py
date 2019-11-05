@@ -42,7 +42,7 @@ def Calibration():
     def drawBackground():
         backgroudcolor = color_rgb(33, 33, 33)
         # === creating the graphic window ===
-        win = GraphWin("calibrate instruction", 500, 350)
+        win = GraphWin("calibrate instruction", 600, 350)
         win.setCoords(0, 0, 40, 20)
 
         # === set the background color ===
