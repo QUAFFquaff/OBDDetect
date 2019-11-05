@@ -120,12 +120,16 @@ def main():
     txtMsg.setSize(36)
     txtMsg.draw(win)
     Msg = Text(Point(0,0), "")
-    thread.join(1)
+    
     while True:
         txtMsg.setText(Speed)
+        if(win.isClosed()):
+            print("window closed")
+            break
         Msg.draw(win)
         Msg.undraw()
-
+    print("end")
+    
 
 if __name__ == "__main__":
     main()
