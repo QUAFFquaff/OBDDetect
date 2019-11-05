@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ede0ee12-7d37-4429-aaca-b2e4415022ee" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/Kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/Kmeans.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/distribution1.png" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/distribution1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/elbowMethod.png" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/elbowMethod.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OBD_GUI/Calibration2.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/Calibration2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -213,6 +210,7 @@
       <workItem from="1571418640463" duration="21544000" />
       <workItem from="1571517993336" duration="6575000" />
       <workItem from="1571628840548" duration="418000" />
+      <workItem from="1572939978811" duration="303000" />
     </task>
     <servers />
   </component>
