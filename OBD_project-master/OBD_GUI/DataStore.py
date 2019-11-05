@@ -6,7 +6,7 @@ import pymysql.cursors
 import threading
 from graphics import *
 
-Speed = 0;
+Speed = 0
 
 def getSerial():
     ser = serial.Serial(port='/dev/rfcomm0', baudrate=57600, timeout=0.5)
