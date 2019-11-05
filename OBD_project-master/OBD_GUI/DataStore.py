@@ -36,6 +36,7 @@ class dataStore(threading.Thread):
 
         while True:
             row = obddata + BTserial.readline()
+            print(row)
             row = splitByte(row)
             if row != "":
                 timestamp = int(round(time.time() * 1000))
