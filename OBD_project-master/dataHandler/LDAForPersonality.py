@@ -117,16 +117,7 @@ class LDAForEvent:
 
 
     def read_training_data(self):
-        # try:
-        #     f = open('fakeDataForPersonality.txt', 'r')  # 打开文件
-        #     data = f.read()  # 读取文件内容
-        #     print(data)
-        #     # return data[0]
-        # finally:
-        #     if f:
-        #         f.close()
-        #         return [data]
-        with open('fakeDataForPersonality.txt', 'r') as f:
+        with open('fakeDataForPersonality3.txt', 'r') as f:
             lines = f.readlines()
         file_list = []
         for line in lines:
@@ -151,16 +142,31 @@ class LDAForEvent:
         p_stemmer = PorterStemmer()
 
         # loop through document list
-      
+
         print(texts)
 
         # turn our tokenized documents into a id <-> term dictionary
-        dictionary = corpora.Dictionary(texts )
-
+        dictionary = corpora.Dictionary(texts)
         # convert tokenized documents into a document-term matrix
         corpus = [dictionary.doc2bow(text) for text in texts]
-
+        dic_len = len(dictionary)
+        preset3 = dictionary.doc2idx(['ojo', 'jxovoh', 'oxib', 'wbh', 'oxap', 'cqco', 'qxjb','xbvcw', 'hbiiq', 'bwxi', 'hovh', 'jivqvp', 'cibvq', 'chbp', 'abcvix','hiiwi', 'ppocwp', 'xqvo', 'pqbbi', 'pvbjio', 'wabq', 'jabxbq', 'pww', ])
+        preset2 = dictionary.doc2idx(['bqpxvw', 'xwqcxhw', 'owpqqq', 'jxahb', 'oqapw', 'xaxwx', 'hiccb', 'ojvxqp','cbwco', 'hpwbox', 'cpoiqi', 'jxvp', 'hxhwcx', 'qcqcj', 'wpxjxcj','xxbjw', 'cojbj', 'pjiwx', 'aowcx', 'xaxcq', 'hwhcc', 'xpwvi',])
+        preset1 = dictionary.doc2idx(['oxchcjqh', 'xoxhqc', 'chaxah', 'cohhov', 'hxqqxqq', 'ojxqox', 'jvocohqq', 'qccvhc', 'qhchxvx','xoxchoojc', 'vqxqxjoh', 'covjqhj', 'choj', 'jcacjq', 'ovqacvqj', 'xcxhhajv', 'hcxxqoh', 'jcjvjoh','xhojjjhjc', 'ooqvq', 'hhocoqxv',])
+        preset0 = dictionary.doc2idx(['oi', 'hh', 'va', 'aa', 'hhvb', 'vvv', 'avo', 'haaa', 'hoo','aaa', 'o', 'ohvav', 'ho', 'ha', 'aov', 'voh', 'hhv''ao', 'oavh', 'vvah', 'oaoh', 'aava', 'ov','vh', 'vhhv', 'vhaa', 'aho', 'oohv', 'avo', 'aw',])
+        print(len(dictionary))
+        np.random.seed(1)
+        init_eta = np.random.randint(3,size=len(dictionary))
+        for i in preset3:
+            init_eta[i] = 3
+        for i in preset2:
+            init_eta[i] = 2
+        for i in preset1:
+            init_eta[i] = 1
+        for i in preset0:
+            init_eta[i] = 0
         Lda = gensim.models.ldamodel.LdaModel
+        print(init_eta)
 
         # generate LDA model
         #   passes (int, optional) – Number of passes through the corpus during training.
@@ -173,7 +179,7 @@ class LDAForEvent:
         #                                    Set to 0 for batch learning,
         #                                    > 1 for online iterative learning.
         # ldamodel = Lda(corpus, num_topics=4, eval_every=10, id2word=dictionary, passes=900, iterations=500)
-        self.ldamodel = Lda(corpus, num_topics=4, random_state=0,iterations=600, id2word=dictionary)
+        self.ldamodel = Lda(corpus, num_topics=4, random_state=0,iterations=600, id2word=dictionary,eta=init_eta)
 
         # print most related words of each topic
         print(self.ldamodel.print_topics(num_topics=4, num_words=6))
