@@ -161,7 +161,7 @@ def makeLevel0():  # this is for safe driver
 
 # this is for anxious driver
 def makeLevel1():
-    length = int(random.gauss(7, 1.2))
+    length = int(random.gauss(9, 1.2))
     if length <= 0:
         return "!"
     term = ''
@@ -209,11 +209,11 @@ def makeLevel2():
         if totalTime > 1:
             threshold = random.randint(0, 99)
             if mood == -1:
-                if threshold < 40:
+                if threshold < 30:
                     index = random.randint(0, 7)
                     term += notebook[index]
                     termList.append(notebook[index])
-                elif threshold <70:
+                elif threshold <50:
                     index = random.randint(4, 11)
                     term += notebook[index]
                     termList.append(notebook[index])
@@ -229,7 +229,7 @@ def makeLevel2():
                     index = random.randint(0, 7)
                     term += notebook[index]
                     termList.append(notebook[index])
-                elif threshold < 80:
+                elif threshold < 90:
                     index = random.randint(4, 11)
                     term += notebook[index]
                     termList.append(notebook[index])
@@ -261,11 +261,11 @@ def makeLevel3():
         if totalTime > 1:
             if mood == -1:
                 threshold = random.randint(0, 99)
-                if threshold < 40:
+                if threshold < 10:
                     index = random.randint(4, 7)
                     term += notebook[index]
                     termList.append(notebook[index])
-                elif threshold < 60:
+                elif threshold < 30:
                     index = random.randint(0, 3)
                     term += notebook[index]
                     termList.append(notebook[index])
@@ -317,7 +317,7 @@ def main():
     log = Logger('all.log',level='debug')
     for j in range(4):
         for i in range(50):
-            data += makeDocument(j) + ",\n"
+            data += makeDocument(3-j) + ",\n"
     write(data)
     data1 = readText()
     log.logger.info("test")
@@ -325,7 +325,7 @@ def main():
 
 def write(data):
     try:
-        with open('fakeDataForPersonality4.txt', 'w') as f:
+        with open('fakeDataForPersonality5.txt', 'w') as f:
             f.write(data)
     finally:
         if f:
