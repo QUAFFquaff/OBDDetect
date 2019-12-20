@@ -17,7 +17,7 @@ def write_data(dataTemp, table, row):  # write features in excel
 
 
 def makeLevel0():  # this is for safe driver
-    length = int(random.gauss(4, 1.5))
+    length = int(random.gauss(4, 1.2))
     if length <= 0:
         return "!"
     term = ''
@@ -46,7 +46,7 @@ def makeLevel0():  # this is for safe driver
 
 # this is for anxious driver
 def makeLevel1():
-    length = int(random.gauss(6, 2.5))
+    length = int(random.gauss(7, 2.2))
     if length <= 0:
         return "!"
     term = ''
@@ -58,63 +58,29 @@ def makeLevel1():
     for i in range(length):
         if totalTime > 1:
             threshold = random.randint(0, 99)
-            if threshold < 20:
+            if threshold < 40:
                 index = random.randint(0, 3)
                 term += notebook[index]
                 termList.append(notebook[index])
-            else:
+            elif threshold < 40:
                 index = random.randint(4, 7)
-                term += notebook[index]
-                termList.append(notebook[index])
-            eventTime = random.uniform(1, average)
-            duration.append(eventTime)
-            totalTime -= eventTime
-        else:
-            break
-    return "'" + term + "'"
-
-reckless_Prob = 20
-# this is for reckless driver
-def makeLevel2():
-    global  reckless_Prob
-    length = int(random.gauss(4, 1.5))
-    if length <= 0:
-        return "!"
-    term = ''
-    eventTime = 0
-    totalTime = 40
-    average = totalTime / length
-    if average >16:   # ensure the event will not last too long
-        average = 10
-    for i in range(length):
-        if totalTime > 1:
-            threshold = random.randint(0, 99)
-            if threshold < 10:
-                index = random.randint(0, 7)
-                term += notebook[index]
-                termList.append(notebook[index])
-            elif threshold <reckless_Prob:
-                index = random.randint(4, 11)
                 term += notebook[index]
                 termList.append(notebook[index])
             else:
                 index = random.randint(8, 11)
                 term += notebook[index]
                 termList.append(notebook[index])
-                reckless_Prob+= 40
             eventTime = random.uniform(1, average)
             duration.append(eventTime)
             totalTime -= eventTime
-            if reckless_Prob > 200:
-                reckless_Prob = 20
         else:
             break
     return "'" + term + "'"
 
-# this is for angry driver
-angrey_Prob = 60
-def makeLevel3():
-    global angrey_Prob
+# reckless_Prob = 20
+# this is for reckless driver
+def makeLevel2():
+    # global  reckless_Prob
     length = int(random.gauss(5, 1.9))
     if length <= 0:
         return "!"
@@ -124,29 +90,95 @@ def makeLevel3():
     average = totalTime / length
     if average >16:   # ensure the event will not last too long
         average = 10
+    mood = -1
     for i in range(length):
         if totalTime > 1:
             threshold = random.randint(0, 99)
-            if threshold < 10:
-                index = random.randint(4, 7)
-                term += notebook[index]
-                termList.append(notebook[index])
-                angrey_Prob = 60
-            elif threshold < angrey_Prob:
-                index = random.randint(0, 3)
-                term += notebook[index]
-                termList.append(notebook[index])
-                angrey_Prob = 60
+            if mood == -1:
+                if threshold < 40:
+                    index = random.randint(0, 7)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                elif threshold <70:
+                    index = random.randint(4, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                else:
+                    index = random.randint(8, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                    mood = 1
             else:
-                index = random.randint(8, 11)
-                term += notebook[index]
-                termList.append(notebook[index])
-                angrey_Prob -= 20
+                threshold = random.randint(0, 99)
+                mood = -1
+                if threshold < 60:
+                    index = random.randint(0, 7)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                elif threshold < 80:
+                    index = random.randint(4, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                else:
+                    index = random.randint(8, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                    mood = 1
+                    # reckless_Prob+= 40
             eventTime = random.uniform(1, average)
             duration.append(eventTime)
             totalTime -= eventTime
-            if angrey_Prob<-20:
-                angrey_Prob = 60
+        else:
+            break
+    return "'" + term + "'"
+
+# this is for angry driver
+def makeLevel3():
+    length = int(random.gauss(5, 1.9))
+    if length <= 0:
+        return "!"
+    term = ''
+    eventTime = 0
+    totalTime = 40
+    average = totalTime / length
+    if average >16:   # ensure the event will not last too long
+        average = 10
+    mood = -1
+    for i in range(length):
+        if totalTime > 1:
+            if mood == -1:
+                threshold = random.randint(0, 99)
+                if threshold < 40:
+                    index = random.randint(4, 7)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                elif threshold < 60:
+                    index = random.randint(0, 3)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                else:
+                    index = random.randint(8, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+            else:
+                mood = -1
+                threshold = random.randint(0, 99)
+                if threshold < 10:
+                    index = random.randint(0, 7)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                elif threshold < 40:
+                    index = random.randint(4, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                else:
+                    mood = 1
+                    index = random.randint(8, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+            eventTime = random.uniform(1, average)
+            duration.append(eventTime)
+            totalTime -= eventTime
         else:
             break
     return "'" + term + "'"
@@ -243,6 +275,7 @@ def choosePersonality(data,safe, anxious, reckless):
     return data
 
 def main():
+    pass
     # data = ""
     # data = choosePersonality(data, 3, 2, 1)  # safe
     # data = choosePersonality(data, 15, 5, 2)
@@ -251,94 +284,16 @@ def main():
     # write(data)
 
 
-    data = read_txt_pattern()
-    score = read_txt_score1()
-    patternsDoc = ""
-    for i in range(400):
-        index = 0
-        numOfLowScore = 0
-        numOfHighScore = 0
-        numOfAngry = 0
-        numOfAnxious = 0
-        numOfReckless = 0
-
-        for j in range(len(data[i])):  # for one person
-            term = data[i][j]
-            averageTime = 40 / len(term)
-            flag = False
-            max_angryE = 0
-            eventTime = 0
-            Anxious = 1
-            Reckless = 0
-            if float(score[i][j])<75: # choose the low score
-                numOfLowScore = numOfLowScore + 1
-                for t in range(len(term)):  # for one pattern
-                    if term[t]=='c' or term[t]=='j' or term[t]=='q' or term[t] == 'x':
-                        Reckless = 1
-                        Anxious = 0
-                        flag = True
-                        eventTime = eventTime + random.uniform(1, averageTime)
-                    else:
-                        flag = False
-                    if flag == False or t == len(term)-1:
-                        if eventTime > max_angryE:
-                            max_angryE = eventTime
-                        eventTime = 0
-                if max_angryE>10:
-                    numOfAngry = numOfAngry + 1
-                    Reckless = 0
-                    patternsDoc = patternsDoc + "A"
-                if Reckless == 1:
-                    numOfReckless = numOfReckless + 1
-                    patternsDoc = patternsDoc + "R"
-                elif Anxious == 1:
-                    numOfAnxious = numOfAnxious + 1
-                    patternsDoc = patternsDoc + "X"
-            else:
-                numOfHighScore = numOfHighScore + 1
-                patternsDoc = patternsDoc+"C"
 
 
-        patternsDoc = patternsDoc +'\n'
 
-        Per_angry = numOfAngry / len(data[i])
-        Per_anxious  = numOfAnxious / len(data[i])
-        Per_reckless  = numOfReckless / len(data[i])
-        Per_lowS = numOfLowScore / len(data[i])
-        Per_highS = numOfHighScore / len(data[i])
-
-        # oldwd = open_workbook('ForKMeans_temp.xls', formatting_info=True)
-        # sheet = oldwd.sheet_by_index(0)
-        # rowNum = sheet.nrows
-        # newwb = copy(oldwd)
-        # newWs = newwb.get_sheet(0)
-        # write_data(np.array([Per_highS, Per_lowS, Per_angry, Per_reckless, Per_anxious]), newWs, rowNum)
-        # newwb.save('ForKMeans_temp.xls')
-
-    writePatterns(patternsDoc)
-
-def write(data):
+def write_fakedata(data):
     try:
-        with open('fakeData.txt', 'w') as f:
+        with open('fakeDataForPersonality.txt', 'w') as f:
             f.write(data)
     finally:
         if f:
             f.close()
-
-def writePatterns(data):
-    try:
-        with open('Patterns.txt', 'w') as f:
-            f.write(data)
-    finally:
-        if f:
-            f.close()
-
-def write_data(dataTemp, table, row):
-    data = np.array(dataTemp)
-    l = len(data)  # h为行数，l为列数
-    for j in range(l):
-        table.write(row, j, data[j])
-
 
 
 def read_txt_pattern():

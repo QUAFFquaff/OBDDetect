@@ -68,68 +68,232 @@ logging.basicConfig(level=logging.INFO,#控制台打印的日志级别
                     )
 notebook = "ahovbipwcjqx"
 
+#
+# def makeLevel0():
+#     length = int(random.gauss(2.5, 2))
+#     if length <= 0:
+#         return "!"
+#     term = ''
+#     for i in range(length):
+#         threshold = random.randint(0, 99)
+#         if threshold != 9:
+#             index = random.randint(0, 3)
+#             term += notebook[index]
+#         else:
+#             term += notebook[random.randint(4, 11)]
+#     return "'" + term + "'"
+#
+#
+# def makeLevel1():
+#     length = int(random.gauss(2.5, 2))
+#     if length <= 0:
+#         return "!"
+#     term = ''
+#     for i in range(length):
+#         threshold = random.randint(0, 99)
+#         if threshold < 30:
+#             index = random.randint(0, 3)
+#             term += notebook[index]
+#         else:
+#             term += notebook[random.randint(4, 7)]
+#     return "'" + term + "'"
+#
+# def makeLevel2():
+#     length = int(random.gauss(3.5, 1.5))
+#     if length <= 0:
+#         return "!"
+#     term = ''
+#     for i in range(length):
+#         threshold = random.randint(0, 99)
+#         if threshold < 10:
+#             index = random.randint(0, 11)
+#             term += notebook[index]
+#         elif threshold > 75:
+#             term += notebook[random.randint(4, 11)]
+#         else:
+#             term += notebook[random.randint(4, 7)]
+#     return "'" + term + "'"
+#
+# def makeLevel3():
+#     length = int(random.gauss(3, 1.9))
+#     if length <= 0:
+#         return "!"
+#     term = ''
+#     for i in range(length):
+#         threshold = random.randint(0, 99)
+#         if threshold < 10:
+#             index = random.randint(4, 7)
+#             term += notebook[index]
+#         else:
+#             term += notebook[random.randint(8, 11)]
+#     return "'" + term + "'"
+#
 
-def makeLevel0():
-    length = int(random.gauss(2.5, 2))
+
+termList = []  # put all the terms(event) in one trip
+
+def makeLevel0():  # this is for safe driver
+    length = int(random.gauss(4, 1.2))
     if length <= 0:
         return "!"
     term = ''
+    eventTime = 0
+    totalTime = 40
+    average = totalTime / length
+    if average >16:
+        average = 10
     for i in range(length):
-        threshold = random.randint(0, 99)
-        if threshold != 9:
-            index = random.randint(0, 3)
-            term += notebook[index]
+        if totalTime>1:
+            threshold = random.randint(0, 99)
+            if threshold >= 3:
+                index = random.randint(0, 3)
+                term += notebook[index]
+                termList.append(notebook[index])
+            else:
+                index = random.randint(4, 11)
+                term += notebook[index]
+                termList.append(notebook[index])
+            eventTime = random.uniform(1,average)
+            totalTime -= eventTime
         else:
-            term += notebook[random.randint(4, 11)]
+            break
     return "'" + term + "'"
 
-
+# this is for anxious driver
 def makeLevel1():
-    length = int(random.gauss(2.5, 2))
+    length = int(random.gauss(9, 1.2))
     if length <= 0:
         return "!"
     term = ''
+    eventTime = 0
+    totalTime = 40
+    average = totalTime / length
+    if average >16:
+        average = 10
     for i in range(length):
-        threshold = random.randint(0, 99)
-        if threshold < 30:
-            index = random.randint(0, 3)
-            term += notebook[index]
+        if totalTime > 1:
+            threshold = random.randint(0, 99)
+            if threshold < 40:
+                index = random.randint(0, 3)
+                term += notebook[index]
+                termList.append(notebook[index])
+            elif threshold < 40:
+                index = random.randint(4, 7)
+                term += notebook[index]
+                termList.append(notebook[index])
+            else:
+                index = random.randint(8, 11)
+                term += notebook[index]
+                termList.append(notebook[index])
+            eventTime = random.uniform(1, average)
+            totalTime -= eventTime
         else:
-            term += notebook[random.randint(4, 7)]
+            break
     return "'" + term + "'"
 
+# reckless_Prob = 20
+# this is for reckless driver
 def makeLevel2():
-    length = int(random.gauss(3.5, 1.5))
+    # global  reckless_Prob
+    length = int(random.gauss(6, 1))
     if length <= 0:
         return "!"
     term = ''
+    eventTime = 0
+    totalTime = 40
+    average = totalTime / length
+    if average >16:   # ensure the event will not last too long
+        average = 10
+    mood = -1
     for i in range(length):
-        threshold = random.randint(0, 99)
-        if threshold < 10:
-            index = random.randint(0, 11)
-            term += notebook[index]
-        elif threshold > 75:
-            term += notebook[random.randint(4, 11)]
+        if totalTime > 1:
+            threshold = random.randint(0, 99)
+            if mood == -1:
+                if threshold < 30:
+                    index = random.randint(0, 7)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                elif threshold <50:
+                    index = random.randint(4, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                else:
+                    index = random.randint(8, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                    mood = 1
+            else:
+                threshold = random.randint(0, 99)
+                mood = -1
+                if threshold < 60:
+                    index = random.randint(0, 7)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                elif threshold < 90:
+                    index = random.randint(4, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                else:
+                    index = random.randint(8, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                    mood = 1
+                    # reckless_Prob+= 40
+            eventTime = random.uniform(1, average)
+            totalTime -= eventTime
         else:
-            term += notebook[random.randint(4, 7)]
+            break
     return "'" + term + "'"
 
+# this is for angry driver
 def makeLevel3():
-    length = int(random.gauss(3, 1.9))
+    length = int(random.gauss(5, 1))
     if length <= 0:
         return "!"
     term = ''
+    eventTime = 0
+    totalTime = 40
+    average = totalTime / length
+    if average >16:   # ensure the event will not last too long
+        average = 10
+    mood = -1
     for i in range(length):
-        threshold = random.randint(0, 99)
-        if threshold < 10:
-            index = random.randint(4, 7)
-            term += notebook[index]
+        if totalTime > 1:
+            if mood == -1:
+                threshold = random.randint(0, 99)
+                if threshold < 10:
+                    index = random.randint(4, 7)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                elif threshold < 30:
+                    index = random.randint(0, 3)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                else:
+                    index = random.randint(8, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+            else:
+                mood = -1
+                threshold = random.randint(0, 99)
+                if threshold < 10:
+                    index = random.randint(0, 7)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                elif threshold < 40:
+                    index = random.randint(4, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+                else:
+                    mood = 1
+                    index = random.randint(8, 11)
+                    term += notebook[index]
+                    termList.append(notebook[index])
+            eventTime = random.uniform(1, average)
+            totalTime -= eventTime
         else:
-            term += notebook[random.randint(8, 11)]
+            break
     return "'" + term + "'"
-
-
-
 
 def makeDocument(level):
     document = '['
@@ -153,7 +317,7 @@ def main():
     log = Logger('all.log',level='debug')
     for j in range(4):
         for i in range(50):
-            data += makeDocument(j) + ",\n"
+            data += makeDocument(3-j) + ",\n"
     write(data)
     data1 = readText()
     log.logger.info("test")
@@ -161,7 +325,7 @@ def main():
 
 def write(data):
     try:
-        with open('fakeData.txt', 'w') as f:
+        with open('fakeDataForPersonality5.txt', 'w') as f:
             f.write(data)
     finally:
         if f:
@@ -170,15 +334,13 @@ def write(data):
 
 def readText():
     try:
-        f = open('fakeData.txt', 'r')  # 打开文件
+        f = open('fakeDataForPersonality2.txt', 'r')  # 打开文件
         data = f.read()  # 读取文件内容
         # print(data)
         logging.info(data)
         # return data[0]
     finally:
-        if f:
-            f.close()
-            return
+        return
 
 
 main()
