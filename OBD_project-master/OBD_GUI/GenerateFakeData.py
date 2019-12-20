@@ -252,6 +252,7 @@ def main():
 
     data = read_txt_pattern()
     score = read_txt_score1()
+    patternsDoc = ""
     for i in range(400):
         index = 0
         numOfLowScore = 0
@@ -259,14 +260,15 @@ def main():
         numOfAngry = 0
         numOfAnxious = 0
         numOfReckless = 0
-        Anxious = 1
-        Reckless = 0
+
         for j in range(len(data[i])):  # for one person
             term = data[i][j]
             averageTime = 40 / len(term)
             flag = False
             max_angryE = 0
             eventTime = 0
+            Anxious = 1
+            Reckless = 0
             if float(score[i][j])<75: # choose the low score
                 numOfLowScore = numOfLowScore + 1
                 for t in range(len(term)):  # for one pattern
@@ -274,21 +276,29 @@ def main():
                         Reckless = 1
                         Anxious = 0
                         flag = True
-                        eventTime = random.uniform(1, averageTime)
+                        eventTime = eventTime + random.uniform(1, averageTime)
                     else:
                         flag = False
-                    if flag == False:
+                    if flag == False or t == len(term)-1:
                         if eventTime > max_angryE:
                             max_angryE = eventTime
+                        eventTime = 0
                 if max_angryE>10:
                     numOfAngry = numOfAngry + 1
                     Reckless = 0
+                    patternsDoc = patternsDoc + "A"
                 if Reckless == 1:
                     numOfReckless = numOfReckless + 1
+                    patternsDoc = patternsDoc + "R"
                 elif Anxious == 1:
                     numOfAnxious = numOfAnxious + 1
+                    patternsDoc = patternsDoc + "X"
             else:
                 numOfHighScore = numOfHighScore + 1
+                patternsDoc = patternsDoc+"C"
+
+
+        patternsDoc = patternsDoc +'\n'
 
         Per_angry = numOfAngry / len(data[i])
         Per_anxious  = numOfAnxious / len(data[i])
@@ -296,20 +306,27 @@ def main():
         Per_lowS = numOfLowScore / len(data[i])
         Per_highS = numOfHighScore / len(data[i])
 
-        oldwd = open_workbook('ForKMeans_temp.xls', formatting_info=True)
-        sheet = oldwd.sheet_by_index(0)
-        rowNum = sheet.nrows
-        newwb = copy(oldwd)
-        newWs = newwb.get_sheet(0)
-        write_data(np.array([Per_highS, Per_lowS, Per_angry, Per_reckless, Per_anxious]), newWs, rowNum)
-        newwb.save('ForKMeans_temp.xls')
+        # oldwd = open_workbook('ForKMeans_temp.xls', formatting_info=True)
+        # sheet = oldwd.sheet_by_index(0)
+        # rowNum = sheet.nrows
+        # newwb = copy(oldwd)
+        # newWs = newwb.get_sheet(0)
+        # write_data(np.array([Per_highS, Per_lowS, Per_angry, Per_reckless, Per_anxious]), newWs, rowNum)
+        # newwb.save('ForKMeans_temp.xls')
 
-
-
+    writePatterns(patternsDoc)
 
 def write(data):
     try:
         with open('fakeData.txt', 'w') as f:
+            f.write(data)
+    finally:
+        if f:
+            f.close()
+
+def writePatterns(data):
+    try:
+        with open('Patterns.txt', 'w') as f:
             f.write(data)
     finally:
         if f:
