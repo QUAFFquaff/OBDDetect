@@ -9,19 +9,55 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Input data set
-X = np.array([
-    [-4, -3.5], [-3.5, -5], [-2.7, -4.5],
-    [-2, -4.5], [-2.9, -2.9], [-0.4, -4.5],
-    [-1.4, -2.5], [-1.6, -2], [-1.5, -1.3],
-    [-0.5, -2.1], [-0.6, -1], [0, -1.6],
-    [-2.8, -1], [-2.4, -0.6], [-3.5, 0],
-    [-0.2, 4], [0.9, 1.8], [1, 2.2],
-    [1.1, 2.8], [1.1, 3.4], [1, 4.5],
-    [1.8, 0.3], [2.2, 1.3], [2.9, 0],
-    [2.7, 1.2], [3, 3], [3.4, 2.8],
-    [3, 5], [5.4, 1.2], [6.3, 2]
-])
+# X = np.array([
+#     [-4, -3.5], [-3.5, -5], [-2.7, -4.5],
+#     [-2, -4.5], [-2.9, -2.9], [-0.4, -4.5],
+#     [-1.4, -2.5], [-1.6, -2], [-1.5, -1.3],
+#     [-0.5, -2.1], [-0.6, -1], [0, -1.6],
+#     [-2.8, -1], [-2.4, -0.6], [-3.5, 0],
+#     [-0.2, 4], [0.9, 1.8], [1, 2.2],
+#     [1.1, 2.8], [1.1, 3.4], [1, 4.5],
+#     [1.8, 0.3], [2.2, 1.3], [2.9, 0],
+#     [2.7, 1.2], [3, 3], [3.4, 2.8],
+#     [3, 5], [5.4, 1.2], [6.3, 2]
+# ])
+from matplotlib.ticker import FuncFormatter
 
+
+def read_txt():
+    with open('../../data/fakeData.txt', 'r') as f:
+        lines = f.readlines()
+    file_list = []
+    for line in lines:
+        pattern_list = []
+        patterns = line.split("\'")
+        for i in range(len(patterns)):
+            if i % 2 != 0:
+                pattern_list.append(patterns[i])
+        file_list.append(pattern_list)
+    return file_list
+
+normal_events = ['a','h','v','o']
+medium_events = ['b','i','p','w']
+high_events = ['c','j','q','x']
+def word2vector(word):
+    x0,x1,x2 = 0, 0, 0
+    for l in word:
+        if l in normal_events:
+            x0 += 1
+        elif l in medium_events:
+            x1 += 10
+        elif l in high_events:
+            x2 += 20
+    return [x0,x1,x2,len(word)]
+
+def build_matrix(document, input = []):
+    for word in document:
+        temp_v = word2vector(word)
+        if temp_v not in input:
+            input.append(temp_v)
+    # print(input)
+    return input
 
 def mean_shift(data, radius=2.0):
     clusters = []
@@ -63,7 +99,8 @@ def mean_shift(data, radius=2.0):
 
     print('clusters (', len(clusters), '): ', clusters)
     clustering(data, clusters)
-    show_clusters(clusters, radius)
+    print('number of clusters: ',len(clusters))
+    show_clusters(clusters, radius,data)
 
 
 # Clustering data using frequency
@@ -81,7 +118,7 @@ def clustering(data, clusters):
 
 
 # Plot clusters
-def show_clusters(clusters, radius):
+def show_clusters(clusters, radius, X):
     colors = 10 * ['r', 'g', 'b', 'k', 'y']
     plt.figure(figsize=(5, 5))
     plt.xlim((-8, 8))
@@ -95,8 +132,19 @@ def show_clusters(clusters, radius):
         centroid = cluster['centroid']
         plt.scatter(centroid[0], centroid[1], color=colors[i], marker='x', s=30)
         x, y = np.cos(theta) * radius + centroid[0], np.sin(theta) * radius + centroid[1]
+
+        plt.xlim((0,8))
+        plt.ylim((0, 80))
         plt.plot(x, y, linewidth=1, color=colors[i])
     plt.show()
 
+def main():
+    documents = read_txt()
+    input = []
+    for i in documents:
+        input = build_matrix(i,input)
 
-mean_shift(X, 2.5)
+    X = np.array(input)
+    mean_shift(X, 35)
+
+main()
