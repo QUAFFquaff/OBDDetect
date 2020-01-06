@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt
 #     [3, 5], [5.4, 1.2], [6.3, 2]
 # ])
 from matplotlib.ticker import FuncFormatter
+from mpl_toolkits.mplot3d import Axes3D
 
 
 def read_txt():
@@ -97,10 +98,12 @@ def mean_shift(data, radius=2.0):
                 'frequency': cluster_frequency
             })
 
-    print('clusters (', len(clusters), '): ', clusters)
     clustering(data, clusters)
+    print(cluster['centroid'])
     print('number of clusters: ',len(clusters))
+    print('the items of each cluster is: ',len(clusters[0]),len(clusters[1]),len(clusters[2]))
     show_clusters(clusters, radius,data)
+
 
 
 # Clustering data using frequency
@@ -125,17 +128,46 @@ def show_clusters(clusters, radius, X):
     plt.ylim((-8, 8))
     plt.scatter(X[:, 0], X[:, 1], s=20)
     theta = np.linspace(0, 2 * np.pi, 800)
+    # 3D
+    fig = plt.figure()
+    ax = Axes3D(fig)
     for i in range(len(clusters)):
         cluster = clusters[i]
         data = np.array(cluster['data'])
-        plt.scatter(data[:, 0], data[:, 1], color=colors[i], s=20)
-        centroid = cluster['centroid']
-        plt.scatter(centroid[0], centroid[1], color=colors[i], marker='x', s=30)
-        x, y = np.cos(theta) * radius + centroid[0], np.sin(theta) * radius + centroid[1]
+        # plt.scatter(data[:, 0], data[:, 1], color=colors[i], s=20)
+        ax.scatter(data[:, 0],data[:, 1],data[:, 2], c=colors[i], label='first cluster')
+        # centroid = cluster['centroid']
+        # plt.scatter(centroid[0], centroid[1], color=colors[i], marker='x', s=30)
+        # x, y = np.cos(theta) * radius + centroid[0], np.sin(theta) * radius + centroid[1]
 
-        plt.xlim((0,8))
-        plt.ylim((0, 80))
-        plt.plot(x, y, linewidth=1, color=colors[i])
+        # plt.xlim((0,8))
+        # plt.ylim((0, 80))
+        # plt.plot(x, y, linewidth=1, color=colors[i])
+
+    # cluster_set = [[],[],[],[]]
+    # # print(clusters)
+    # # print(clusters[0])
+    # for ind in range(len(data)):
+    #     temp = data[ind]
+    #     cluster_set[int(clusters[ind])].append(data[ind])
+    # cluster_arr = tuple(cluster_set)
+    # ax.scatter([i[0] for i in cluster_arr[0]],[i[1] for i in cluster_arr[0]],[i[2] for i in cluster_arr[0]], c='r', label='first cluster')
+    # ax.scatter([i[0] for i in cluster_arr[1]],[i[1] for i in cluster_arr[1]],[i[2] for i in cluster_arr[1]], c='b', label='second cluster')
+    # ax.scatter([i[0] for i in cluster_arr[2]],[i[1] for i in cluster_arr[2]],[i[2] for i in cluster_arr[2]], c='g', label='third cluster')
+    # ax.scatter([i[0] for i in cluster_arr[3]],[i[1] for i in cluster_arr[3]],[i[2] for i in cluster_arr[3]], c='y', label='fourth cluster')
+    # print('the items of each cluster is: ',len(cluster_set[3][:]),len(cluster_set[2]),len(cluster_set[1]),len(cluster_set[0]))
+    # ax.scatter(centers[0][2], centers[0][3], centers[0][5], marker='*', c='r')
+    # ax.scatter(centers[1][2], centers[1][3], centers[1][5], marker='1', c='b')
+    # ax.scatter(centers[2][2], centers[2][3], centers[2][5], marker='P', c='g')
+    # ax.scatter(centers[3][2], centers[3][3], centers[3][5], marker='x', c='y')
+    # print(cluster_arr[0])
+    ax.legend(loc='best')
+    ax.set_zlabel('high risk', fontdict={'size': 13, 'color': 'black'})
+    ax.set_ylabel('medium risk', fontdict={'size': 13, 'color': 'black'})
+    ax.set_xlabel('normal event', fontdict={'size': 13, 'color': 'black'})
+    plt.savefig('fig.png', bbox_inches='tight')
+    plt.show()
+
     plt.show()
 
 def main():
