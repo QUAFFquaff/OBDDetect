@@ -307,13 +307,13 @@ def main():
         Per_lowS = numOfLowScore / len(data[i])
         Per_highS = numOfHighScore / len(data[i])
 
-        # oldwd = open_workbook('ForKMeans_temp.xls', formatting_info=True)
-        # sheet = oldwd.sheet_by_index(0)
-        # rowNum = sheet.nrows
-        # newwb = copy(oldwd)
-        # newWs = newwb.get_sheet(0)
-        # write_data(np.array([Per_highS, Per_lowS, Per_angry, Per_reckless, Per_anxious]), newWs, rowNum)
-        # newwb.save('ForKMeans_temp.xls')
+        oldwd = open_workbook('ForKMeans_temp.xls')
+        sheet = oldwd.sheet_by_index(0)
+        rowNum = sheet.nrows
+        newwb = copy(oldwd)
+        newWs = newwb.get_sheet(0)
+        write_data(np.array([Per_highS, Per_lowS, Per_angry, Per_reckless, Per_anxious]), newWs, rowNum)
+        newwb.save('ForKMeans_temp.xls')
 
     writePatterns(patternsDoc)
 
