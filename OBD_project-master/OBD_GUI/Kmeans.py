@@ -62,7 +62,8 @@ ax.scatter(cluster0[:,2],cluster0[:,3],cluster0[:,5],c='r',label='first cluster'
 ax.scatter(cluster1[:,2],cluster1[:,3],cluster1[:,5],c='b',label='second cluster')
 ax.scatter(cluster2[:,2],cluster2[:,3],cluster2[:,5],c='g',label='third cluster')
 ax.scatter(cluster3[:,2],cluster3[:,3],cluster3[:,5],c='y',label='fourth cluster')
-
+print(len(cluster0))
+print(cluster0[0])
 ax.scatter(centers[0][2],centers[0][3],centers[0][5],marker='*',c='r')
 ax.scatter(centers[1][2],centers[1][3],centers[1][5],marker='1',c='b')
 ax.scatter(centers[2][2],centers[2][3],centers[2][5],marker='P',c='g')
