@@ -494,9 +494,9 @@ def Calibration():
     Rx = array([(1, 0 , 0),
                 (0, cosPitch, -sinPitch),
                 (0, sinPitch, cosPitch)])
-    Ry = array([(cosRoll, 0, -sinRoll),
+    Ry = array([(cosRoll, 0, sinRoll),
                 (0, 1, 0),
-                (sinRoll, 0, cosRoll)])
+                (-sinRoll, 0, cosRoll)])
 
     orientationMatrix = dot(Rx, Ry)
 
