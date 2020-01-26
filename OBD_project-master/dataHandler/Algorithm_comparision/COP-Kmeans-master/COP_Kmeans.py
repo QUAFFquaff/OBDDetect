@@ -21,7 +21,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 def read_txt():
-    with open('../../../data/fakeData.txt', 'r') as f:
+    with open('../../../data/fakeData0.txt', 'r') as f:
         lines = f.readlines()
     file_list = []
     for line in lines:
@@ -67,19 +67,31 @@ def cop_kmean():
     for i in documents:
         input_matrix = build_matrix(i, input_matrix)
 
-    print(input_matrix)
-    must_link = [(1,2),(8,9)]
-    cannot_link = [(1,7),(0,5),(0,8)]
+    print(input_matrix[70:])
+    must_link = [(1,2),(8,9),(0,1),(3,7),(0,3),(0,4),(11,12),(24,26),(25,27),(50,51),(53,54)]
+    cannot_link = [(7,13),(0,5),(0,8),(0,24),(0,27),(0,50),(0,53)]
     clusters, centers = cop_kmeans(dataset=input_matrix, k=4, ml=must_link, cl=cannot_link)
     print(clusters)
     print(input_matrix)
     print(len(clusters) , '--',len(input_matrix))
 
+    # test model
+    # tests = ['h', 'a', 'qq', 'cx', 'hvh']
+    tests = ['h', 'a', 'qq', 'cx', 'hvh','xcqxx','ibpxiix','avhvowa']
+    for test in tests:
+        vect = word2vector(test)
+        temp = input_matrix.index(vect)
+        # print(temp)
+        test_result = clusters[temp]
+        # print(test_result)
+        print('test case',test, 'in cluster ', test_result)
+
+
+
     fig = plt.figure()
     ax = Axes3D(fig)
     cluster_set = [[],[],[],[]]
     for ind in range(len(input_matrix)):
-        temp = input_matrix[ind]
         cluster_set[clusters[ind]].append((input_matrix[ind]))
     cluster_arr = tuple(cluster_set)
     ax.scatter([i[0] for i in cluster_arr[0]],[i[1] for i in cluster_arr[0]],[i[2] for i in cluster_arr[0]], c='r', label='first cluster')

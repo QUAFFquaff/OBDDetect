@@ -51,7 +51,7 @@ seed_topic_list = [['a', 'h', 'o', 'v','vo', 'hho','hhah','avoa','haa','vvvv', '
 # X = guidedlda.datasets.load_data(guidedlda.datasets.NYT)
 # vocab = guidedlda.datasets.load_vocab(guidedlda.datasets.NYT)
 # word2id = dict((v, idx) for idx, v in enumerate(vocab))
-n_top_words = 40
+n_top_words = 5344
 TOPICS = 4
 
 
@@ -60,7 +60,7 @@ def guidedldatest(X, vocab, word2id):
     # Normal LDA without seeding
     model = guidedlda.GuidedLDA(n_topics=TOPICS, n_iter=1000, random_state=9, refresh=20)
     model.fit(X)
-
+    sortedresult = [[], [], [], []]
     topic_word = model.topic_word_
     # n_top_words = 2
     # print(topic_word.shape)
@@ -68,6 +68,24 @@ def guidedldatest(X, vocab, word2id):
         # print(topic_dist.shape)
         topic_words = np.array(vocab)[np.argsort(topic_dist)][:-(n_top_words + 1):-1]
         print('Topic {}: {}'.format(i, ' '.join(topic_words)))
+        sortedresult[i].append(topic_words)
+
+
+    # test lda model
+    tests = ['h', 'a', 'qq', 'cx', 'hvh']
+    max_len = 5344
+    for test in tests:
+        temp = [int(np.argwhere(i[0] == test)) for i in sortedresult]
+
+        # half len optimize
+        half_len = 5344 / 2
+        for i in range(len(temp)):
+            if temp[i] > half_len:
+                temp[i] = half_len
+        output = [(half_len - index) / (4 * half_len - sum(temp)) for index in temp]
+        # output = [ (max_len - index)/(4*max_len - sum(temp)) for index in temp]
+        print('test', test, ':', output)
+
 
     model = guidedlda.GuidedLDA(n_topics=TOPICS, n_iter=1000, random_state=9, refresh=20)
 
@@ -79,13 +97,34 @@ def guidedldatest(X, vocab, word2id):
     model.fit(X, seed_topics=seed_topics, seed_confidence=0.15)
 
     topic_word = model.topic_word_
+    # print('model topic words')
+    # print(model.topic_word_)
+    sortedresult = [[],[],[],[]]
     for i, topic_dist in enumerate(topic_word):
         topic_words = np.array(vocab)[np.argsort(topic_dist)][:-(n_top_words + 1):-1]
+        sortedresult[i].append(topic_words)
+
         print('Topic {}: {}'.format(i, ' '.join(topic_words)))
 
+    print(sortedresult)
+    tests = ['h','a','qq','cx','hvh']
+    max_len = 5344
+    for test in tests:
+        temp = [int(np.argwhere(i[0]==test)) for i in sortedresult]
 
-    # test = ['aho']
-    # result = model.test(test)
+        # half len optimize
+        half_len = 5344/2
+        for i in range(len(temp)):
+            if temp[i] > half_len:
+                temp[i] = half_len
+        output = [ (half_len - index)/(4*half_len - sum(temp)) for index in temp]
+        # output = [ (max_len - index)/(4*max_len - sum(temp)) for index in temp]
+        print('test',test,':',output)
+
+
+
+def testText(text, result):
+    output = []
 
 
 def transTextIntoMatrix(text):

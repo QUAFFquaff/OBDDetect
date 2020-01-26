@@ -456,6 +456,10 @@ def main():
     print(score)
     print(time.time()-start )
     start = time.time()
+    tests = ['h', 'a', 'qq', 'cx', 'hvh']
+    for test in tests:
+        result = ldamodel.LDATest(ldamodel, test)
+        print('test case:', test, result)
     test = ['aahiavohh']
     result = ldamodel.LDATest(ldamodel, test)
     print(result)
