@@ -21,7 +21,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 def read_txt():
-    with open('../../../data/fakeData0.txt', 'r') as f:
+    with open('../../../data/newfakeData0.txt', 'r') as f:
         lines = f.readlines()
     file_list = []
     for line in lines:
@@ -67,12 +67,13 @@ def cop_kmean():
     for i in documents:
         input_matrix = build_matrix(i, input_matrix)
 
-    print(input_matrix[70:])
+    print(input_matrix[:])
     must_link = [(1,2),(8,9),(0,1),(3,7),(0,3),(0,4),(11,12),(24,26),(25,27),(50,51),(53,54)]
     cannot_link = [(7,13),(0,5),(0,8),(0,24),(0,27),(0,50),(0,53)]
     clusters, centers = cop_kmeans(dataset=input_matrix, k=4, ml=must_link, cl=cannot_link)
     print(clusters)
     print(input_matrix)
+    print(centers)
     print(len(clusters) , '--',len(input_matrix))
 
     # test model
@@ -81,10 +82,11 @@ def cop_kmean():
     for test in tests:
         vect = word2vector(test)
         temp = input_matrix.index(vect)
-        # print(temp)
+        # print(vect)
         test_result = clusters[temp]
         # print(test_result)
-        print('test case',test, 'in cluster ', test_result)
+        print('test case: \''+test+ '\'  in cluster ', test_result)
+        print('score is: ',get_score(centers,vect))
 
 
 
@@ -111,5 +113,30 @@ def cop_kmean():
     plt.savefig('fig.png', bbox_inches='tight')
     plt.show()
 
+def get_score(centers,point):
+    distance = []
+    for item in centers:
+        d = 0
+        for i in item:
+            d += i*i
+        distance.append(d)
+    sort_distance = sorted(distance)
+    # print(sort_distance)
+    dis_p = 0
+    for i in point:
+        dis_p += i*i
+    if dis_p<=sort_distance[0]:
+        score = 100 - dis_p/sort_distance[0] * 10
+        return score
+    elif dis_p>=sort_distance[0] and dis_p<=sort_distance[1]:
+        score = 90 - (dis_p-sort_distance[0])/(sort_distance[1]-sort_distance[0]) * 20
+    elif sort_distance[1]<=dis_p<=sort_distance[2]:
+        score = 70 - (dis_p-sort_distance[1])/(sort_distance[2]-sort_distance[1]) * 20
+    elif sort_distance[2]<=dis_p<=sort_distance[3]:
+        score = 50 - (dis_p-sort_distance[2])/(sort_distance[3]-sort_distance[2]) * 20
+    elif sort_distance[3]<=dis_p:
+        score = 30 - (dis_p-sort_distance[3])/sort_distance[3] * 80
+
+    return score
 
 cop_kmean()

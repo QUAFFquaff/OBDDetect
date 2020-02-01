@@ -20,7 +20,7 @@ import numpy as np
 import guidedlda
 
 def read_txt():
-    with open('../data/fakeData.txt', 'r') as f:
+    with open('../data/newfakeData.txt', 'r') as f:
         lines = f.readlines()
     file_list = []
     for line in lines:
@@ -65,6 +65,8 @@ def guidedldatest(X, vocab, word2id):
     # n_top_words = 2
     # print(topic_word.shape)
     for i, topic_dist in enumerate(topic_word):
+
+        
         # print(topic_dist.shape)
         topic_words = np.array(vocab)[np.argsort(topic_dist)][:-(n_top_words + 1):-1]
         print('Topic {}: {}'.format(i, ' '.join(topic_words)))
@@ -112,6 +114,10 @@ def guidedldatest(X, vocab, word2id):
     for test in tests:
         temp = [int(np.argwhere(i[0]==test)) for i in sortedresult]
 
+        # normal one
+        output_o = [(max_len - index) / (4 * max_len - sum(temp)) for index in temp]
+
+
         # half len optimize
         half_len = 5344/2
         for i in range(len(temp)):
@@ -119,12 +125,20 @@ def guidedldatest(X, vocab, word2id):
                 temp[i] = half_len
         output = [ (half_len - index)/(4*half_len - sum(temp)) for index in temp]
         # output = [ (max_len - index)/(4*max_len - sum(temp)) for index in temp]
+
         print('test',test,':',output)
+        print('    score: ',get_score(output))
 
+        print('test_o',test,':',output_o)
+        print('    score: ',get_score(output_o))
 
+def get_score(output):
+    score = 0
 
-def testText(text, result):
-    output = []
+    for item in range(len(output)):
+        score += (4-item)*25*output[item]
+    return score
+
 
 
 def transTextIntoMatrix(text):
