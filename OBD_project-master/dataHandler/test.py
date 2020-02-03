@@ -1,62 +1,60 @@
-#!/usr/bin/env python
-
-# encoding: utf-8
-
-'''
-
-@author: Quaff
-
-@contact: Quaff.lyu@gmail.com
-
-@file: test.py
-
-@time: 2019/6/5 21:37
-
-@desc:
-
-'''
-import numpy as np
-import guidedlda
-
-X = guidedlda.datasets.load_data(guidedlda.datasets.NYT)
-vocab = guidedlda.datasets.load_vocab(guidedlda.datasets.NYT)
-word2id = dict((v, idx) for idx, v in enumerate(vocab))
-
-print(X.shape)
-print(vocab)
-print(vocab)
-
-print(X.sum())
-# Normal LDA without seeding
-model = guidedlda.GuidedLDA(n_topics=5, n_iter=100, random_state=9, refresh=20)
-model.fit(X)
-
-topic_word = model.topic_word_
-n_top_words = 8
-print(topic_word.shape)
-for i, topic_dist in enumerate(topic_word):
-    print(topic_dist.shape)
-    topic_words = np.array(vocab)[np.argsort(topic_dist)][:-(n_top_words+1):-1]
-    print('Topic {}: {}'.format(i, ' '.join(topic_words)))
+# coding=UTF-8
+import xlrd
+import xlwt
+from xlutils.copy import copy
 
 
-# Guided LDA with seed topics.
-seed_topic_list = [['game', 'team', 'win', 'player', 'season', 'second', 'victory'],
-                   ['percent', 'company', 'market', 'price', 'sell', 'business', 'stock', 'share'],
-                   ['music', 'write', 'art', 'book', 'world', 'film'],
-                   ['political', 'government', 'leader', 'official', 'state', 'country', 'american', 'case', 'law', 'police', 'charge', 'officer', 'kill', 'arrest', 'lawyer']]
+def write_excel_xls(path, sheet_name, value):
+    index = len(value)  # 获取需要写入数据的行数
+    workbook = xlwt.Workbook()  # 新建一个工作簿
+    sheet = workbook.add_sheet(sheet_name)  # 在工作簿中新建一个表格
+    for i in range(0, index):
+        for j in range(0, len(value[i])):
+            sheet.write(i, j, value[i][j])  # 像表格中写入数据（对应的行和列）
+    workbook.save(path)  # 保存工作簿
+    print("xls格式表格写入数据成功！")
 
-model = guidedlda.GuidedLDA(n_topics=5, n_iter=100, random_state=7, refresh=20)
 
-seed_topics = {}
-for t_id, st in enumerate(seed_topic_list):
-    for word in st:
-        seed_topics[word2id[word]] = t_id
+def write_excel_xls_append(path, value):
+    index = len(value)  # 获取需要写入数据的行数
+    workbook = xlrd.open_workbook(path)  # 打开工作簿
+    sheets = workbook.sheet_names()  # 获取工作簿中的所有表格
+    worksheet = workbook.sheet_by_name(sheets[0])  # 获取工作簿中所有表格中的的第一个表格
+    rows_old = worksheet.nrows  # 获取表格中已存在的数据的行数
+    new_workbook = copy(workbook)  # 将xlrd对象拷贝转化为xlwt对象
+    new_worksheet = new_workbook.get_sheet(0)  # 获取转化后工作簿中的第一个表格
+    for i in range(0, index):
+        for j in range(0, len(value[i])):
+            new_worksheet.write(i + rows_old, j, value[i][j])  # 追加写入数据，注意是从i+rows_old行开始写入
+    new_workbook.save(path)  # 保存工作簿
+    print("xls格式表格【追加】写入数据成功！")
 
-model.fit(X, seed_topics=seed_topics, seed_confidence=0.15)
 
-n_top_words = 10
-topic_word = model.topic_word_
-for i, topic_dist in enumerate(topic_word):
-    topic_words = np.array(vocab)[np.argsort(topic_dist)][:-(n_top_words+1):-1]
-    print('Topic {}: {}'.format(i, ' '.join(topic_words)))
+def read_excel_xls(path):
+    workbook = xlrd.open_workbook(path)  # 打开工作簿
+    sheets = workbook.sheet_names()  # 获取工作簿中的所有表格
+    worksheet = workbook.sheet_by_name(sheets[0])  # 获取工作簿中所有表格中的的第一个表格
+    for i in range(0, worksheet.nrows):
+        for j in range(0, worksheet.ncols):
+            print(worksheet.cell_value(i, j), "\t", end="")  # 逐行逐列读取数据
+        print()
+
+
+book_name_xls = 'xls格式测试工作簿.xls'
+
+sheet_name_xls = 'xls格式测试表'
+
+value_title = [["姓名", "性别", "年龄", "城市", "职业"], ]
+
+value1 = [["张三", "男", "19", "杭州", "研发工程师"],
+          ["李四", "男", "22", "北京", "医生"],
+          ["王五", "女", "33", "珠海", "出租车司机"], ]
+
+value2 = [["Tom", "男", "21", "西安", "测试工程师"],
+          ["Jones", "女", "34", "上海", "产品经理"],
+          ["Cat", "女", "56", "上海", "教师"], ]
+
+write_excel_xls(book_name_xls, sheet_name_xls, value_title)
+write_excel_xls_append(book_name_xls, value1)
+write_excel_xls_append(book_name_xls, value2)
+read_excel_xls(book_name_xls)

@@ -21,7 +21,8 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 def read_txt():
-    with open('../../../data/newfakeData0.txt', 'r') as f:
+    # was used newfakedata0.txt before Feb 2020
+    with open('../../../data/ABCD0000.txt', 'r') as f:
         lines = f.readlines()
     file_list = []
     for line in lines:
@@ -34,9 +35,9 @@ def read_txt():
     return file_list
 
 
-normal_events = ['a', 'h', 'v', 'o']
-medium_events = ['b', 'i', 'p', 'w']
-high_events = ['c', 'j', 'q', 'x']
+normal_events = ['a', 'b', 'c', 'd']
+medium_events = ['m', 'n', 'o', 'p']
+high_events = ['w', 'x', 'y', 'z']
 
 
 def word2vector(word):

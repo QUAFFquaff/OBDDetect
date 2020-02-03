@@ -6,7 +6,7 @@
 # @Software: PyCharm
 
 def read_txt():
-    with open('../data/fakeData.txt', 'r') as f:
+    with open('../data/fakeData0.txt', 'r') as f:
         lines = f.readlines()
     file_list = []
     for line in lines:
@@ -36,11 +36,11 @@ def change_char(data):
 
 
     print(new_dacu)
-    # write(str(new_dacu))
+    write(str(new_dacu))
 
 def write(data):
     try:
-        with open('newfakeData.txt', 'w') as f:
+        with open('ABCDnewfakeDataBetter.txt', 'w') as f:
             f.write(data)
     finally:
         if f:
@@ -53,16 +53,16 @@ def convert(letter):
     return dic[letter]
 
 def main():
-    # data = read_txt()
-    data = [['a', 'h', 'ahhva', 'vvhha', 'oahooa',
-             'b', 'abbw', 'ipi', 'bboi', 'paa',
-             'p', 'ccw', 'jw', 'jiw', 'wwpwi',
-             'c', 'jxxbx', 'qcxxqx', 'cqcqxqq', 'xcc']]
-    data = [['a', 'h', 'o', 'v','vo', 'hho','hhah','avoa','haa','vvvv', 'ova', 'avavv', 'ahao', 'aoah',],
-                   ['io', 'b', 'i',  'bi','va','vv','wwhhi','bbbi','abovb','ovppah','avhvowa','ai','ih','wa','ba'],
-                   ['iwwp', 'pb', 'pb', 'wbi', 'bi', 'p', 'pi', 'pwp' ,'xi','ixipp','bwbw', 'iwx','ibpxiix','iq','pq','px','ix','ipi','pwi'],
-                   ['xcqxx', 'cq',  'wx', 'cii','jcc', 'qq', 'jcxqc','cq', 'wj','j','q' 'jx', 'x', 'c', 'cjc']
-                   ]
+    data = read_txt()
+    # data = [['a', 'h', 'ahhva', 'vvhha', 'oahooa',
+    #          'b', 'abbw', 'ipi', 'bboi', 'paa',
+    #          'p', 'ccw', 'jw', 'jiw', 'wwpwi',
+    #          'c', 'jxxbx', 'qcxxqx', 'cqcqxqq', 'xcc']]
+    # data = [['a', 'h', 'o', 'v','vo', 'hho','hhah','avoa','haa','vvvv', 'ova', 'avavv', 'ahao', 'aoah',],
+    #                ['io', 'b', 'i',  'bi','va','vv','wwhhi','bbbi','abovb','ovppah','avhvowa','ai','ih','wa','ba'],
+    #                ['iwwp', 'pb', 'pb', 'wbi', 'bi', 'p', 'pi', 'pwp' ,'xi','ixipp','bwbw', 'iwx','ibpxiix','iq','pq','px','ix','ipi','pwi'],
+    #                ['xcqxx', 'cq',  'wx', 'cii','jcc', 'qq', 'jcxqc','cq', 'wj','j','q' 'jx', 'x', 'c', 'cjc']
+    #                ]
     change_char(data)
 
 main()
