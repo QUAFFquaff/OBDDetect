@@ -220,6 +220,7 @@ def main():
              'b', 'abbw', 'ipi', 'bboi', 'paa',
              'p', 'ccw', 'jw', 'jiw', 'wwpwi',
              'c', 'jxxbx', 'qcxxqx', 'cqcqxqq', 'xcc']
+
     for test in tests:
         result = ldamodel.LDATest(ldamodel, test)
         score = 0
@@ -237,6 +238,54 @@ def main():
         # print(test)
         # print(score)
         print(result[3][1])
+    score_a_file(ldamodel)
+
+def read_txt(path):
+    # with open('../data/ABCDFakeDataForEvent.txt', 'r') as f:
+    # with open('../data/newfakeData0.txt', 'r') as f:
+    with open(path, 'r') as f:
+        lines = f.readlines()
+    file_list = []
+    for line in lines:
+        pattern_list = []
+        patterns = line.split("\'")
+        for i in range(len(patterns)):
+            if i % 2 != 0:
+                pattern_list.append(patterns[i])
+        file_list.append(pattern_list)
+    return file_list
+
+
+def score_a_file(ldamodel):
+    tests = read_txt('../data/TOBESCORED.txt')
+    output = []
+
+    for line in tests:
+        new_line = []
+        for pattern in line:
+            result = ldamodel.LDATest(ldamodel, pattern)
+            score = 0
+            for node in result:
+                if 0 == node[0]:
+                    score += 75 * node[1]
+                elif 1 == node[0]:
+                    score += 100 * node[1]
+                elif 2 == node[0]:
+                    score += 50 * node[1]
+                elif 3 == node[0]:
+                    score += 25 * node[1]
+        # print(line[:10],'  ',new_line[:10])
+            new_line.append(score)
+        output.append(new_line)
+    write(str(output))
+
+def write(data):
+    try:
+        with open('ScoredPattern.txt', 'w') as f:
+            f.write(data)
+    finally:
+        if f:
+            f.close()
 
 
 if __name__ == '__main__':

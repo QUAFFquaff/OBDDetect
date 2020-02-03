@@ -19,10 +19,13 @@ import matplotlib.pyplot as plt
 # print(len(clusters))
 from mpl_toolkits.mplot3d import Axes3D
 
+import xlrd
+import xlwt
+from xlutils.copy import copy
 
-def read_txt():
+def read_txt(path = '../../../data/ABCD0001.txt'):
     # was used newfakedata0.txt before Feb 2020
-    with open('../../../data/ABCD0000.txt', 'r') as f:
+    with open(path, 'r') as f:
         lines = f.readlines()
     file_list = []
     for line in lines:
@@ -61,6 +64,40 @@ def build_matrix(document, input=[]):
     return input
 
 
+def write_excel_xls(path, sheet_name, value):
+    index = len(value)  # 获取需要写入数据的行数
+    workbook = xlwt.Workbook()  # 新建一个工作簿
+    for name in sheet_name:
+        sheet = workbook.add_sheet(name)  # 在工作簿中新建一个表格
+        for i in range(0, index):
+            for j in range(0, len(value[i])):
+                sheet.write(i, j, value[i][j])  # 像表格中写入数据（对应的行和列）
+    workbook.save(path)  # 保存工作簿
+    print("xls格式表格写入数据成功！")
+
+
+def write_excel_xls_append(path, value):
+    index = len(value)  # 获取需要写入数据的行数
+    workbook = xlrd.open_workbook(path)  # 打开工作簿
+    sheets = workbook.sheet_names()  # 获取工作簿中的所有表格
+    worksheet = workbook.sheet_by_name(sheets[0])  # 获取工作簿中所有表格中的的第一个表格
+    rows_old = worksheet.nrows  # 获取表格中已存在的数据的行数
+    new_workbook = copy(workbook)  # 将xlrd对象拷贝转化为xlwt对象
+    new_worksheet = new_workbook.get_sheet(0)  # 获取转化后工作簿中的第一个表格
+    for i in range(0, index):
+        for j in range(0, len(value[i])):
+            new_worksheet.write(i + rows_old, j, value[i][j])  # 追加写入数据，注意是从i+rows_old行开始写入
+    new_workbook.save(path)  # 保存工作簿
+    print("xls格式表格【追加】写入数据成功！")
+
+
+book_name_xls = 'COP_Kmeans_result0001.xls'
+
+sheet_name_xls = ['tests']
+
+
+value_title = [["test case", "score", "cluster","index","vector"], ]
+
 def cop_kmean():
     # input_matrix = numpy.random.rand(100, 500)
     documents = read_txt()
@@ -68,9 +105,10 @@ def cop_kmean():
     for i in documents:
         input_matrix = build_matrix(i, input_matrix)
 
-    print(input_matrix[:])
-    must_link = [(1,2),(8,9),(0,1),(3,7),(0,3),(0,4),(11,12),(24,26),(25,27),(50,51),(53,54)]
-    cannot_link = [(7,13),(0,5),(0,8),(0,24),(0,27),(0,50),(0,53)]
+    # must_link = [(1,2),(8,9),(0,1),(3,7),(0,3),(0,4),(11,12),(24,26),(25,27),(50,51),(53,54)]
+    # cannot_link = [(7,13),(0,5),(0,8),(0,24),(0,27),(0,50),(0,53)]
+    must_link = [(0,1),(0,2),(0,3),(0,7),(5,8), (14,18), (37,38)]
+    cannot_link = [(0,4), (0,5), (0,6), (0,8), (7,71), (7,16), (0,31),(0,37),(7,123), (0,123), (7,18)]
     clusters, centers = cop_kmeans(dataset=input_matrix, k=4, ml=must_link, cl=cannot_link)
     print(clusters)
     print(input_matrix)
@@ -79,17 +117,23 @@ def cop_kmean():
 
     # test model
     # tests = ['h', 'a', 'qq', 'cx', 'hvh']
-    tests = ['h', 'a', 'qq', 'cx', 'hvh','xcqxx','ibpxiix','avhvowa']
+    tests = ['a', 'b', 'abbca', 'ccbba', 'dabdda',
+                 'm', 'ammp', 'non', 'mmdn', 'oaa',
+                 'o', 'wwp', 'xp', 'xnp', 'ppopn',
+                 'w', 'xzzmz', 'ywzzyz', 'wywyzyy', 'zww']
+    result = []
     for test in tests:
         vect = word2vector(test)
         temp = input_matrix.index(vect)
         # print(vect)
-        test_result = clusters[temp]
+        group_num = clusters[temp]
         # print(test_result)
-        print('test case: \''+test+ '\'  in cluster ', test_result)
-        print('score is: ',get_score(centers,vect))
 
-
+        line = [test,str(get_score(centers,vect,group_num)),str(group_num),str(temp),str(vect)]
+        result.append(line)
+    write_excel_xls(book_name_xls, sheet_name_xls, value_title)
+    write_excel_xls_append(book_name_xls, result)
+    # score_a_file(input_matrix, clusters, centers)
 
     fig = plt.figure()
     ax = Axes3D(fig)
@@ -114,7 +158,7 @@ def cop_kmean():
     plt.savefig('fig.png', bbox_inches='tight')
     plt.show()
 
-def get_score(centers,point):
+def get_score(centers,point,group_num):
     distance = []
     for item in centers:
         d = 0
@@ -122,22 +166,87 @@ def get_score(centers,point):
             d += i*i
         distance.append(d)
     sort_distance = sorted(distance)
-    # print(sort_distance)
+
     dis_p = 0
     for i in point:
         dis_p += i*i
-    if dis_p<=sort_distance[0]:
-        score = 100 - dis_p/sort_distance[0] * 10
-        return score
-    elif dis_p>=sort_distance[0] and dis_p<=sort_distance[1]:
-        score = 90 - (dis_p-sort_distance[0])/(sort_distance[1]-sort_distance[0]) * 20
-    elif sort_distance[1]<=dis_p<=sort_distance[2]:
-        score = 70 - (dis_p-sort_distance[1])/(sort_distance[2]-sort_distance[1]) * 20
-    elif sort_distance[2]<=dis_p<=sort_distance[3]:
-        score = 50 - (dis_p-sort_distance[2])/(sort_distance[3]-sort_distance[2]) * 20
-    elif sort_distance[3]<=dis_p:
-        score = 30 - (dis_p-sort_distance[3])/sort_distance[3] * 80
+
+    # print(sort_distance)
+    # 90    70  50  30
+    # if dis_p<=sort_distance[0]:
+    #     score = 100 - dis_p/sort_distance[0] * 10
+    #     return score
+    # elif dis_p>=sort_distance[0] and dis_p<=sort_distance[1]:
+    #     score = 90 - (dis_p-sort_distance[0])/(sort_distance[1]-sort_distance[0]) * 20
+    # elif sort_distance[1]<=dis_p<=sort_distance[2]:
+    #     score = 70 - (dis_p-sort_distance[1])/(sort_distance[2]-sort_distance[1]) * 20
+    # elif sort_distance[2]<=dis_p<=sort_distance[3]:
+    #     score = 50 - (dis_p-sort_distance[2])/(sort_distance[3]-sort_distance[2]) * 20
+    # elif sort_distance[3]<=dis_p:
+    #     score = 30 - (dis_p-sort_distance[3])/sort_distance[3] * 80
+    # print(sort_distance)
+    # 85    70  50  30
+    # if dis_p<=sort_distance[0]:
+    #     score = 100 - dis_p/sort_distance[0] * 15
+    #     return score
+    # elif dis_p>=sort_distance[0] and dis_p<=sort_distance[1]:
+    #     score = 85 - (dis_p-sort_distance[0])/(sort_distance[1]-sort_distance[0]) * 15
+    # elif sort_distance[1]<=dis_p<=sort_distance[2]:
+    #     score = 70 - (dis_p-sort_distance[1])/(sort_distance[2]-sort_distance[1]) * 20
+    # elif sort_distance[2]<=dis_p<=sort_distance[3]:
+    #     score = 50 - (dis_p-sort_distance[2])/(sort_distance[3]-sort_distance[2]) * 20
+    # elif sort_distance[3]<=dis_p:
+    #     score = 30 - (dis_p-sort_distance[3])/sort_distance[3] * 80
+    # print(sort_distance)
+    # 80    60  45  30
+    # if dis_p<=sort_distance[0]:
+    #     score = 100 - dis_p/sort_distance[0] * 20
+    #     return score
+    # elif dis_p>=sort_distance[0] and dis_p<=sort_distance[1]:
+    #     score = 80 - (dis_p-sort_distance[0])/(sort_distance[1]-sort_distance[0]) * 20
+    # elif sort_distance[1]<=dis_p<=sort_distance[2]:
+    #     score = 60 - (dis_p-sort_distance[1])/(sort_distance[2]-sort_distance[1]) * 15
+    # elif sort_distance[2]<=dis_p<=sort_distance[3]:
+    #     score = 45 - (dis_p-sort_distance[2])/(sort_distance[3]-sort_distance[2]) * 15
+    # elif sort_distance[3]<=dis_p:
+    #     score = 30 - (dis_p-sort_distance[3])/sort_distance[3] * 80
+
+    # generate method 2, based on cluster.
+    # 80    60  45  30
+    score = 100 - dis_p/sort_distance[0] * 20 * (group_num+1)
 
     return score
+
+
+def score_a_file(input_matrix,clusters,centers):
+    tests = read_txt('TOBESCORED.txt')
+    result = []
+    for test in tests:
+        line = []
+        for pattern in test:
+            vect = word2vector(pattern)
+            if vect in input_matrix:
+                temp = input_matrix.index(vect)
+                # print(vect)
+                group_num = clusters[temp]
+                # print(test_result)
+                print('score is: ', get_score(centers, vect,group_num))
+
+                line.append(get_score(centers, vect))
+            else:
+                line.append(0)
+        result.append(line)
+    write(str(result))
+
+def write(data):
+    try:
+        with open('ScoredPattern.txt', 'w') as f:
+            f.write(data)
+    finally:
+        if f:
+            f.close()
+
+
+
 
 cop_kmean()

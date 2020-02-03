@@ -6,7 +6,7 @@
 # @Software: PyCharm
 
 def read_txt():
-    with open('../data/fakeData0.txt', 'r') as f:
+    with open('../data/dataNeedToBeScored.txt', 'r') as f:
         lines = f.readlines()
     file_list = []
     for line in lines:
@@ -33,14 +33,12 @@ def change_char(data):
         # print(line[:10],'  ',new_line[:10])
         new_dacu.append(new_line)
 
-
-
     print(new_dacu)
     write(str(new_dacu))
 
 def write(data):
     try:
-        with open('ABCDnewfakeDataBetter.txt', 'w') as f:
+        with open('TOBESCORED.txt', 'w') as f:
             f.write(data)
     finally:
         if f:
