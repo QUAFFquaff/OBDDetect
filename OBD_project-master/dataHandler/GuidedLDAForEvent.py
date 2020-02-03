@@ -20,7 +20,7 @@ import numpy as np
 import guidedlda
 
 def read_txt():
-    with open('../data/newfakeData.txt', 'r') as f:
+    with open('../data/ABCDFakeDataForEvent.txt', 'r') as f:
         lines = f.readlines()
     file_list = []
     for line in lines:
@@ -40,11 +40,17 @@ text2 = [['aaa', 'aaa'],
          ['ddd', 'eee']]
 
 # Guided LDA with seed topics.
-seed_topic_list = [['a', 'h', 'o', 'v','vo', 'hho','hhah','avoa','haa','vvvv', 'ova', 'avavv', 'ahao', 'aoah',],
-                   ['io', 'b', 'i',  'bi','va','vv','wwhhi','bbbi','abovb','ovppah','avhvowa','ai','ih','wa','ba'],
-                   ['iwwp', 'pb', 'pb', 'wbi', 'bi', 'p', 'pi', 'pwp' ,'xi','ixipp','bwbw', 'iwx','ibpxiix','iq','pq','px','ix','ipi','pwi'],
-                   ['xcqxx', 'cq',  'wx', 'cii','jcc', 'qq', 'jcxqc','cq', 'wj','j','q' 'jx', 'x', 'c', 'cjc']
-                   ]
+# old seeds
+# seed_topic_list = [['a', 'h', 'o', 'v','vo', 'hho','hhah','avoa','haa','vvvv', 'ova', 'avavv', 'ahao', 'aoah',],
+#                    ['io', 'b', 'i',  'bi','va','vv','wwhhi','bbbi','abovb','ovppah','avhvowa','ai','ih','wa','ba'],
+#                    ['iwwp', 'pb', 'pb', 'wbi', 'bi', 'p', 'pi', 'pwp' ,'xi','ixipp','bwbw', 'iwx','ibpxiix','iq','pq','px','ix','ipi','pwi'],
+#                    ['xcqxx', 'cq',  'wx', 'cii','jcc', 'qq', 'jcxqc','cq', 'wj','j','q' 'jx', 'x', 'c', 'cjc']
+#                    ]
+seed_topic_list = [['a', 'b', 'd', 'c', 'cd', 'bbd', 'bbab', 'acda', 'baa', 'cccc', 'dca', 'acacc', 'abad', 'adab'],
+                   ['nd', 'm', 'n', 'mn', 'ca', 'cc', 'ppbbn', 'mmmn', 'amdcm', 'dcooab', 'acbcdpa', 'an', 'nb', 'pa', 'ma'],
+                   ['nppo', 'om', 'om', 'pmn', 'mn', 'o', 'on', 'opo', 'zn', 'nznoo', 'mpmp', 'npz', 'nmoznnz', 'ny', 'oy', 'oz', 'nz', 'non', 'opn'],
+                   ['zwyzz', 'wy', 'pz', 'wnn', 'xww', 'yy', 'xwzyw', 'wy', 'px', 'x', 'yxz', 'z', 'w', 'wxw']]
+
 # seed_topic_list = [['aaa'],
 #                    ['ccc']
 #                    ]
@@ -66,7 +72,6 @@ def guidedldatest(X, vocab, word2id):
     # print(topic_word.shape)
     for i, topic_dist in enumerate(topic_word):
 
-        
         # print(topic_dist.shape)
         topic_words = np.array(vocab)[np.argsort(topic_dist)][:-(n_top_words + 1):-1]
         print('Topic {}: {}'.format(i, ' '.join(topic_words)))
@@ -74,7 +79,10 @@ def guidedldatest(X, vocab, word2id):
 
 
     # test lda model
-    tests = ['h', 'a', 'qq', 'cx', 'hvh']
+    tests = ['a', 'b', 'abbca', 'ccbba', 'dabdda',
+             'm', 'ammp', 'non', 'mmdn', 'oaa',
+             'o', 'wwp', 'xp', 'xnp', 'ppopn',
+             'w', 'xzzmz', 'ywzzyz', 'wywyzyy', 'zww']
     max_len = 5344
     for test in tests:
         temp = [int(np.argwhere(i[0] == test)) for i in sortedresult]
@@ -89,7 +97,14 @@ def guidedldatest(X, vocab, word2id):
         print('test', test, ':', output)
 
 
+
+
+    # model with seeds
+
+
     model = guidedlda.GuidedLDA(n_topics=TOPICS, n_iter=1000, random_state=9, refresh=20)
+
+
 
     seed_topics = {}
     for t_id, st in enumerate(seed_topic_list):
@@ -99,8 +114,6 @@ def guidedldatest(X, vocab, word2id):
     model.fit(X, seed_topics=seed_topics, seed_confidence=0.15)
 
     topic_word = model.topic_word_
-    # print('model topic words')
-    # print(model.topic_word_)
     sortedresult = [[],[],[],[]]
     for i, topic_dist in enumerate(topic_word):
         topic_words = np.array(vocab)[np.argsort(topic_dist)][:-(n_top_words + 1):-1]
@@ -109,7 +122,6 @@ def guidedldatest(X, vocab, word2id):
         print('Topic {}: {}'.format(i, ' '.join(topic_words)))
 
     print(sortedresult)
-    tests = ['h','a','qq','cx','hvh']
     max_len = 5344
     for test in tests:
         temp = [int(np.argwhere(i[0]==test)) for i in sortedresult]
