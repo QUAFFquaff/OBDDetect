@@ -254,6 +254,7 @@ def main():
     data = read_txt_pattern()
     score = read_txt_score1()
     patternsDoc = ""
+    indexOfScore = 0
     for i in range(400):
         index = 0
         numOfLowScore = 0
@@ -261,6 +262,19 @@ def main():
         numOfAngry = 0
         numOfAnxious = 0
         numOfReckless = 0
+        numOfSafeBrake = 0
+        numOfMediumBrake = 0
+        numOfHighBrake = 0
+        numOfSafeAcc = 0
+        numOfMediumAcc = 0
+        numOfHighAcc = 0
+        numOfSafeTurn = 0
+        numOfMediumTurn = 0
+        numOfHighTurn = 0
+        numOfSafeSwerve = 0
+        numOfMediumSwerve = 0
+        numOfHighSwerve = 0
+
 
         for j in range(len(data[i])):  # for one person
             term = data[i][j]
@@ -270,7 +284,7 @@ def main():
             eventTime = 0
             Anxious = 1
             Reckless = 0
-            if float(score[i][j])<75: # choose the low score
+            if float(score[0][indexOfScore])<75: # choose the low score
                 numOfLowScore = numOfLowScore + 1
                 for t in range(len(term)):  # for one pattern
                     if term[t]=='c' or term[t]=='j' or term[t]=='q' or term[t] == 'x':
@@ -298,6 +312,33 @@ def main():
                 numOfHighScore = numOfHighScore + 1
                 patternsDoc = patternsDoc+"C"
 
+            indexOfScore = indexOfScore + 1
+
+            for t in range(len(term)):
+                if(term[t]=='a'):
+                    numOfSafeAcc = numOfSafeAcc+1
+                if(term[t]=='b'):
+                    numOfMediumAcc = numOfMediumAcc+1
+                if(term[t]=='c'):
+                    numOfHighAcc = numOfHighAcc+1
+                if(term[t]=='h'):
+                    numOfSafeBrake = numOfSafeBrake+1
+                if(term[t]=='i'):
+                    numOfMediumBrake = numOfMediumBrake+1
+                if(term[t]=='j'):
+                    numOfHighBrake = numOfHighBrake+1
+                if(term[t]=='o'):
+                    numOfSafeTurn = numOfSafeTurn+1
+                if(term[t]=='p'):
+                    numOfMediumTurn = numOfMediumTurn+1
+                if(term[t]=='q'):
+                    numOfHighTurn = numOfHighTurn+1
+                if(term[t]=='v'):
+                    numOfSafeSwerve = numOfSafeSwerve+1
+                if(term[t]=='w'):
+                    numOfMediumSwerve = numOfMediumSwerve+1
+                if(term[t]=='x'):
+                    numOfHighSwerve = numOfHighSwerve+1
 
         patternsDoc = patternsDoc +'\n'
 
@@ -307,12 +348,25 @@ def main():
         Per_lowS = numOfLowScore / len(data[i])
         Per_highS = numOfHighScore / len(data[i])
 
+        Per_safeAcc = numOfSafeAcc/(numOfHighAcc+numOfSafeAcc+numOfMediumAcc)
+        Per_mediumAcc = numOfMediumAcc/(numOfHighAcc+numOfSafeAcc+numOfMediumAcc)
+        Per_highAcc = numOfHighAcc/(numOfHighAcc+numOfSafeAcc+numOfMediumAcc)
+        Per_safeBrake = numOfSafeBrake/(numOfSafeBrake+numOfHighBrake+numOfMediumBrake)
+        Per_mediumBrake= numOfMediumBrake/(numOfSafeBrake+numOfHighBrake+numOfMediumBrake)
+        Per_highBrake = numOfHighBrake / (numOfSafeBrake+numOfHighBrake+numOfMediumBrake)
+        Per_safeTurn = numOfSafeTurn / (numOfSafeTurn+numOfMediumTurn+numOfHighTurn)
+        Per_mediumTurn = numOfMediumTurn/ (numOfSafeTurn+numOfMediumTurn+numOfHighTurn)
+        Per_highTurn = numOfHighTurn / (numOfSafeTurn+numOfMediumTurn+numOfHighTurn)
+        Per_safeSwerve = numOfSafeSwerve/(numOfSafeSwerve + numOfHighSwerve+numOfMediumSwerve)
+        Per_mediumSwerve = numOfMediumSwerve/(numOfSafeSwerve + numOfHighSwerve+numOfMediumSwerve)
+        Per_highSwerve = numOfHighSwerve / (numOfSafeSwerve + numOfHighSwerve+numOfMediumSwerve)
+
         oldwd = open_workbook('ForKMeans_temp.xls')
         sheet = oldwd.sheet_by_index(0)
         rowNum = sheet.nrows
         newwb = copy(oldwd)
         newWs = newwb.get_sheet(0)
-        write_data(np.array([Per_highS, Per_lowS, Per_angry, Per_reckless, Per_anxious]), newWs, rowNum)
+        write_data(np.array([Per_highS, Per_lowS, Per_angry, Per_reckless, Per_anxious,Per_safeBrake,Per_mediumBrake, Per_highBrake,Per_safeAcc, Per_mediumAcc, Per_highAcc,Per_safeTurn,Per_mediumTurn,Per_highTurn,Per_safeSwerve,Per_mediumSwerve,Per_highSwerve]), newWs, rowNum)
         newwb.save('ForKMeans_temp.xls')
 
     writePatterns(patternsDoc)
@@ -369,7 +423,7 @@ def read_txt_score():
     return file_list
 
 def read_txt_score1():
-    with open('scores00.txt', 'r') as f:
+    with open('ScoredPattern.txt', 'r') as f:
         lines = f.readlines()
     file_list = []
     print(len(lines))

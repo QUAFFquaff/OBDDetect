@@ -74,7 +74,7 @@ def svm_test(data):
     # coef0 is a constant for poly
     # model = svm.SVC(kernel='poly', C=2, gamma=4,degree = 3,coef0=1, probability=True, class_weight='balanced')
     #model = svm.SVC(kernel='rbf', C=2, gamma=2, degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, decision_function_shape='ovr')
-    model = svm.SVC(kernel='rbf', C= 3, gamma="scale", degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, class_weight='balanced')
+    model = svm.SVC(kernel='rbf', C= 10, gamma='scale', degree=3, coef0=0.0, shrinking=True, max_iter=-1, probability=True, class_weight='balanced')
     model.fit(x_train, y_train.ravel())
 
     print('train set accuracy:  ', model.score(x_train, y_train.ravel()))

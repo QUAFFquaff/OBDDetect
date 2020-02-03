@@ -15,20 +15,9 @@ def calcData(data):
     minAY = min(data[:, 3])
     maxAccX = max(abs(data[:, 4]))
     maxAccY = max(abs(data[:, 3]))
-    datalist = data[:, 4].tolist()
+    datalist = data[:, 3].tolist()
     # print(datalist.index(max(datalist)))
     fraction = datalist.index(max(datalist))/len(datalist)
-    if(maxAX==maxAccX):
-        if(datalist.index(max(datalist))!=0):
-            firstHalfMean = np.mean(data[0:datalist.index(max(datalist)),4])
-        else:
-            firstHalfMean = datalist[0];
-
-    else:
-        if (datalist.index(min(datalist)) != 0):
-            firstHalfMean = np.mean(data[0:datalist.index(min(datalist)),4])
-        else:
-            firstHalfMean = datalist[0];
 
 
     rangeAX = maxAX - minAX
@@ -48,22 +37,23 @@ def calcData(data):
     maxOri = max(maxOX,maxOY)
     t = (data[-1, 1] - data[0, 1])/1000
     meanSP = np.mean(data[:, 2])
-    varSP = np.std(data[:, 2])
     differenceSP = data[-1, 2]-data[0, 2]
     accelerate = differenceSP / t
+    varSP = np.std(data[:,2])
     StartEndAccx = data[0,4]+data[-1,4]
     StartEndAccy = data[0,3]+data[-1,3]
-    # return [rangeAX, rangeAY, varAX, varAY, varOX, maxOri, maxAX, minAX, maxAccY, differenceSP, t, data[0, -1]]  #92% 78% 去掉平均
-    # return [rangeAX, rangeAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP, t, data[0, -1]]  #93% 85% 去掉std
-    # return [ varAX, varAY, varOX, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP, t, data[0, -1]]  #92% 83% 去掉范围
-    # return [rangeAX, rangeAY, varAX, varAY, varOX, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY, differenceSP, t, data[0, -1]]  #95% 85%
-    # return [rangeAX, rangeAY, varAX, varAY, varOX, meanAX, meanAY, meanOX, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, t, data[0, -1]]  #96% 83%
-    # return [rangeAX, rangeAY, varAX, varAY, varOX, meanAX, meanAY,meanOX, maxOX, maxAX,maxAY, minAX, minAY, accelerate, meanSP, t, data[0, -1]] #97% 85%
-    # return [rangeAX, rangeAY, varAX, varAY, varOX, meanAX, meanAY,meanOX, maxOX, maxAX,maxAY, minAX, minAY, differenceSP, meanSP, t, data[0, -1]] #97% 85%
-    return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP,StartEndAccx,StartEndAccy, t, data[0, -1]] #99% 86%
-    # return [rangeAX, rangeAY, varAX, varAY, varOX, meanAX, meanAY, meanOX, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, t, data[0, -1]] #96% 86%
-    # return [rangeAX, rangeAY, varAX, varAY, varOX, meanAX, meanAY, meanOX, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, varSP, t, data[0, -1]] #97.5% 83%
-    # return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, varSP, t, data[0, -1]] #98% 83%
+    axis = 0
+    if(data[0, -1]<6):
+        axis = 0
+    else:
+        axis = 1
+
+    # return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY,differenceSP,meanSP, StartEndAccx,StartEndAccy, t, axis, data[0, -1]] #99% 86%
+    # return [rangeAX, rangeAY, varAX, varAY, meanAX, meanAY, meanOX, maxOri, maxAX, minAX, maxAccY,differenceSP,meanSP, StartEndAccx,StartEndAccy, t, axis, data[0, -1]] #99% 86%
+
+    # return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, varSP, StartEndAccx, StartEndAccy, t, data[0, -1]] #21  98% 83%
+    return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, varSP, t, axis, data[0, -1]] #20 98% 83%
+    # return [rangeAX, rangeAY, varAX, varAY, varOX, varOY, meanAX, meanAY, meanOX, meanOY, maxOri, maxAX, maxAY, minAX, minAY, differenceSP, meanSP, varSP, t, data[0, -1]] #19 98% 83%
 
 # load raw data into workspace
 def read_excel(file):
