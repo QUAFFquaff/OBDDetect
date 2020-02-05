@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ede0ee12-7d37-4429-aaca-b2e4415022ee" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/AutoCoach/GUI.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoCoach/GUI.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoCoach/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoCoach/_main_.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoCoach/entry_point/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoCoach/entry_point/run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoCoach/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/CalculateFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/CalculateFeatures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/ForKMeans.xls" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/ForKMeans.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/ForKMeans_temp.xls" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/ForKMeans_temp.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/GenerateFakeData.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/GenerateFakeData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/OutOBDX.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/OutOBDX.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/Patterns.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/SVM.py" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/SVM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/label data.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/label data.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/rawX.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/rawX.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/svm.pkl" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/svm.pkl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OBD_GUI/vect.xls" beforeDir="false" afterPath="$PROJECT_DIR$/OBD_GUI/vect.xls" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,22 +42,23 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/OBD_GUI" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/FeelUOwn-master/FeelUOwn-master" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dabenw\Documents\PythonProject\OBDDetect\OBD_project-master\AutoCoach" />
+      <recent name="C:\Users\Daben\Documents\PythonProject\OBDDetect\OBD_project-master\OBD_GUI" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dabenw\Documents\PythonProject\OBDDetect\OBD_project-master\OBD_GUI" />
       <recent name="C:\Users\Dabenw\Documents\PythonProject\OBDDetect\OBD_project-master" />
       <recent name="C:\Users\Daben\Documents\PythonProject\OBDDetect\OBD_project-master\OBD_GUI" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Daben\Documents\PythonProject\OBDDetect\OBD_project-master\OBD_GUI" />
-    </key>
   </component>
-  <component name="RunManager" selected="Python.GenerateFakeData">
+  <component name="RunManager" selected="Python._main_">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -82,7 +79,7 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
-    <configuration name="CalculateEventTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="GUI" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OBD_project-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -90,34 +87,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OBD_GUI" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AutoCoach" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OBD_GUI/CalculateEventTest.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="CalculateFeatures" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="OBD_project-master" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OBD_GUI" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OBD_GUI/CalculateFeatures.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AutoCoach/GUI.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -148,7 +123,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="LowPass" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="_main_" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OBD_project-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -156,12 +131,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OBD_GUI" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AutoCoach" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OBD_GUI/LowPass.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AutoCoach/_main_.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -170,7 +145,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="SVM" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OBD_project-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -178,12 +153,34 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/OBD_GUI" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AutoCoach/entry_point" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OBD_GUI/SVM.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AutoCoach/entry_point/run.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="OBD_project-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AutoCoach" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AutoCoach/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -203,18 +200,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.GenerateFakeData" />
-      <item itemvalue="Python.LowPass" />
-      <item itemvalue="Python.CalculateFeatures" />
-      <item itemvalue="Python.SVM" />
-      <item itemvalue="Python.CalculateEventTest" />
+      <item itemvalue="Python.GUI" />
+      <item itemvalue="Python._main_" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.run" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python._main_" />
+        <item itemvalue="Python.GUI" />
+        <item itemvalue="Python.run" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.GenerateFakeData" />
-        <item itemvalue="Python.LowPass" />
-        <item itemvalue="Python.CalculateFeatures" />
-        <item itemvalue="Python.SVM" />
-        <item itemvalue="Python.CalculateEventTest" />
       </list>
     </recent_temporary>
   </component>
@@ -276,6 +273,7 @@
       <workItem from="1580357037755" duration="7000" />
       <workItem from="1580587479281" duration="20117000" />
       <workItem from="1580749515321" duration="2182000" />
+      <workItem from="1580770619789" duration="29171000" />
     </task>
     <servers />
   </component>
@@ -296,83 +294,102 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state x="616" y="152" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1580790377009">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="616" y="152" key="#com.intellij.ide.macro.MacrosDialog/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580790377009" />
     <state x="2610" y="216" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580704409443">
       <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state x="2610" y="216" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580704409443" />
-    <state x="929" y="253" key="FileChooserDialogImpl" timestamp="1576604865913">
-      <screen x="0" y="0" width="1920" height="1170" />
+    <state x="607" y="289" width="456" height="305" key="#com.intellij.tools.ToolEditorDialog" timestamp="1580790620372">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="607" y="289" width="456" height="305" key="#com.intellij.tools.ToolEditorDialog/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580790620372" />
+    <state x="743" y="180" width="601" height="556" key="FileChooserDialogImpl" timestamp="1580791770803">
+      <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="929" y="253" key="FileChooserDialogImpl/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1576604865913" />
-    <state width="1478" height="148" key="GridCell.Tab.0.bottom" timestamp="1580751714161">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="743" y="180" width="601" height="556" key="FileChooserDialogImpl/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580791770803" />
+    <state width="1877" height="193" key="GridCell.Tab.0.bottom" timestamp="1580891370376">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state width="1493" height="175" key="GridCell.Tab.0.bottom/-1920.124.1536.840/0.0.1920.1170@-1920.124.1536.840" timestamp="1579461723666" />
     <state width="1877" height="175" key="GridCell.Tab.0.bottom/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1579545018348" />
-    <state width="1877" height="175" key="GridCell.Tab.0.bottom/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580079342273" />
-    <state width="1877" height="232" key="GridCell.Tab.0.bottom/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580723140876" />
-    <state width="1478" height="148" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1580751714161" />
+    <state width="1478" height="148" key="GridCell.Tab.0.bottom/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580793203414" />
+    <state width="1877" height="193" key="GridCell.Tab.0.bottom/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580891370376" />
+    <state width="1478" height="148" key="GridCell.Tab.0.bottom/0.0.1536.834@0.0.1536.834" timestamp="1580856955309" />
     <state width="1877" height="175" key="GridCell.Tab.0.bottom/0.0.1920.1170@0.0.1920.1170" timestamp="1580075991987" />
-    <state width="1478" height="148" key="GridCell.Tab.0.center" timestamp="1580751714161">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1877" height="193" key="GridCell.Tab.0.center" timestamp="1580891370376">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state width="1493" height="175" key="GridCell.Tab.0.center/-1920.124.1536.840/0.0.1920.1170@-1920.124.1536.840" timestamp="1579461723666" />
     <state width="1877" height="175" key="GridCell.Tab.0.center/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1579545018348" />
-    <state width="1877" height="175" key="GridCell.Tab.0.center/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580079342271" />
-    <state width="1877" height="232" key="GridCell.Tab.0.center/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580723140876" />
-    <state width="1478" height="148" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1580751714161" />
+    <state width="1478" height="148" key="GridCell.Tab.0.center/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580793203414" />
+    <state width="1877" height="193" key="GridCell.Tab.0.center/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580891370376" />
+    <state width="1478" height="148" key="GridCell.Tab.0.center/0.0.1536.834@0.0.1536.834" timestamp="1580856955308" />
     <state width="1877" height="175" key="GridCell.Tab.0.center/0.0.1920.1170@0.0.1920.1170" timestamp="1580075991986" />
-    <state width="1478" height="148" key="GridCell.Tab.0.left" timestamp="1580751714161">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1877" height="193" key="GridCell.Tab.0.left" timestamp="1580891370376">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state width="1493" height="175" key="GridCell.Tab.0.left/-1920.124.1536.840/0.0.1920.1170@-1920.124.1536.840" timestamp="1579461723666" />
     <state width="1877" height="175" key="GridCell.Tab.0.left/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1579545018348" />
-    <state width="1877" height="175" key="GridCell.Tab.0.left/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580079342270" />
-    <state width="1877" height="232" key="GridCell.Tab.0.left/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580723140876" />
-    <state width="1478" height="148" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1580751714161" />
+    <state width="1478" height="148" key="GridCell.Tab.0.left/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580793203414" />
+    <state width="1877" height="193" key="GridCell.Tab.0.left/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580891370376" />
+    <state width="1478" height="148" key="GridCell.Tab.0.left/0.0.1536.834@0.0.1536.834" timestamp="1580856955308" />
     <state width="1877" height="175" key="GridCell.Tab.0.left/0.0.1920.1170@0.0.1920.1170" timestamp="1580075991986" />
-    <state width="1478" height="148" key="GridCell.Tab.0.right" timestamp="1580751714161">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state width="1877" height="193" key="GridCell.Tab.0.right" timestamp="1580891370376">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state width="1493" height="175" key="GridCell.Tab.0.right/-1920.124.1536.840/0.0.1920.1170@-1920.124.1536.840" timestamp="1579461723666" />
     <state width="1877" height="175" key="GridCell.Tab.0.right/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1579545018348" />
-    <state width="1877" height="175" key="GridCell.Tab.0.right/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580079342272" />
-    <state width="1877" height="232" key="GridCell.Tab.0.right/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580723140876" />
-    <state width="1478" height="148" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1580751714161" />
+    <state width="1478" height="148" key="GridCell.Tab.0.right/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580793203414" />
+    <state width="1877" height="193" key="GridCell.Tab.0.right/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580891370376" />
+    <state width="1478" height="148" key="GridCell.Tab.0.right/0.0.1536.834@0.0.1536.834" timestamp="1580856955309" />
     <state width="1877" height="175" key="GridCell.Tab.0.right/0.0.1920.1170@0.0.1920.1170" timestamp="1580075991987" />
-    <state width="1877" height="400" key="GridCell.Tab.1.bottom" timestamp="1578350053480">
-      <screen x="0" y="0" width="1920" height="1170" />
+    <state width="1476" height="262" key="GridCell.Tab.1.bottom" timestamp="1580868771568">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state width="1877" height="400" key="GridCell.Tab.1.bottom/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1578350053480" />
-    <state width="1877" height="400" key="GridCell.Tab.1.center" timestamp="1578350053479">
-      <screen x="0" y="0" width="1920" height="1170" />
+    <state width="1476" height="262" key="GridCell.Tab.1.bottom/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580868771568" />
+    <state width="1476" height="262" key="GridCell.Tab.1.center" timestamp="1580868771568">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state width="1877" height="400" key="GridCell.Tab.1.center/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1578350053479" />
-    <state width="1877" height="400" key="GridCell.Tab.1.left" timestamp="1578350053479">
-      <screen x="0" y="0" width="1920" height="1170" />
+    <state width="1476" height="262" key="GridCell.Tab.1.center/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580868771568" />
+    <state width="1476" height="262" key="GridCell.Tab.1.left" timestamp="1580868771567">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state width="1877" height="400" key="GridCell.Tab.1.left/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1578350053479" />
-    <state width="1877" height="400" key="GridCell.Tab.1.right" timestamp="1578350053479">
-      <screen x="0" y="0" width="1920" height="1170" />
+    <state width="1476" height="262" key="GridCell.Tab.1.left/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580868771567" />
+    <state width="1476" height="262" key="GridCell.Tab.1.right" timestamp="1580868771568">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state width="1877" height="400" key="GridCell.Tab.1.right/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1578350053479" />
-    <state x="652" y="141" key="SettingsEditor" timestamp="1576604520360">
-      <screen x="0" y="0" width="1920" height="1170" />
+    <state width="1476" height="262" key="GridCell.Tab.1.right/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580868771568" />
+    <state x="2354" y="1" key="SettingsEditor" timestamp="1580862660743">
+      <screen x="1920" y="-120" width="1920" height="1170" />
     </state>
     <state x="652" y="141" key="SettingsEditor/-1920.124.1536.840/0.0.1920.1170@0.0.1920.1170" timestamp="1576604520360" />
+    <state x="347" y="86" key="SettingsEditor/0.0.1536.834/1920.-120.1920.1170@0.0.1536.834" timestamp="1580790626507" />
+    <state x="2354" y="1" key="SettingsEditor/0.0.1536.834/1920.-120.1920.1170@1920.-120.1920.1170" timestamp="1580862660743" />
+    <state x="522" y="101" key="SettingsEditor/0.0.1536.834@0.0.1536.834" timestamp="1580770850790" />
     <state x="898" y="330" width="762" height="678" key="dock-window-1" timestamp="1579460119058">
       <screen x="0" y="0" width="1920" height="1170" />
     </state>
     <state x="898" y="330" width="762" height="678" key="dock-window-1/-1920.124.1536.840/0.0.1920.1170@-1920.124.1536.840" timestamp="1579460119058" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/OBD_project_master$_main_.coverage" NAME="_main_ Coverage Results" MODIFIED="1580891370370" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AutoCoach" />
     <SUITE FILE_PATH="coverage/OBD_project_master$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1571472416234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$run.coverage" NAME="run Coverage Results" MODIFIED="1580870362833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AutoCoach/entry_point" />
     <SUITE FILE_PATH="coverage/OBD_project_master$Kmeans.coverage" NAME="Kmeans Coverage Results" MODIFIED="1571523935739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
     <SUITE FILE_PATH="coverage/OBD_project_master$CalculateFeatures.coverage" NAME="CalculateFeatures Coverage Results" MODIFIED="1580686103906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
     <SUITE FILE_PATH="coverage/OBD_project_master$CalculateEventTest.coverage" NAME="CalculateEventTest Coverage Results" MODIFIED="1578292530515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
-    <SUITE FILE_PATH="coverage/OBD_project_master$test.coverage" NAME="test Coverage Results" MODIFIED="1571471663708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$test.coverage" NAME="test Coverage Results" MODIFIED="1580868888468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AutoCoach" />
     <SUITE FILE_PATH="coverage/OBD_project_master$LowPass.coverage" NAME="LowPass Coverage Results" MODIFIED="1580716097651" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
     <SUITE FILE_PATH="coverage/OBD_project_master$GenerateFakeData.coverage" NAME="GenerateFakeData Coverage Results" MODIFIED="1580751237716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
     <SUITE FILE_PATH="coverage/OBD_project_master$SVM.coverage" NAME="SVM Coverage Results" MODIFIED="1579545018341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/OBD_GUI" />
+    <SUITE FILE_PATH="coverage/OBD_project_master$GUI.coverage" NAME="GUI Coverage Results" MODIFIED="1580870521761" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AutoCoach" />
   </component>
 </project>
