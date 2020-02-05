@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ede0ee12-7d37-4429-aaca-b2e4415022ee" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/AutoCoach/GUI.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoCoach/GUI.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoCoach/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoCoach/_main_.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoCoach/entry_point/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoCoach/entry_point/run.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoCoach/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="ede0ee12-7d37-4429-aaca-b2e4415022ee" name="Default" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -273,7 +264,7 @@
       <workItem from="1580357037755" duration="7000" />
       <workItem from="1580587479281" duration="20117000" />
       <workItem from="1580749515321" duration="2182000" />
-      <workItem from="1580770619789" duration="29171000" />
+      <workItem from="1580770619789" duration="29438000" />
     </task>
     <servers />
   </component>
