@@ -125,7 +125,7 @@
      </widget>
     </item>
     <item>
-     <layout class="QGridLayout" name="Meunu">
+     <layout class="QGridLayout" name="Menu">
       <item row="4" column="0">
        <widget class="QWidget" name="down" native="true">
         <property name="maximumSize">
@@ -414,7 +414,7 @@
      <x>0</x>
      <y>0</y>
      <width>782</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

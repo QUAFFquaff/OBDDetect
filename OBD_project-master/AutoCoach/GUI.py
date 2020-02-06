@@ -12,6 +12,8 @@ import numpy as np
 
 class Ui_MainWindow(object):
 
+    windowMoved = QtCore.pyqtSignal(QtCore.QPoint)
+
     def update2(self):
         data3 = self.data3
         ptr3 = self.ptr3
@@ -29,6 +31,7 @@ class Ui_MainWindow(object):
         self.ptr3 = ptr3
 
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(782, 511)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
@@ -50,11 +53,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(-1, 5, -1, 5)
         self.horizontalLayout.setSpacing(9)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.closer = QtWidgets.QPushButton(self.bar)
-        self.closer.setMaximumSize(QtCore.QSize(30, 20))
-        self.closer.setText("")
-        self.closer.setObjectName("close")
-        self.horizontalLayout.addWidget(self.closer)
+        self.exit = QtWidgets.QPushButton(self.bar)
+        self.exit.setMaximumSize(QtCore.QSize(30, 20))
+        self.exit.setText("")
+        self.exit.setObjectName("close")
+        self.horizontalLayout.addWidget(self.exit)
         self.visit = QtWidgets.QPushButton(self.bar)
         self.visit.setMaximumSize(QtCore.QSize(30, 20))
         self.visit.setText("")
@@ -72,8 +75,8 @@ class Ui_MainWindow(object):
         spacerItem = QtWidgets.QSpacerItem(40, 15, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.verticalLayout.addWidget(self.bar)
-        self.Meunu = QtWidgets.QGridLayout()
-        self.Meunu.setObjectName("Meunu")
+        self.Menu = QtWidgets.QGridLayout()
+        self.Menu.setObjectName("Menu")
         self.down = QtWidgets.QWidget(self.centralwidget)
         self.down.setMaximumSize(QtCore.QSize(16777215, 120))
         self.down.setObjectName("down")
@@ -119,16 +122,16 @@ class Ui_MainWindow(object):
         self.TotalScore.setAlignment(QtCore.Qt.AlignCenter)
         self.TotalScore.setObjectName("TotalScore")
         self.gridLayout_down.addWidget(self.TotalScore, 0, 2, 1, 1)
-        self.Meunu.addWidget(self.down, 4, 0, 1, 1)
+        self.Menu.addWidget(self.down, 4, 0, 1, 1)
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setFrameShadow(QtWidgets.QFrame.Plain)
         self.line.setLineWidth(10)
         self.line.setFrameShape(QtWidgets.QFrame.HLine)
         self.line.setObjectName("line")
-        self.Meunu.addWidget(self.line, 1, 0, 1, 1)
+        self.Menu.addWidget(self.line, 1, 0, 1, 1)
         self.up = QtWidgets.QWidget(self.centralwidget)
         self.up.setMinimumSize(QtCore.QSize(0, 0))
-        self.up.setMaximumSize(QtCore.QSize(16777215, 350))
+        self.up.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.up.setObjectName("up")
         self.gridLayout_up = QtWidgets.QGridLayout(self.up)
         self.gridLayout_up.setHorizontalSpacing(5)
@@ -146,8 +149,8 @@ class Ui_MainWindow(object):
         self.Acc_bar.setMaximumSize(QtCore.QSize(70, 200))
         self.Acc_bar.setObjectName("Acc_bar")
         self.gridLayout_up.addWidget(self.Acc_bar, 0, 0, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(35, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_up.addItem(spacerItem1, 0, 2, 1, 1)
+        spacer1 = QtWidgets.QSpacerItem(35, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_up.addItem(spacer1, 0, 2, 1, 1)
         self.feedback = QtWidgets.QToolButton(self.up)
         self.feedback.setMinimumSize(QtCore.QSize(50, 50))
         self.feedback.setMaximumSize(QtCore.QSize(320, 320))
@@ -174,10 +177,10 @@ class Ui_MainWindow(object):
         self.Brake_level.setMaximumSize(QtCore.QSize(80, 50))
         self.Brake_level.setObjectName("Brake_level")
         self.gridLayout_up.addWidget(self.Brake_level, 1, 1, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(35, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_up.addItem(spacerItem2, 0, 4, 1, 1)
-        self.Meunu.addWidget(self.up, 0, 0, 1, 1)
-        self.verticalLayout.addLayout(self.Meunu)
+        spacer2 = QtWidgets.QSpacerItem(35, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_up.addItem(spacer2, 0, 4, 1, 1)
+        self.Menu.addWidget(self.up, 0, 0, 1, 1)
+        self.verticalLayout.addLayout(self.Menu)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 782, 21))
@@ -187,61 +190,21 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
+        self.exit.setFixedSize(15, 15)
+        self.visit.setFixedSize(15, 15)
+        self.mini.setFixedSize(15, 15)
+        self.exit.setStyleSheet('''QPushButton{background:#F76677;border-radius:5px;}QPushButton:hover{background:red;}''')
+        # self.visit.setStyleSheet('''QPushButton{background:#F7D674;border-radius:5px;}QPushButton:hover{background:yellow;}''')
+        # self.mini.setStyleSheet('''QPushButton{background:#6DDF6D;border-radius:5px;}QPushButton:hover{background:green;}''')
 
-        self.closer.setFixedSize(15,15)
-        self.visit.setFixedSize(15,15)
-        self.mini.setFixedSize(15,15)
-        self.closer.setStyleSheet('''QPushButton{background:#F76677;border-radius:5px;}QPushButton:hover{background:red;}''')
-        self.visit.setStyleSheet('''QPushButton{background:#F7D674;border-radius:5px;}QPushButton:hover{background:yellow;}''')
-        self.mini.setStyleSheet('''QPushButton{background:#6DDF6D;border-radius:5px;}QPushButton:hover{background:green;}''')
-
-        self.bar.setStyleSheet('''
-            QWidget#bar{
-                color:#A7BDBA;
-                background:#EFF2F7;
-                border:1px solid white;
-                border-bottom:0px solid;
-                border-top-right-radius:10px;
-                border-top-left-radius:10px;
-            }
-        ''')
-        self.up.setStyleSheet('''
-            QWidget#up{
-                color:#A7BDBA;
-                background:#EFF2F7;
-                border:1px solid white;
-                border-top:0px solid;
-            }
-        ''')
-        self.down.setStyleSheet('''
-            QWidget#down{
-                border-bottom:1px solid darkGray;
-                border-left:1px solid darkGray;
-                border-right:1px solid darkGray;
-                background:#17191A;
-                border-bottom-right-radius:10px;
-                border-bottom-left-radius:10px;
-            }
-            QLabel#CurrentScore{
-                color:white;
-                border:none;
-                font-size:50px;
-                font-weight:700;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            }
-            QLabel#TotalScore{
-                color:white;
-                border:none;
-                font-size:15px;
-                font-weight:700;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            }
-        ''')
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # 隐藏边框
-        self.setWindowOpacity(0.97)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.closer.clicked.connect(self.close)
+        self.setWindowOpacity(0.98)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
+        self.exit.clicked.connect(self.close)       # close window
+        self.mini.clicked.connect(self.showMinimized)  # minimum window
+        self.windowMoved.connect(self.move)  # move window
 
+        # draw graph of lines
         self.widget.setDownsampling(mode='peak')
         self.widget.setClipToView(True)
         self.widget.setXRange(0, 100)
@@ -254,6 +217,20 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def mousePressEvent(self,event):
+        if event.button() == QtCore.Qt.LeftButton:
+            self.mPos = event.pos()
+        event.accept()
+
+    def mouseReleaseEvent(self, event):
+        self.mPos = None
+        event.accept()
+
+    def mouseMoveEvent(self,event):
+        if event.buttons() == QtCore.Qt.LeftButton and self.mPos:
+            self.windowMoved.emit(self.mapToGlobal(event.pos() - self.mPos))
+        event.accept()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

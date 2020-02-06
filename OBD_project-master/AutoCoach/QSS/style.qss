@@ -1,0 +1,81 @@
+/*
+*three buttons
+*/
+
+QPushButton#exit{
+    background:#F76677;
+    border-radius:5px;
+}
+
+QPushButton#exit:hover{
+    background:red;
+}
+
+QPushButton#visit{
+    background:#F7D674;
+    border-radius:5px;
+}
+
+QPushButton#visit:hover{
+    background:yellow;
+}
+
+
+
+QPushButton#mini{
+    background:#6DDF6D;
+    border-radius:5px;
+}
+
+QPushButton#mini:hover{
+    background:green;
+}
+
+/*style for menubar*/
+QWidget#bar{
+    color:#A7BDBA;
+    background:#FCFCFC;
+    border:1px solid darkGray;
+    border-bottom:0px solid;
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+}
+
+/*style for up area*/
+QWidget#up{
+    color:#A7BDBA;
+    background:#FCFCFC;
+    border:1px solid darkGray;
+    border-top:0px solid;
+}
+
+/*style for down area*/
+QWidget#down{
+    border-bottom:1px solid black;
+    border-left:1px solid black;
+    border-right:1px solid black;
+    background:#17191A;
+    border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
+}
+QLabel#CurrentScore{
+    color:white;
+    border:none;
+    font-size:50px;
+    font-weight:700;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+QLabel#TotalScore{
+    color:white;
+    border:none;
+    font-size:15px;
+    font-weight:700;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+#line{
+    color:#52B7BD;
+    border-left:2px solid white;
+    border-right:2px solid white;
+}
