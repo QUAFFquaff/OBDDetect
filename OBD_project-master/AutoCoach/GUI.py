@@ -24,10 +24,11 @@ class Ui_MainWindow(object):
             tmp = data3
             data3 = np.empty(data3.shape[0] * 2)
             data3[:tmp.shape[0]] = tmp
-        self.p1.setData(data3[:ptr3])
+        self.pen1.setData(data3[:ptr3])
         self.data3 = data3
-
-        self.p1.setPos(-ptr3, 0)
+        if(ptr3>100):
+            self.pen1.setPen(pg.mkPen('r', width=3))
+        self.pen1.setPos(-ptr3, 0)
         self.ptr3 = ptr3
 
     def setupUi(self, MainWindow):
@@ -197,7 +198,7 @@ class Ui_MainWindow(object):
         # self.visit.setStyleSheet('''QPushButton{background:#F7D674;border-radius:5px;}QPushButton:hover{background:yellow;}''')
         # self.mini.setStyleSheet('''QPushButton{background:#6DDF6D;border-radius:5px;}QPushButton:hover{background:green;}''')
 
-        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # 隐藏边框
+        self.setWindowFlag(QtCore.Qt.FramelessWindowHint)  # hide the boarder
         self.setWindowOpacity(0.98)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # set transparent window
         self.exit.clicked.connect(self.close)       # close window
@@ -209,8 +210,8 @@ class Ui_MainWindow(object):
         self.widget.setClipToView(True)
         self.widget.setXRange(0, 100)
         self.widget.setLimits(xMax=0)
-        self.p1 = self.widget.plot()
-        self.p1.setPen(pg.mkPen('y', width=3))
+        self.pen1 = self.widget.plot()
+        self.pen1.setPen(pg.mkPen('y', width=3))
         self.data3 = np.empty(10)
         self.ptr3 = 0
 
@@ -231,6 +232,14 @@ class Ui_MainWindow(object):
         if event.buttons() == QtCore.Qt.LeftButton and self.mPos:
             self.windowMoved.emit(self.mapToGlobal(event.pos() - self.mPos))
         event.accept()
+
+    # set current score and update
+    def setCurrentScore(self, score):
+        self.CurrentScore.setText(str(score))
+
+    # set Total score for trip
+    def setTotalScore(self, score):
+        self.TotalScore.setText(str(score)+' points')
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
